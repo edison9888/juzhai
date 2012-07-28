@@ -13,6 +13,7 @@
 #import "MessageShow.h"
 #import "NSString+Chinese.h"
 
+
 @implementation DialogService
 
 - (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock
