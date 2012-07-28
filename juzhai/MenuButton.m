@@ -1,0 +1,34 @@
+//
+//  MenuButton.m
+//  juzhai
+//
+//  Created by JiaJun Wu on 12-7-20.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "MenuButton.h"
+
+@implementation MenuButton
+
+- (id)initWithWidth:(NSUInteger)width buttonText:(NSString *)buttonText CapLocation:(CapLocation)location
+{
+    self.delegate = self;
+    return [super initWithWidth:width buttonText:buttonText CapLocation:location];
+}
+
+- (CGFloat)buttonCapWidth
+{
+    return CAP_WIDTH;
+}
+
+- (NSString *)buttonNormalBackgroundImageName
+{
+    return BUTTON_IMAGE;
+}
+
+- (NSString *)buttonHighlightedBackgroundImageName
+{
+    return BUTTON_HOVER_IMAGE;
+}
+
+@end

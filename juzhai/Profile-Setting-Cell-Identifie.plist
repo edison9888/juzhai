@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>section1</key>
+	<array>
+		<string>编辑头像</string>
+	</array>
+	<key>section2</key>
+	<array>
+		<string>昵称</string>
+		<string>生日</string>
+		<string>性别</string>
+	</array>
+	<key>section3</key>
+	<array>
+		<string>自我评价</string>
+		<string>职业</string>
+	</array>
+</dict>
+</plist>
