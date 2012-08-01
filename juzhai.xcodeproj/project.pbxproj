@@ -532,7 +532,7 @@
 		CB4BAEFD15AF064F00C68760 /* DialogContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialogContentViewController.xib; sourceTree = "<group>"; };
 		CB50E4A815918D16001D5673 /* Profile-Setting-Cell-Identifie.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Profile-Setting-Cell-Identifie.plist"; sourceTree = "<group>"; };
 		CB50E4AB1591981D001D5673 /* ProfileSettingForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileSettingForm.xib; sourceTree = "<group>"; };
-		CB50E4AD1591BF38001D5673 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/wujiajun/work/ios/workspace/juzhai/juzhai/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		CB50E4AD1591BF38001D5673 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CB540E4015ABD99E00265412 /* isaytota@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isaytota@2x.png"; sourceTree = "<group>"; };
 		CB540E4115ABD99E00265412 /* shuaxin_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shuaxin_hover@2x.png"; sourceTree = "<group>"; };
 		CB540E4215ABD99E00265412 /* shuaxin_link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shuaxin_link@2x.png"; sourceTree = "<group>"; };

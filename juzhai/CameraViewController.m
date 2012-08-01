@@ -91,7 +91,7 @@
             errorInfo = [jsonResult valueForKey:@"errorInfo"];
         }
     }else {
-        errorInfo = [NSString stringWithFormat:@"error: @%", [request responseStatusMessage]];
+        errorInfo = [NSString stringWithFormat:@"error: %@", [request responseStatusMessage]];
     }
     if(errorInfo != nil){
         MBProgressHUD *hud2 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
