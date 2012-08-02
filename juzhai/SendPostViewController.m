@@ -53,9 +53,8 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
-        UIImage *image = [[UIImage imageNamed:TOP_BG_PIC_NAME] stretchableImageWithLeftCapWidth:TOP_BG_CAP_WIDTH topCapHeight:0];
-        [navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    if (IOS_VERSION >= 5.0){
+        [navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
     } else {
         infoView.frame = CGRectMake(infoView.frame.origin.x, infoView.frame.origin.y + 36, infoView.frame.size.width, infoView.frame.size.height);
         textView.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height + 36);
@@ -238,7 +237,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         return;
     }
     UIImagePickerControllerSourceType sourceType;
-    if(buttonIndex == 1){
+    if(buttonIndex == 0){
         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }else {
         if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -336,6 +335,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark Navigation Delegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    if (IOS_VERSION >= 5.0) {
+       [navigationController.navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault]; 
+    }
     navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 

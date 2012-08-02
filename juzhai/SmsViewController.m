@@ -68,7 +68,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.tableView reloadData];
+    if (self.navigationController.tabBarItem.badgeValue != nil && _data != nil) {
+        [_refreshHeaderView autoRefresh:self.tableView];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

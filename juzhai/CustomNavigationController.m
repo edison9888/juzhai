@@ -7,6 +7,7 @@
 //
 
 #import "CustomNavigationController.h"
+#import "Constant.h"
 
 @interface CustomNavigationController ()
 
@@ -27,9 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
-        UIImage *image = [[UIImage imageNamed:TOP_BG_PIC_NAME] stretchableImageWithLeftCapWidth:TOP_BG_CAP_WIDTH topCapHeight:0];
-        [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    if (IOS_VERSION >= 5.0){
+        [self.navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
     }
 //    else{
         // Override point for customization after application launch.
@@ -86,6 +86,11 @@
     return _homeItem;
 }
 
+- (UIViewController *)popViewController
+{
+    return [super popViewControllerAnimated:YES];
+}
+
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated 
 {
     if (viewController.navigationItem.leftBarButtonItem == nil && [self.viewControllers count] > 0) { 
@@ -115,8 +120,7 @@
 
 @implementation UINavigationBar (CustomImage2)   
 - (void)drawRect:(CGRect)rect {
-    UIImage *image = [[UIImage imageNamed:TOP_BG_PIC_NAME] stretchableImageWithLeftCapWidth:TOP_BG_CAP_WIDTH topCapHeight:0];    
-    [image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];   
+    [TOP_BG_IMG drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];   
 } 
 
 @end

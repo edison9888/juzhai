@@ -41,6 +41,9 @@
     self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
 //    [navController pushViewController:viewController animated:YES];
+    
+    [application setStatusBarHidden:NO];
+    
     return YES;
 }
 

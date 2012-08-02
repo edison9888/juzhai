@@ -249,7 +249,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row < [_data count]) {
-        IdeaDetailViewController *ideaDetailViewController = [[IdeaDetailViewController alloc] initWithNibName:@"ideaDetailViewController" bundle:nil];
+        IdeaDetailViewController *ideaDetailViewController = [[IdeaDetailViewController alloc] initWithNibName:@"IdeaDetailViewController" bundle:nil];
         ideaDetailViewController.hidesBottomBarWhenPushed = YES;
         ideaDetailViewController.ideaView = [_data objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:ideaDetailViewController animated:YES];

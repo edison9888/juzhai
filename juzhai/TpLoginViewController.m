@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "UrlUtils.h"
 #import "CustomNavigationController.h"
+#import "Constant.h"
 
 @interface TpLoginViewController ()
 
@@ -39,9 +40,8 @@
     [super viewDidLoad];
     navigationBar.topItem.title = webTitle;
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0){
-        UIImage *image = [[UIImage imageNamed:TOP_BG_PIC_NAME] stretchableImageWithLeftCapWidth:TOP_BG_CAP_WIDTH topCapHeight:0];
-        [navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    if (IOS_VERSION >= 5.0){
+        [navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
     }
 
     UIImage *backImage = [UIImage imageNamed:BACK_NORMAL_PIC_NAME];

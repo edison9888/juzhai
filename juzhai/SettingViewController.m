@@ -24,6 +24,7 @@
 #import "MessageShow.h"
 #import "SBJson.h"
 #import "Constant.h"
+#import "CustomNavigationController.h"
 
 @interface SettingViewController (Private)
 
@@ -390,7 +391,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     }
     if (actionSheet.tag == LOGO_ACTION_SHEET_TAG){
         UIImagePickerControllerSourceType sourceType;
-        if(buttonIndex == 1){
+        if(buttonIndex == 0){
             sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }else {
             if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -470,6 +471,9 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark Navigation Delegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    if (IOS_VERSION >= 5.0){
+        [navigationController.navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
+    }
     navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 

@@ -202,7 +202,6 @@
 		CB7EFEF015804E3D00176E59 /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EFEEE15804E3D00176E59 /* PostDetailViewController.m */; };
 		CB7EFEF115804E3D00176E59 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7EFEEF15804E3D00176E59 /* PostDetailViewController.xib */; };
 		CB7EFEF91580515500176E59 /* IdeaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EFEF71580515500176E59 /* IdeaDetailViewController.m */; };
-		CB7EFEFA1580515500176E59 /* IdeaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7EFEF81580515500176E59 /* IdeaDetailViewController.xib */; };
 		CB7F16DB155196F50009E060 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F16D9155196F50009E060 /* LoginViewController.m */; };
 		CB7F16DC155196F50009E060 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7F16DA155196F50009E060 /* LoginViewController.xib */; };
 		CB7F16E0155197110009E060 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F16DE155197100009E060 /* RegisterViewController.m */; };
@@ -255,6 +254,7 @@
 		CBAD7A031588882300AF2666 /* my_jz_set_btn_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CBAD79F91588881B00AF2666 /* my_jz_set_btn_hover.png */; };
 		CBAD7A041588882300AF2666 /* my_jz_set_btn_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CBAD79FA1588881D00AF2666 /* my_jz_set_btn_link.png */; };
 		CBAD7A051588882300AF2666 /* my_jz_title_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBAD79FB1588882000AF2666 /* my_jz_title_bg.png */; };
+		CBB7517615CA370000B94D99 /* IdeaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */; };
 		CBB765E6158C6A4700F0DCA8 /* PostListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB765E5158C6A4700F0DCA8 /* PostListCell.m */; };
 		CBB765E9158C6A6F00F0DCA8 /* PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB765E8158C6A6F00F0DCA8 /* PostListCell.xib */; };
 		CBB765EF158CE90D00F0DCA8 /* db@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB765EA158CE90D00F0DCA8 /* db@2x.png */; };
@@ -652,7 +652,6 @@
 		CB7EFEEF15804E3D00176E59 /* PostDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		CB7EFEF61580515400176E59 /* IdeaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaDetailViewController.h; sourceTree = "<group>"; };
 		CB7EFEF71580515500176E59 /* IdeaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaDetailViewController.m; sourceTree = "<group>"; };
-		CB7EFEF81580515500176E59 /* IdeaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdeaDetailViewController.xib; sourceTree = "<group>"; };
 		CB7F16D8155196F50009E060 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CB7F16D9155196F50009E060 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CB7F16DA155196F50009E060 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -723,6 +722,7 @@
 		CBAD79F91588881B00AF2666 /* my_jz_set_btn_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_jz_set_btn_hover.png; sourceTree = "<group>"; };
 		CBAD79FA1588881D00AF2666 /* my_jz_set_btn_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_jz_set_btn_link.png; sourceTree = "<group>"; };
 		CBAD79FB1588882000AF2666 /* my_jz_title_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_jz_title_bg.png; sourceTree = "<group>"; };
+		CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaDetailViewController.xib; sourceTree = "<group>"; };
 		CBB765E4158C6A4700F0DCA8 /* PostListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListCell.h; sourceTree = "<group>"; };
 		CBB765E5158C6A4700F0DCA8 /* PostListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListCell.m; sourceTree = "<group>"; };
 		CBB765E8158C6A6F00F0DCA8 /* PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostListCell.xib; sourceTree = "<group>"; };
@@ -1027,7 +1027,7 @@
 				CB175AC7156E620700D5F054 /* CategoryTableViewController.m */,
 				CB7EFEF61580515400176E59 /* IdeaDetailViewController.h */,
 				CB7EFEF71580515500176E59 /* IdeaDetailViewController.m */,
-				CB7EFEF81580515500176E59 /* IdeaDetailViewController.xib */,
+				CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */,
 				CB540E5115ABDA9E00265412 /* IdeaUsersViewController.h */,
 				CB540E5215ABDA9E00265412 /* IdeaUsersViewController.m */,
 				CB86A25F15AC8DB10028F0A4 /* IdeaUserListCell.h */,
@@ -1963,6 +1963,7 @@
 				CB87D3D215518C9C00A25129 /* Sources */,
 				CB87D3D315518C9C00A25129 /* Frameworks */,
 				CB87D3D415518C9C00A25129 /* Resources */,
+				CBEF377715CA240A0041E71D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1989,6 +1990,7 @@
 				en,
 				es,
 				it,
+				"zh-Hans",
 			);
 			mainGroup = CB87D3CB15518C9B00A25129;
 			productRefGroup = CB87D3D715518C9C00A25129 /* Products */;
@@ -2024,7 +2026,6 @@
 				CBD96541157FC57E006E0196 /* juzhai.png in Resources */,
 				CBD96543157FC57E006E0196 /* MicrosoftYaHei.ttf in Resources */,
 				CB7EFEF115804E3D00176E59 /* PostDetailViewController.xib in Resources */,
-				CB7EFEFA1580515500176E59 /* IdeaDetailViewController.xib in Resources */,
 				CBBD5DF815827C6E003F0800 /* idea_more_btn@2x.png in Resources */,
 				CBBD5DF915827C6E003F0800 /* idea_wgo_btn_done@2x.png in Resources */,
 				CBBD5DFA15827C6E003F0800 /* idea_wgo_btn_hover@2x.png in Resources */,
@@ -2284,10 +2285,27 @@
 				CB55010115BE732B00DD21EE /* send_jz_select_line@2x.png in Resources */,
 				CB54B16C15C0F95900041B73 /* Default.png in Resources */,
 				CB54B16E15C0F96000041B73 /* Default@2x.png in Resources */,
+				CBB7517615CA370000B94D99 /* IdeaDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CBEF377715CA240A0041E71D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CB87D3D215518C9C00A25129 /* Sources */ = {

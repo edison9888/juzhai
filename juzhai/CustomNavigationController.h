@@ -16,6 +16,8 @@
 #define HOME_NORMAL_PIC_NAME @"home_btn_link.png"
 #define HOME_HIGHLIGHT_PIC_NAME @"home_btn_hover.png"
 
+#define TOP_BG_IMG [[UIImage imageNamed:TOP_BG_PIC_NAME] stretchableImageWithLeftCapWidth:TOP_BG_CAP_WIDTH topCapHeight:0]
+
 @interface CustomNavigationController : UINavigationController
 {
     UIBarButtonItem *_backItem;
