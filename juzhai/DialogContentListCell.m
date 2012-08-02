@@ -15,6 +15,7 @@
 #import "UserView.h"
 #import "DetailTextView.h"
 #import "NSDate+BeforeShowType.h"
+#import "TaHomeViewController.h"
 
 @implementation DialogContentListCell
 
@@ -66,6 +67,14 @@
     [self redrawnTime];
 }
 
+- (void)logoClick:(UIGestureRecognizer *)gestureRecognizer {
+    TaHomeViewController *taHomeViewController = [[TaHomeViewController alloc] initWithNibName:@"TaHomeViewController" bundle:nil];
+    taHomeViewController.hidesBottomBarWhenPushed = YES;
+    taHomeViewController.userView = targetUser;
+    UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder.nextResponder;
+    [viewController.navigationController pushViewController:taHomeViewController animated:YES];
+}
+
 + (CGFloat)heightForCell:(DialogContentView *)dialogContentView
 {
     CGSize dialogContentSize = [dialogContentView.content sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
@@ -87,6 +96,8 @@
         myLogoView.hidden = YES;
         logoView = hisLogoView;
         logoUrl = targetUser.smallLogo;
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
+        [hisLogoView addGestureRecognizer:singleTap];
     }
     logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];

@@ -57,7 +57,17 @@
 
 - (BOOL)hasTime
 {
-    return (self.startTime != nil && ![self.startTime isEqual:[NSNull null]] && ![self.startTime isEqualToString:@""]) || (self.endTime != nil && ![self.endTime isEqual:[NSNull null]] && ![self.endTime isEqualToString:@""]);
+    return [self hasStartTime] || [self hasEndTime];
+}
+
+- (BOOL)hasStartTime
+{
+    return self.startTime != nil && ![self.startTime isEqual:[NSNull null]] && ![self.startTime isEqualToString:@""];
+}
+
+- (BOOL)hasEndTime
+{
+    return self.endTime != nil && ![self.endTime isEqual:[NSNull null]] && ![self.endTime isEqualToString:@""];
 }
 
 - (BOOL)hasCategory

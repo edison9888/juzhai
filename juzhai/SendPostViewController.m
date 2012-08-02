@@ -75,7 +75,6 @@
     _saveButton.enabled = NO;
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_saveButton];
     
-    [textView becomeFirstResponder];
     textView.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:17];
     textView.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     textView.delegate = self;
@@ -90,6 +89,8 @@
     Category *category = [[BaseData getCategories] objectAtIndex:0];
     categoryLabel.text = category.name;
     categoryLabel.tag = category.categoryId.intValue;
+    
+    [textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
 
 - (void)viewDidUnload

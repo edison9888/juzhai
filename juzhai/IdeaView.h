@@ -27,6 +27,8 @@
 
 - (BOOL)hasPlace;
 - (BOOL)hasTime;
+- (BOOL)hasStartTime;
+- (BOOL)hasEndTime;
 - (BOOL)hasCategory;
 - (BOOL)hasPerson;
 

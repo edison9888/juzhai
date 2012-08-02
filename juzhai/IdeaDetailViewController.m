@@ -76,7 +76,12 @@
     timeLabel.hidden = timeIconView.hidden;
     if(!timeLabel.hidden){
         timeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
-        timeLabel.text = [NSString stringWithFormat:@"%@ - %@", ideaView.startTime, ideaView.endTime];
+        if ([ideaView hasStartTime] && [ideaView hasEndTime]) {
+            timeLabel.text = [NSString stringWithFormat:@"%@ - %@", ideaView.startTime, ideaView.endTime];
+        } else {
+            timeLabel.text = ideaView.endTime;
+        }
+        
         timeLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [timeLabel setFrame:CGRectMake(timeLabel.frame.origin.x, timeIconView.frame.origin.y, timeLabel.frame.size.width, timeLabel.frame.size.height)];
     }
