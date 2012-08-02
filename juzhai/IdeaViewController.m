@@ -173,9 +173,10 @@
     CategoryTableViewController *controller = [[CategoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
     controller.rootController = self;
     _categoryPopver = [[FPPopoverController alloc] initWithViewController:controller];
-    _categoryPopver.tint = FPPopoverDefaultTint;
-    _categoryPopver.arrowDirection = FPPopoverArrowDirectionAny;
+    _categoryPopver.tint = FPPopoverLightGrayTint;
+    _categoryPopver.arrowDirection = FPPopoverArrowDirectionVertical;
     _categoryPopver.delegate = self;
+    _categoryPopver.contentSize = CGSizeMake(150, 250);
     //sender is the UIButton view
     [_categoryPopver presentPopoverFromView:sender]; 
 }

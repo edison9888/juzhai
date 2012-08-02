@@ -10,9 +10,10 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>app.png</string>
 		<string>Default@2x.png</string>
 		<string>Default.png</string>
+		<string>logo_icon.png</string>
+		<string>logo_icon@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -20,10 +21,13 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>app.png</string>
 				<string>Default@2x.png</string>
 				<string>Default.png</string>
+				<string>logo_icon.png</string>
+				<string>logo_icon@2x.png</string>
 			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
@@ -46,15 +50,17 @@
 	<array>
 		<string>MicrosoftYaHei.ttf</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIStatusBarHidden</key>
-	<false/>
 </dict>
 </plist>
