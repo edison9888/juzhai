@@ -24,6 +24,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UserContext.h"
 #import "CustomNavigationController.h"
+#import "CheckNetwork.h"
 
 @interface DialogContentViewController ()
 
@@ -177,16 +178,16 @@
     
     //load
     [self loadListDataWithPage:1];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+    
+    if ([CheckNetwork isExistenceNetwork]) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)hideKeyboard{  
@@ -198,6 +199,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -222,7 +225,8 @@
         }
     }];
     [request setFailedBlock:^{
-        [HttpRequestDelegate requestFailedHandle:request];
+        [_timer invalidate];
+        _timer = nil;
     }];
     [request startAsynchronous];
 }

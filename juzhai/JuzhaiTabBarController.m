@@ -10,6 +10,7 @@
 #import "HttpRequestSender.h"
 #import "UrlUtils.h"
 #import "SBJson.h"
+#import "CheckNetwork.h"
 
 @interface JuzhaiTabBarController ()
 
@@ -29,18 +30,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if ([CheckNetwork isExistenceNetwork]) {
+        _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-//    [self performSelector:@selector(startNoticeTimer) withObject:nil afterDelay:2];
-    _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
+//    _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [_noticeTimer invalidate];
-    _noticeTimer = nil;
+//    [_noticeTimer invalidate];
+//    _noticeTimer = nil;
 }
 
 - (void)viewDidUnload
@@ -53,14 +56,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)startNoticeTimer
-{
-    _noticeTimer = [NSTimer timerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
-    [_noticeTimer fire];
-    [[NSRunLoop currentRunLoop] addTimer:_noticeTimer forMode:NSDefaultRunLoopMode];
-    [[NSRunLoop currentRunLoop] run]; 
 }
 
 - (void)notice
@@ -80,7 +75,8 @@
         }
     }];
     [request setFailedBlock:^{
-        [HttpRequestDelegate requestFailedHandle:request];
+        [_noticeTimer invalidate];
+        _noticeTimer = nil;
     }];
     [request startAsynchronous];;
 }

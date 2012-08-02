@@ -257,6 +257,7 @@
 		CBB7517615CA370000B94D99 /* IdeaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */; };
 		CBB7517815CA56D400B94D99 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517715CA56D400B94D99 /* logo_icon.png */; };
 		CBB7517A15CA56DB00B94D99 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517915CA56DB00B94D99 /* logo_icon@2x.png */; };
+		CBB7517D15CA7C8900B94D99 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517F15CA7C8900B94D99 /* Localizable.strings */; };
 		CBB765E6158C6A4700F0DCA8 /* PostListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB765E5158C6A4700F0DCA8 /* PostListCell.m */; };
 		CBB765E9158C6A6F00F0DCA8 /* PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB765E8158C6A6F00F0DCA8 /* PostListCell.xib */; };
 		CBB765EF158CE90D00F0DCA8 /* db@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB765EA158CE90D00F0DCA8 /* db@2x.png */; };
@@ -725,6 +726,8 @@
 		CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaDetailViewController.xib; sourceTree = "<group>"; };
 		CBB7517715CA56D400B94D99 /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_icon.png; path = ../logo_icon.png; sourceTree = "<group>"; };
 		CBB7517915CA56DB00B94D99 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_icon@2x.png"; path = "../logo_icon@2x.png"; sourceTree = "<group>"; };
+		CBB7517E15CA7C8900B94D99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CBB7518015CA7C9300B94D99 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CBB765E4158C6A4700F0DCA8 /* PostListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListCell.h; sourceTree = "<group>"; };
 		CBB765E5158C6A4700F0DCA8 /* PostListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListCell.m; sourceTree = "<group>"; };
 		CBB765E8158C6A6F00F0DCA8 /* PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostListCell.xib; sourceTree = "<group>"; };
@@ -1456,6 +1459,7 @@
 				CB87D3EA15518C9C00A25129 /* juzhai-Prefix.pch */,
 				CB87D3E815518C9C00A25129 /* main.m */,
 				CB50E4A815918D16001D5673 /* Profile-Setting-Cell-Identifie.plist */,
+				CBB7517F15CA7C8900B94D99 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2286,6 +2290,7 @@
 				CBB7517615CA370000B94D99 /* IdeaDetailViewController.xib in Resources */,
 				CBB7517815CA56D400B94D99 /* logo_icon.png in Resources */,
 				CBB7517A15CA56DB00B94D99 /* logo_icon@2x.png in Resources */,
+				CBB7517D15CA7C8900B94D99 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2439,6 +2444,15 @@
 				CB50E4AD1591BF38001D5673 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CBB7517F15CA7C8900B94D99 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CBB7517E15CA7C8900B94D99 /* en */,
+				CBB7518015CA7C9300B94D99 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
