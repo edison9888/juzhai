@@ -15,6 +15,8 @@
 +(ASIFormDataRequest *) postRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params;
 +(ASIHTTPRequest *) getRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params;
 
++(ASIHTTPRequest *) backgroundGetRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params;
+
 @end
 
 @interface HttpRequestDelegate : NSObject <ASIHTTPRequestDelegate>

@@ -111,31 +111,35 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:_ideaUserView.ideaId], @"ideaId", _ideaUserView.userView.uid, @"targetUid", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/sendDate"] withParams:params];
-        [request setCompletionBlock:^{
+        if (request) {
+            [request setCompletionBlock:^{
+                [MBProgressHUD hideHUDForView:coverView animated:YES];
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    ((UIButton *)sender).enabled = NO;
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"发送成功";
+                    [hud hide:YES afterDelay:1];
+                    return;
+                }
+                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                NSLog(@"%@", errorInfo);
+                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                    errorInfo = SERVER_ERROR_INFO;
+                }
+                [MBProgressHUD hideHUDForView:coverView animated:YES];
+                [MessageShow error:errorInfo onView:coverView];
+            }];
+            [request setFailedBlock:^{
+                [MBProgressHUD hideHUDForView:coverView animated:YES];
+                [HttpRequestDelegate requestFailedHandle:request];
+            }];
+            [request startAsynchronous];
+        } else {
             [MBProgressHUD hideHUDForView:coverView animated:YES];
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                ((UIButton *)sender).enabled = NO;
-                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                hud.mode = MBProgressHUDModeCustomView;
-                hud.labelText = @"发送成功";
-                [hud hide:YES afterDelay:1];
-                return;
-            }
-            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
-            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                errorInfo = SERVER_ERROR_INFO;
-            }
-            [MBProgressHUD hideHUDForView:coverView animated:YES];
-            [MessageShow error:errorInfo onView:coverView];
-        }];
-        [request setFailedBlock:^{
-            [MBProgressHUD hideHUDForView:coverView animated:YES];
-            [HttpRequestDelegate requestFailedHandle:request];
-        }];
-        [request startAsynchronous];
+        }
     });
 }
 

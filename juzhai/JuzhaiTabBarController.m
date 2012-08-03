@@ -61,24 +61,26 @@
 - (void)notice
 {
     UITabBarItem *messageTabBar = [[self.tabBar items] objectAtIndex:3];
-    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/notice/nums"] withParams:nil];
-    [request setCompletionBlock:^{
-        NSString *responseString = [request responseString];
-        NSMutableDictionary *jsonResult = [responseString JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            NSInteger num = [[jsonResult valueForKey:@"result"] intValue];
-            if (num > 0) {
-                messageTabBar.badgeValue = [NSString stringWithFormat:@"%d", num];
-            } else {
-                messageTabBar.badgeValue = nil;
+    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/notice/nums"] withParams:nil];
+    if (request != nil) {
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                NSInteger num = [[jsonResult valueForKey:@"result"] intValue];
+                if (num > 0) {
+                    messageTabBar.badgeValue = [NSString stringWithFormat:@"%d", num];
+                } else {
+                    messageTabBar.badgeValue = nil;
+                }
             }
-        }
-    }];
-    [request setFailedBlock:^{
-        [_noticeTimer invalidate];
-        _noticeTimer = nil;
-    }];
-    [request startAsynchronous];;
+        }];
+        [request setFailedBlock:^{
+//            [_noticeTimer invalidate];
+//            _noticeTimer = nil;
+        }];
+        [request startAsynchronous];;
+    }
 }
 
 @end

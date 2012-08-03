@@ -44,7 +44,7 @@ static BaseData *baseData;
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.categoryArray){
         //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"base/categoryList"] withParams:nil];
+        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/categoryList"] withParams:nil];
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [request responseString];
@@ -61,7 +61,7 @@ static BaseData *baseData;
                 }
             }
         }];
-        [request startSynchronous];
+        [request startAsynchronous];
     }
     return baseData.categoryArray;
 }
@@ -70,7 +70,7 @@ static BaseData *baseData;
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.professionArray){
         //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"base/professionList"] withParams:nil];
+        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/professionList"] withParams:nil];
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [request responseString];
@@ -87,7 +87,7 @@ static BaseData *baseData;
                 }
             }
         }];
-        [request startSynchronous];
+        [request startAsynchronous];
     }
     return baseData.professionArray;
 }
@@ -96,7 +96,7 @@ static BaseData *baseData;
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.provinceArray){
         //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"base/provinceCityList"] withParams:nil];
+        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/provinceCityList"] withParams:nil];
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [request responseString];
@@ -128,7 +128,7 @@ static BaseData *baseData;
                 }
             }
         }];
-        [request startSynchronous];
+        [request startAsynchronous];
     }
     return baseData.provinceArray;
 }

@@ -58,30 +58,32 @@
 -(void)doRegister{
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:accountField.text,@"account",nicknameField.text,@"nickname", passwordField.text,@"pwd", confirmPwdField.text,@"confirmPwd", nil];
     ASIHTTPRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"passport/register"] withParams:params];
-    [request startSynchronous];
-    NSError *error = [request error];
-    NSString *errorInfo = SERVER_ERROR_INFO;
-    if (!error && [request responseStatusCode] == 200){
-        NSString *response = [request responseString];
-        NSMutableDictionary *jsonResult = [response JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            //TODO 注册成功
-            LoginUser *loginUser = [[LoginUser alloc] initWithAccount:accountField.text password:passwordField.text];
-            [[LoginService getInstance] loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
-            
-            UIViewController *startController = [[LoginService getInstance] loginTurnToViewController];
-            if(startController){
-                self.view.window.rootViewController = startController;
-                [self.view.window makeKeyAndVisible];
+    if (request) {
+        [request startSynchronous];
+        NSError *error = [request error];
+        NSString *errorInfo = SERVER_ERROR_INFO;
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                //TODO 注册成功
+                LoginUser *loginUser = [[LoginUser alloc] initWithAccount:accountField.text password:passwordField.text];
+                [[LoginService getInstance] loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
+                
+                UIViewController *startController = [[LoginService getInstance] loginTurnToViewController];
+                if(startController){
+                    self.view.window.rootViewController = startController;
+                    [self.view.window makeKeyAndVisible];
+                }
+                return;
+            }else{
+                errorInfo = [jsonResult valueForKey:@"errorInfo"];
             }
-            return;
         }else{
-            errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            NSLog(@"error: %@", [request responseStatusMessage]);
         }
-    }else{
-        NSLog(@"error: %@", [request responseStatusMessage]);
+        [MessageShow error:errorInfo onView:self.navigationController.view];
     }
-    [MessageShow error:errorInfo onView:self.navigationController.view];
 }
 
 -(IBAction)regist:(id)sender{

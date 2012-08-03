@@ -145,27 +145,29 @@
         DialogView *dialogView = (DialogView *)[_data objectAtIndex:indexPath.row];
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:dialogView.dialogId], @"dialogId", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/deleteDialog"] withParams:params];
-        [request setCompletionBlock:^{
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                NSUInteger row = [indexPath row];
-                [_data removeObjectAtIndex:row];
-                // Delete the row from the data source
-                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                return;
-            }
-            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
-            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                errorInfo = SERVER_ERROR_INFO;
-            }
-            [MessageShow error:errorInfo onView:self.view];
-        }];
-        [request setFailedBlock:^{
-            [HttpRequestDelegate requestFailedHandle:request];
-        }];
-        [request startAsynchronous];
+        if (request) {
+            [request setCompletionBlock:^{
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    NSUInteger row = [indexPath row];
+                    [_data removeObjectAtIndex:row];
+                    // Delete the row from the data source
+                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    return;
+                }
+                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                NSLog(@"%@", errorInfo);
+                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                    errorInfo = SERVER_ERROR_INFO;
+                }
+                [MessageShow error:errorInfo onView:self.view];
+            }];
+            [request setFailedBlock:^{
+                [HttpRequestDelegate requestFailedHandle:request];
+            }];
+            [request startAsynchronous];
+        }
     }   
 }
 

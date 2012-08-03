@@ -23,18 +23,20 @@
     
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:nickname, @"nickname", nil];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"profile/validate/nickexist"] withParams:params];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error && [request responseStatusCode] == 200){
-        NSString *response = [request responseString];
-        NSMutableDictionary *jsonResult = [response JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:NO]){
-            if ([jsonResult valueForKey:@"result"] == [NSNumber numberWithBool:YES]) {
-                return [jsonResult valueForKey:@"errorInfo"];
+    if (request) {
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:NO]){
+                if ([jsonResult valueForKey:@"result"] == [NSNumber numberWithBool:YES]) {
+                    return [jsonResult valueForKey:@"errorInfo"];
+                }
             }
+        }else{
+            NSLog(@"error: %@", [error description]);
         }
-    }else{
-        NSLog(@"error: %@", [error description]);
     }
     return nil;
 }

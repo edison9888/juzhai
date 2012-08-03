@@ -189,30 +189,32 @@
 
 - (void)doSave:(MBProgressHUD *)hud{
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[self postUrl] withParams: [self getParams]];
-    [self postNewLogo:request];
-     [request startSynchronous];
-     NSError *error = [request error];
-     NSString *errorInfo = SERVER_ERROR_INFO;
-     if (!error && [request responseStatusCode] == 200){
-         NSString *response = [request responseString];
-         NSMutableDictionary *jsonResult = [response JSONValue];
-         if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-             //保存成功
-             _saveButton.enabled = NO;
-             [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
-             hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-             hud.mode = MBProgressHUDModeCustomView;
-             hud.labelText = @"保存成功";
-             [self saveSuccess];
-             return;
-         }else{
-             errorInfo = [jsonResult valueForKey:@"errorInfo"];
-         }
-         [MessageShow error:errorInfo onView:self.navigationController.view];
-     }else{
-         NSLog(@"error: %@", [request responseStatusMessage]);
-         [HttpRequestDelegate requestFailedHandle:request];
-     }
+    if (request) {
+        [self postNewLogo:request];
+        [request startSynchronous];
+        NSError *error = [request error];
+        NSString *errorInfo = SERVER_ERROR_INFO;
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                //保存成功
+                _saveButton.enabled = NO;
+                [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
+                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                hud.mode = MBProgressHUDModeCustomView;
+                hud.labelText = @"保存成功";
+                [self saveSuccess];
+                return;
+            }else{
+                errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            }
+            [MessageShow error:errorInfo onView:self.navigationController.view];
+        }else{
+            NSLog(@"error: %@", [request responseStatusMessage]);
+            [HttpRequestDelegate requestFailedHandle:request];
+        }
+    }
 }
 
 - (IBAction)save:(id)sender{

@@ -27,38 +27,40 @@
     }
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:content, @"content", [NSNumber numberWithInt:uid], @"uid", nil];
     __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/sendSms"] withParams:params];
-    if (image != nil) {
-        CGFloat compression = 0.9f;
-        CGFloat maxCompression = 0.1f;
-        int maxFileSize = 2*1024*1024;
-        
-        NSData *imageData = UIImageJPEGRepresentation(image, compression);
-        while ([imageData length] > maxFileSize && compression > maxCompression){
-            compression -= 0.1;
-            imageData = UIImageJPEGRepresentation(image, compression);
-        }
-        [request setData:imageData withFileName:@"dialogImg.jpg" andContentType:@"image/jpeg" forKey:@"dialogImg"];
-    }
-    [request setCompletionBlock:^{
-        NSString *responseString = [request responseString];
-        NSMutableDictionary *jsonResult = [responseString JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            if (aSuccessBlock) {
-                aSuccessBlock([jsonResult valueForKey:@"result"]);
+    if (request) {
+        if (image != nil) {
+            CGFloat compression = 0.9f;
+            CGFloat maxCompression = 0.1f;
+            int maxFileSize = 2*1024*1024;
+            
+            NSData *imageData = UIImageJPEGRepresentation(image, compression);
+            while ([imageData length] > maxFileSize && compression > maxCompression){
+                compression -= 0.1;
+                imageData = UIImageJPEGRepresentation(image, compression);
             }
-            return;
+            [request setData:imageData withFileName:@"dialogImg.jpg" andContentType:@"image/jpeg" forKey:@"dialogImg"];
         }
-        NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-        NSLog(@"%@", errorInfo);
-        if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-            errorInfo = SERVER_ERROR_INFO;
-        }
-        [MessageShow error:errorInfo onView:nil];
-    }];
-    [request setFailedBlock:^{
-        [HttpRequestDelegate requestFailedHandle:request];
-    }];
-    [request startAsynchronous];
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                if (aSuccessBlock) {
+                    aSuccessBlock([jsonResult valueForKey:@"result"]);
+                }
+                return;
+            }
+            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            NSLog(@"%@", errorInfo);
+            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                errorInfo = SERVER_ERROR_INFO;
+            }
+            [MessageShow error:errorInfo onView:nil];
+        }];
+        [request setFailedBlock:^{
+            [HttpRequestDelegate requestFailedHandle:request];
+        }];
+        [request startAsynchronous];
+    }
 }
 
 @end

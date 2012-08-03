@@ -217,33 +217,37 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:userView.post.postId, @"postId", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/respPost"] withParams:params];
-        [request setCompletionBlock:^{
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                userView.post.hasResp = [NSNumber numberWithInt:1];
-                userView.post.respCnt = [NSNumber numberWithInt:(userView.post.respCnt.intValue + 1)];
-                UIButton *respButton = (UIButton *)sender;
-                respButton.enabled = NO;
-                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                hud.mode = MBProgressHUDModeCustomView;
-                hud.labelText = @"保存成功";
-                [hud hide:YES afterDelay:1];
-                return;
-            }
-            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
-            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                errorInfo = SERVER_ERROR_INFO;
-            }
+        if (request) {
+            [request setCompletionBlock:^{
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    userView.post.hasResp = [NSNumber numberWithInt:1];
+                    userView.post.respCnt = [NSNumber numberWithInt:(userView.post.respCnt.intValue + 1)];
+                    UIButton *respButton = (UIButton *)sender;
+                    respButton.enabled = NO;
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"保存成功";
+                    [hud hide:YES afterDelay:1];
+                    return;
+                }
+                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                NSLog(@"%@", errorInfo);
+                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                    errorInfo = SERVER_ERROR_INFO;
+                }
+                [MBProgressHUD hideHUDForView:postScrollView animated:YES];
+                [MessageShow error:errorInfo onView:postScrollView];
+            }];
+            [request setFailedBlock:^{
+                [MBProgressHUD hideHUDForView:postScrollView animated:YES];
+                [HttpRequestDelegate requestFailedHandle:request];
+            }];
+            [request startAsynchronous];
+        } else {
             [MBProgressHUD hideHUDForView:postScrollView animated:YES];
-            [MessageShow error:errorInfo onView:postScrollView];
-        }];
-        [request setFailedBlock:^{
-            [MBProgressHUD hideHUDForView:postScrollView animated:YES];
-            [HttpRequestDelegate requestFailedHandle:request];
-        }];
-        [request startAsynchronous];
+        }
     });
 }
 

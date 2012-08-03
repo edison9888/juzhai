@@ -173,34 +173,38 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_userView.uid, @"uid", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/interest"] withParams:params];
-        [request setCompletionBlock:^{
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                _userView.hasInterest = [NSNumber numberWithInt:1];
-                interestButton.hidden = YES;
-                interestButton.enabled = NO;
-                cancelInterestButton.hidden = NO;
-                cancelInterestButton.enabled = YES;
-                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                hud.mode = MBProgressHUDModeCustomView;
-                hud.labelText = @"关注成功";
-                [hud hide:YES afterDelay:1];
-                return;
-            }
-            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
-            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                errorInfo = SERVER_ERROR_INFO;
-            }
+        if (request != nil) {
+            [request setCompletionBlock:^{
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    _userView.hasInterest = [NSNumber numberWithInt:1];
+                    interestButton.hidden = YES;
+                    interestButton.enabled = NO;
+                    cancelInterestButton.hidden = NO;
+                    cancelInterestButton.enabled = YES;
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"关注成功";
+                    [hud hide:YES afterDelay:1];
+                    return;
+                }
+                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                NSLog(@"%@", errorInfo);
+                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                    errorInfo = SERVER_ERROR_INFO;
+                }
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MessageShow error:errorInfo onView:self.view];
+            }];
+            [request setFailedBlock:^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [HttpRequestDelegate requestFailedHandle:request];
+            }];
+            [request startAsynchronous];
+        } else {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [MessageShow error:errorInfo onView:self.view];
-        }];
-        [request setFailedBlock:^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [HttpRequestDelegate requestFailedHandle:request];
-        }];
-        [request startAsynchronous];
+        }
     });
 }
 
@@ -228,34 +232,38 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_userView.uid, @"uid", nil];
             __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/removeInterest"] withParams:params];
-            [request setCompletionBlock:^{
-                NSString *responseString = [request responseString];
-                NSMutableDictionary *jsonResult = [responseString JSONValue];
-                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                    _userView.hasInterest = [NSNumber numberWithInt:0];
-                    cancelInterestButton.hidden = YES;
-                    cancelInterestButton.enabled = NO;
-                    interestButton.hidden = NO;
-                    interestButton.enabled = YES;
-                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                    hud.mode = MBProgressHUDModeCustomView;
-                    hud.labelText = @"取消成功";
-                    [hud hide:YES afterDelay:1];
-                    return;
-                }
-                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-                NSLog(@"%@", errorInfo);
-                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                    errorInfo = SERVER_ERROR_INFO;
-                }
+            if (request != nil) {
+                [request setCompletionBlock:^{
+                    NSString *responseString = [request responseString];
+                    NSMutableDictionary *jsonResult = [responseString JSONValue];
+                    if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                        _userView.hasInterest = [NSNumber numberWithInt:0];
+                        cancelInterestButton.hidden = YES;
+                        cancelInterestButton.enabled = NO;
+                        interestButton.hidden = NO;
+                        interestButton.enabled = YES;
+                        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                        hud.mode = MBProgressHUDModeCustomView;
+                        hud.labelText = @"取消成功";
+                        [hud hide:YES afterDelay:1];
+                        return;
+                    }
+                    NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                    NSLog(@"%@", errorInfo);
+                    if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                        errorInfo = SERVER_ERROR_INFO;
+                    }
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MessageShow error:errorInfo onView:self.view];
+                }];
+                [request setFailedBlock:^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [HttpRequestDelegate requestFailedHandle:request];
+                }];
+                [request startAsynchronous];
+            } else {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [MessageShow error:errorInfo onView:self.view];
-            }];
-            [request setFailedBlock:^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [HttpRequestDelegate requestFailedHandle:request];
-            }];
-            [request startAsynchronous];
+            }
         });
     }
 }

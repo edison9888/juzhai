@@ -134,6 +134,8 @@
         if (request) {
             [request setDelegate:_listHttpRequestDelegate];
             [request startAsynchronous];
+        } else {
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         }
     });
 }
@@ -211,24 +213,26 @@
 - (void)refresh
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.targetUser.uid, @"uid", nil];
-    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/refreshDialogContent"] withParams:params];
-    [request setCompletionBlock:^{
-        NSString *responseString = [request responseString];
-        NSMutableDictionary *jsonResult = [responseString JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            NSMutableArray *dialogContentViewList = [[jsonResult valueForKey:@"result"] valueForKey:@"list"];
-            for (int i = 0; i < dialogContentViewList.count; i++) {
-                DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:[dialogContentViewList objectAtIndex:i]];
-                [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
+    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/refreshDialogContent"] withParams:params];
+    if (request != nil) {
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                NSMutableArray *dialogContentViewList = [[jsonResult valueForKey:@"result"] valueForKey:@"list"];
+                for (int i = 0; i < dialogContentViewList.count; i++) {
+                    DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:[dialogContentViewList objectAtIndex:i]];
+                    [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
+                }
+                [self doneLoadingTableViewData];
             }
-            [self doneLoadingTableViewData];
-        }
-    }];
-    [request setFailedBlock:^{
-        [_timer invalidate];
-        _timer = nil;
-    }];
-    [request startAsynchronous];
+        }];
+        [request setFailedBlock:^{
+//            [_timer invalidate];
+//            _timer = nil;
+        }];
+        [request startAsynchronous];
+    }
 }
 
 - (void)doneLoadingTableViewData

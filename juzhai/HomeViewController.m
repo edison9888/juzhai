@@ -107,19 +107,21 @@
 - (void)doRefresh
 {
     ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"home/refresh"] withParams: nil];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error && [request responseStatusCode] == 200){
-        NSString *response = [request responseString];
-        NSMutableDictionary *jsonResult = [response JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            //保存成功
-            [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
-            [self viewWillAppear:NO];
-            [self.infoTableView reloadData];
+    if (request != nil) {
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                //保存成功
+                [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
+                [self viewWillAppear:NO];
+                [self.infoTableView reloadData];
+            }
+        }else {
+            [HttpRequestDelegate requestFailedHandle:request];
         }
-    }else {
-        [HttpRequestDelegate requestFailedHandle:request];
     }
 }
 

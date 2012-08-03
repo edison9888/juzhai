@@ -11,7 +11,17 @@
 @implementation CheckNetwork
 +(BOOL)isExistenceNetwork
 {
-	BOOL isExistenceNetwork;
+    BOOL isExistenceNetwork = [CheckNetwork isExistenceNetworkWithoutAlert];
+	if (!isExistenceNetwork) {
+		UIAlertView *myalert = [[UIAlertView alloc] initWithTitle:@"网络状态" message:@"网络不存在" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
+		[myalert show];
+	}
+	return isExistenceNetwork;
+}
+
++(BOOL)isExistenceNetworkWithoutAlert
+{
+    BOOL isExistenceNetwork;
 	Reachability *r = [Reachability reachabilityWithHostName:@"www.apple.com"];
     switch ([r currentReachabilityStatus]) {
         case NotReachable:
@@ -27,10 +37,7 @@
 			//  NSLog(@"姝ｅ湪浣跨敤wifi缃戠粶");        
             break;
     }
-	if (!isExistenceNetwork) {
-		UIAlertView *myalert = [[UIAlertView alloc] initWithTitle:@"网络状态" message:@"网络不存在" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
-		[myalert show];
-	}
-	return isExistenceNetwork;
+    return isExistenceNetwork;
 }
+
 @end

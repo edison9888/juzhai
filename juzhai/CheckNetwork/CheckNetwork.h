@@ -12,4 +12,5 @@
 	
 }
 +(BOOL)isExistenceNetwork;
++(BOOL)isExistenceNetworkWithoutAlert;
 @end

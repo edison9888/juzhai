@@ -42,31 +42,33 @@ static LoginService *loginService;
     //Http请求
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:account, @"account", password, @"password", [NSNumber numberWithBool:YES], @"remember", nil];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"passport/login"] withParams:params];
-    if (nil != token && ![token isEqualToString:@""]) {
-        NSDictionary *properties = [[NSMutableDictionary alloc] init];
-        [properties setValue:token forKey:NSHTTPCookieValue];
-        [properties setValue:P_TOKEN_COOKIE_NAME forKey:NSHTTPCookieName];
-        [properties setValue:@".51juzhai.com" forKey:NSHTTPCookieDomain];
-        [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60] forKey:NSHTTPCookieExpires];
-        [properties setValue:@"/" forKey:NSHTTPCookiePath];
-        NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
-        [request setRequestCookies:[NSMutableArray arrayWithObjects:cookie, nil]];
-    }
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error && [request responseStatusCode] == 200){
-        NSString *response = [request responseString];
-        NSMutableDictionary *jsonResult = [response JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            //登录成功
-            LoginUser *loginUser = [[LoginUser alloc] initWithAccount:account password:password];
-            [self loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
-            return nil;
-        }else{
-            return [jsonResult valueForKey:@"errorInfo"];
+    if (nil != request) {
+        if (nil != token && ![token isEqualToString:@""]) {
+            NSDictionary *properties = [[NSMutableDictionary alloc] init];
+            [properties setValue:token forKey:NSHTTPCookieValue];
+            [properties setValue:P_TOKEN_COOKIE_NAME forKey:NSHTTPCookieName];
+            [properties setValue:@".51juzhai.com" forKey:NSHTTPCookieDomain];
+            [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60] forKey:NSHTTPCookieExpires];
+            [properties setValue:@"/" forKey:NSHTTPCookiePath];
+            NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
+            [request setRequestCookies:[NSMutableArray arrayWithObjects:cookie, nil]];
         }
-    }else{
-        NSLog(@"error: %@", [request responseStatusMessage]);
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                //登录成功
+                LoginUser *loginUser = [[LoginUser alloc] initWithAccount:account password:password];
+                [self loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
+                return nil;
+            }else{
+                return [jsonResult valueForKey:@"errorInfo"];
+            }
+        }else{
+            NSLog(@"error: %@", [request responseStatusMessage]);
+        }
     }
     return SERVER_ERROR_INFO;
 }
@@ -75,20 +77,22 @@ static LoginService *loginService;
     //Http请求
     NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/tpAccess/%d?%@", tpId, query]];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:url withParams:nil];
-    [request startSynchronous];
-    NSError *error = [request error];
-    if (!error && [request responseStatusCode] == 200){
-        NSString *response = [request responseString];
-        NSMutableDictionary *jsonResult = [response JSONValue];
-        if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-            //登录成功
-            [self loginSuccess:nil withJson:jsonResult withCookies:request.responseCookies];
-            return nil;
+    if (request != nil) {
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                //登录成功
+                [self loginSuccess:nil withJson:jsonResult withCookies:request.responseCookies];
+                return nil;
+            }else{
+                return [jsonResult valueForKey:@"errorInfo"];
+            }
         }else{
-            return [jsonResult valueForKey:@"errorInfo"];
+            NSLog(@"error: %@", [request responseStatusMessage]);
         }
-    }else{
-        NSLog(@"error: %@", [request responseStatusMessage]);
     }
     return SERVER_ERROR_INFO;
 }
@@ -135,7 +139,9 @@ static LoginService *loginService;
 
 - (void)logout{
     ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"passport/logout"] withParams:nil];
-    [request startSynchronous];
+    if (request) {
+        [request startSynchronous];
+    }
     [ASIHTTPRequest setSessionCookies:nil];
     [self localLogout];
 }

@@ -139,26 +139,6 @@
     }
     ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"post/showposts"] withParams:params];
     if (request) {
-        
-//        [request setCompletionBlock:^{
-//            // Use when fetching text data
-//            NSString *responseString = [request responseString];
-//            NSMutableDictionary *jsonResult = [responseString JSONValue];
-//            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-//                //reload
-//                _data = [JZData loadPager:[[jsonResult valueForKey:@"result"] valueForKey:@"pager"] withOldData:_data];
-//                NSMutableArray *userViewList = [[jsonResult valueForKey:@"result"] valueForKey:@"userViewList"];
-//                for (int i = 0; i < userViewList.count; i++) {
-//                    id userView = [NSClassFromString(@"UserView") convertFromDictionary:[userViewList objectAtIndex:i]];
-//                    [_data addObject:userView withIdentity:[userView uid]];
-//                }
-//                [self doneLoadingTableViewData];
-//            }
-//        }];
-//        [request setFailedBlock:^{
-//            [self doneLoadingTableViewData];
-//        }];
-        
         [request setDelegate:_listHttpRequestDelegate];
         [request startAsynchronous];
     }

@@ -208,34 +208,38 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:ideaView.ideaId], @"ideaId", nil];
        __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/sendPost"] withParams:params];
-        [request setCompletionBlock:^{
+        if (request) {
+            [request setCompletionBlock:^{
+                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    ideaView.hasUsed = YES;
+                    ideaView.useCount = ideaView.useCount + 1;
+                    UIButton *wantToButton = (UIButton *)sender;
+                    wantToButton.enabled = NO;
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"保存成功";
+                    [hud hide:YES afterDelay:1];
+                    return;
+                }
+                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+                NSLog(@"%@", errorInfo);
+                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                    errorInfo = SERVER_ERROR_INFO;
+                }
+                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+                [MessageShow error:errorInfo onView:self.contentView];
+            }];
+            [request setFailedBlock:^{
+                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+                [HttpRequestDelegate requestFailedHandle:request];
+            }];
+            [request startAsynchronous];
+        } else {
             [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                ideaView.hasUsed = YES;
-                ideaView.useCount = ideaView.useCount + 1;
-                UIButton *wantToButton = (UIButton *)sender;
-                wantToButton.enabled = NO;
-                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                hud.mode = MBProgressHUDModeCustomView;
-                hud.labelText = @"保存成功";
-                [hud hide:YES afterDelay:1];
-                return;
-            }
-            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
-            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                errorInfo = SERVER_ERROR_INFO;
-            }
-            [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-            [MessageShow error:errorInfo onView:self.contentView];
-        }];
-        [request setFailedBlock:^{
-            [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-            [HttpRequestDelegate requestFailedHandle:request];
-        }];
-        [request startAsynchronous];
+        }
     });
 }
 

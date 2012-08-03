@@ -33,10 +33,8 @@
     return request;
 }
 
-+(ASIHTTPRequest *)getRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params{
-    if (![CheckNetwork isExistenceNetwork]) {
-        return nil;
-    }
++ (ASIHTTPRequest *) createRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params
+{
     if(params != nil && [params count] > 0){
         NSString *parameString = @"";
         int i = 0;
@@ -60,6 +58,22 @@
     [request setResponseEncoding:NSUTF8StringEncoding];
     [request setUseCookiePersistence:YES];
     return request;
+}
+
++(ASIHTTPRequest *) getRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params{
+    if (![CheckNetwork isExistenceNetwork]) {
+        return nil;
+    }
+    return [self createRequestWithUrl:url withParams:params];
+}
+
+//没有无网络提示
++(ASIHTTPRequest *) backgroundGetRequestWithUrl:(NSString *)url withParams:(NSDictionary *)params
+{
+    if (![CheckNetwork isExistenceNetworkWithoutAlert]) {
+        return nil;
+    }
+    return [self createRequestWithUrl:url withParams:params];
 }
 
 @end
