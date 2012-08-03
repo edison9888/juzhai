@@ -12,12 +12,14 @@
 
 @synthesize categoryId;
 @synthesize name;
+@synthesize icon;
 
-- (id) initWithCategoryId:(NSDecimalNumber *)cId withName:(NSString *)cName{
+- (id) initWithCategoryId:(NSInteger)cId withName:(NSString *)cName withIcon:(NSString *)ico{
     self = [super init];
     if(self){
         self.categoryId = cId;
         self.name = cName;
+        self.icon = ico;
     }
     return self;
 }

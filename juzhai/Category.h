@@ -10,9 +10,10 @@
 
 @interface Category : NSObject
     
-@property (nonatomic, retain) NSDecimalNumber *categoryId;
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic) NSInteger categoryId;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *icon;
 
-- (id) initWithCategoryId:(NSDecimalNumber *)categoryId withName:(NSString *)name;
+- (id) initWithCategoryId:(NSInteger)categoryId withName:(NSString *)name withIcon:(NSString *)icon;
 
 @end

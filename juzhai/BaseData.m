@@ -53,15 +53,14 @@ static BaseData *baseData;
                 NSArray *array = [jsonResult objectForKey:@"result"];
                 baseData.categoryArray = [[NSMutableArray alloc] initWithCapacity:array.count];
                 for(NSDictionary *dic in array){
-                    NSDecimalNumber *cId = nil;
-                    for(NSDecimalNumber *key in [dic allKeys]){
-                        cId = key;
-                    }
-                    [baseData.categoryArray addObject:[[Category alloc] initWithCategoryId:cId withName:[dic objectForKey:cId]]];
+                    NSInteger categoryId = [[dic objectForKey:@"categoryId"] intValue];
+                    NSString *name = [dic objectForKey:@"name"];
+                    NSString *icon = [dic objectForKey:@"icon"];
+                    [baseData.categoryArray addObject:[[Category alloc] initWithCategoryId:categoryId withName:name withIcon:icon]];
                 }
             }
         }];
-        [request startAsynchronous];
+        [request startSynchronous];
     }
     return baseData.categoryArray;
 }
@@ -87,7 +86,7 @@ static BaseData *baseData;
                 }
             }
         }];
-        [request startAsynchronous];
+        [request startSynchronous];
     }
     return baseData.professionArray;
 }
@@ -128,7 +127,7 @@ static BaseData *baseData;
                 }
             }
         }];
-        [request startAsynchronous];
+        [request startSynchronous];
     }
     return baseData.provinceArray;
 }

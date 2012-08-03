@@ -13,7 +13,7 @@
 
 + (NSString *)urlStringWithUri:(NSString *)uri;
 {
-    return [NSString stringWithFormat:@"%@%@", BASE_DOMAIN, uri];
+    return [NSString stringWithFormat:@"%@%@", BASE_URL, uri];
 }
 
 @end

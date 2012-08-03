@@ -88,7 +88,7 @@
     
     Category *category = [[BaseData getCategories] objectAtIndex:0];
     categoryLabel.text = category.name;
-    categoryLabel.tag = category.categoryId.intValue;
+    categoryLabel.tag = category.categoryId;
     
     [textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
@@ -225,7 +225,7 @@
         NSInteger row = [_categoryPicker selectedRowInComponent:0];
         Category *category = [[BaseData getCategories] objectAtIndex:row];
         categoryLabel.text = category.name;
-        categoryLabel.tag = category.categoryId.intValue;
+        categoryLabel.tag = category.categoryId;
     }
 }
 

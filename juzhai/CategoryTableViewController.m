@@ -53,7 +53,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
@@ -75,7 +74,7 @@
     }else {
         Category *category = [[BaseData getCategories] objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = category.name;
-        cell.textLabel.tag = [category.categoryId intValue];
+        cell.textLabel.tag = category.categoryId;
     }
     return cell;
 }

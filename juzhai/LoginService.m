@@ -19,6 +19,7 @@
 #import "CustomNavigationController.h"
 #import "UrlUtils.h"
 #import "LoginResult.h"
+#import "Constant.h"
 
 @interface LoginService(Private)
 
@@ -48,7 +49,7 @@ static LoginService *loginService;
             NSDictionary *properties = [[NSMutableDictionary alloc] init];
             [properties setValue:token forKey:NSHTTPCookieValue];
             [properties setValue:P_TOKEN_COOKIE_NAME forKey:NSHTTPCookieName];
-            [properties setValue:@".51juzhai.com" forKey:NSHTTPCookieDomain];
+            [properties setValue:BASE_DOMAIN forKey:NSHTTPCookieDomain];
             [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60] forKey:NSHTTPCookieExpires];
             [properties setValue:@"/" forKey:NSHTTPCookiePath];
             NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
@@ -92,7 +93,6 @@ static LoginService *loginService;
                 return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
             }
         }else{
-            NSLog(@"error: %@", [request responseStatusMessage]);
         }
     }
     return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];
@@ -107,15 +107,12 @@ static LoginService *loginService;
             loginResult = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:loginUser.token];
         }else if (![@"" isEqualToString:loginUser.account] && ![@"" isEqualToString:loginUser.password]) {
             loginResult = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:nil];
-        }else {
-            return NO;
         }
-        if(!loginResult.success){
-            [loginUser reset];
-        } else {
+        if(loginResult && loginResult.success){
             return YES;
         }
     }
+    [self localLogout];
     return NO;
 }
 
@@ -143,12 +140,18 @@ static LoginService *loginService;
     if (request) {
         [request startSynchronous];
     }
-    [ASIHTTPRequest setSessionCookies:nil];
     [self localLogout];
 }
 
 - (void)localLogout
 {
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[UrlUtils urlStringWithUri:@"passport/login"]]]) {
+//        if ([cookie.name isEqualToString:P_TOKEN_COOKIE_NAME]) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+//            break;
+//        }
+    }
+    [ASIHTTPRequest setSessionCookies:nil];
     //清除帐号信息
     [[[LoginUser alloc] init] reset];
     [UserContext logout];
