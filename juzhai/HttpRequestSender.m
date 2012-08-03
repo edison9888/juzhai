@@ -94,7 +94,10 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    
+    if ([request responseStatusCode] != 200) {
+        [self requestFailed:request];
+        return;
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

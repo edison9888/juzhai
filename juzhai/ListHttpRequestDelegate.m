@@ -28,6 +28,11 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    if(request.responseStatusCode != 200)
+    {
+        [self requestFailed:request];
+        return;
+    }
     NSString *responseString = [request responseString];
     NSMutableDictionary *jsonResult = [responseString JSONValue];
     if([[jsonResult valueForKey:@"success"] boolValue]){
@@ -51,6 +56,9 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
+    if (listViewController && [listViewController respondsToSelector:@selector(doneLoadingTableViewData)]) {
+        [listViewController performSelector:@selector(doneLoadingTableViewData) withObject:nil];
+    }
     [super requestFailed:request];
 }
 

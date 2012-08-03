@@ -76,6 +76,8 @@
     if (request) {
         [request setDelegate:_listHttpRequestDelegate];
         [request startAsynchronous];
+    } else {
+        [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
     }
 }
 
