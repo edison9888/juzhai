@@ -228,7 +228,7 @@
                     respButton.enabled = NO;
                     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                     hud.mode = MBProgressHUDModeCustomView;
-                    hud.labelText = @"保存成功";
+                    hud.labelText = @"ta看到会开心的";
                     [hud hide:YES afterDelay:1];
                     return;
                 }
