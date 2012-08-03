@@ -13,6 +13,7 @@
 #import "UrlUtils.h"
 #import "CustomNavigationController.h"
 #import "Constant.h"
+#import "LoginResult.h"
 
 @interface TpLoginViewController ()
 
@@ -78,12 +79,11 @@
 }
 
 -(void) doLogin:(NSString *)query{
-    NSLog(@"%@", query);
-    NSString *errorInfo = [[LoginService getInstance] loginWithTpId:tpId withQuery:query];
-    if(errorInfo == nil){
+    LoginResult *loginResult = [[LoginService getInstance] loginWithTpId:tpId withQuery:query];
+    if(loginResult.success){
         [self performSelectorOnMainThread:@selector(redirect) withObject:nil waitUntilDone:NO];
     }else{
-        [MessageShow error:errorInfo onView:self.navigationController.view];
+        [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
     }
 }
 

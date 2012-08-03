@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class LoginUser;
+@class LoginResult;
 
 #define P_TOKEN_COOKIE_NAME @"p_token"
 
@@ -15,8 +16,8 @@
 
 + (id)getInstance;
 
-- (NSString *)useLoginName:(NSString *)account byPassword:(NSString *)password byToken:(NSString *)token;
-- (NSString *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query;
+- (LoginResult *)useLoginName:(NSString *)account byPassword:(NSString *)password byToken:(NSString *)token;
+- (LoginResult *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query;
 - (BOOL)checkLogin;
 - (void)loginSuccess:(LoginUser *)loginUser withJson:(NSDictionary *)jsonResult withCookies:(NSArray *)cookies;
 - (void)logout;

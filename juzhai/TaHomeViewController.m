@@ -172,7 +172,7 @@
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"操作中...";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_userView.uid, @"uid", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/interest"] withParams:params];
         if (request != nil) {
@@ -207,7 +207,7 @@
         } else {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
-    });
+//    });
 }
 
 - (IBAction)cancelInterestUser:(id)sender
@@ -231,7 +231,7 @@
     if (buttonIndex != alertView.cancelButtonIndex) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"操作中...";
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_userView.uid, @"uid", nil];
             __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/removeInterest"] withParams:params];
             if (request != nil) {
@@ -266,7 +266,7 @@
             } else {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
             }
-        });
+//        });
     }
 }
 

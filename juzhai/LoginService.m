@@ -18,6 +18,7 @@
 #import "GuideSettingViewController.h"
 #import "CustomNavigationController.h"
 #import "UrlUtils.h"
+#import "LoginResult.h"
 
 @interface LoginService(Private)
 
@@ -38,7 +39,7 @@ static LoginService *loginService;
     }
 }
 
-- (NSString *)useLoginName:(NSString *)account byPassword:(NSString *)password byToken:(NSString *)token{
+- (LoginResult *)useLoginName:(NSString *)account byPassword:(NSString *)password byToken:(NSString *)token{
     //Http请求
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:account, @"account", password, @"password", [NSNumber numberWithBool:YES], @"remember", nil];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"passport/login"] withParams:params];
@@ -62,18 +63,18 @@ static LoginService *loginService;
                 //登录成功
                 LoginUser *loginUser = [[LoginUser alloc] initWithAccount:account password:password];
                 [self loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
-                return nil;
+                return [LoginResult successLoginResult];
             }else{
-                return [jsonResult valueForKey:@"errorInfo"];
+                return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
             }
         }else{
             NSLog(@"error: %@", [request responseStatusMessage]);
         }
     }
-    return SERVER_ERROR_INFO;
+    return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];
 }
 
-- (NSString *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query{
+- (LoginResult *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query{
     //Http请求
     NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/tpAccess/%d?%@", tpId, query]];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:url withParams:nil];
@@ -86,30 +87,30 @@ static LoginService *loginService;
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
                 //登录成功
                 [self loginSuccess:nil withJson:jsonResult withCookies:request.responseCookies];
-                return nil;
+                return [LoginResult successLoginResult];
             }else{
-                return [jsonResult valueForKey:@"errorInfo"];
+                return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
             }
         }else{
             NSLog(@"error: %@", [request responseStatusMessage]);
         }
     }
-    return SERVER_ERROR_INFO;
+    return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];
 }
 
 - (BOOL)checkLogin{
     LoginUser *loginUser = [[LoginUser alloc] initFromData];
     if(loginUser != nil)
     {
-        NSString *errorInfo = nil;
+        LoginResult *loginResult = nil;
         if (![@"" isEqualToString:loginUser.token]) {
-            errorInfo = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:loginUser.token];
+            loginResult = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:loginUser.token];
         }else if (![@"" isEqualToString:loginUser.account] && ![@"" isEqualToString:loginUser.password]) {
-            errorInfo = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:nil];
+            loginResult = [self useLoginName:loginUser.account byPassword:loginUser.password byToken:nil];
         }else {
             return NO;
         }
-        if(errorInfo != nil){
+        if(!loginResult.success){
             [loginUser reset];
         } else {
             return YES;

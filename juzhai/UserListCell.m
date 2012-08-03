@@ -183,7 +183,7 @@
     UIView *coverView = self.superview.superview.superview.superview;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:coverView animated:YES];
     hud.labelText = @"操作中...";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:_userView.post.postId, @"postId", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/respPost"] withParams:params];
         if (request) {
@@ -218,7 +218,7 @@
         } else {
             [MBProgressHUD hideHUDForView:coverView animated:YES];
         }
-    });
+//    });
 }
 
 @end

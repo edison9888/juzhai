@@ -30,9 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([CheckNetwork isExistenceNetwork]) {
-        _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
-    }
+    _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -42,8 +40,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-//    [_noticeTimer invalidate];
-//    _noticeTimer = nil;
 }
 
 - (void)viewDidUnload

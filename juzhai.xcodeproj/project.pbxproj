@@ -384,6 +384,7 @@
 		CBE90A901558D646002780E8 /* LoginUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE90A8F1558D646002780E8 /* LoginUser.m */; };
 		CBE90B2915A576EB00E500B5 /* SendPostBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE90B2815A576EB00E500B5 /* SendPostBarButtonItem.m */; };
 		CBE91CD515829B1C008BDDE9 /* juzhai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBE91CD315829B1C008BDDE9 /* juzhai.xcdatamodeld */; };
+		CBEE332F15CB99A1004CEE34 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE332E15CB99A1004CEE34 /* LoginResult.m */; };
 		CBF253F715B6EB97009FDE0B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF253F515B6EB97009FDE0B /* HomeViewController.m */; };
 		CBF253F815B6EB97009FDE0B /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBF253F615B6EB97009FDE0B /* HomeViewController.xib */; };
 		CBF3229915AA741100D82CBB /* SmsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF3229815AA741100D82CBB /* SmsListCell.m */; };
@@ -909,6 +910,8 @@
 		CBE90B2715A576EB00E500B5 /* SendPostBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendPostBarButtonItem.h; sourceTree = "<group>"; };
 		CBE90B2815A576EB00E500B5 /* SendPostBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendPostBarButtonItem.m; sourceTree = "<group>"; };
 		CBE91CD415829B1C008BDDE9 /* juzhai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = juzhai.xcdatamodel; sourceTree = "<group>"; };
+		CBEE332D15CB99A1004CEE34 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
+		CBEE332E15CB99A1004CEE34 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
 		CBF253F415B6EB96009FDE0B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CBF253F515B6EB97009FDE0B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CBF253F615B6EB97009FDE0B /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -1155,6 +1158,8 @@
 				CBF9484E1594C06100543F67 /* UserContext.m */,
 				CB29554D15BC46BF0036C2B6 /* ProfileValidation.h */,
 				CB29554E15BC46BF0036C2B6 /* ProfileValidation.m */,
+				CBEE332D15CB99A1004CEE34 /* LoginResult.h */,
+				CBEE332E15CB99A1004CEE34 /* LoginResult.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -2431,6 +2436,7 @@
 				CB32D09915BF9F94005B5B7F /* CustomTextView.m in Sources */,
 				CB32D0A115BFC173005B5B7F /* GrowingTextViewDelegate.m in Sources */,
 				CB32D0A415BFC417005B5B7F /* GrowingTextView.m in Sources */,
+				CBEE332F15CB99A1004CEE34 /* LoginResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

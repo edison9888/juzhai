@@ -126,18 +126,18 @@
 {
     if(page <= 0)
         page = 1;
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//    hud.labelText = @"加载中...";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.targetUser.uid, @"uid", [NSNumber numberWithInt:page], @"page", nil];
-        ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/dialogContentList"] withParams:params];
-        if (request) {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"加载中...";
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.targetUser.uid, @"uid", [NSNumber numberWithInt:page], @"page", nil];
+    ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/dialogContentList"] withParams:params];
+    if (request) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [request setDelegate:_listHttpRequestDelegate];
             [request startAsynchronous];
-        } else {
-            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        }
-    });
+        });
+    } else {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }
 }
 
 - (void)viewDidLoad
@@ -181,9 +181,7 @@
     //load
     [self loadListDataWithPage:1];
     
-    if ([CheckNetwork isExistenceNetwork]) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
-    }
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -210,10 +210,10 @@
 - (IBAction)postIdea:(id)sender{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
     hud.labelText = @"操作中...";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:ideaView.ideaId], @"ideaId", nil];
-       __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/sendPost"] withParams:params];
-        if (request) {
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:ideaView.ideaId], @"ideaId", nil];
+    __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/sendPost"] withParams:params];
+    if (request) {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [request setCompletionBlock:^{
                 [MBProgressHUD hideHUDForView:self.contentView animated:YES];
                 NSString *responseString = [request responseString];
@@ -242,10 +242,10 @@
                 [HttpRequestDelegate requestFailedHandle:request];
             }];
             [request startAsynchronous];
-        } else {
-            [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-        }
-    });
+//        });
+    } else {
+        [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+    }
 }
 
 - (IBAction)showUsedUsers:(id)sender

@@ -14,6 +14,7 @@
 #import "TpLoginDelegate.h"
 #import "RectButton.h"
 #import "MessageShow.h"
+#import "LoginResult.h"
 
 @implementation LoginViewController
 
@@ -30,12 +31,12 @@
 }
 
 -(void) doLogin{
-    NSString *errorInfo = [[LoginService getInstance] useLoginName:[nameField text] byPassword:[pwdField text] byToken:nil];
-    if(errorInfo == nil){
+    LoginResult *loginResult = [[LoginService getInstance] useLoginName:[nameField text] byPassword:[pwdField text] byToken:nil];
+    if(loginResult.success){
         [self performSelectorOnMainThread:@selector(redirect) withObject:nil waitUntilDone:NO];
     }else{
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        [MessageShow error:errorInfo onView:self.navigationController.view];
+        [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
     }
 }
 
