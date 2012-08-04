@@ -25,6 +25,7 @@
 #import "SBJson.h"
 #import "Constant.h"
 #import "CustomNavigationController.h"
+#import "UIImage+UIImageExt.h"
 
 @interface SettingViewController (Private)
 
@@ -85,17 +86,18 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if(!_saveButton.enabled){
         UserView *userView = [UserContext getUserView];
         
         self.logoImageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+        self.logoImageView.layer.shouldRasterize = YES;
+        self.logoImageView.layer.masksToBounds = YES;
+        self.logoImageView.layer.cornerRadius = 5.0;
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSURL *imageURL = [NSURL URLWithString:userView.rawLogo];
         [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-            self.logoImageView.image = image;
-            self.logoImageView.layer.shouldRasterize = YES;
-            self.logoImageView.layer.masksToBounds = YES;
-            self.logoImageView.layer.cornerRadius = 5.0;
+            self.logoImageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoImageView.frame.size.width*2, self.logoImageView.frame.size.height*2)];
         } failure:nil];
         if (userView.nickname && ![userView.nickname isEqual:[NSNull null]]) {
             self.nicknameLabel.text = userView.nickname;
@@ -232,7 +234,7 @@
     [picker dismissModalViewControllerAnimated:YES];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     _newLogo = image;
-    self.logoImageView.image = image;
+    self.logoImageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoImageView.frame.size.width*2, self.logoImageView.frame.size.height*2)];
     _saveButton.enabled = YES;
 }
 

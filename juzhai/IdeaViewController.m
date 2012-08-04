@@ -86,7 +86,9 @@
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     if (_data != nil) {
         [self.tableView reloadData];
     }

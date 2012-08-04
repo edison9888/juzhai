@@ -71,6 +71,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if (valueId == 0){
         [professionPicker selectRow:[_professionArray count] inComponent:0 animated:NO];
         [self showTextField:YES];

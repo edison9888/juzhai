@@ -82,7 +82,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     if (_data != nil) {
         [self.tableView reloadData];
     }
@@ -90,7 +90,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidUnload

@@ -11,6 +11,7 @@
 #import "Constant.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIImage+UIImageExt.h"
 
 @implementation PostListCell
 
@@ -64,24 +65,15 @@
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, labelsize.width, labelsize.height)];
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    if(![postView.pic isEqual:[NSNull null]]){
+    if(![postView.bigPic isEqual:[NSNull null]]){
+        imageView.layer.shouldRasterize = YES;
+        imageView.layer.masksToBounds = YES;
+        imageView.layer.cornerRadius = 5.0;
         imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-        NSURL *postImageURL = [NSURL URLWithString:postView.pic];
+        NSURL *postImageURL = [NSURL URLWithString:postView.bigPic];
         [imageView setFrame:CGRectMake(imageView.frame.origin.x, contentLabel.frame.origin.y + labelsize.height + 10.0, imageView.frame.size.width, imageView.frame.size.height)];
         [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            CGFloat imageHeight = image.size.height*(imageView.frame.size.width/image.size.width);
-            if (imageHeight > imageView.frame.size.height) {
-                UIGraphicsBeginImageContext(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height));
-                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageHeight)];
-                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                imageView.image = resultImage;
-            } else {
-                imageView.image = image;
-            }
-            imageView.layer.shouldRasterize = YES;
-            imageView.layer.masksToBounds = YES;
-            imageView.layer.cornerRadius = 5.0;
+            imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
         } failure:nil];
         [imageView setHidden:NO];
     }else {
@@ -94,7 +86,7 @@
     NSString *content = [NSString stringWithFormat:@"%@：%@", postView.purpose, postView.content];
     CGSize contentSize = [content sizeWithFont:[UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0] constrainedToSize:CGSizeMake(300, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     height += contentSize.height + 10.0;
-    if(![postView.pic isEqual:[NSNull null]]){
+    if(![postView.bigPic isEqual:[NSNull null]]){
         height += 80.0;
     }
     return height;

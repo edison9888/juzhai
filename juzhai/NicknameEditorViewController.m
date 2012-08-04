@@ -53,6 +53,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.textField.text = self.textValue;
     [self.textField becomeFirstResponder];
 }

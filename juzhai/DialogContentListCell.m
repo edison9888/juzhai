@@ -16,6 +16,7 @@
 #import "DetailTextView.h"
 #import "NSDate+BeforeShowType.h"
 #import "TaHomeViewController.h"
+#import "UIImage+UIImageExt.h"
 
 @implementation DialogContentListCell
 
@@ -90,23 +91,24 @@
         hisLogoView.hidden = YES;
         myLogoView.hidden = NO;
         logoView = myLogoView;
-        logoUrl = [UserContext getUserView].smallLogo;
+        logoUrl = [UserContext getUserView].bigLogo;
     }else {
         hisLogoView.hidden = NO;
         myLogoView.hidden = YES;
         logoView = hisLogoView;
-        logoUrl = targetUser.smallLogo;
+        logoUrl = targetUser.bigLogo;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
         [hisLogoView addGestureRecognizer:singleTap];
     }
+    
+    logoView.layer.shouldRasterize = YES;
+    logoView.layer.masksToBounds = YES;
+    logoView.layer.cornerRadius = 5.0;
     logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:logoUrl];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = image;
-        logoView.layer.shouldRasterize = YES;
-        logoView.layer.masksToBounds = YES;
-        logoView.layer.cornerRadius = 5.0;
+        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
 }
 
@@ -138,7 +140,7 @@
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
             [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-                imageView.image = image;
+                imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
             } failure:nil];
         }
     } else {

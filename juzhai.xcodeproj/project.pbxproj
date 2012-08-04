@@ -385,6 +385,7 @@
 		CBE90B2915A576EB00E500B5 /* SendPostBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE90B2815A576EB00E500B5 /* SendPostBarButtonItem.m */; };
 		CBE91CD515829B1C008BDDE9 /* juzhai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBE91CD315829B1C008BDDE9 /* juzhai.xcdatamodeld */; };
 		CBEE332F15CB99A1004CEE34 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE332E15CB99A1004CEE34 /* LoginResult.m */; };
+		CBEE333415CBD7C9004CEE34 /* UIImage+UIImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE333315CBD7C9004CEE34 /* UIImage+UIImageExt.m */; };
 		CBF253F715B6EB97009FDE0B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF253F515B6EB97009FDE0B /* HomeViewController.m */; };
 		CBF253F815B6EB97009FDE0B /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBF253F615B6EB97009FDE0B /* HomeViewController.xib */; };
 		CBF3229915AA741100D82CBB /* SmsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF3229815AA741100D82CBB /* SmsListCell.m */; };
@@ -912,6 +913,8 @@
 		CBE91CD415829B1C008BDDE9 /* juzhai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = juzhai.xcdatamodel; sourceTree = "<group>"; };
 		CBEE332D15CB99A1004CEE34 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
 		CBEE332E15CB99A1004CEE34 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
+		CBEE333215CBD7C9004CEE34 /* UIImage+UIImageExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageExt.h"; sourceTree = "<group>"; };
+		CBEE333315CBD7C9004CEE34 /* UIImage+UIImageExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageExt.m"; sourceTree = "<group>"; };
 		CBF253F415B6EB96009FDE0B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CBF253F515B6EB97009FDE0B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CBF253F615B6EB97009FDE0B /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -1482,6 +1485,7 @@
 		CBB3154D155A691F00C08B16 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CBEE333115CBD7B1004CEE34 /* Image */,
 				CBF9B4C01598B98200FE0F8B /* String */,
 				CBD964AD157FC4A7006E0196 /* CheckNetwork */,
 				CB175ABC156E252200D5F054 /* FPPopover */,
@@ -1891,6 +1895,15 @@
 				CBE90A8F1558D646002780E8 /* LoginUser.m */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		CBEE333115CBD7B1004CEE34 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				CBEE333215CBD7C9004CEE34 /* UIImage+UIImageExt.h */,
+				CBEE333315CBD7C9004CEE34 /* UIImage+UIImageExt.m */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 		CBF4973D15B8F21A009DB8C3 /* EGORefresh */ = {
@@ -2437,6 +2450,7 @@
 				CB32D0A115BFC173005B5B7F /* GrowingTextViewDelegate.m in Sources */,
 				CB32D0A415BFC417005B5B7F /* GrowingTextView.m in Sources */,
 				CBEE332F15CB99A1004CEE34 /* LoginResult.m in Sources */,
+				CBEE333415CBD7C9004CEE34 /* UIImage+UIImageExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

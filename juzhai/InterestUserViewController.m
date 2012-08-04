@@ -21,6 +21,7 @@
 #import "UrlUtils.h"
 #import "CheckNetwork.h"
 #import "ListHttpRequestDelegate.h"
+#import "UIImage+UIImageExt.h"
 
 @interface InterestUserViewController ()
 
@@ -114,6 +115,9 @@
         [cell addSubview:separatorView];
         
         UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
+        logo.layer.shouldRasterize = YES;
+        logo.layer.masksToBounds = YES;
+        logo.layer.cornerRadius = 5.0;
         logo.tag = INTEREST_USER_LOGO_TAG;
         [cell addSubview:logo];
         
@@ -136,12 +140,9 @@
     UIImageView *logo = (UIImageView *)[cell viewWithTag:INTEREST_USER_LOGO_TAG];
     logo.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:userView.smallLogo];
+    NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logo.image = image;
-        logo.layer.shouldRasterize = YES;
-        logo.layer.masksToBounds = YES;
-        logo.layer.cornerRadius = 5.0;
+        logo.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logo.frame.size.width*2, logo.frame.size.height*2)];
     } failure:nil];
     
     UILabel *nicknameLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_NICKNAME_TAG];

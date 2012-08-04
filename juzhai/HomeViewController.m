@@ -21,6 +21,7 @@
 #import "HttpRequestSender.h"
 #import "UrlUtils.h"
 #import "SBJson.h"
+#import "UIImage+UIImageExt.h"
 
 @interface HomeViewController ()
 
@@ -67,15 +68,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     UserView *userView = [UserContext getUserView];
     
+    logoView.layer.shouldRasterize = YES;
+    logoView.layer.masksToBounds = YES;
+    logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:userView.rawLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = image;
-        logoView.layer.shouldRasterize = YES;
-        logoView.layer.masksToBounds = YES;
-        logoView.layer.cornerRadius = 5.0;
+        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
     
     nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14];
@@ -87,7 +89,7 @@
     nicknameLabel.text = userView.nickname;
     
     infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
-    infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];;
+    infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.text = [userView basicInfo];
 }
 

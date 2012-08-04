@@ -19,6 +19,7 @@
 #import "TaHomeViewController.h"
 #import "MessageShow.h"
 #import "UrlUtils.h"
+#import "UIImage+UIImageExt.h"
 
 @implementation UserListCell
 
@@ -75,14 +76,14 @@
 - (void) redrawn:(UserView *)userView{
     _userView = userView;
     UIImageView *imageView = (UIImageView *)[self viewWithTag:USER_LOGO_TAG];
+    imageView.layer.shouldRasterize = YES;
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = 5.0;
     imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:userView.logo];
+    NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        imageView.image = image;
-        imageView.layer.shouldRasterize = YES;
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 5.0;
+        imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
     } failure:nil];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [imageView addGestureRecognizer:singleTap];
@@ -114,25 +115,26 @@
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, contentSize.width, contentSize.height)];
     
     UIImageView *postImageView = (UIImageView *)[self viewWithTag:POST_IMAGE_TAG];
-    if(![userView.post.pic isEqual:[NSNull null]]){
+    postImageView.layer.shouldRasterize = YES;
+    postImageView.layer.masksToBounds = YES;
+    postImageView.layer.cornerRadius = 5.0;
+    if(![userView.post.bigPic isEqual:[NSNull null]]){
         postImageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-        NSURL *postImageURL = [NSURL URLWithString:userView.post.pic];
+        NSURL *postImageURL = [NSURL URLWithString:userView.post.bigPic];
         [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, contentLabel.frame.origin.y + contentSize.height + 10.0, postImageView.frame.size.width, postImageView.frame.size.height)];
         [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            CGFloat imageHeight = image.size.height*(postImageView.frame.size.width/image.size.width);
-            if (imageHeight > postImageView.frame.size.height) {
-                UIGraphicsBeginImageContext(CGSizeMake(postImageView.frame.size.width, postImageView.frame.size.height));
-                [image drawInRect:CGRectMake(0, 0, postImageView.frame.size.width, imageHeight)];
-                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                postImageView.image = resultImage;
-            } else {
-                postImageView.image = image;
-            }
+            postImageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(postImageView.frame.size.width*2, postImageView.frame.size.height*2)];
             
-            postImageView.layer.shouldRasterize = YES;
-            postImageView.layer.masksToBounds = YES;
-            postImageView.layer.cornerRadius = 5.0;
+//            CGFloat imageHeight = image.size.height*(postImageView.frame.size.width/image.size.width);
+//            if (imageHeight > postImageView.frame.size.height) {
+//                UIGraphicsBeginImageContext(CGSizeMake(postImageView.frame.size.width, postImageView.frame.size.height));
+//                [image drawInRect:CGRectMake(0, 0, postImageView.frame.size.width, imageHeight)];
+//                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
+//                UIGraphicsEndImageContext();
+//                postImageView.image = resultImage;
+//            } else {
+//                postImageView.image = image;
+//            }
         } failure:nil];
         [postImageView setHidden:NO];
     }else {
@@ -173,7 +175,7 @@
     NSString *content = [NSString stringWithFormat:@"%@：%@", userView.post.purpose, userView.post.content];
     CGSize contentSize = [content sizeWithFont:[UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0] constrainedToSize:CGSizeMake(220, 200.0) lineBreakMode:UILineBreakModeCharacterWrap];
     height += contentSize.height;
-    if(![userView.post.pic isEqual:[NSNull null]]){
+    if(![userView.post.bigPic isEqual:[NSNull null]]){
         height += 80.0;
     }
     return height;

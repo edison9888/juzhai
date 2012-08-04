@@ -20,6 +20,7 @@
 #import "MessageShow.h"
 #import "UrlUtils.h"
 #import "DialogContentViewController.h"
+#import "UIImage+UIImageExt.h"
 
 @interface PostDetailViewController ()
 - (CGFloat) getViewOriginY:(UIView *)view byUpperView:(UIView *)upperView heightGap:(float)heightGap;
@@ -64,14 +65,14 @@
     
     _isMe = userView.uid.intValue == [UserContext getUid];
     
-    //    logoView.image = [UIImage imageNamed:USER_DEFAULT_LOGO];
+    logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+    logoView.layer.shouldRasterize = YES;
+    logoView.layer.masksToBounds = YES;
+    logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:userView.logo];
+    NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = image;
-        logoView.layer.shouldRasterize = YES;
-        logoView.layer.masksToBounds = YES;
-        logoView.layer.cornerRadius = 5.0;
+        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
     
     nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
@@ -92,6 +93,9 @@
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(300.0, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, [self getViewOriginY:contentLabel byUpperView:nil heightGap:POST_DEFAULT_HEIGHT_GAP], contentSize.width, contentSize.height)];
     
+    postImageView.layer.shouldRasterize = YES;
+    postImageView.layer.masksToBounds = YES;
+    postImageView.layer.cornerRadius = 5.0;
     [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, [self getViewOriginY:postImageView byUpperView:contentLabel heightGap:POST_DEFAULT_HEIGHT_GAP], postImageView.frame.size.width, postImageView.frame.size.height)];
     [postImageView setHidden:userView.post.bigPic == nil || [userView.post.bigPic isEqual:[NSNull null]] || [userView.post.bigPic isEqualToString:@""]];
     
@@ -151,12 +155,8 @@
             NSInteger width = image.size.width;
             postImageView.image = image;
             [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, width/2, height/2)];
-            postImageView.layer.shouldRasterize = YES;
-            postImageView.layer.masksToBounds = YES;
-            postImageView.layer.cornerRadius = 5.0;
             //重新定位以下元素
             [self resetViewFrame];
-            
         } failure:nil];
     }
     [self resetViewFrame];

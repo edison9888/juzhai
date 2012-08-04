@@ -17,6 +17,7 @@
 #import "SBJson.h"
 #import "MessageShow.h"
 #import "UrlUtils.h"
+#import "UIImage+UIImageExt.h"
 
 @implementation IdeaListCell
 
@@ -58,24 +59,28 @@
     _ideaView = ideaView;
     UIImageView *imageView = (UIImageView *)[self viewWithTag:IDEA_IMAGE_TAG];
     imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
+    imageView.layer.shouldRasterize = YES;
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    if(![ideaView.pic isEqual:[NSNull null]]){
-        NSURL *imageURL = [NSURL URLWithString:ideaView.pic];
+    if(![ideaView.bigPic isEqual:[NSNull null]]){
+        NSURL *imageURL = [NSURL URLWithString:ideaView.bigPic];
         [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-            CGFloat imageHeight = image.size.height*(imageView.frame.size.width/image.size.width);
-            if (imageHeight > imageView.frame.size.height) {
-                UIGraphicsBeginImageContext(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height));
-                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageHeight)];
-                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                imageView.image = resultImage;
-            } else {
-                imageView.image = image;
-            }
+            imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
             
-            imageView.layer.shouldRasterize = YES;
-            imageView.layer.masksToBounds = YES;
-            imageView.layer.cornerRadius = 5.0;
+//            CGFloat imageHeight = image.size.height*(imageView.frame.size.width*2/image.size.width);
+//            
+//            if (imageHeight > imageView.frame.size.height*2) {
+//                
+//                UIGraphicsBeginImageContext(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height));
+//                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width*2, imageHeight)];
+//                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
+//                UIGraphicsEndImageContext();
+//                
+//                imageView.image = resultImage;
+//            } else {
+//                imageView.image = image;
+//            }
         } failure:nil];
     }
     

@@ -30,6 +30,7 @@
 #import "CheckNetwork.h"
 #import "ListHttpRequestDelegate.h"
 #import "DialogContentViewController.h"
+#import "UIImage+UIImageExt.h"
 
 @interface TaHomeViewController ()
 
@@ -79,13 +80,14 @@
     
     
     _isMe = _userView.uid.intValue == [UserContext getUserView].uid.intValue;
+    
+    logoView.layer.shouldRasterize = YES;
+    logoView.layer.masksToBounds = YES;
+    logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:(_userView.logo)];
+    NSURL *imageURL = [NSURL URLWithString:(_userView.bigLogo)];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = image;
-        logoView.layer.shouldRasterize = YES;
-        logoView.layer.masksToBounds = YES;
-        logoView.layer.cornerRadius = 5.0;
+        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
     
     nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
@@ -129,6 +131,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidUnload

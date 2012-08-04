@@ -14,6 +14,7 @@
 #import "TaHomeViewController.h"
 #import "Constant.h"
 #import "NSDate+BeforeShowType.h"
+#import "UIImage+UIImageExt.h"
 
 @implementation SmsListCell
 
@@ -74,15 +75,13 @@
     
     //头像
     userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+    userLogoView.layer.shouldRasterize = YES;
+    userLogoView.layer.masksToBounds = YES;
+    userLogoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:_dialogView.targetUser.smallLogo];
+    NSURL *imageURL = [NSURL URLWithString:_dialogView.targetUser.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        userLogoView.image = image;
-        userLogoView.layer.shouldRasterize = YES;
-        userLogoView.layer.masksToBounds = YES;
-        userLogoView.layer.cornerRadius = 5.0;
-//        userLogoView.layer.borderWidth = 1;
-//        userLogoView.layer.borderColor = [UIColor grayColor].CGColor;
+        userLogoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
     } failure:nil];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [userLogoView addGestureRecognizer:singleTap];

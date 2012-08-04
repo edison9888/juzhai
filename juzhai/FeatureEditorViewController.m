@@ -51,6 +51,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [textView becomeFirstResponder];
     textView.text = textValue;
 }

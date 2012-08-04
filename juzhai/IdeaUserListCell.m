@@ -18,6 +18,7 @@
 #import "MessageShow.h"
 #import "UserContext.h"
 #import "UrlUtils.h"
+#import "UIImage+UIImageExt.h"
 
 @implementation IdeaUserListCell
 
@@ -59,13 +60,13 @@
 {
     _ideaUserView = ideaUserView;
     userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+    userLogoView.layer.shouldRasterize = YES;
+    userLogoView.layer.masksToBounds = YES;
+    userLogoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:ideaUserView.userView.smallLogo];
+    NSURL *imageURL = [NSURL URLWithString:ideaUserView.userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        userLogoView.image = image;
-        userLogoView.layer.shouldRasterize = YES;
-        userLogoView.layer.masksToBounds = YES;
-        userLogoView.layer.cornerRadius = 5.0;
+        userLogoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
     } failure:nil];
     
     nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];

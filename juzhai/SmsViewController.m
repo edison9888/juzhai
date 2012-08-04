@@ -67,7 +67,9 @@
     _data = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     if (self.navigationController.tabBarItem.badgeValue != nil && _data != nil) {
         [_refreshHeaderView autoRefresh:self.tableView];
     } else {
