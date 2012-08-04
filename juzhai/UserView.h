@@ -11,7 +11,7 @@
 
 @class PostView;
 
-@interface UserView : NSObject <DataView>
+@interface UserView : NSObject <DataView,NSCopying>
 
 @property (strong,nonatomic) NSDecimalNumber *uid;
 @property (strong,nonatomic) NSString *nickname;

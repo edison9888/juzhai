@@ -127,8 +127,9 @@
     if (indexPath.row < [_data count]) {
         PostDetailViewController *postDetailViewController = [[PostDetailViewController alloc] initWithNibName:@"PostDetailViewController" bundle:nil];
         postDetailViewController.hidesBottomBarWhenPushed = YES;
-        [UserContext getUserView].post = [_data objectAtIndex:indexPath.row];
-        postDetailViewController.userView = [UserContext getUserView];
+        UserView *userView = [[UserContext getUserView] copy];
+        userView.post = [_data objectAtIndex:indexPath.row];
+        postDetailViewController.userView = userView;
         [self.navigationController pushViewController:postDetailViewController animated:YES];
     } else {
         [self loadListDataWithPage:[_data.pager nextPage]];

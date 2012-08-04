@@ -103,4 +103,39 @@
     return self.uid;
 }
 
+#pragma mark - NSCopying
+-(id) copyWithZone:(NSZone *)zone{
+    UserView *copy = [[[self class] allocWithZone:zone] init];
+    if(copy){
+        copy.uid = self.uid;
+        copy.nickname = self.nickname;
+        copy.gender = self.gender;
+        copy.logo = self.logo;
+        copy.smallLogo = self.smallLogo;
+        copy.bigLogo = self.bigLogo;
+        copy.rawLogo = self.rawLogo;
+        copy.logoVerifyState = self.logoVerifyState;
+        copy.birthYear = self.birthYear;
+        copy.birthMonth = self.birthMonth;
+        copy.birthDay = self.birthDay;
+        copy.constellation = self.constellation;
+        copy.professionId = self.professionId;
+        copy.profession = self.profession;
+        copy.provinceId = self.provinceId;
+        copy.provinceName = self.provinceName;
+        copy.cityId = self.cityId;
+        copy.cityName = self.cityName;
+        copy.townId = self.townId;
+        copy.townName = self.townName;
+        copy.feature = self.feature;
+        copy.interestUserCount = self.interestMeCount;
+        copy.interestMeCount = self.interestMeCount;
+        copy.postCount = self.postCount;
+        copy.hasGuided = self.hasGuided;
+        copy.hasInterest = self.hasInterest;
+        copy.post = self.post;
+    }
+    return copy;
+}
+
 @end
