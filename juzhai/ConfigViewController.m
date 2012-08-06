@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "CustomNavigationController.h"
 #import "ProfileSettingViewController.h"
+#import "Constant.h"
 
 @implementation ConfigViewController
 
@@ -23,8 +24,9 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    self.itemList = [[NSMutableArray alloc] initWithObjects:@"个人资料设置", @"退出账号", nil];
+    self.itemList = [[NSMutableArray alloc] initWithObjects:@"退出账号", nil];
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
 }
 
 -(void)doLogout{
