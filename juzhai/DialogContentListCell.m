@@ -17,6 +17,8 @@
 #import "NSDate+BeforeShowType.h"
 #import "TaHomeViewController.h"
 #import "UIImage+UIImageExt.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "DialogContentViewController.h"
 
 @implementation DialogContentListCell
 
@@ -74,6 +76,16 @@
     taHomeViewController.userView = targetUser;
     UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder.nextResponder;
     [viewController.navigationController pushViewController:taHomeViewController animated:YES];
+}
+
+- (void)imageClick:(UIGestureRecognizer *)gestureRecognizer {
+    [[self.superview.superview viewWithTag:GROWING_TEXT_VIEW_TAG] resignFirstResponder];
+    _wholeImageViewController = [[WholeImageViewController alloc] init];
+    _wholeImageViewController.image = imageView.image;
+    _wholeImageViewController.imageUrl = _dialogContentView.imgUrl;
+    _wholeImageViewController.delegate = self;
+    UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder.nextResponder;
+    [viewController presentPopupViewController:_wholeImageViewController animationType:MJPopupViewAnimationFade];
 }
 
 + (CGFloat)heightForCell:(DialogContentView *)dialogContentView
@@ -139,6 +151,8 @@
             NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
             [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
                 imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                [imageView addGestureRecognizer:singleTap];
             } failure:nil];
         }
     } else {
@@ -172,6 +186,16 @@
     containerFram.origin.y = bubbleView.frame.origin.y + bubbleView.frame.size.height + 10;
     timeLabel.frame = containerFram;
     timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:_dialogContentView.createTime] showBefore];
+}
+
+#pragma mark -
+#pragma mark Whole Image View Delegate
+
+- (void)cancelButtonClicked:(WholeImageViewController *)wholeImageViewController
+{
+    UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder.nextResponder;
+    [viewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    wholeImageViewController = nil;
 }
 
 @end

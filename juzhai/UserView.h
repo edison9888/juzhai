@@ -22,6 +22,7 @@
 @property (strong,nonatomic) NSString *originalLogo;
 @property (strong,nonatomic) NSString *rawLogo;
 @property (strong,nonatomic) NSNumber *logoVerifyState;
+@property (nonatomic) BOOL hasLogo;
 @property (strong,nonatomic) NSNumber *birthYear;
 @property (strong,nonatomic) NSNumber *birthMonth;
 @property (strong,nonatomic) NSNumber *birthDay;

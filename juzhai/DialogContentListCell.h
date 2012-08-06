@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ListCell.h"
+#import "WholeImageViewController.h"
 
 @class DetailTextView;
 @class UserView;
@@ -28,10 +29,11 @@
 #define HIS_BG_CAP_HEIHGT 20
 #define HIS_BG_CAP_WIDTH 8
 
-@interface DialogContentListCell : UITableViewCell <ListCell>
+@interface DialogContentListCell : UITableViewCell <ListCell, WholeImageViewDelegate>
 {
     DialogContentView *_dialogContentView;
     BOOL _isMe;
+    WholeImageViewController *_wholeImageViewController;
 }
 
 @property (strong, nonatomic) UserView *targetUser;

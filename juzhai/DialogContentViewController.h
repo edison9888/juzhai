@@ -17,6 +17,8 @@
 
 #define TIMER_INTERVAL 10
 
+#define GROWING_TEXT_VIEW_TAG 1000
+
 @interface DialogContentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CustomTextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 {
     UIPanGestureRecognizer *_singlePan;

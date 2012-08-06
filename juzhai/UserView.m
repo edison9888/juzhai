@@ -20,6 +20,7 @@
 @synthesize originalLogo;
 @synthesize rawLogo;
 @synthesize logoVerifyState;
+@synthesize hasLogo;
 @synthesize birthYear;
 @synthesize birthMonth;
 @synthesize birthDay;
@@ -60,6 +61,7 @@
     self.originalLogo = [info valueForKey:@"originalLogo"];
     self.rawLogo = [info valueForKey:@"newLogo"];
     self.logoVerifyState = [info valueForKey:@"logoVerifyState"];
+    self.hasLogo = [[info valueForKey:@"hasLogo"] boolValue];
     self.birthYear = [info valueForKey:@"birthYear"];
     self.birthMonth = [info valueForKey:@"birthMonth"];
     self.birthDay = [info valueForKey:@"birthDay"];

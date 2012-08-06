@@ -89,7 +89,7 @@
     NSURL *imageURL = [NSURL URLWithString:(_userView.bigLogo)];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
         logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
-        if (_userView.logoVerifyState.intValue == 2) {
+        if (_userView.hasLogo) {
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
             [logoView addGestureRecognizer:singleTap];
         }

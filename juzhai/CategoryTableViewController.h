@@ -11,5 +11,6 @@
 @interface CategoryTableViewController : UITableViewController
 
 @property UIViewController *rootController;
+@property (nonatomic) NSInteger selectCategoryId;
 
 @end

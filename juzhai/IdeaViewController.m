@@ -175,12 +175,13 @@
 {
     //the controller we want to present as a popover
     CategoryTableViewController *controller = [[CategoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    controller.selectCategoryId = _categoryButton.tag;
     controller.rootController = self;
     _categoryPopver = [[FPPopoverController alloc] initWithViewController:controller];
     _categoryPopver.tint = FPPopoverLightGrayTint;
     _categoryPopver.arrowDirection = FPPopoverArrowDirectionVertical;
     _categoryPopver.delegate = self;
-    _categoryPopver.contentSize = CGSizeMake(150, 250);
+    _categoryPopver.contentSize = CGSizeMake(150, 256);
     //sender is the UIButton view
     [_categoryPopver presentPopoverFromView:sender]; 
 }

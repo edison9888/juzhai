@@ -9,6 +9,7 @@
 #import "CategoryTableViewController.h"
 #import "BaseData.h"
 #import "Category.h"
+#import "Constant.h"
 
 @interface CategoryTableViewController ()
 
@@ -17,6 +18,7 @@
 @implementation CategoryTableViewController
 
 @synthesize rootController = _rootController;
+@synthesize selectCategoryId;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,11 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.scrollEnabled = YES;
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.12f green:0.31f blue:0.53f alpha:1.00f];
+    self.tableView.separatorColor = [UIColor colorWithRed:0.15f green:0.39f blue:0.66f alpha:1.00f];
 }
 
 - (void)viewDidUnload
@@ -67,14 +67,33 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        
+        UIView *selectBgColorView = [[UIView alloc] init];
+        selectBgColorView.backgroundColor = [UIColor colorWithRed:0.15f green:0.39f blue:0.66f alpha:1.00f];
+        cell.selectedBackgroundView = selectBgColorView;
     }
+    UIImageView *iconView;
     if(indexPath.row == 0){
         cell.textLabel.text = @"全部分类";
         cell.textLabel.tag = 0;
+        NSString *iconImageName = (cell.textLabel.tag == selectCategoryId) ? @"ca_all_hover" : @"ca_all_link";
+        iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconImageName]];
     }else {
         Category *category = [[BaseData getCategories] objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = category.name;
         cell.textLabel.tag = category.categoryId;
+        if (category.icon != nil && ![category.icon isEqual:[NSNull null]] && ![category.icon isEqualToString:@""]) {
+            NSString *iconImageName = (cell.textLabel.tag == selectCategoryId) ? [NSString stringWithFormat:@"%@_hover", category.icon] : [NSString stringWithFormat:@"%@_link", category.icon];
+            iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconImageName]];
+        }
+    }
+    cell.accessoryView = iconView;
+    if (cell.textLabel.tag == selectCategoryId) {
+        cell.backgroundView = cell.selectedBackgroundView;
     }
     return cell;
 }
@@ -123,6 +142,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_rootController performSelector:@selector(selectByCategory:) withObject:[tableView cellForRowAtIndexPath:indexPath]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
 }
 
 @end

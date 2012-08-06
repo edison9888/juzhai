@@ -11,7 +11,7 @@
 
 #define FP_POPOVER_ARROW_HEIGHT 5.0
 #define FP_POPOVER_ARROW_BASE 5.0
-#define FP_POPOVER_RADIUS 5.0
+#define FP_POPOVER_RADIUS 3.0
 
 
 @interface FPPopoverView(Private)
@@ -339,7 +339,8 @@
     }
     else if(self.tint == FPPopoverLightGrayTint)
     {
-        CGContextSetRGBFillColor(ctx, 0.3, 0.3, 0.3, 1.0);        
+//        CGContextSetRGBFillColor(ctx, 0.3, 0.3, 0.3, 1.0);        
+        CGContextSetRGBFillColor(ctx, 0.15, 0.39, 0.66, 1.0);
     }
     else if(self.tint == FPPopoverRedTint)
     {
@@ -355,7 +356,8 @@
     //internal border
     CGContextBeginPath(ctx);
     CGContextAddPath(ctx, contentPath);
-    CGContextSetRGBStrokeColor(ctx, 0.7, 0.7, 0.7, 1.0);
+//    CGContextSetRGBStrokeColor(ctx, 0.7, 0.7, 0.7, 1.0);
+    CGContextSetRGBStrokeColor(ctx, 0.15, 0.39, 0.66, 1.0);
     CGContextSetLineWidth(ctx, 1);
     CGContextSetLineCap(ctx,kCGLineCapRound);
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
@@ -366,7 +368,8 @@
     CGPathRef externalBorderPath = [self createContentPathWithBorderWidth:1.0 arrowDirection:_arrowDirection];
     CGContextBeginPath(ctx);
     CGContextAddPath(ctx, externalBorderPath);
-    CGContextSetRGBStrokeColor(ctx, 0.4, 0.4, 0.4, 1.0);
+//    CGContextSetRGBStrokeColor(ctx, 0.4, 0.4, 0.4, 1.0);
+    CGContextSetRGBStrokeColor(ctx, 0.15, 0.39, 0.66, 1.0);
     CGContextSetLineWidth(ctx, 1);
     CGContextSetLineCap(ctx,kCGLineCapRound);
     CGContextSetLineJoin(ctx, kCGLineJoinRound);
@@ -376,11 +379,13 @@
     //3D border of the content view
     CGRect cvRect = _contentView.frame;
     //firstLine
-    CGContextSetRGBStrokeColor(ctx, 0.7, 0.7, 0.7, 1.0);
+//    CGContextSetRGBStrokeColor(ctx, 0.7, 0.7, 0.7, 1.0);
+    CGContextSetRGBStrokeColor(ctx, 0.15, 0.39, 0.66, 1.0);
     CGContextStrokeRect(ctx, cvRect);
     //secondLine
     cvRect.origin.x -= 1; cvRect.origin.y -= 1; cvRect.size.height += 2; cvRect.size.width += 2;
-    CGContextSetRGBStrokeColor(ctx, 0.4, 0.4, 0.4, 1.0);
+//    CGContextSetRGBStrokeColor(ctx, 0.4, 0.4, 0.4, 1.0);
+    CGContextSetRGBStrokeColor(ctx, 0.15, 0.39, 0.66, 1.0);
     CGContextStrokeRect(ctx, cvRect);
     
     
@@ -395,9 +400,9 @@
 
     if(_arrowDirection == FPPopoverArrowDirectionUp)
     {
-        contentRect.origin = CGPointMake(10, 10+FP_POPOVER_ARROW_HEIGHT);  
-        contentRect.size = CGSizeMake(self.bounds.size.width-20, self.bounds.size.height-(20+FP_POPOVER_ARROW_HEIGHT));
-        _titleLabel.frame = CGRectMake(10, 30, self.bounds.size.width-20, 20);        
+        contentRect.origin = CGPointMake(6, 6+FP_POPOVER_ARROW_HEIGHT);  
+        contentRect.size = CGSizeMake(self.bounds.size.width-12, self.bounds.size.height-(12+FP_POPOVER_ARROW_HEIGHT));
+        _titleLabel.frame = CGRectMake(6, 30, self.bounds.size.width-12, 12);        
     }
     else if(_arrowDirection == FPPopoverArrowDirectionDown)
     {
