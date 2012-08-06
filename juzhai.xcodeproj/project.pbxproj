@@ -409,6 +409,9 @@
 		CBF5611C155E2DE3006A03E6 /* IdeaView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF5611B155E2DE3006A03E6 /* IdeaView.m */; };
 		CBF56126155E51B0006A03E6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF56125155E51B0006A03E6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBF5612E155EA774006A03E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF5612C155EA752006A03E6 /* QuartzCore.framework */; };
+		CBF9406B15CE5F3E0080A521 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406815CE5F3E0080A521 /* MJPopupBackgroundView.m */; };
+		CBF9406C15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406A15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m */; };
+		CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406F15CE60CA0080A521 /* WholeImageViewController.m */; };
 		CBF9484F1594C06100543F67 /* UserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9484E1594C06100543F67 /* UserContext.m */; };
 		CBF9B4C81598B9E900FE0F8B /* NSString+Chinese.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9B4C71598B9E900FE0F8B /* NSString+Chinese.m */; };
 		CBFB167E159EF7C1006B3EE7 /* InterestUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFB167D159EF7BF006B3EE7 /* InterestUserViewController.m */; };
@@ -948,6 +951,12 @@
 		CBF56124155E51B0006A03E6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		CBF56125155E51B0006A03E6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		CBF5612C155EA752006A03E6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CBF9406715CE5F3E0080A521 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		CBF9406815CE5F3E0080A521 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		CBF9406915CE5F3E0080A521 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		CBF9406A15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		CBF9406E15CE60CA0080A521 /* WholeImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WholeImageViewController.h; sourceTree = "<group>"; };
+		CBF9406F15CE60CA0080A521 /* WholeImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WholeImageViewController.m; sourceTree = "<group>"; };
 		CBF9484D1594C06100543F67 /* UserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserContext.h; sourceTree = "<group>"; };
 		CBF9484E1594C06100543F67 /* UserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserContext.m; sourceTree = "<group>"; };
 		CBF9B4C61598B9E900FE0F8B /* NSString+Chinese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Chinese.h"; sourceTree = "<group>"; };
@@ -1249,6 +1258,7 @@
 				CB4668CF156F391E0030D655 /* Tab */,
 				CB4668CE156F39130030D655 /* Navigation */,
 				CB4668CD156F39050030D655 /* Button */,
+				CBF9406D15CE5F510080A521 /* ViewController */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1485,6 +1495,7 @@
 		CBB3154D155A691F00C08B16 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CBF9406515CE5EDB0080A521 /* MJPopup */,
 				CBEE333115CBD7B1004CEE34 /* Image */,
 				CBF9B4C01598B98200FE0F8B /* String */,
 				CBD964AD157FC4A7006E0196 /* CheckNetwork */,
@@ -1964,6 +1975,26 @@
 				CBF56125155E51B0006A03E6 /* EGORefreshTableHeaderView.m */,
 			);
 			path = RefreshTableHeaderView;
+			sourceTree = "<group>";
+		};
+		CBF9406515CE5EDB0080A521 /* MJPopup */ = {
+			isa = PBXGroup;
+			children = (
+				CBF9406715CE5F3E0080A521 /* MJPopupBackgroundView.h */,
+				CBF9406815CE5F3E0080A521 /* MJPopupBackgroundView.m */,
+				CBF9406915CE5F3E0080A521 /* UIViewController+MJPopupViewController.h */,
+				CBF9406A15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m */,
+			);
+			name = MJPopup;
+			sourceTree = "<group>";
+		};
+		CBF9406D15CE5F510080A521 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CBF9406E15CE60CA0080A521 /* WholeImageViewController.h */,
+				CBF9406F15CE60CA0080A521 /* WholeImageViewController.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		CBF9B4C01598B98200FE0F8B /* String */ = {
@@ -2451,6 +2482,9 @@
 				CB32D0A415BFC417005B5B7F /* GrowingTextView.m in Sources */,
 				CBEE332F15CB99A1004CEE34 /* LoginResult.m in Sources */,
 				CBEE333415CBD7C9004CEE34 /* UIImage+UIImageExt.m in Sources */,
+				CBF9406B15CE5F3E0080A521 /* MJPopupBackgroundView.m in Sources */,
+				CBF9406C15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m in Sources */,
+				CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

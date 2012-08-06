@@ -60,7 +60,6 @@
 {
     _ideaUserView = ideaUserView;
     userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    userLogoView.layer.shouldRasterize = YES;
     userLogoView.layer.masksToBounds = YES;
     userLogoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];

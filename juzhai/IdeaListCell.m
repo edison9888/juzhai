@@ -59,7 +59,6 @@
     _ideaView = ideaView;
     UIImageView *imageView = (UIImageView *)[self viewWithTag:IDEA_IMAGE_TAG];
     imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-    imageView.layer.shouldRasterize = YES;
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];

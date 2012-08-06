@@ -115,7 +115,6 @@
         [cell addSubview:separatorView];
         
         UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
-        logo.layer.shouldRasterize = YES;
         logo.layer.masksToBounds = YES;
         logo.layer.cornerRadius = 5.0;
         logo.tag = INTEREST_USER_LOGO_TAG;

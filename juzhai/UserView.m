@@ -17,6 +17,7 @@
 @synthesize logo;
 @synthesize smallLogo;
 @synthesize bigLogo;
+@synthesize originalLogo;
 @synthesize rawLogo;
 @synthesize logoVerifyState;
 @synthesize birthYear;
@@ -56,6 +57,7 @@
     self.logo = [info valueForKey:@"logo"];
     self.smallLogo = [info valueForKey:@"smallLogo"];
     self.bigLogo = [info valueForKey:@"bigLogo"];
+    self.originalLogo = [info valueForKey:@"originalLogo"];
     self.rawLogo = [info valueForKey:@"newLogo"];
     self.logoVerifyState = [info valueForKey:@"logoVerifyState"];
     self.birthYear = [info valueForKey:@"birthYear"];

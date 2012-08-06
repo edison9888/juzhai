@@ -71,7 +71,6 @@
     [super viewWillAppear:animated];
     UserView *userView = [UserContext getUserView];
     
-    logoView.layer.shouldRasterize = YES;
     logoView.layer.masksToBounds = YES;
     logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];

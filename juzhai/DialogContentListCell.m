@@ -101,7 +101,6 @@
         [hisLogoView addGestureRecognizer:singleTap];
     }
     
-    logoView.layer.shouldRasterize = YES;
     logoView.layer.masksToBounds = YES;
     logoView.layer.cornerRadius = 5.0;
     logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
@@ -133,7 +132,6 @@
         imageView.frame = CGRectMake(startX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height);
         //load图片
         imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-        imageView.layer.shouldRasterize = YES;
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 5.0;
         if (_dialogContentView.imgUrl != nil && ![_dialogContentView.imgUrl isEqual:[NSNull null]] && ![_dialogContentView.imgUrl isEqualToString:@""]) {

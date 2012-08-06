@@ -66,7 +66,6 @@
     _isMe = userView.uid.intValue == [UserContext getUid];
     
     logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    logoView.layer.shouldRasterize = YES;
     logoView.layer.masksToBounds = YES;
     logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -93,7 +92,6 @@
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(300.0, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, [self getViewOriginY:contentLabel byUpperView:nil heightGap:POST_DEFAULT_HEIGHT_GAP], contentSize.width, contentSize.height)];
     
-    postImageView.layer.shouldRasterize = YES;
     postImageView.layer.masksToBounds = YES;
     postImageView.layer.cornerRadius = 5.0;
     [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, [self getViewOriginY:postImageView byUpperView:contentLabel heightGap:POST_DEFAULT_HEIGHT_GAP], postImageView.frame.size.width, postImageView.frame.size.height)];

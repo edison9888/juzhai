@@ -76,7 +76,6 @@
 - (void) redrawn:(UserView *)userView{
     _userView = userView;
     UIImageView *imageView = (UIImageView *)[self viewWithTag:USER_LOGO_TAG];
-    imageView.layer.shouldRasterize = YES;
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = 5.0;
     imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
@@ -115,7 +114,6 @@
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, contentSize.width, contentSize.height)];
     
     UIImageView *postImageView = (UIImageView *)[self viewWithTag:POST_IMAGE_TAG];
-    postImageView.layer.shouldRasterize = YES;
     postImageView.layer.masksToBounds = YES;
     postImageView.layer.cornerRadius = 5.0;
     if(![userView.post.bigPic isEqual:[NSNull null]]){

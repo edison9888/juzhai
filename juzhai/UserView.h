@@ -19,6 +19,7 @@
 @property (strong,nonatomic) NSString *logo;
 @property (strong,nonatomic) NSString *smallLogo;
 @property (strong,nonatomic) NSString *bigLogo;
+@property (strong,nonatomic) NSString *originalLogo;
 @property (strong,nonatomic) NSString *rawLogo;
 @property (strong,nonatomic) NSNumber *logoVerifyState;
 @property (strong,nonatomic) NSNumber *birthYear;

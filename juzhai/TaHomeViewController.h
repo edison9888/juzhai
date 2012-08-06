@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EGORefreshHeaderViewController.h"
+#import "WholeImageViewController.h"
 
 @class UserView;
 @class JZData;
@@ -21,11 +22,12 @@
 #define TABLE_HEAD_BG_IMAGE @"my_jz_title_bg.png"
 #define TABLE_HEAD_TITLE @"    共 %d 条拒宅"
 
-@interface TaHomeViewController : EGORefreshHeaderViewController <UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate>
+@interface TaHomeViewController : EGORefreshHeaderViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, WholeImageViewDelegate>
 {
     JZData *_data;
     BOOL _isMe;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    WholeImageViewController *_wholeImageViewController;
 }
 
 @property (strong, nonatomic) UserView *userView;

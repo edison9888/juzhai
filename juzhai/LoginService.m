@@ -131,7 +131,6 @@ static LoginService *loginService;
     [UserContext setUserView:[UserView convertFromDictionary:[jsonResult valueForKey:@"result"]]];
     if (loginUser.token != nil && ![loginUser.token isEqualToString:@""]) {
         [loginUser save];
-        NSLog(@"save token %@", loginUser.token);
     }
 }
 

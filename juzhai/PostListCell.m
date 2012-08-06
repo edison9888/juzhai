@@ -66,7 +66,6 @@
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     if(![postView.bigPic isEqual:[NSNull null]]){
-        imageView.layer.shouldRasterize = YES;
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 5.0;
         imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];

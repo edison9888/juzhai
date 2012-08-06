@@ -174,7 +174,6 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
     [inputAreaView sizeToFit];
     
-    imageView.layer.shouldRasterize = YES;
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = 5.0;
     

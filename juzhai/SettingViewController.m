@@ -91,7 +91,6 @@
         UserView *userView = [UserContext getUserView];
         
         self.logoImageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-        self.logoImageView.layer.shouldRasterize = YES;
         self.logoImageView.layer.masksToBounds = YES;
         self.logoImageView.layer.cornerRadius = 5.0;
         SDWebImageManager *manager = [SDWebImageManager sharedManager];

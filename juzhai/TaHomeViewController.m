@@ -31,6 +31,8 @@
 #import "ListHttpRequestDelegate.h"
 #import "DialogContentViewController.h"
 #import "UIImage+UIImageExt.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "WholeImageViewController.h"
 
 @interface TaHomeViewController ()
 
@@ -81,13 +83,16 @@
     
     _isMe = _userView.uid.intValue == [UserContext getUserView].uid.intValue;
     
-    logoView.layer.shouldRasterize = YES;
     logoView.layer.masksToBounds = YES;
     logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:(_userView.bigLogo)];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
         logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        if (_userView.logoVerifyState.intValue == 2) {
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
+            [logoView addGestureRecognizer:singleTap];
+        }
     } failure:nil];
     
     nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
@@ -151,6 +156,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)logoClick:(UIGestureRecognizer *)gestureRecognizer {  
+    _wholeImageViewController = [[WholeImageViewController alloc] init];
+    _wholeImageViewController.image = logoView.image;
+    _wholeImageViewController.imageUrl = _userView.originalLogo;
+    _wholeImageViewController.delegate = self;
+    [self presentPopupViewController:_wholeImageViewController animationType:MJPopupViewAnimationFade];
 }
 
 -(void)doneLoadingTableViewData{
@@ -323,6 +336,14 @@
         [self loadListDataWithPage:[_data.pager nextPage]];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark Whole Image View Delegate
+- (void)cancelButtonClicked:(WholeImageViewController *)wholeImageViewController
+{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    wholeImageViewController = nil;
 }
 
 @end
