@@ -13,6 +13,7 @@
 #import "ASIDownloadCache.h"
 #import "CustomNavigationController.h"
 #import "BaseData.h"
+#import "MobClick.h"
 
 @implementation AppDelegate
 
@@ -40,10 +41,10 @@
     }
     self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
-//    [navController pushViewController:viewController animated:YES];
+    [application setStatusBarHidden:NO];    
     
-    [application setStatusBarHidden:NO];
-    
+    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
+    [MobClick checkUpdate];
     return YES;
 }
 

@@ -290,6 +290,7 @@
 		CBB46DBC15CFB1C9003F2ADC /* ca_ms_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB46DBA15CFB1C9003F2ADC /* ca_ms_link@2x.png */; };
 		CBB46DC015CFB1DA003F2ADC /* ca_ms_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB46DBE15CFB1DA003F2ADC /* ca_ms_hover.png */; };
 		CBB46DC115CFB1DA003F2ADC /* ca_ms_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB46DBF15CFB1DA003F2ADC /* ca_ms_link.png */; };
+		CBB46DC415CFB7D0003F2ADC /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB46DC215CFB7D0003F2ADC /* libMobClickLibrary.a */; };
 		CBB7517615CA370000B94D99 /* IdeaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */; };
 		CBB7517815CA56D400B94D99 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517715CA56D400B94D99 /* logo_icon.png */; };
 		CBB7517A15CA56DB00B94D99 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7517915CA56DB00B94D99 /* logo_icon@2x.png */; };
@@ -800,6 +801,8 @@
 		CBB46DBA15CFB1C9003F2ADC /* ca_ms_link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ca_ms_link@2x.png"; sourceTree = "<group>"; };
 		CBB46DBE15CFB1DA003F2ADC /* ca_ms_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ca_ms_hover.png; sourceTree = "<group>"; };
 		CBB46DBF15CFB1DA003F2ADC /* ca_ms_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ca_ms_link.png; sourceTree = "<group>"; };
+		CBB46DC215CFB7D0003F2ADC /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		CBB46DC315CFB7D0003F2ADC /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		CBB7517515CA36B100B94D99 /* IdeaDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaDetailViewController.xib; sourceTree = "<group>"; };
 		CBB7517715CA56D400B94D99 /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_icon.png; path = ../logo_icon.png; sourceTree = "<group>"; };
 		CBB7517915CA56DB00B94D99 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_icon@2x.png"; path = "../logo_icon@2x.png"; sourceTree = "<group>"; };
@@ -1056,6 +1059,7 @@
 				CB87D3DB15518C9C00A25129 /* UIKit.framework in Frameworks */,
 				CB87D3DD15518C9C00A25129 /* Foundation.framework in Frameworks */,
 				CB87D3E115518C9C00A25129 /* CoreData.framework in Frameworks */,
+				CBB46DC415CFB7D0003F2ADC /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,6 +1308,8 @@
 		CB3E04D215526A570069DE30 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CBB46DC215CFB7D0003F2ADC /* libMobClickLibrary.a */,
+				CBB46DC315CFB7D0003F2ADC /* MobClick.h */,
 				CB87D3EB15518C9C00A25129 /* AppDelegate.h */,
 				CB87D3EC15518C9C00A25129 /* AppDelegate.m */,
 				CB87D3EE15518C9C00A25129 /* juzhai.xcdatamodeld */,
@@ -2714,6 +2720,10 @@
 				);
 				INFOPLIST_FILE = "juzhai/juzhai-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/juzhai\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -2731,6 +2741,10 @@
 				);
 				INFOPLIST_FILE = "juzhai/juzhai-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/juzhai\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

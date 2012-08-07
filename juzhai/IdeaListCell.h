@@ -24,6 +24,8 @@
     IdeaView *_ideaView;
 }
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 - (IBAction)wantGo:(id)sender;
 
 @end

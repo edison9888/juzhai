@@ -21,6 +21,8 @@
 
 @implementation IdeaListCell
 
+@synthesize imageView;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -38,13 +40,7 @@
 
 + (id)cellFromNib
 {
-    IdeaListCell *cell = nil;
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"IdeaListCell" owner:self options:nil];
-    for(id oneObject in nib){
-        if([oneObject isKindOfClass:[IdeaListCell class]]){
-            cell = (IdeaListCell *) oneObject;
-        }
-    }
+    IdeaListCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"IdeaListCell" owner:self options:nil] lastObject];
     [cell setBackground];
     return cell;
 }
@@ -55,36 +51,28 @@
     self.selectedBackgroundView = selectBgColorView;
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    
+}
+
 - (void) redrawn:(IdeaView *)ideaView{
     _ideaView = ideaView;
-    UIImageView *imageView = (UIImageView *)[self viewWithTag:IDEA_IMAGE_TAG];
-    imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = 5.0;
+    imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     if(![ideaView.bigPic isEqual:[NSNull null]]){
         NSURL *imageURL = [NSURL URLWithString:ideaView.bigPic];
         [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-            imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-            
-//            CGFloat imageHeight = image.size.height*(imageView.frame.size.width*2/image.size.width);
-//            
-//            if (imageHeight > imageView.frame.size.height*2) {
-//                
-//                UIGraphicsBeginImageContext(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height));
-//                [image drawInRect:CGRectMake(0, 0, imageView.frame.size.width*2, imageHeight)];
-//                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
-//                UIGraphicsEndImageContext();
-//                
-//                imageView.image = resultImage;
-//            } else {
-//                imageView.image = image;
-//            }
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+            imageView.image = resultImage;
         } failure:nil];
     }
     
     UILabel *contentLabel = (UILabel *)[self viewWithTag:IDEA_CONTENT_TAG];
     contentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+//    contentLabel.font = [UIFont systemFontOfSize:14.0];
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     contentLabel.highlightedTextColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     CGSize labelsize = [ideaView.content sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(190, 37) lineBreakMode:UILineBreakModeCharacterWrap];

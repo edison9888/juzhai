@@ -107,6 +107,7 @@
     static NSString *InterestUserCellIdentifier = @"InterestUserCellCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:InterestUserCellIdentifier];
     if (!cell) {
+        NSLog(@"aa");
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:InterestUserCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
@@ -135,28 +136,30 @@
         cell.selectedBackgroundView = selectBgColorView;
         cell.backgroundColor = [UIColor clearColor];
     }
-    UserView *userView = [_data objectAtIndex:indexPath.row];
-    UIImageView *logo = (UIImageView *)[cell viewWithTag:INTEREST_USER_LOGO_TAG];
-    logo.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
-    [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logo.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logo.frame.size.width*2, logo.frame.size.height*2)];
-    } failure:nil];
-    
-    UILabel *nicknameLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_NICKNAME_TAG];
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
-    if(userView.gender.intValue == 0){
-        nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
-    }else {
-        nicknameLabel.textColor = MALE_NICKNAME_COLOR;
+    if (indexPath.row < [_data count]) {
+        UserView *userView = [_data objectAtIndex:indexPath.row];
+        UIImageView *logo = (UIImageView *)[cell viewWithTag:INTEREST_USER_LOGO_TAG];
+        logo.image = [UIImage imageNamed:FACE_LOADING_IMG];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
+        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+            logo.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logo.frame.size.width*2, logo.frame.size.height*2)];
+        } failure:nil];
+        
+        UILabel *nicknameLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_NICKNAME_TAG];
+        nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+        if(userView.gender.intValue == 0){
+            nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
+        }else {
+            nicknameLabel.textColor = MALE_NICKNAME_COLOR;
+        }
+        nicknameLabel.text = userView.nickname;
+        
+        UILabel *infoLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_INFO_TAG];
+        infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
+        infoLabel.textColor = [UIColor grayColor];
+        infoLabel.text = [userView basicInfo];
     }
-    nicknameLabel.text = userView.nickname;
-    
-    UILabel *infoLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_INFO_TAG];
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
-    infoLabel.textColor = [UIColor grayColor];
-    infoLabel.text = [userView basicInfo];
     
     return cell;
 }
