@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UITableView *infoTableView;
+@property (strong, nonatomic) IBOutlet UILabel *logoVerifyLabel;
 
 - (IBAction)editor:(id)sender;
 

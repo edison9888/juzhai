@@ -33,6 +33,7 @@
 @synthesize nicknameLabel;
 @synthesize infoLabel;
 @synthesize infoTableView;
+@synthesize logoVerifyLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,6 +91,8 @@
     infoLabel.font = DEFAULT_FONT(13);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.text = [userView basicInfo];
+    logoVerifyLabel.hidden = userView.logoVerifyState.intValue != 3;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -117,7 +120,7 @@
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
                 //保存成功
                 [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
-                [self viewWillAppear:NO];
+                [self viewWillAppear:YES];
                 [self.infoTableView reloadData];
             }
         }else {

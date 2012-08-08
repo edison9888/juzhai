@@ -75,12 +75,11 @@
     
     //头像
     userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    userLogoView.layer.masksToBounds = YES;
-    userLogoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:_dialogView.targetUser.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        userLogoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+        userLogoView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [userLogoView addGestureRecognizer:singleTap];
@@ -100,8 +99,8 @@
         nicknameLabel.textColor = MALE_NICKNAME_COLOR;
         nicknameLabel.highlightedTextColor = MALE_NICKNAME_COLOR;
     }
-    CGSize nicknameSize = [_dialogView.targetUser.nickname sizeWithFont:nicknameLabel.font constrainedToSize:CGSizeMake(140.0f, nicknameLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
-    [nicknameLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x, nicknameLabel.frame.origin.y, nicknameSize.width, nicknameSize.height)];
+//    CGSize nicknameSize = [_dialogView.targetUser.nickname sizeWithFont:nicknameLabel.font constrainedToSize:CGSizeMake(140.0f, nicknameLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
+//    [nicknameLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x, nicknameLabel.frame.origin.y, nicknameSize.width, nicknameSize.height)];
     nicknameLabel.text = _dialogView.targetUser.nickname;
     
     //时间
@@ -112,13 +111,13 @@
     CGSize timeSize = [timeLabel.text sizeWithFont:timeLabel.font constrainedToSize:CGSizeMake(72, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
     [timeLabel setFrame:CGRectMake(310 - timeSize.width, timeLabel.frame.origin.y, timeSize.width, timeSize.height)];
     
-    //基本资料
-    infoLabel.font = DEFAULT_FONT(14);
-    infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    infoLabel.highlightedTextColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    infoLabel.text = [_dialogView.targetUser basicInfo];
-    CGSize infoSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:CGSizeMake(230 - nicknameSize.width - timeSize.width, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
-    [infoLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x + nicknameLabel.frame.size.width + 8.0, infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
+//    //基本资料
+//    infoLabel.font = DEFAULT_FONT(14);
+//    infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
+//    infoLabel.highlightedTextColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
+//    infoLabel.text = [_dialogView.targetUser basicInfo];
+//    CGSize infoSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:CGSizeMake(230 - nicknameSize.width - timeSize.width, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
+//    [infoLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x + nicknameLabel.frame.size.width + 8.0, infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
     
     //最新一条内容
     latestContentLabel.font = DEFAULT_FONT(12);
@@ -129,7 +128,7 @@
 
 + (CGFloat) heightForCell:(id)objView
 {
-    return 60;
+    return 70;
 }
 
 @end
