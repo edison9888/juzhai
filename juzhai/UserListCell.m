@@ -76,19 +76,18 @@
 - (void) redrawn:(UserView *)userView{
     _userView = userView;
     UIImageView *imageView = (UIImageView *)[self viewWithTag:USER_LOGO_TAG];
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.cornerRadius = 5.0;
     imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+        imageView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [imageView addGestureRecognizer:singleTap];
     
     UILabel *nicknameLabel = (UILabel *)[self viewWithTag:USER_NICKNAME_TAG];
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    nicknameLabel.font = DEFAULT_FONT(12);
     if(userView.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
     }else {
@@ -99,30 +98,28 @@
     nicknameLabel.text = userView.nickname;
     
     UILabel *infoLabel = (UILabel *)[self viewWithTag:USER_INFO_TAG];
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    infoLabel.font = DEFAULT_FONT(12);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];;
     infoLabel.text = [userView basicInfo];
-    CGSize infoSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:CGSizeMake(120.0f, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
+    CGSize infoSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:CGSizeMake(180 - nicknameSize.width, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
     [infoLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x + nicknameLabel.frame.size.width + 10.0, infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
 
     
     UILabel *contentLabel = (UILabel *)[self viewWithTag:POST_CONTENT_TAG];
-    contentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    contentLabel.font = DEFAULT_FONT(14);
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];;
     contentLabel.text = [NSString stringWithFormat:@"%@：%@", userView.post.purpose, userView.post.content];
-    CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(220, 500.0) lineBreakMode:UILineBreakModeCharacterWrap];
+    CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(225, 1000.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, contentSize.width, contentSize.height)];
     
     UIImageView *postImageView = (UIImageView *)[self viewWithTag:POST_IMAGE_TAG];
-    postImageView.layer.masksToBounds = YES;
-    postImageView.layer.cornerRadius = 5.0;
     if(![userView.post.bigPic isEqual:[NSNull null]]){
         postImageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
         NSURL *postImageURL = [NSURL URLWithString:userView.post.bigPic];
         [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, contentLabel.frame.origin.y + contentSize.height + 10.0, postImageView.frame.size.width, postImageView.frame.size.height)];
         [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            postImageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(postImageView.frame.size.width*2, postImageView.frame.size.height*2)];
-            
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(postImageView.frame.size.width*2, postImageView.frame.size.height*2)];
+            postImageView.image = [resultImage createRoundedRectImage:8.0];
 //            CGFloat imageHeight = image.size.height*(postImageView.frame.size.width/image.size.width);
 //            if (imageHeight > postImageView.frame.size.height) {
 //                UIGraphicsBeginImageContext(CGSizeMake(postImageView.frame.size.width, postImageView.frame.size.height));
@@ -141,12 +138,12 @@
     
     UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];
     NSString *buttonTitle = [NSString stringWithFormat:@"%d", userView.post.respCnt.intValue];
-    CGSize respButtonTitleSize = [buttonTitle sizeWithFont:[UIFont fontWithName:DEFAULT_FONT_FAMILY size:11.0] constrainedToSize:CGSizeMake(100.0f, 25.0f)lineBreakMode:UILineBreakModeHeadTruncation];
+    CGSize respButtonTitleSize = [buttonTitle sizeWithFont:DEFAULT_FONT(11) constrainedToSize:CGSizeMake(100.0f, 25.0f)lineBreakMode:UILineBreakModeHeadTruncation];
     [respButton setTitle:buttonTitle forState:UIControlStateNormal];
     [respButton setTitleColor:[UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f] forState:UIControlStateNormal];
     [respButton setTitleColor:[UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f] forState:UIControlStateDisabled];
     [respButton setTitleColor:[UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f] forState:UIControlStateHighlighted];
-    respButton.titleLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:11.0];
+    respButton.titleLabel.font = DEFAULT_FONT(11);
     
     respButton.enabled = ![userView.post.hasResp boolValue];
     UIImage *normalImg = [[UIImage imageNamed:NORMAL_RESP_BUTTON_IMAGE] stretchableImageWithLeftCapWidth:WANT_BUTTON_CAP_WIDTH topCapHeight:0.0];
@@ -171,7 +168,7 @@
 +(CGFloat) heightForCell:(UserView *)userView{
     float height = 85.0;
     NSString *content = [NSString stringWithFormat:@"%@：%@", userView.post.purpose, userView.post.content];
-    CGSize contentSize = [content sizeWithFont:[UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0] constrainedToSize:CGSizeMake(220, 200.0) lineBreakMode:UILineBreakModeCharacterWrap];
+    CGSize contentSize = [content sizeWithFont:DEFAULT_FONT(14) constrainedToSize:CGSizeMake(220, 200.0) lineBreakMode:UILineBreakModeCharacterWrap];
     height += contentSize.height;
     if(![userView.post.bigPic isEqual:[NSNull null]]){
         height += 80.0;

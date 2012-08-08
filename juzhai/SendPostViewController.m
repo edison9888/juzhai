@@ -75,13 +75,13 @@
     _saveButton.enabled = NO;
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_saveButton];
     
-    textView.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:17];
+    textView.font = DEFAULT_FONT(17);
     textView.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     textView.delegate = self;
     
-    timeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12];
-    placeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12];
-    categoryLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12];
+    timeLabel.font = DEFAULT_FONT(12);
+    placeLabel.font = DEFAULT_FONT(12);
+    categoryLabel.font = DEFAULT_FONT(12);
     timeLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     placeLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     categoryLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];

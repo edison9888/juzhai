@@ -69,7 +69,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 //        cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14];
+        cell.textLabel.font = DEFAULT_FONT(14);
         cell.textLabel.backgroundColor = [UIColor clearColor];
         
         UIView *selectBgColorView = [[UIView alloc] init];

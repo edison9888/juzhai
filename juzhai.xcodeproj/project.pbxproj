@@ -12,6 +12,7 @@
 		CB0C4464155CD07000B238D4 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4463155CD07000B238D4 /* TabBar.xib */; };
 		CB0C4468155CD50400B238D4 /* IdeaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C4466155CD50300B238D4 /* IdeaViewController.m */; };
 		CB0C4490155D05B800B238D4 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C448E155D05B800B238D4 /* ConfigViewController.m */; };
+		CB0D30DE15D0B76600A01A53 /* CustomIdeaListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0D30DD15D0B76500A01A53 /* CustomIdeaListCell.m */; };
 		CB0DF30B15B5C56B008397B8 /* app_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0DF30915B5C561008397B8 /* app_bg.png */; };
 		CB0DF30C15B5C56B008397B8 /* app_top_nav_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0DF30A15B5C566008397B8 /* app_top_nav_bg.png */; };
 		CB0DF31215B5C5DA008397B8 /* app_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0DF30E15B5C5DA008397B8 /* app_bg@2x.png */; };
@@ -366,6 +367,8 @@
 		CBBEDFF315921B8200ECC2C2 /* NicknameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBEDFF115921B8200ECC2C2 /* NicknameEditorViewController.xib */; };
 		CBBF7E7C158911D80073EA0A /* TaHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBF7E7A158911D70073EA0A /* TaHomeViewController.m */; };
 		CBBF7E7D158911D80073EA0A /* TaHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBBF7E7B158911D80073EA0A /* TaHomeViewController.xib */; };
+		CBD2FDFD15D106EE00C23119 /* btn_unable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2FDFC15D106ED00C23119 /* btn_unable@2x.png */; };
+		CBD2FE0015D106F900C23119 /* btn_unable.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2FDFF15D106F900C23119 /* btn_unable.png */; };
 		CBD6FA9215A586F10029877D /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD6FA9115A586F10029877D /* top_bg@2x.png */; };
 		CBD6FA9515A587180029877D /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD6FA9415A587180029877D /* top_bg.png */; };
 		CBD6FAA215A609C30029877D /* PostService.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD6FAA115A609C30029877D /* PostService.m */; };
@@ -466,6 +469,8 @@
 		CB0C4466155CD50300B238D4 /* IdeaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaViewController.m; sourceTree = "<group>"; };
 		CB0C448D155D05B800B238D4 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		CB0C448E155D05B800B238D4 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		CB0D30DC15D0B76500A01A53 /* CustomIdeaListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIdeaListCell.h; sourceTree = "<group>"; };
+		CB0D30DD15D0B76500A01A53 /* CustomIdeaListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIdeaListCell.m; sourceTree = "<group>"; };
 		CB0DF30915B5C561008397B8 /* app_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_bg.png; sourceTree = "<group>"; };
 		CB0DF30A15B5C566008397B8 /* app_top_nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_top_nav_bg.png; sourceTree = "<group>"; };
 		CB0DF30E15B5C5DA008397B8 /* app_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_bg@2x.png"; sourceTree = "<group>"; };
@@ -882,6 +887,8 @@
 		CBBF7E79158911D70073EA0A /* TaHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaHomeViewController.h; sourceTree = "<group>"; };
 		CBBF7E7A158911D70073EA0A /* TaHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaHomeViewController.m; sourceTree = "<group>"; };
 		CBBF7E7B158911D80073EA0A /* TaHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaHomeViewController.xib; sourceTree = "<group>"; };
+		CBD2FDFC15D106ED00C23119 /* btn_unable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_unable@2x.png"; sourceTree = "<group>"; };
+		CBD2FDFF15D106F900C23119 /* btn_unable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_unable.png; sourceTree = "<group>"; };
 		CBD6FA9115A586F10029877D /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
 		CBD6FA9415A587180029877D /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		CBD6FAA015A609C30029877D /* PostService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostService.h; sourceTree = "<group>"; };
@@ -1114,6 +1121,8 @@
 			children = (
 				CB0C4465155CD50300B238D4 /* IdeaViewController.h */,
 				CB0C4466155CD50300B238D4 /* IdeaViewController.m */,
+				CB0D30DC15D0B76500A01A53 /* CustomIdeaListCell.h */,
+				CB0D30DD15D0B76500A01A53 /* CustomIdeaListCell.m */,
 				CB8F09C01572217F0003018D /* IdeaListCell.h */,
 				CB8F09C11572217F0003018D /* IdeaListCell.m */,
 				CB8F09C3157221A30003018D /* IdeaListCell.xib */,
@@ -1635,6 +1644,7 @@
 		CBD964B2157FC57D006E0196 /* big */ = {
 			isa = PBXGroup;
 			children = (
+				CBD2FDFC15D106ED00C23119 /* btn_unable@2x.png */,
 				CBB46DB915CFB1C9003F2ADC /* ca_ms_hover@2x.png */,
 				CBB46DBA15CFB1C9003F2ADC /* ca_ms_link@2x.png */,
 				CB39190C15CF996500767E5F /* ca_all_hover@2x.png */,
@@ -1827,6 +1837,7 @@
 				CB5500F415BE71F700DD21EE /* send_jz_select_time_link.png */,
 				CB5500D115BE4E5F00DD21EE /* mail_btn_hover.png */,
 				CB5500D215BE4E5F00DD21EE /* mail_btn_link.png */,
+				CBD2FDFF15D106F900C23119 /* btn_unable.png */,
 				CBF4975915B94649009DB8C3 /* btn_hover.png */,
 				CBF4975A15B94649009DB8C3 /* btn_link.png */,
 				CBF4975B15B94649009DB8C3 /* send_input_bgxy.png */,
@@ -2490,6 +2501,8 @@
 				CBB46DBC15CFB1C9003F2ADC /* ca_ms_link@2x.png in Resources */,
 				CBB46DC015CFB1DA003F2ADC /* ca_ms_hover.png in Resources */,
 				CBB46DC115CFB1DA003F2ADC /* ca_ms_link.png in Resources */,
+				CBD2FDFD15D106EE00C23119 /* btn_unable@2x.png in Resources */,
+				CBD2FE0015D106F900C23119 /* btn_unable.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2635,6 +2648,7 @@
 				CBF9406B15CE5F3E0080A521 /* MJPopupBackgroundView.m in Sources */,
 				CBF9406C15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m in Sources */,
 				CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */,
+				CB0D30DE15D0B76600A01A53 /* CustomIdeaListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

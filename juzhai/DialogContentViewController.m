@@ -258,7 +258,7 @@
         [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
         textView.text = @"";
         [self resetSendForm];
-//        [textView resignFirstResponder];
+        [textView resignFirstResponder];
         [self doneLoadingTableViewData];
     }];
 }

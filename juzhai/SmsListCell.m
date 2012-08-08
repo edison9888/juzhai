@@ -92,7 +92,7 @@
     }
     
     //昵称
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    nicknameLabel.font = DEFAULT_FONT(14);
     if(_dialogView.targetUser.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
         nicknameLabel.highlightedTextColor = FEMALE_NICKNAME_COLOR;
@@ -105,7 +105,7 @@
     nicknameLabel.text = _dialogView.targetUser.nickname;
     
     //时间
-    timeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    timeLabel.font = DEFAULT_FONT(12);
     timeLabel.textColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
     timeLabel.highlightedTextColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
     timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:_dialogView.createTime] showBefore];
@@ -113,7 +113,7 @@
     [timeLabel setFrame:CGRectMake(310 - timeSize.width, timeLabel.frame.origin.y, timeSize.width, timeSize.height)];
     
     //基本资料
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    infoLabel.font = DEFAULT_FONT(14);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.highlightedTextColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.text = [_dialogView.targetUser basicInfo];
@@ -121,7 +121,7 @@
     [infoLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x + nicknameLabel.frame.size.width + 8.0, infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
     
     //最新一条内容
-    latestContentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    latestContentLabel.font = DEFAULT_FONT(12);
     latestContentLabel.textColor = [UIColor blackColor];
     latestContentLabel.highlightedTextColor = [UIColor blackColor];
     latestContentLabel.text = [NSString stringWithFormat:@"\"%@\"" ,_dialogView.latestContent];

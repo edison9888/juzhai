@@ -19,7 +19,7 @@
         UIView *selectBgColorView = [[UIView alloc] init];
         selectBgColorView.backgroundColor = [UIColor colorWithRed:0.96f green:0.96f blue:0.96f alpha:1.00f];
         self.selectedBackgroundView = selectBgColorView;
-        _titleLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+        _titleLabel.font = DEFAULT_FONT(14);
         _titleLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_titleLabel];

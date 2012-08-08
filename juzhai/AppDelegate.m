@@ -25,6 +25,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [application setStatusBarHidden:NO];    
+    [application setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO]; 
     // Override point for customization after application launch.
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
@@ -41,10 +43,9 @@
     }
     self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
-    [application setStatusBarHidden:NO];    
     
-    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
-    [MobClick checkUpdate];
+//    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
+//    [MobClick checkUpdate];
     return YES;
 }
 

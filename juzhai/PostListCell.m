@@ -58,7 +58,7 @@
     _postView = postView; 
 
     contentLabel.text = [NSString stringWithFormat:@"%@：%@", postView.purpose, postView.content];
-    contentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    contentLabel.font = DEFAULT_FONT(14);
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     contentLabel.highlightedTextColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     CGSize labelsize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(contentLabel.frame.size.width, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
@@ -83,7 +83,7 @@
 +(CGFloat) heightForCell:(PostView *)postView{
     float height = 10.0;
     NSString *content = [NSString stringWithFormat:@"%@：%@", postView.purpose, postView.content];
-    CGSize contentSize = [content sizeWithFont:[UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0] constrainedToSize:CGSizeMake(300, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
+    CGSize contentSize = [content sizeWithFont:DEFAULT_FONT(14) constrainedToSize:CGSizeMake(300, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     height += contentSize.height + 10.0;
     if(![postView.bigPic isEqual:[NSNull null]]){
         height += 80.0;

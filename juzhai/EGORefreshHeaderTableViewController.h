@@ -15,6 +15,8 @@
     BOOL _reloading;
 }
 
+//@property (strong, nonatomic) UITableView *tableView;
+
 - (void)loadListDataWithPage:(NSInteger)page;
 - (void)doneLoadingTableViewData;
 

@@ -60,7 +60,7 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
     
-    contentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15.0];
+    contentLabel.font = DEFAULT_FONT(15);
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     contentLabel.text = self.ideaView.content;
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(300.0, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
@@ -77,7 +77,7 @@
     timeIconView.hidden = ![ideaView hasTime];
     timeLabel.hidden = timeIconView.hidden;
     if(!timeLabel.hidden){
-        timeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        timeLabel.font = DEFAULT_FONT(12);
         if ([ideaView hasStartTime] && [ideaView hasEndTime]) {
             timeLabel.text = [NSString stringWithFormat:@"%@ - %@", ideaView.startTime, ideaView.endTime];
         } else {
@@ -93,7 +93,7 @@
     addressIconView.hidden = ![ideaView hasPlace];
     addressLabel.hidden = addressIconView.hidden;
     if(!addressLabel.hidden){
-        addressLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        addressLabel.font = DEFAULT_FONT(12);
         addressLabel.text = ideaView.place;
         addressLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [addressLabel setFrame:CGRectMake(addressLabel.frame.origin.x, addressIconView.frame.origin.y, addressLabel.frame.size.width, addressLabel.frame.size.height)];
@@ -104,7 +104,7 @@
     categoryIconView.hidden = ![ideaView hasCategory];
     categoryLabel.hidden = categoryIconView.hidden;
     if(!categoryLabel.hidden){
-        categoryLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        categoryLabel.font = DEFAULT_FONT(12);
         categoryLabel.text = ideaView.categoryName;
         categoryLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [categoryLabel setFrame:CGRectMake(categoryLabel.frame.origin.x, categoryIconView.frame.origin.y, categoryLabel.frame.size.width, categoryLabel.frame.size.height)];
@@ -115,7 +115,7 @@
     personIconView.hidden = ![ideaView hasPerson];
     personLabel.hidden = personIconView.hidden;
     if(!personLabel.hidden){
-        personLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        personLabel.font = DEFAULT_FONT(12);
         personLabel.text = [NSString stringWithFormat:@"共有 %d 人想去", self.ideaView.useCount];
         personLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [personLabel setFrame:CGRectMake(personLabel.frame.origin.x, personIconView.frame.origin.y, personLabel.frame.size.width, personLabel.frame.size.height)];
@@ -212,36 +212,33 @@
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:ideaView.ideaId], @"ideaId", nil];
     __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/sendPost"] withParams:params];
     if (request) {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [request setCompletionBlock:^{
-                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-                NSString *responseString = [request responseString];
-                NSMutableDictionary *jsonResult = [responseString JSONValue];
-                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                    ideaView.hasUsed = YES;
-                    ideaView.useCount = ideaView.useCount + 1;
-                    UIButton *wantToButton = (UIButton *)sender;
-                    wantToButton.enabled = NO;
-                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                    hud.mode = MBProgressHUDModeCustomView;
-                    hud.labelText = @"保存成功";
-                    [hud hide:YES afterDelay:1];
-                    return;
-                }
-                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-                NSLog(@"%@", errorInfo);
-                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                    errorInfo = SERVER_ERROR_INFO;
-                }
-                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-                [MessageShow error:errorInfo onView:self.contentView];
-            }];
-            [request setFailedBlock:^{
-                [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-                [HttpRequestDelegate requestFailedHandle:request];
-            }];
-            [request startAsynchronous];
-//        });
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                ideaView.hasUsed = YES;
+                ideaView.useCount = ideaView.useCount + 1;
+                UIButton *wantToButton = (UIButton *)sender;
+                wantToButton.enabled = NO;
+                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                hud.mode = MBProgressHUDModeCustomView;
+                hud.labelText = @"保存成功";
+                [hud hide:YES afterDelay:1];
+                return;
+            }
+            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            NSLog(@"%@", errorInfo);
+            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                errorInfo = SERVER_ERROR_INFO;
+            }
+            [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+            [MessageShow error:errorInfo onView:self.contentView];
+        }];
+        [request setFailedBlock:^{
+            [MBProgressHUD hideHUDForView:self.contentView animated:YES];
+            [HttpRequestDelegate requestFailedHandle:request];
+        }];
+        [request startAsynchronous];
     } else {
         [MBProgressHUD hideHUDForView:self.contentView animated:YES];
     }

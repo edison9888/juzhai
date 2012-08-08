@@ -68,7 +68,7 @@
         userLogoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
     } failure:nil];
     
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    nicknameLabel.font = DEFAULT_FONT(12);
     if(ideaUserView.userView.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
         nicknameLabel.highlightedTextColor = FEMALE_NICKNAME_COLOR;
@@ -78,7 +78,7 @@
     }
     nicknameLabel.text = ideaUserView.userView.nickname;
     
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    infoLabel.font = DEFAULT_FONT(12);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.highlightedTextColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.text = [ideaUserView.userView basicInfo];

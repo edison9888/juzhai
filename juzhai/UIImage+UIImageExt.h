@@ -9,5 +9,5 @@
 @interface UIImage (UIImageExt)
 
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize;
-
+- (UIImage *)createRoundedRectImage:(CGFloat)radius;
 @end

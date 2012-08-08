@@ -39,7 +39,7 @@
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 200, 13)];
         titleLabel.tag = TITLE_VIEW_TAG;
-        titleLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13];
+        titleLabel.font = DEFAULT_FONT(13);
         titleLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
         titleLabel.backgroundColor = [UIColor clearColor];
         [cell addSubview:titleLabel];

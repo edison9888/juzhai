@@ -15,7 +15,7 @@
 @class DialogContentView;
 
 
-#define TEXT_FONT [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14]
+//#define TEXT_FONT [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14]
 #define TEXT_MAX_WIDTH 175
 #define TEXT_MAX_HEIGHT 1000
 #define CONTENT_TEXT_VIEW_MARGIN 10

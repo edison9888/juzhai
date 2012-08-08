@@ -79,7 +79,7 @@
         logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
     
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14];
+    nicknameLabel.font = DEFAULT_FONT(14);
     if(userView.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
     }else {
@@ -87,7 +87,7 @@
     }
     nicknameLabel.text = userView.nickname;
     
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
+    infoLabel.font = DEFAULT_FONT(13);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     infoLabel.text = [userView basicInfo];
 }
@@ -201,7 +201,7 @@
             break;
     }
     cell.textLabel.text = title;
-    cell.textLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15];
+    cell.textLabel.font = DEFAULT_FONT(15);
     cell.textLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     return cell;
 }
@@ -247,7 +247,7 @@
 {
     if ([UserContext getUserView].postCount.intValue > 0) {
         if (nil == _userPostViewController) {
-            _userPostViewController = [[UserPostViewController alloc] initWithStyle:UITableViewStylePlain];
+            _userPostViewController = [[UserPostViewController alloc] init];
             _userPostViewController.hidesBottomBarWhenPushed = YES;
         }
         [self.navigationController pushViewController:_userPostViewController animated:YES];

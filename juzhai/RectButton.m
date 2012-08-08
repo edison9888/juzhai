@@ -31,4 +31,9 @@
     return BUTTON_HOVER_IMAGE;
 }
 
+- (NSString *)buttonDisabledBackgroundImageName
+{
+    return BUTTON_DISABLE_IMAGE;
+}
+
 @end

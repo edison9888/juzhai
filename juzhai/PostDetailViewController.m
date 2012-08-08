@@ -74,7 +74,7 @@
         logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
     } failure:nil];
     
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    nicknameLabel.font = DEFAULT_FONT(14);
     if(userView.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
     }else {
@@ -82,11 +82,11 @@
     }
     nicknameLabel.text = userView.nickname;
     
-    userInfoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
+    userInfoLabel.font = DEFAULT_FONT(13);
     userInfoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     userInfoLabel.text = [userView basicInfo];
     
-    contentLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15.0];
+    contentLabel.font = DEFAULT_FONT(15);
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     contentLabel.text = [NSString stringWithFormat:@"%@：%@", userView.post.purpose, userView.post.content];
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(300.0, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
@@ -101,7 +101,7 @@
     timeIconView.hidden = ![userView.post hasTime];
     timeLabel.hidden = timeIconView.hidden;
     if(!timeLabel.hidden){
-        timeLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        timeLabel.font = DEFAULT_FONT(12);
         timeLabel.text = userView.post.date;
         timeLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [timeLabel setFrame:CGRectMake(timeLabel.frame.origin.x, timeIconView.frame.origin.y, timeLabel.frame.size.width, timeLabel.frame.size.height)];
@@ -110,7 +110,7 @@
     addressIconView.hidden = ![userView.post hasPlace];
     addressLabel.hidden = addressIconView.hidden;
     if(!addressLabel.hidden){
-        addressLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        addressLabel.font = DEFAULT_FONT(12);
         addressLabel.text = userView.post.place;
         addressLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [addressLabel setFrame:CGRectMake(addressLabel.frame.origin.x, addressIconView.frame.origin.y, addressLabel.frame.size.width, addressLabel.frame.size.height)];
@@ -119,7 +119,7 @@
     categoryIconView.hidden = ![userView.post hasCategory];
     categoryLabel.hidden = categoryIconView.hidden;
     if(!categoryLabel.hidden){
-        categoryLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+        categoryLabel.font = DEFAULT_FONT(12);
         categoryLabel.text = userView.post.categoryName;
         categoryLabel.textColor = [UIColor colorWithRed:0.53f green:0.53f blue:0.53f alpha:1.00f];
         [categoryLabel setFrame:CGRectMake(categoryLabel.frame.origin.x, categoryIconView.frame.origin.y, categoryLabel.frame.size.width, categoryLabel.frame.size.height)];
@@ -214,41 +214,37 @@
     hud.labelText = @"操作中...";
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:userView.post.postId, @"postId", nil];
     __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/respPost"] withParams:params];
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        if (request) {
-            [request setCompletionBlock:^{
-                NSString *responseString = [request responseString];
-                NSMutableDictionary *jsonResult = [responseString JSONValue];
-                if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                    userView.post.hasResp = [NSNumber numberWithInt:1];
-                    userView.post.respCnt = [NSNumber numberWithInt:(userView.post.respCnt.intValue + 1)];
-                    UIButton *respButton = (UIButton *)sender;
-                    respButton.enabled = NO;
-                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-                    hud.mode = MBProgressHUDModeCustomView;
-                    hud.labelText = @"ta看到会开心的";
-                    [hud hide:YES afterDelay:1];
-                    return;
-                }
-                NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-                NSLog(@"%@", errorInfo);
-                if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
-                    errorInfo = SERVER_ERROR_INFO;
-                }
-                [MBProgressHUD hideHUDForView:postScrollView animated:YES];
-                [MessageShow error:errorInfo onView:postScrollView];
-            }];
-            [request setFailedBlock:^{
-                [MBProgressHUD hideHUDForView:postScrollView animated:YES];
-                [HttpRequestDelegate requestFailedHandle:request];
-            }];
-            [request startAsynchronous];
-        } else {
+    if (request) {
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                userView.post.hasResp = [NSNumber numberWithInt:1];
+                userView.post.respCnt = [NSNumber numberWithInt:(userView.post.respCnt.intValue + 1)];
+                UIButton *respButton = (UIButton *)sender;
+                respButton.enabled = NO;
+                hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                hud.mode = MBProgressHUDModeCustomView;
+                hud.labelText = @"ta看到会开心的";
+                [hud hide:YES afterDelay:1];
+                return;
+            }
+            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            NSLog(@"%@", errorInfo);
+            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                errorInfo = SERVER_ERROR_INFO;
+            }
             [MBProgressHUD hideHUDForView:postScrollView animated:YES];
-        }
-//    });
+            [MessageShow error:errorInfo onView:postScrollView];
+        }];
+        [request setFailedBlock:^{
+            [MBProgressHUD hideHUDForView:postScrollView animated:YES];
+            [HttpRequestDelegate requestFailedHandle:request];
+        }];
+        [request startAsynchronous];
+    } else {
+        [MBProgressHUD hideHUDForView:postScrollView animated:YES];
+    }
 }
 
 - (IBAction)smsHis:(id)sender

@@ -61,6 +61,10 @@
 
 - (void)viewDidLoad
 {
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.postTableView.frame];
+    imageView.image = [UIImage imageNamed:APP_BG_IMG];
+    [self.view insertSubview:imageView atIndex:0];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -72,12 +76,13 @@
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
     [postTableView setTableFooterView:view];
-    self.postTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+//    self.postTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+    self.postTableView.backgroundColor = [UIColor clearColor];
     self.postTableView.separatorColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
     _tableView = self.postTableView;
     
     postCountLabel.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: TABLE_HEAD_BG_IMAGE]];
-    postCountLabel.font=[UIFont fontWithName:DEFAULT_FONT_FAMILY size:12];
+    postCountLabel.font = DEFAULT_FONT(12);
     postCountLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     
     
@@ -95,7 +100,7 @@
         }
     } failure:nil];
     
-    nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+    nicknameLabel.font = DEFAULT_FONT(14);
     if(_userView.gender.intValue == 0){
         nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
     }else {
@@ -103,7 +108,7 @@
     }
     nicknameLabel.text = _userView.nickname;
     
-    infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
+    infoLabel.font = DEFAULT_FONT(12);
     infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];;
     infoLabel.text = [_userView basicInfo];
     CGSize infoLabelSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:infoLabel.frame.size lineBreakMode:UILineBreakModeWordWrap];

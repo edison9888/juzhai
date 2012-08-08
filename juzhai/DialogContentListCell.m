@@ -90,7 +90,7 @@
 
 + (CGFloat)heightForCell:(DialogContentView *)dialogContentView
 {
-    CGSize dialogContentSize = [dialogContentView.content sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize dialogContentSize = [dialogContentView.content sizeWithFont:DEFAULT_FONT(14) constrainedToSize:CGSizeMake(TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
     return 10 + (dialogContentView.hasImg ? dialogContentSize.height + CONTENT_TEXT_VIEW_MARGIN + 50 : dialogContentSize.height) + CONTENT_TEXT_VIEW_MARGIN*2 + 10 + 12 + 10;
 }
 
@@ -132,11 +132,11 @@
 {
     //设置内容
     dialogContentTextView.text = _dialogContentView.content;
-    dialogContentTextView.font = TEXT_FONT;
+    dialogContentTextView.font = DEFAULT_FONT(14);
     dialogContentTextView.textColor = [UIColor blackColor];
     
-//    [dialogContentTextView setText:_dialogContentView.content WithFont:TEXT_FONT AndColor:[UIColor blackColor]];
-    CGSize dialogContentSize = [_dialogContentView.content sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
+//    [dialogContentTextView setText:_dialogContentView.content WithFont:DEFAULT_FONT(14) AndColor:[UIColor blackColor]];
+    CGSize dialogContentSize = [_dialogContentView.content sizeWithFont:DEFAULT_FONT(14) constrainedToSize:CGSizeMake(TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
     
     CGFloat startX = _isMe ? CONTENT_TEXT_VIEW_MARGIN : (CONTENT_TEXT_VIEW_MARGIN + ARROW_WIDTH);
     if (_dialogContentView.hasImg) {

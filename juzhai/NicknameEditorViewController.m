@@ -46,16 +46,16 @@
     textField.leftView = paddingView;
     textField.leftViewMode = UITextFieldViewModeAlways;
     textField.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    textField.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15];
+    textField.font = DEFAULT_FONT(15);
     
-    tipsLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15];
+    tipsLabel.font = DEFAULT_FONT(15);
     tipsLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.textField.text = self.textValue;
-    [self.textField becomeFirstResponder];
+    [self.textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
 
 - (void)viewDidUnload

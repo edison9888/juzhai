@@ -49,9 +49,9 @@
     professionField.leftView = paddingView;
     professionField.leftViewMode = UITextFieldViewModeAlways;
     professionField.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    professionField.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15];
+    professionField.font = DEFAULT_FONT(15);
     
-    tipsLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:15];
+    tipsLabel.font = DEFAULT_FONT(15);
     tipsLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
 }
 

@@ -11,21 +11,27 @@
 
 @implementation CustomButton
 
-@synthesize delegate;
+@synthesize delegate = _delegate;
 
-- (id)initWithFrame:(CGRect)frame buttonText:(NSString *)buttonText buttonImage:(UIImage *)image buttonPressedImage:(UIImage *)pressedImage{
+- (id)initWithFrame:(CGRect)frame buttonText:(NSString *)buttonText buttonImage:(UIImage *)image buttonPressedImage:(UIImage *)pressedImage buttonDisabledImage:(UIImage *)disabledImage{
     self = [UIButton buttonWithType:UIButtonTypeCustom];
     if (self) {
         self.frame = frame;
-        self.titleLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:12.0];
-        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = DEFAULT_FONT(12);
         self.titleLabel.shadowOffset = CGSizeMake(0,-1);
         self.titleLabel.shadowColor = [UIColor darkGrayColor];
         [self setTitle:buttonText forState:UIControlStateNormal];
         
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [self setTitleColor:[UIColor colorWithRed:0.50f green:0.67f blue:0.83f alpha:1.00f] forState:UIControlStateDisabled];
         [self setBackgroundImage:image forState:UIControlStateNormal];
         [self setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
         [self setBackgroundImage:pressedImage forState:UIControlStateSelected];
+        if (disabledImage != nil) {
+            [self setBackgroundImage:disabledImage forState:UIControlStateDisabled];
+        }
         self.adjustsImageWhenHighlighted = NO;
     }
     return self;
@@ -35,17 +41,24 @@
 {
     UIImage* buttonImage = nil;
     UIImage* buttonPressedImage = nil;
+    UIImage* buttonDisableImage = nil;
     if (location == CapLeftAndRight)
     {
         buttonImage = [[UIImage imageNamed:[self.delegate buttonNormalBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
         buttonPressedImage = [[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
+        if ([_delegate respondsToSelector:@selector(buttonDisabledBackgroundImageName)]) {
+            buttonDisableImage = [[UIImage imageNamed:[self.delegate buttonDisabledBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
+        }
     }
     else
     {
         buttonImage = [self image:[[UIImage imageNamed:[self.delegate buttonNormalBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
         buttonPressedImage = [self image:[[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
+        if ([_delegate respondsToSelector:@selector(buttonDisabledBackgroundImageName)]) {
+            buttonDisableImage = [self image:[[UIImage imageNamed:[self.delegate buttonDisabledBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
+        }
     }
-    return [self initWithFrame:CGRectMake(0, 0, width, buttonImage.size.height) buttonText:buttonText buttonImage:buttonImage buttonPressedImage:buttonPressedImage];
+    return [self initWithFrame:CGRectMake(0, 0, width, buttonImage.size.height) buttonText:buttonText buttonImage:buttonImage buttonPressedImage:buttonPressedImage buttonDisabledImage:buttonDisableImage];
 }
 
 -(UIImage*)image:(UIImage*)image withCap:(CapLocation)location capWidth:(NSUInteger)capWidth buttonWidth:(NSUInteger)buttonWidth

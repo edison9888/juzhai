@@ -27,6 +27,7 @@
 #import "BaseData.h"
 #import "MenuButton.h"
 #import "ListHttpRequestDelegate.h"
+#import "CustomIdeaListCell.h"
 
 @interface IdeaViewController (Private)
 - (void) loadListDataWithPage:(NSInteger)page;
@@ -65,7 +66,7 @@
     _categoryButton.frame = CGRectMake(0, 0, _categoryDownLinkImg.size.width, _categoryDownLinkImg.size.height);
     [_categoryButton setBackgroundImage:_categoryDownLinkImg forState:UIControlStateNormal];
     [_categoryButton setBackgroundImage:_categoryDownHoverImg forState:UIControlStateHighlighted];
-    _categoryButton.titleLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
+    _categoryButton.titleLabel.font = DEFAULT_FONT(13);
     [_categoryButton setTitle:@"全部分类" forState:UIControlStateNormal];
     [_categoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_categoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -81,7 +82,7 @@
     
     //设置分割线
     self.tableView.separatorColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+//    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
     
     [super viewDidLoad];
 }
@@ -240,6 +241,19 @@
         [cell redrawn:ideaView];
     }
     return cell;
+    
+//    CustomIdeaListCell *cell = (CustomIdeaListCell *)[tableView dequeueReusableCellWithIdentifier:IdeaListCellIdentifier];
+//    if (cell == nil) {
+//        cell = [[CustomIdeaListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IdeaListCellIdentifier];
+//    }
+//    if (indexPath.row < [_data count]) {
+//        IdeaView *ideaView = (IdeaView *)[_data objectAtIndex:indexPath.row];
+//        [cell reset];
+//        cell.ideaView = ideaView;
+//        [cell setNeedsDisplay];
+//        [cell addAllSubView];
+//    }
+//    return cell;
 }
 
 #pragma mark -

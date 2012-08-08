@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define DEFAULT_FONT_FAMILY @"MicrosoftYaHei"
+//#define DEFAULT_FONT_FAMILY @"MicrosoftYaHei"
+//#define DEFAULT_FONT(fontSize) [UIFont fontWithName:@"AppleGothic" size:fontSize]
+#define DEFAULT_FONT(fontSize) [UIFont systemFontOfSize:fontSize+1]
 
 #define FACE_LOADING_IMG @"face_loading"
 #define SMALL_PIC_LOADING_IMG @"small_pic_loading"

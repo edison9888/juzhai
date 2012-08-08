@@ -107,7 +107,6 @@
     static NSString *InterestUserCellIdentifier = @"InterestUserCellCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:InterestUserCellIdentifier];
     if (!cell) {
-        NSLog(@"aa");
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:InterestUserCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
@@ -147,7 +146,7 @@
         } failure:nil];
         
         UILabel *nicknameLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_NICKNAME_TAG];
-        nicknameLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:14.0];
+        nicknameLabel.font = DEFAULT_FONT(14);
         if(userView.gender.intValue == 0){
             nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
         }else {
@@ -156,7 +155,7 @@
         nicknameLabel.text = userView.nickname;
         
         UILabel *infoLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_INFO_TAG];
-        infoLabel.font = [UIFont fontWithName:DEFAULT_FONT_FAMILY size:13.0];
+        infoLabel.font = DEFAULT_FONT(13);
         infoLabel.textColor = [UIColor grayColor];
         infoLabel.text = [userView basicInfo];
     }

@@ -15,6 +15,9 @@
 - (NSString *)buttonNormalBackgroundImageName;
 - (NSString *)buttonHighlightedBackgroundImageName;
 
+@optional
+- (NSString *)buttonDisabledBackgroundImageName;
+
 @end
 
 typedef enum {
@@ -25,6 +28,9 @@ typedef enum {
 } CapLocation;
 
 @interface CustomButton : UIButton
+{
+    id _delegate;
+}
 
 @property (strong, nonatomic) id<CustomButtonDelegate> delegate;
 

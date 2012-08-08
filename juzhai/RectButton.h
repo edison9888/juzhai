@@ -10,6 +10,7 @@
 
 #define BUTTON_IMAGE @"btn_link.png"
 #define BUTTON_HOVER_IMAGE @"btn_hover.png"
+#define BUTTON_DISABLE_IMAGE @"btn_unable.png"
 #define CAP_WIDTH 5
 
 @interface RectButton : CustomButton <CustomButtonDelegate>
