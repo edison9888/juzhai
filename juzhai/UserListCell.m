@@ -137,7 +137,7 @@
     }
     
     UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];
-    NSString *buttonTitle = [NSString stringWithFormat:@"%d", userView.post.respCnt.intValue];
+    NSString *buttonTitle = [NSString stringWithFormat:@"有兴趣 %d", userView.post.respCnt.intValue];
     CGSize respButtonTitleSize = [buttonTitle sizeWithFont:DEFAULT_FONT(11) constrainedToSize:CGSizeMake(100.0f, 25.0f)lineBreakMode:UILineBreakModeHeadTruncation];
     [respButton setTitle:buttonTitle forState:UIControlStateNormal];
     [respButton setTitleColor:[UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f] forState:UIControlStateNormal];
@@ -192,7 +192,7 @@
                     _userView.post.respCnt = [NSNumber numberWithInt:(_userView.post.respCnt.intValue + 1)];
                     UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];
                     respButton.enabled = NO;
-                    [respButton setTitle:[NSString stringWithFormat:@"%d", respButton.titleLabel.text.intValue + 1] forState:UIControlStateNormal];
+                    [respButton setTitle:[NSString stringWithFormat:@"有兴趣 %d", _userView.post.respCnt.intValue] forState:UIControlStateNormal];
                     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                     hud.mode = MBProgressHUDModeCustomView;
                     hud.labelText = @"ta看到会开心的";

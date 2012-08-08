@@ -78,10 +78,13 @@
     contentLabel.text = ideaView.content;
     
     UIButton *wantToButton = (UIButton *)[self viewWithTag:IDEA_WANT_TO_TAG];
-    NSString *buttonTitle = [NSString stringWithFormat:@"%d", ideaView.useCount];
+    NSString *buttonTitle = [NSString stringWithFormat:@"想去 %d", ideaView.useCount];
     CGSize wgoButtonTitleSize = [buttonTitle sizeWithFont:DEFAULT_FONT(11) constrainedToSize:CGSizeMake(100.0f, 25.0f)lineBreakMode:UILineBreakModeHeadTruncation];
     [wantToButton setTitle:buttonTitle forState:UIControlStateNormal];
-    [wantToButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [wantToButton setTitleColor:[UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f] forState:UIControlStateNormal];
+    [wantToButton setTitleColor:[UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f] forState:UIControlStateDisabled];
+    [wantToButton setTitleColor:[UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f] forState:UIControlStateHighlighted];
+    
     wantToButton.titleLabel.font = DEFAULT_FONT(11);
     
     wantToButton.enabled = !ideaView.hasUsed;
@@ -115,7 +118,7 @@
                 _ideaView.useCount = _ideaView.useCount + 1;
                 UIButton *wantToButton = (UIButton *)[self viewWithTag:IDEA_WANT_TO_TAG];
                 wantToButton.enabled = NO;
-                [wantToButton setTitle:[NSString stringWithFormat:@"%d", wantToButton.titleLabel.text.intValue + 1] forState:UIControlStateNormal];
+                [wantToButton setTitle:[NSString stringWithFormat:@"想去 %d", _ideaView.useCount] forState:UIControlStateNormal];
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                 hud.mode = MBProgressHUDModeCustomView;
                 hud.labelText = @"保存成功";
