@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FPPopoverController.h"
 #import "EGORefreshTableHeaderView.h"
-#import "EGORefreshHeaderTableViewController.h"
+#import "EGORefreshHeaderViewController.h"
 #import "CustomSegmentedControl.h"
 
 @class EGORefreshTableHeaderView;
@@ -32,7 +32,7 @@ enum {
 #define CATEGORY_UP_LINK_IMG @"select_up_link"
 #define CATEGORY_up_HOVER_IMG @"select_up_hover"
 
-@interface IdeaViewController : EGORefreshHeaderTableViewController <FPPopoverControllerDelegate, CustomSegmentedControlDelegate>
+@interface IdeaViewController : EGORefreshHeaderViewController <FPPopoverControllerDelegate, CustomSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {	
 	JZData *_data;
     FPPopoverController *_categoryPopver;

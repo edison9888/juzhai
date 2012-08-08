@@ -60,12 +60,11 @@
 {
     _ideaUserView = ideaUserView;
     userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    userLogoView.layer.masksToBounds = YES;
-    userLogoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:ideaUserView.userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        userLogoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+        userLogoView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
     
     nicknameLabel.font = DEFAULT_FONT(12);

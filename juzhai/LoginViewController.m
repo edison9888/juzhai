@@ -36,7 +36,9 @@
         [self performSelectorOnMainThread:@selector(redirect) withObject:nil waitUntilDone:NO];
     }else{
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
+        if (loginResult.errorInfo != nil && ![loginResult.errorInfo isEqualToString:@""]) {
+            [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
+        }
     }
 }
 

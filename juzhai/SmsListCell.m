@@ -58,7 +58,7 @@
     TaHomeViewController *taHomeViewController = [[TaHomeViewController alloc] initWithNibName:@"TaHomeViewController" bundle:nil];
     taHomeViewController.hidesBottomBarWhenPushed = YES;
     taHomeViewController.userView = _dialogView.targetUser;
-    UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder;
+    UIViewController *viewController = (UIViewController *)self.nextResponder.nextResponder.nextResponder;
     [viewController.navigationController pushViewController:taHomeViewController animated:YES];
 }
 

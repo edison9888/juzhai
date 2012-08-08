@@ -69,14 +69,19 @@
     
     self.navigationItem.leftBarButtonItem = [[SendPostBarButtonItem alloc] initWithOwnerViewController:self];
     
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height - self.tabBarController.tabBar.bounds.size.height) style:UITableViewStylePlain];
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
     //隐藏下方线条
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
-    [self.tableView setTableFooterView:view];
-    self.tableView.separatorColor = [UIColor clearColor];
+    [_tableView setTableFooterView:view];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:APP_BG_IMG]];
+    [self.view addSubview:imageView];
+    [self.view addSubview:_tableView];
     
-    //设置背景图
-    //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+    _tableView.separatorColor = [UIColor clearColor];
     
     [super viewDidLoad];
 }
@@ -84,7 +89,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (_data != nil) {
-        [self.tableView reloadData];
+        [_tableView reloadData];
     }
 }
 
@@ -159,7 +164,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         [_genderButton setBackgroundImage:genderImage forState:UIControlStateNormal];
         [_genderButton setBackgroundImage:activeGenderImage forState:UIControlStateHighlighted];
         //reload data
-        [_refreshHeaderView autoRefresh:self.tableView];
+        [_refreshHeaderView autoRefresh:_tableView];
     }
 }
 
@@ -197,7 +202,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     }
     _segmentedControl.tag = segmentIndex;
     //reload data
-    [_refreshHeaderView autoRefresh:self.tableView];
+    [_refreshHeaderView autoRefresh:_tableView];
 }
 
 #pragma mark -

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGORefreshHeaderTableViewController.h"
+#import "EGORefreshHeaderViewController.h"
 
 @class IdeaView;
 @class JZData;
@@ -16,7 +16,7 @@
 #define TABLE_HEAD_HEIGHT 35
 #define TABLE_HEAD_BG_IMG @"want_go_pers_top_bg"
 
-@interface IdeaUsersViewController : EGORefreshHeaderTableViewController
+@interface IdeaUsersViewController : EGORefreshHeaderViewController <UITableViewDelegate, UITableViewDataSource>
 {
     JZData *_data;
     ListHttpRequestDelegate *_listHttpRequestDelegate;

@@ -71,6 +71,8 @@ static LoginService *loginService;
         }else{
             NSLog(@"error: %@", [request responseStatusMessage]);
         }
+    } else {
+        return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:nil];
     }
     return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];
 }

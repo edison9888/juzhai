@@ -25,6 +25,7 @@
 #import "UserContext.h"
 #import "CustomNavigationController.h"
 #import "CheckNetwork.h"
+#import "UIImage+UIImageExt.h"
 
 @interface DialogContentViewController ()
 
@@ -174,8 +175,8 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
     [inputAreaView sizeToFit];
     
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.cornerRadius = 5.0;
+//    imageView.layer.masksToBounds = YES;
+//    imageView.layer.cornerRadius = 5.0;
     
     //load
     [self loadListDataWithPage:1];
@@ -362,7 +363,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [picker dismissModalViewControllerAnimated:YES];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     _image = image;
-    imageView.image = _image;
+    imageView.image = [_image createRoundedRectImage:8.0];
     imageView.hidden = NO;
     
     CGRect textViewFrame = textView.frame;

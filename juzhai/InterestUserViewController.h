@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGORefreshHeaderTableViewController.h"
+#import "EGORefreshHeaderViewController.h"
 
 @class JZData;
 @class ListHttpRequestDelegate;
@@ -16,7 +16,7 @@
 #define INTEREST_USER_NICKNAME_TAG 2
 #define INTEREST_USER_INFO_TAG 3
 
-@interface InterestUserViewController : EGORefreshHeaderTableViewController
+@interface InterestUserViewController : EGORefreshHeaderViewController <UITableViewDelegate, UITableViewDataSource>
 {
     JZData *_data;
     ListHttpRequestDelegate *_listHttpRequestDelegate;

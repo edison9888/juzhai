@@ -72,12 +72,11 @@
     [super viewWillAppear:animated];
     UserView *userView = [UserContext getUserView];
     
-    logoView.layer.masksToBounds = YES;
-    logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:userView.rawLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        logoView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
     
     nicknameLabel.font = DEFAULT_FONT(14);
@@ -226,7 +225,7 @@
 {
     if ([UserContext getUserView].interestUserCount.intValue > 0) {
         if (nil == _interestUserViewController) {
-            _interestUserViewController = [[InterestUserViewController alloc] initWithStyle:UITableViewStylePlain];
+            _interestUserViewController = [[InterestUserViewController alloc] init];
             _interestUserViewController.hidesBottomBarWhenPushed = YES;
         }
         _interestUserViewController.isInterest = YES;
@@ -238,7 +237,7 @@
 {
     if ([UserContext getUserView].interestMeCount.intValue > 0) {
         if (nil == _interestMeUserViewController) {
-            _interestMeUserViewController = [[InterestUserViewController alloc] initWithStyle:UITableViewStylePlain];
+            _interestMeUserViewController = [[InterestUserViewController alloc] init];
             _interestMeUserViewController.hidesBottomBarWhenPushed = YES;
         }
         _interestMeUserViewController.isInterest = NO;

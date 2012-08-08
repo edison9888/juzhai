@@ -18,6 +18,7 @@
 #import "MessageShow.h"
 #import "IdeaUsersViewController.h"
 #import "UrlUtils.h"
+#import "UIImage+UIImageExt.h"
 
 @interface IdeaDetailViewController ()
 - (CGFloat) getViewOriginY:(UIView *)view byUpperView:(UIView *)upperView heightGap:(float)heightGap;
@@ -65,9 +66,7 @@
     contentLabel.text = self.ideaView.content;
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(300.0, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, [self getViewOriginY:contentLabel byUpperView:nil heightGap:IDEA_DEFAULT_HEIGHT_GAP], contentSize.width, contentSize.height)];
-    
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.cornerRadius = 5.0;
+
     imageView.image = [UIImage imageNamed:BIG_PIC_LOADING_IMG];
     [imageView setFrame:CGRectMake(imageView.frame.origin.x, [self getViewOriginY:imageView byUpperView:contentLabel heightGap:IDEA_DEFAULT_HEIGHT_GAP], imageView.frame.size.width, imageView.frame.size.height)];
     [imageView setHidden:[ideaView.bigPic isEqual:[NSNull null]]];
@@ -139,7 +138,7 @@
         [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
             NSInteger height = image.size.height;
             [imageView setFrame:CGRectMake(imageView.frame.origin.x, [self getViewOriginY:imageView byUpperView:contentLabel heightGap:IDEA_DEFAULT_HEIGHT_GAP], imageView.frame.size.width, height/2)];
-            imageView.image = image;
+            imageView.image = [image createRoundedRectImage:8.0];
             //重新定位以下元素
             [self resetViewFrame];
             
@@ -246,7 +245,7 @@
 
 - (IBAction)showUsedUsers:(id)sender
 {
-    IdeaUsersViewController *ideaUsersViewController = [[IdeaUsersViewController alloc] initWithStyle:UITableViewStylePlain];
+    IdeaUsersViewController *ideaUsersViewController = [[IdeaUsersViewController alloc] init];
     ideaUsersViewController.ideaView = ideaView;
     [self.navigationController pushViewController:ideaUsersViewController animated:YES];
 }

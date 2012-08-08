@@ -32,15 +32,6 @@
 
 @synthesize ideaView;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     _data = [[JZData alloc] init];
@@ -50,15 +41,21 @@
     _listHttpRequestDelegate.listViewController = self;
     
     self.title = @"想去的人";
-    
+    CGFloat tableHeight = self.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height - (self.tabBarController.tabBar.hidden||self.hidesBottomBarWhenPushed ? 0 : self.tabBarController.tabBar.bounds.size.height);
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, tableHeight) style:UITableViewStylePlain];
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
     //隐藏下方线条
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
-    [self.tableView setTableFooterView:view];
+    [_tableView setTableFooterView:view];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:APP_BG_IMG]];
+    [self.view addSubview:imageView];
+    [self.view addSubview:_tableView];
     
     //设置分割线
-    self.tableView.separatorColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+    _tableView.separatorColor = [UIColor colorWithRed:0.71f green:0.71f blue:0.71f alpha:1.00f];
     
     [super viewDidLoad];
 }

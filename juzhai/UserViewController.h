@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomSegmentedControl.h"
-#import "EGORefreshHeaderTableViewController.h"
+#import "EGORefreshHeaderViewController.h"
 
 @class JZData;
 @class PostDetailViewController;
@@ -21,7 +21,7 @@
 #define QUERY_GENDER_BOY 1
 #define QUERY_GENDER_ALL 2
 
-@interface UserViewController : EGORefreshHeaderTableViewController <UIActionSheetDelegate,CustomSegmentedControlDelegate>
+@interface UserViewController : EGORefreshHeaderViewController <UIActionSheetDelegate,CustomSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     JZData *_data;
     CustomSegmentedControl *_segmentedControl;

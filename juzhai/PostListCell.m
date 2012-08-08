@@ -66,13 +66,12 @@
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     if(![postView.bigPic isEqual:[NSNull null]]){
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 5.0;
         imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
         NSURL *postImageURL = [NSURL URLWithString:postView.bigPic];
         [imageView setFrame:CGRectMake(imageView.frame.origin.x, contentLabel.frame.origin.y + labelsize.height + 10.0, imageView.frame.size.width, imageView.frame.size.height)];
         [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+            imageView.image = [resultImage createRoundedRectImage:8.0];
         } failure:nil];
         [imageView setHidden:NO];
     }else {

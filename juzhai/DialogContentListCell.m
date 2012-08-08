@@ -113,13 +113,12 @@
         [hisLogoView addGestureRecognizer:singleTap];
     }
     
-    logoView.layer.masksToBounds = YES;
-    logoView.layer.cornerRadius = 5.0;
     logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:logoUrl];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        logoView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
 }
 
@@ -144,13 +143,13 @@
         imageView.frame = CGRectMake(startX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height);
         //load图片
         imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 5.0;
         if (_dialogContentView.imgUrl != nil && ![_dialogContentView.imgUrl isEqual:[NSNull null]] && ![_dialogContentView.imgUrl isEqualToString:@""]) {
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
             [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-                imageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                imageView.image = [resultImage createRoundedRectImage:8.0];
+                
                 UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
                 [imageView addGestureRecognizer:singleTap];
             } failure:nil];

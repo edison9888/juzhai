@@ -88,12 +88,11 @@
     
     _isMe = _userView.uid.intValue == [UserContext getUserView].uid.intValue;
     
-    logoView.layer.masksToBounds = YES;
-    logoView.layer.cornerRadius = 5.0;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:(_userView.bigLogo)];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        logoView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(logoView.frame.size.width*2, logoView.frame.size.height*2)];
+        logoView.image = [resultImage createRoundedRectImage:8.0];
         if (_userView.hasLogo) {
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
             [logoView addGestureRecognizer:singleTap];
