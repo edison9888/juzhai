@@ -362,10 +362,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [self imagePickerControllerDidCancel:picker];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    _image = image;
-    imageView.image = image;
+    _image = [info objectForKey:UIImagePickerControllerEditedImage];
+    imageView.image = _image;
     imageView.hidden = NO;
     
     CGRect textViewFrame = textView.frame;
@@ -375,6 +373,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uploadImageClick:)];
     [imageView addGestureRecognizer:singleTap];
+    
+    [self imagePickerControllerDidCancel:picker];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{

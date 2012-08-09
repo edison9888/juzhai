@@ -241,11 +241,10 @@
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [picker dismissModalViewControllerAnimated:YES];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    _newLogo = image;
-    self.logoImageView.image = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoImageView.frame.size.width*2, self.logoImageView.frame.size.height*2)];
+    _newLogo = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.logoImageView.image = [_newLogo imageByScalingAndCroppingForSize:CGSizeMake(self.logoImageView.frame.size.width*2, self.logoImageView.frame.size.height*2)];
     _saveButton.enabled = YES;
+    [picker dismissModalViewControllerAnimated:YES];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{

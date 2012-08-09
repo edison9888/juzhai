@@ -268,12 +268,11 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [self imagePickerControllerDidCancel:picker];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    _image = image;
-    self.imageView.image = image;
+    _image = [info objectForKey:UIImagePickerControllerEditedImage];
+    self.imageView.image = _image;
     imageDelButton.hidden = NO;
     imageDelButton.enabled = YES;
+    [self imagePickerControllerDidCancel:picker];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
