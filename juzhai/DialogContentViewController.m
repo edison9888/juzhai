@@ -266,6 +266,7 @@
 
 - (IBAction)imageButtonClick:(id)sender
 {
+    [textView resignFirstResponder];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] 
                                   initWithTitle:@"上传图片" 
                                   delegate:self 
@@ -338,6 +339,7 @@
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == [actionSheet cancelButtonIndex]){
+        [textView becomeFirstResponder];
         return;
     }
     UIImagePickerControllerSourceType sourceType;
@@ -360,10 +362,10 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [picker dismissModalViewControllerAnimated:YES];
+    [self imagePickerControllerDidCancel:picker];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     _image = image;
-    imageView.image = [_image createRoundedRectImage:8.0];
+    imageView.image = image;
     imageView.hidden = NO;
     
     CGRect textViewFrame = textView.frame;
@@ -377,6 +379,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissModalViewControllerAnimated:YES];
+    [textView becomeFirstResponder];
 }
 
 #pragma mark -

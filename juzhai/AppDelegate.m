@@ -44,7 +44,7 @@
     self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
     
-//    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
+    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
 //    [MobClick checkUpdate];
     return YES;
 }

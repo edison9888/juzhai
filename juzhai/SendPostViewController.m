@@ -122,6 +122,7 @@
 
 - (IBAction)timeButtonClick:(id)sender
 {
+    [textView resignFirstResponder];
     if (nil == _datePicker) {
         _datePicker = [[UIDatePicker alloc] init];
         _datePicker.datePickerMode = UIDatePickerModeDate;
@@ -135,6 +136,7 @@
 
 - (IBAction)placeButtonClick:(id)sender
 {
+    [textView resignFirstResponder];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"输入地点" message:@"\n\n" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     
     if (_placeField == nil) {
@@ -155,6 +157,7 @@
 
 - (IBAction)imageButtonClick:(id)sender
 {
+    [textView resignFirstResponder];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] 
                                   initWithTitle:@"上传图片" 
                                   delegate:self 
@@ -166,6 +169,7 @@
 
 - (IBAction)categoryButtonClick:(id)sender
 {
+    [textView resignFirstResponder];
     if (nil == _categoryPicker) {
         _categoryPicker = [[UIPickerView alloc] init];
         _categoryPicker.dataSource = self;
@@ -227,6 +231,12 @@
         categoryLabel.text = category.name;
         categoryLabel.tag = category.categoryId;
     }
+    [textView becomeFirstResponder];
+}
+
+- (void)docancel:(CustomActionSheet *)actionSheet
+{
+    [textView becomeFirstResponder];
 }
 
 #pragma mark - 
@@ -234,30 +244,31 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == [actionSheet cancelButtonIndex]){
-        return;
-    }
-    UIImagePickerControllerSourceType sourceType;
-    if(buttonIndex == 0){
-        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }else {
-        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+    if(buttonIndex != [actionSheet cancelButtonIndex]){
+        UIImagePickerControllerSourceType sourceType;
+        if(buttonIndex == 0){
             sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }else {
-            sourceType = UIImagePickerControllerSourceTypeCamera;
+            if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }else {
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
         }
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentModalViewController:picker animated:YES];
+    } else {
+        [textView becomeFirstResponder];
     }
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = sourceType;
-    [self presentModalViewController:picker animated:YES];
 }
 
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    [picker dismissModalViewControllerAnimated:YES];
+    [self imagePickerControllerDidCancel:picker];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     _image = image;
     self.imageView.image = image;
@@ -267,6 +278,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissModalViewControllerAnimated:YES];
+    [textView becomeFirstResponder];
 }
 
 #pragma mark -
@@ -301,6 +313,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
             }
         }
 	}
+    [textView becomeFirstResponder];
 }
 
 #pragma mark -

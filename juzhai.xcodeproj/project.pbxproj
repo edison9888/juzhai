@@ -390,7 +390,6 @@
 		CBD9653D157FC57E006E0196 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD964E1157FC57D006E0196 /* grayArrow@2x.png */; };
 		CBD9653E157FC57E006E0196 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD964E2157FC57D006E0196 /* whiteArrow.png */; };
 		CBD9653F157FC57E006E0196 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD964E3157FC57D006E0196 /* whiteArrow@2x.png */; };
-		CBD96543157FC57E006E0196 /* MicrosoftYaHei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD964E8157FC57D006E0196 /* MicrosoftYaHei.ttf */; };
 		CBD977B215A9DB2E002FC519 /* MessageNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD977B115A9DB2E002FC519 /* MessageNavigationController.m */; };
 		CBD977B615A9DBEE002FC519 /* SmsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD977B515A9DBEE002FC519 /* SmsViewController.m */; };
 		CBDDC55B1553948500C70D31 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDDC5481553948500C70D31 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -925,7 +924,6 @@
 		CBD964E1157FC57D006E0196 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		CBD964E2157FC57D006E0196 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		CBD964E3157FC57D006E0196 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
-		CBD964E8157FC57D006E0196 /* MicrosoftYaHei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MicrosoftYaHei.ttf; path = Resources/MicrosoftYaHei.ttf; sourceTree = "<group>"; };
 		CBD96569157FC649006E0196 /* juzhai-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "juzhai-Info.plist"; sourceTree = "<group>"; };
 		CBD977B015A9DB2E002FC519 /* MessageNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageNavigationController.h; sourceTree = "<group>"; };
 		CBD977B115A9DB2E002FC519 /* MessageNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageNavigationController.m; sourceTree = "<group>"; };
@@ -1558,7 +1556,6 @@
 				CB54B16D15C0F96000041B73 /* Default@2x.png */,
 				CB54B16B15C0F95900041B73 /* Default.png */,
 				CBD96569157FC649006E0196 /* juzhai-Info.plist */,
-				CBD964E8157FC57D006E0196 /* MicrosoftYaHei.ttf */,
 				CB87D3E515518C9C00A25129 /* InfoPlist.strings */,
 				CBE91CD315829B1C008BDDE9 /* juzhai.xcdatamodeld */,
 				CB87D3EA15518C9C00A25129 /* juzhai-Prefix.pch */,
@@ -2200,7 +2197,6 @@
 				CBD9653D157FC57E006E0196 /* grayArrow@2x.png in Resources */,
 				CBD9653E157FC57E006E0196 /* whiteArrow.png in Resources */,
 				CBD9653F157FC57E006E0196 /* whiteArrow@2x.png in Resources */,
-				CBD96543157FC57E006E0196 /* MicrosoftYaHei.ttf in Resources */,
 				CB7EFEF115804E3D00176E59 /* PostDetailViewController.xib in Resources */,
 				CBBD5DF815827C6E003F0800 /* idea_more_btn@2x.png in Resources */,
 				CBBD5DF915827C6E003F0800 /* idea_wgo_btn_done@2x.png in Resources */,
