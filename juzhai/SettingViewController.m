@@ -26,6 +26,8 @@
 #import "Constant.h"
 #import "CustomNavigationController.h"
 #import "UIImage+UIImageExt.h"
+#import "MobClick.h"
+#import "GuideSettingViewController.h"
 
 @interface SettingViewController (Private)
 
@@ -100,7 +102,10 @@
         if (userView.nickname && ![userView.nickname isEqual:[NSNull null]]) {
             self.nicknameLabel.text = userView.nickname;
         }
-        if (userView.gender && ![userView.gender isEqual:[NSNull null]]) {
+        if ([self isKindOfClass:[GuideSettingViewController class]]) {
+            self.genderLabel.text = @"";
+            self.genderLabel.tag = -1;
+        }else if (userView.gender && ![userView.gender isEqual:[NSNull null]]) {
             self.genderLabel.text = userView.gender.intValue == 0 ? @"女" : @"男";
             self.genderLabel.tag = userView.gender.intValue;
         }
@@ -198,7 +203,14 @@
             NSString *response = [request responseString];
             NSMutableDictionary *jsonResult = [response JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                if ([self isKindOfClass:[GuideSettingViewController class]]) {
+                    [MobClick event:USER_GUIDE];
+                }
+                if (_newLogo != nil) {
+                    [MobClick event:UPLOAD_LOGO];
+                }
                 //保存成功
+                _newLogo = nil;
                 _saveButton.enabled = NO;
                 [[UserContext getUserView] updateFromDictionary:[jsonResult valueForKey:@"result"]];
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];

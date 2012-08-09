@@ -21,6 +21,7 @@
 #import "UrlUtils.h"
 #import "DialogContentViewController.h"
 #import "UIImage+UIImageExt.h"
+#import "MobClick.h"
 
 @interface PostDetailViewController ()
 - (CGFloat) getViewOriginY:(UIView *)view byUpperView:(UIView *)upperView heightGap:(float)heightGap;
@@ -216,6 +217,7 @@
             NSString *responseString = [request responseString];
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                [MobClick event:RESPONSE_POST];
                 userView.post.hasResp = [NSNumber numberWithInt:1];
                 userView.post.respCnt = [NSNumber numberWithInt:(userView.post.respCnt.intValue + 1)];
                 UIButton *respButton = (UIButton *)sender;

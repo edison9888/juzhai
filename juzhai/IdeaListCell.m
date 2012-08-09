@@ -18,6 +18,7 @@
 #import "MessageShow.h"
 #import "UrlUtils.h"
 #import "UIImage+UIImageExt.h"
+#import "MobClick.h"
 
 @implementation IdeaListCell
 
@@ -114,6 +115,7 @@
             NSString *responseString = [request responseString];
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                [MobClick event:SEND_IDEA];
                 _ideaView.hasUsed = YES;
                 _ideaView.useCount = _ideaView.useCount + 1;
                 UIButton *wantToButton = (UIButton *)[self viewWithTag:IDEA_WANT_TO_TAG];

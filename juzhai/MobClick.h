@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "StatEvents.h"
 
 typedef enum {
     REALTIME = 0,       //实时发送

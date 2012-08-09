@@ -26,7 +26,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [application setStatusBarHidden:NO];    
-    [application setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO]; 
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO]; 
     // Override point for customization after application launch.
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];

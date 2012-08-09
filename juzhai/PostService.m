@@ -12,6 +12,8 @@
 #import "HttpRequestSender.h"
 #import "MessageShow.h"
 #import "UrlUtils.h"
+#import "MobClick.h"
+#import "UserContext.h"
 
 @implementation PostService
 
@@ -39,6 +41,9 @@
                 NSString *responseString = [request responseString];
                 NSMutableDictionary *jsonResult = [responseString JSONValue];
                 if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d", [UserContext getUid]], @"uid", [NSString stringWithFormat:@"%d", image != nil], @"withPic", [NSString stringWithFormat:@"%d", ![date isEqualToString:@""]], @"withTime", [NSString stringWithFormat:@"%d", ![place isEqualToString:@""]], @"withPlace", nil];
+                    [MobClick event:SEND_POST attributes:dict];
+                    
                     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                     hud.mode = MBProgressHUDModeCustomView;
                     hud.labelText = @"发送成功";

@@ -649,6 +649,7 @@
 		CB5500F415BE71F700DD21EE /* send_jz_select_time_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_jz_select_time_link.png; sourceTree = "<group>"; };
 		CB5500FE15BE731700DD21EE /* send_jz_select_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_jz_select_line.png; sourceTree = "<group>"; };
 		CB55010015BE732300DD21EE /* send_jz_select_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_jz_select_line@2x.png"; sourceTree = "<group>"; };
+		CB5AEA1B15D37A820048CB94 /* StatEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatEvents.h; sourceTree = "<group>"; };
 		CB5E87E4156CD25C0010EE1C /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		CB5E87E5156CD25C0010EE1C /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		CB669D9315A42186000545D0 /* PagerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerCell.h; sourceTree = "<group>"; };
@@ -1421,6 +1422,14 @@
 			name = SBJson;
 			sourceTree = "<group>";
 		};
+		CB5AEA1A15D37A620048CB94 /* Stat */ = {
+			isa = PBXGroup;
+			children = (
+				CB5AEA1B15D37A820048CB94 /* StatEvents.h */,
+			);
+			name = Stat;
+			sourceTree = "<group>";
+		};
 		CB6B15BC157A50C100AC821F /* Beans */ = {
 			isa = PBXGroup;
 			children = (
@@ -1475,6 +1484,7 @@
 		CB8367F7155EADE7004CFD54 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CB5AEA1A15D37A620048CB94 /* Stat */,
 				CB7C8F3515B3E496007E3F9B /* Date */,
 				CB40316C15903CB000D758AF /* Message */,
 				CB6B15BC157A50C100AC821F /* Beans */,

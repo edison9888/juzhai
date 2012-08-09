@@ -20,6 +20,7 @@
 #import "UserView.h"
 #import "LoginService.h"
 #import "UrlUtils.h"
+#import "MobClick.h"
 
 @implementation RegisterViewController
 
@@ -66,6 +67,9 @@
             NSString *response = [request responseString];
             NSMutableDictionary *jsonResult = [response JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                
+                [MobClick event:LOCAL_REGISTER];
+                
                 //TODO 注册成功
                 LoginUser *loginUser = [[LoginUser alloc] initWithAccount:accountField.text password:passwordField.text];
                 [[LoginService getInstance] loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];

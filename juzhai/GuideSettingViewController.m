@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"个人引导";
+    self.title = @"设置拒宅名片";
     
     _cellIdentifierDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:LOGO_CELL_IDENTIFIER, [NSNumber numberWithInt:0], NICKNAME_CELL_IDENTIFIER, [NSNumber numberWithInt:10], GENDER_CELL_IDENTIFIER, [NSNumber numberWithInt:11], BIRTH_CELL_IDENTIFIER, [NSNumber numberWithInt:12], LOCATION_CELL_IDENTIFIER, [NSNumber numberWithInt:20], PROFESSION_CELL_IDENTIFIER, [NSNumber numberWithInt:21], nil];
     _disableSelectCellIdentifiterArray = [[NSArray alloc] initWithObjects:NICKNAME_CELL_IDENTIFIER, nil];
@@ -55,6 +55,10 @@
 }
 
 - (BOOL)validateSave{
+    if (self.genderLabel.tag < 0) {
+        [MessageShow error:@"请选择性别" onView:self.navigationController.view];
+        return NO;
+    }
     if ([self.birthLabel.text isEqualToString:@""]) {
         [MessageShow error:@"请填写生日" onView:self.navigationController.view];
         return NO;

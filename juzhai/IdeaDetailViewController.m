@@ -19,6 +19,7 @@
 #import "IdeaUsersViewController.h"
 #import "UrlUtils.h"
 #import "UIImage+UIImageExt.h"
+#import "MobClick.h"
 
 @interface IdeaDetailViewController ()
 - (CGFloat) getViewOriginY:(UIView *)view byUpperView:(UIView *)upperView heightGap:(float)heightGap;
@@ -215,6 +216,7 @@
             NSString *responseString = [request responseString];
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                [MobClick event:SEND_IDEA];
                 ideaView.hasUsed = YES;
                 ideaView.useCount = ideaView.useCount + 1;
                 UIButton *wantToButton = (UIButton *)sender;

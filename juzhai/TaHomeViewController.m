@@ -33,6 +33,7 @@
 #import "UIImage+UIImageExt.h"
 #import "UIViewController+MJPopupViewController.h"
 #import "WholeImageViewController.h"
+#import "MobClick.h"
 
 @interface TaHomeViewController ()
 
@@ -200,6 +201,7 @@
                 NSString *responseString = [request responseString];
                 NSMutableDictionary *jsonResult = [responseString JSONValue];
                 if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    [MobClick event:INTEREST_USER];
                     _userView.hasInterest = [NSNumber numberWithInt:1];
                     interestButton.hidden = YES;
                     interestButton.enabled = NO;

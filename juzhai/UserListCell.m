@@ -20,6 +20,7 @@
 #import "MessageShow.h"
 #import "UrlUtils.h"
 #import "UIImage+UIImageExt.h"
+#import "MobClick.h"
 
 @implementation UserListCell
 
@@ -188,6 +189,7 @@
                 NSString *responseString = [request responseString];
                 NSMutableDictionary *jsonResult = [responseString JSONValue];
                 if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                    [MobClick event:RESPONSE_POST];
                     _userView.post.hasResp = [NSNumber numberWithInt:1];
                     _userView.post.respCnt = [NSNumber numberWithInt:(_userView.post.respCnt.intValue + 1)];
                     UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];

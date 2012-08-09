@@ -12,6 +12,7 @@
 #import "SBJson.h"
 #import "MessageShow.h"
 #import "NSString+Chinese.h"
+#import "MobClick.h"
 
 
 @implementation DialogService
@@ -44,6 +45,7 @@
             NSString *responseString = [request responseString];
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                [MobClick event:SEND_SMS];
                 if (aSuccessBlock) {
                     aSuccessBlock([jsonResult valueForKey:@"result"]);
                 }
