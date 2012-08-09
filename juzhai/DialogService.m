@@ -13,11 +13,12 @@
 #import "MessageShow.h"
 #import "NSString+Chinese.h"
 #import "MobClick.h"
+#import "MBProgressHUD.h"
 
 
 @implementation DialogService
 
-- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock
+- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view
 {
     content = [content stringByTrimmingCharactersInSet: 
                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -59,9 +60,16 @@
             [MessageShow error:errorInfo onView:nil];
         }];
         [request setFailedBlock:^{
+            if (view) {
+                [MBProgressHUD hideHUDForView:view animated:YES];
+            }
             [HttpRequestDelegate requestFailedHandle:request];
         }];
         [request startAsynchronous];
+    } else {            
+        if (view) {
+            [MBProgressHUD hideHUDForView:view animated:YES];
+        }
     }
 }
 

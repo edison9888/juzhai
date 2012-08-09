@@ -14,6 +14,6 @@
 
 @interface DialogService : NSObject
 
-- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock;
+- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view;
 
 @end

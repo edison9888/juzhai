@@ -254,14 +254,21 @@
 //    view.createTime = [[NSDate date] timeIntervalSince1970];
 //    view.hasImg = (_image != nil);
     
+    [textView resignFirstResponder];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"发送中...";
     [_dialogService sendSms:textView.text toUser:self.targetUser.uid.intValue withImg:_image onSuccess:^(NSDictionary *info) {
         DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:info];
         [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
         textView.text = @"";
         [self resetSendForm];
-        [textView resignFirstResponder];
         [self doneLoadingTableViewData];
-    }];
+        
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.labelText = @"发送成功";
+        [hud hide:YES afterDelay:1];
+    } inView:self.view];
 }
 
 - (IBAction)imageButtonClick:(id)sender
