@@ -1,28 +1,26 @@
 //
-//  ShareIdeaInputViewController.m
+//  InviteInputViewController.m
 //  juzhai
 //
 //  Created by JiaJun Wu on 12-8-10.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShareIdeaInputViewController.h"
-#import "RectButton.h"
-#import "CustomNavigationController.h"
+#import "InviteInputViewController.h"
 #import "Constant.h"
+#import "RectButton.h"
 #import "CustomTextView.h"
-#import "IdeaView.h"
+#import "CustomNavigationController.h"
 #import "HttpRequestSender.h"
 #import "UrlUtils.h"
 
-@interface ShareIdeaInputViewController ()
+@interface InviteInputViewController ()
 
 @end
 
-@implementation ShareIdeaInputViewController
+@implementation InviteInputViewController
 
 @synthesize navigationBar;
-@synthesize ideaView;
 @synthesize textView;
 @synthesize navTitle;
 
@@ -53,7 +51,7 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     navigationBar.topItem.leftBarButtonItem = backItem;
     
-    _saveButton = [[RectButton alloc] initWithWidth:45.0 buttonText:@"分享" CapLocation:CapLeftAndRight];
+    _saveButton = [[RectButton alloc] initWithWidth:45.0 buttonText:@"邀请" CapLocation:CapLeftAndRight];
     [_saveButton addTarget:self action:@selector(sendShare:) forControlEvents:UIControlEventTouchUpInside];
     navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_saveButton];
     
@@ -62,7 +60,7 @@
     textView.backgroundImage = [[UIImage imageNamed:@"send_input_bgxy"] stretchableImageWithLeftCapWidth:7 topCapHeight:7];
     textView.font = DEFAULT_FONT(15);
     textView.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    textView.text = [self.ideaView shareThirdpartyText];
+    textView.text = @"刚发现一个小清新的脱宅社区，蛮有新意的；周末不想宅在家的朋友可以来试试哦~";
     [textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
 
@@ -85,8 +83,8 @@
 
 - (IBAction)sendShare:(id)sender
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.textView.text, @"content", [NSNumber numberWithInt:self.ideaView.ideaId], @"ideaId", nil];
-    ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"idea/shareIdea"] withParams:params];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.textView.text, @"content", nil];
+    ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/invite"] withParams:params];
     [request startAsynchronous];
     [self back:nil];
 }

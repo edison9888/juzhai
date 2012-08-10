@@ -306,7 +306,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         }else if (![mailClass canSendMail]) {
             [MessageShow error:@"用户没有设置邮件账户" onView:self.tabBarController.view]; 
         } else {
-            [self displayMailPicker];  
+            [self displayMailPicker];
         }
     } else if (buttonIndex == _shareToThirdparyButtonIdex) {
         ShareIdeaInputViewController *shareIdeaInputViewController = [[ShareIdeaInputViewController alloc] initWithNibName:@"ShareIdeaInputViewController" bundle:nil];

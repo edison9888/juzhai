@@ -104,7 +104,6 @@
     if ([self hasPlace]) {
         [text appendFormat:@"地点：%@", self.place];
     }
-    [text appendFormat:@" http://www.51juzhai.com/idea/%d", self.ideaId];
     return text;
 }
 

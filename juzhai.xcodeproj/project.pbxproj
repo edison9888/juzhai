@@ -10,6 +10,8 @@
 		CB07D5DA15D4B14A003497E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB07D5D915D4B149003497E9 /* MessageUI.framework */; };
 		CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */; };
 		CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */; };
+		CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E515D4F948003497E9 /* InviteInputViewController.m */; };
+		CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */; };
 		CB0C4461155CCFB600B238D4 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C445F155CCFB600B238D4 /* CameraViewController.m */; };
 		CB0C4462155CCFB600B238D4 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4460155CCFB600B238D4 /* CameraViewController.xib */; };
 		CB0C4464155CD07000B238D4 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4463155CD07000B238D4 /* TabBar.xib */; };
@@ -467,6 +469,9 @@
 		CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareIdeaInputViewController.h; sourceTree = "<group>"; };
 		CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareIdeaInputViewController.m; sourceTree = "<group>"; };
 		CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareIdeaInputViewController.xib; sourceTree = "<group>"; };
+		CB07D5E415D4F947003497E9 /* InviteInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteInputViewController.h; sourceTree = "<group>"; };
+		CB07D5E515D4F948003497E9 /* InviteInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteInputViewController.m; sourceTree = "<group>"; };
+		CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteInputViewController.xib; sourceTree = "<group>"; };
 		CB0C445E155CCFB600B238D4 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		CB0C445F155CCFB600B238D4 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		CB0C4460155CCFB600B238D4 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -1146,6 +1151,9 @@
 				CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */,
 				CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */,
 				CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */,
+				CB07D5E415D4F947003497E9 /* InviteInputViewController.h */,
+				CB07D5E515D4F948003497E9 /* InviteInputViewController.m */,
+				CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */,
 			);
 			name = Idea;
 			sourceTree = "<group>";
@@ -2522,6 +2530,7 @@
 				CBD2FDFD15D106EE00C23119 /* btn_unable@2x.png in Resources */,
 				CBD2FE0015D106F900C23119 /* btn_unable.png in Resources */,
 				CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */,
+				CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2669,6 +2678,7 @@
 				CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */,
 				CB0D30DE15D0B76600A01A53 /* CustomIdeaListCell.m in Sources */,
 				CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */,
+				CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
