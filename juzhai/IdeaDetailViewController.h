@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class IdeaView;
 @class IdeaUsersViewController;
@@ -14,7 +15,12 @@
 #define IDEA_DEFAULT_HEIGHT_GAP 10.0
 #define IDEA_INFO_ICON_HEIGHT_GAP 4.0
 
-@interface IdeaDetailViewController : UIViewController
+@interface IdeaDetailViewController : UIViewController <UIActionSheetDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
+{
+    NSInteger _shareToSmsButtonIdex;
+    NSInteger _shareToMailButtonIdex;
+    NSInteger _shareToThirdparyButtonIdex;
+}
 
 @property (strong, nonatomic) IdeaView *ideaView;
 @property (strong, nonatomic) IBOutlet UIScrollView *contentView;
@@ -37,5 +43,6 @@
 - (IBAction)moreIdea:(id)sender;
 - (IBAction)postIdea:(id)sender;
 - (IBAction)showUsedUsers:(id)sender;
+- (IBAction)openShareLog:(id)sender;
 
 @end

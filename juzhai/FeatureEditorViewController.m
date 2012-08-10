@@ -42,7 +42,6 @@
     self.title = @"自我评价";
     
     textView.backgroundImage = [[UIImage imageNamed:@"send_input_bgxy"] stretchableImageWithLeftCapWidth:7 topCapHeight:7];
-    
     textView.font = DEFAULT_FONT(15);
     textView.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
     

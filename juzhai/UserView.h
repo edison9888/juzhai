@@ -11,6 +11,10 @@
 
 @class PostView;
 
+#define TP_NAME_WEIBO @"weibo"
+#define TP_NAME_DOUBAN @"douban"
+#define TP_NAME_QQ @"qq"
+
 @interface UserView : NSObject <DataView,NSCopying>
 
 @property (strong,nonatomic) NSDecimalNumber *uid;
@@ -41,6 +45,8 @@
 @property (strong,nonatomic) NSNumber *postCount;
 @property (strong,nonatomic) NSNumber *hasGuided;
 @property (strong,nonatomic) NSNumber *hasInterest;
+@property (strong,nonatomic) NSDecimalNumber *tpId;
+@property (strong,nonatomic) NSString *tpName;
 @property (strong,nonatomic) PostView *post;
 
 

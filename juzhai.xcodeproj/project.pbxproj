@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB07D5DA15D4B14A003497E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB07D5D915D4B149003497E9 /* MessageUI.framework */; };
+		CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */; };
+		CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */; };
 		CB0C4461155CCFB600B238D4 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C445F155CCFB600B238D4 /* CameraViewController.m */; };
 		CB0C4462155CCFB600B238D4 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4460155CCFB600B238D4 /* CameraViewController.xib */; };
 		CB0C4464155CD07000B238D4 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4463155CD07000B238D4 /* TabBar.xib */; };
@@ -460,6 +463,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB07D5D915D4B149003497E9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareIdeaInputViewController.h; sourceTree = "<group>"; };
+		CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareIdeaInputViewController.m; sourceTree = "<group>"; };
+		CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareIdeaInputViewController.xib; sourceTree = "<group>"; };
 		CB0C445E155CCFB600B238D4 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		CB0C445F155CCFB600B238D4 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		CB0C4460155CCFB600B238D4 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -1053,6 +1060,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB07D5DA15D4B14A003497E9 /* MessageUI.framework in Frameworks */,
 				CB540E5515ABEFDE00265412 /* CoreText.framework in Frameworks */,
 				CBFF441B1577BB930089401C /* CoreGraphics.framework in Frameworks */,
 				CBFCBE5C156CC39A006A97A8 /* MapKit.framework in Frameworks */,
@@ -1135,6 +1143,9 @@
 				CB86A25F15AC8DB10028F0A4 /* IdeaUserListCell.h */,
 				CB86A26015AC8DB10028F0A4 /* IdeaUserListCell.m */,
 				CB86A26315AC8DE60028F0A4 /* IdeaUserListCell.xib */,
+				CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */,
+				CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */,
+				CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */,
 			);
 			name = Idea;
 			sourceTree = "<group>";
@@ -1524,6 +1535,7 @@
 		CB87D3D915518C9C00A25129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB07D5D915D4B149003497E9 /* MessageUI.framework */,
 				CB540E5415ABEFDE00265412 /* CoreText.framework */,
 				CBFCBE5B156CC39A006A97A8 /* MapKit.framework */,
 				CBFCBE59156CC38B006A97A8 /* ImageIO.framework */,
@@ -2509,6 +2521,7 @@
 				CBB46DC115CFB1DA003F2ADC /* ca_ms_link.png in Resources */,
 				CBD2FDFD15D106EE00C23119 /* btn_unable@2x.png in Resources */,
 				CBD2FE0015D106F900C23119 /* btn_unable.png in Resources */,
+				CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2655,6 +2668,7 @@
 				CBF9406C15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m in Sources */,
 				CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */,
 				CB0D30DE15D0B76600A01A53 /* CustomIdeaListCell.m in Sources */,
+				CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

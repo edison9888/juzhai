@@ -80,4 +80,32 @@
     return self.useCount > 0;
 }
 
+- (NSString *)shareSmsText
+{
+    return [NSString stringWithFormat:@"想一起去：%@么？（来自 拒宅iphone版）%@", self.content, @"http://www.51juzhai.com"];
+}
+
+- (NSString *)shareMailText
+{
+    NSMutableString *text = [NSMutableString stringWithFormat:@"想一起去：%@么？", self.content];
+    if ([self hasPlace]) {
+        [text appendFormat:@"地点：%@", self.place];
+    }
+    [text appendFormat:@" <a href=\"http://www.51juzhai.com/idea/%d\">去看看</a>", self.ideaId];
+    if (self.bigPic != nil && ![self.bigPic isEqual:[NSNull null]] && ![self.bigPic isEqualToString:@""]) {
+        [text appendFormat:@"<br /><br /><a href=\"http://www.51juzhai.com/idea/%d\"><img width=\"225\" src=\"%@\" /></a>", self.ideaId, self.bigPic];    
+    }
+    return text;
+}
+
+- (NSString *)shareThirdpartyText
+{
+    NSMutableString *text = [NSMutableString stringWithFormat:@"想一起去：%@么？", self.content];
+    if ([self hasPlace]) {
+        [text appendFormat:@"地点：%@", self.place];
+    }
+    [text appendFormat:@" http://www.51juzhai.com/idea/%d", self.ideaId];
+    return text;
+}
+
 @end

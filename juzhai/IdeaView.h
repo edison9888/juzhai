@@ -31,5 +31,8 @@
 - (BOOL)hasEndTime;
 - (BOOL)hasCategory;
 - (BOOL)hasPerson;
+- (NSString *)shareSmsText;
+- (NSString *)shareMailText;
+- (NSString *)shareThirdpartyText;
 
 @end

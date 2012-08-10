@@ -20,6 +20,9 @@
 #import "UrlUtils.h"
 #import "UIImage+UIImageExt.h"
 #import "MobClick.h"
+#import "ShareIdeaInputViewController.h"
+#import "UserContext.h"
+#import "UserView.h"
 
 @interface IdeaDetailViewController ()
 - (CGFloat) getViewOriginY:(UIView *)view byUpperView:(UIView *)upperView heightGap:(float)heightGap;
@@ -250,6 +253,118 @@
     IdeaUsersViewController *ideaUsersViewController = [[IdeaUsersViewController alloc] init];
     ideaUsersViewController.ideaView = ideaView;
     [self.navigationController pushViewController:ideaUsersViewController animated:YES];
+}
+
+- (IBAction)openShareLog:(id)sender
+{
+    NSString *tpName = [UserContext getUserView].tpName;
+    NSString *tpChineseName;
+    if ([TP_NAME_WEIBO isEqualToString:tpName]) {
+        tpChineseName = @"新浪微博";
+    } else if ([TP_NAME_DOUBAN isEqualToString:tpName]) {
+        tpChineseName = @"豆瓣社区";
+    } else if ([TP_NAME_QQ isEqualToString:tpName]){
+        tpChineseName = @"QQ社区";
+    }
+    UIActionSheet *actionSheet;
+    if (nil == tpChineseName || [tpChineseName isEqualToString:@""]) {
+        actionSheet = [[UIActionSheet alloc]initWithTitle:@"分享拒宅好主意" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: @"分享到邮件", @"分享到短信", nil];
+        _shareToSmsButtonIdex = 1;
+        _shareToMailButtonIdex = 0;
+        _shareToThirdparyButtonIdex = -1;
+    } else {
+        actionSheet = [[UIActionSheet alloc]initWithTitle:@"分享拒宅好主意" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:[NSString stringWithFormat:@"分享到%@", tpChineseName], @"分享到邮件", @"分享到短信", nil];
+        _shareToSmsButtonIdex = 2;
+        _shareToMailButtonIdex = 1;
+        _shareToThirdparyButtonIdex = 0;
+    }
+    [actionSheet showInView:self.tabBarController.view];
+}
+
+#pragma mark - 
+#pragma mark Action Sheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == _shareToSmsButtonIdex) {
+        Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+        if (messageClass != nil) {
+            // Check whether the current device is configured for sending SMS messages
+            if ([messageClass canSendText]) {
+                [self displaySMSComposerSheet];
+            }
+            else {
+                [MessageShow error:@"设备没有短信功能" onView:self.tabBarController.view];
+            }
+        } else {
+            [MessageShow error:@"iOS版本过低,iOS4.0以上才支持程序内发送短信" onView:self.tabBarController.view];
+        }
+    } else if (buttonIndex == _shareToMailButtonIdex) {
+        Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));    
+        if (!mailClass) {  
+            [MessageShow error:@"当前系统版本不支持应用内发送邮件功能，您可以使用mailto方法代替" onView:self.tabBarController.view];
+        }else if (![mailClass canSendMail]) {
+            [MessageShow error:@"用户没有设置邮件账户" onView:self.tabBarController.view]; 
+        } else {
+            [self displayMailPicker];  
+        }
+    } else if (buttonIndex == _shareToThirdparyButtonIdex) {
+        ShareIdeaInputViewController *shareIdeaInputViewController = [[ShareIdeaInputViewController alloc] initWithNibName:@"ShareIdeaInputViewController" bundle:nil];
+        shareIdeaInputViewController.ideaView = self.ideaView;
+        shareIdeaInputViewController.navTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+        [self presentModalViewController:shareIdeaInputViewController animated:YES];
+    }
+}
+
+-(void)displaySMSComposerSheet
+{
+    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate = self;
+    
+    picker.body = [NSString stringWithFormat:[self.ideaView shareSmsText]];
+    [self presentModalViewController:picker animated:YES];
+}
+
+//调出邮件发送窗口   
+- (void)displayMailPicker   
+{   
+    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];     
+    mailPicker.mailComposeDelegate = self;     
+    
+    //设置主题     
+    [mailPicker setSubject: @"分享拒宅好主意"];
+//    NSString *emailBody = @"<font color='red'>eMail</font> 正文";     
+    NSString *emailBody = [self.ideaView shareMailText];
+    [mailPicker setMessageBody:emailBody isHTML:YES];     
+    [self presentModalViewController: mailPicker animated:YES];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
+                 didFinishWithResult:(MessageComposeResult)result {
+    
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+            NSLog(@"Result: SMS sending canceled");
+            break;
+        case MessageComposeResultSent:
+            NSLog(@"Result: SMS sent");
+            break;
+        case MessageComposeResultFailed:
+            [MessageShow error:@"短信发送失败" onView:self.tabBarController.view];
+            break;
+        default:
+            NSLog(@"Result: SMS not sent");
+            break;
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - 实现 MFMailComposeViewControllerDelegate    
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error   
+{   
+    //关闭邮件发送窗口   
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

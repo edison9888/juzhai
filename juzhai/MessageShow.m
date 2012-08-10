@@ -20,7 +20,7 @@
 //    hud.labelText = msg;
 //    [hud hide:YES afterDelay:1];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:msg message:
-                          nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil]; 
+                          nil delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil]; 
     [alert show];
 }
 

@@ -40,6 +40,8 @@
 @synthesize postCount;
 @synthesize hasGuided;
 @synthesize hasInterest;
+@synthesize tpId;
+@synthesize tpName;
 
 + (id) convertFromDictionary:(NSDictionary *)info{
     UserView *user = [UserView alloc];
@@ -80,6 +82,8 @@
     self.postCount = [info valueForKey:@"postCount"];
     self.hasGuided = [info valueForKey:@"hasGuided"];
     self.hasInterest = [info valueForKey:@"hasInterest"];
+    self.tpId = [info valueForKey:@"tpId"];
+    self.tpName = [info valueForKey:@"tpName"];
 }
 
 - (NSString *)basicInfo
