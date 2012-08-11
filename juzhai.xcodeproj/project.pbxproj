@@ -12,6 +12,9 @@
 		CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */; };
 		CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E515D4F948003497E9 /* InviteInputViewController.m */; };
 		CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */; };
+		CB0B12AF15D69B85002C361A /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B12AD15D69B85002C361A /* GuidanceViewController.m */; };
+		CB0B12B015D69B85002C361A /* GuidanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */; };
+		CB0B12B715D6B119002C361A /* guidance_images.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB0B12B615D6B119002C361A /* guidance_images.plist */; };
 		CB0C4461155CCFB600B238D4 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C445F155CCFB600B238D4 /* CameraViewController.m */; };
 		CB0C4462155CCFB600B238D4 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4460155CCFB600B238D4 /* CameraViewController.xib */; };
 		CB0C4464155CD07000B238D4 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C4463155CD07000B238D4 /* TabBar.xib */; };
@@ -472,6 +475,10 @@
 		CB07D5E415D4F947003497E9 /* InviteInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteInputViewController.h; sourceTree = "<group>"; };
 		CB07D5E515D4F948003497E9 /* InviteInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteInputViewController.m; sourceTree = "<group>"; };
 		CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteInputViewController.xib; sourceTree = "<group>"; };
+		CB0B12AC15D69B85002C361A /* GuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidanceViewController.h; sourceTree = "<group>"; };
+		CB0B12AD15D69B85002C361A /* GuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidanceViewController.m; sourceTree = "<group>"; };
+		CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuidanceViewController.xib; sourceTree = "<group>"; };
+		CB0B12B615D6B119002C361A /* guidance_images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = guidance_images.plist; sourceTree = "<group>"; };
 		CB0C445E155CCFB600B238D4 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		CB0C445F155CCFB600B238D4 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		CB0C4460155CCFB600B238D4 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -1340,6 +1347,9 @@
 				CB87D3EB15518C9C00A25129 /* AppDelegate.h */,
 				CB87D3EC15518C9C00A25129 /* AppDelegate.m */,
 				CB87D3EE15518C9C00A25129 /* juzhai.xcdatamodeld */,
+				CB0B12AC15D69B85002C361A /* GuidanceViewController.h */,
+				CB0B12AD15D69B85002C361A /* GuidanceViewController.m */,
+				CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1592,6 +1602,7 @@
 				CB87D3E815518C9C00A25129 /* main.m */,
 				CB50E4A815918D16001D5673 /* Profile-Setting-Cell-Identifie.plist */,
 				CBB7517F15CA7C8900B94D99 /* Localizable.strings */,
+				CB0B12B615D6B119002C361A /* guidance_images.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2531,6 +2542,8 @@
 				CBD2FE0015D106F900C23119 /* btn_unable.png in Resources */,
 				CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */,
 				CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */,
+				CB0B12B015D69B85002C361A /* GuidanceViewController.xib in Resources */,
+				CB0B12B715D6B119002C361A /* guidance_images.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2679,6 +2692,7 @@
 				CB0D30DE15D0B76600A01A53 /* CustomIdeaListCell.m in Sources */,
 				CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */,
 				CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */,
+				CB0B12AF15D69B85002C361A /* GuidanceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

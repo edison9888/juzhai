@@ -12,6 +12,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"
 #import "CustomNavigationController.h"
+#import "GuidanceViewController.h"
 #import "BaseData.h"
 #import "MobClick.h"
 
@@ -25,8 +26,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [application setStatusBarHidden:NO];    
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO]; 
+    
     // Override point for customization after application launch.
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
@@ -41,7 +42,13 @@
     }else{
         viewController = [[LoginService getInstance] loginTurnToViewController];
     }
-    self.window.rootViewController = viewController;
+    
+    GuidanceViewController *guidanceViewController = [[GuidanceViewController alloc] initWithNibName:@"GuidanceViewController" bundle:nil];
+    self.window.rootViewController = guidanceViewController;
+    
+    
+//    [application setStatusBarHidden:NO];
+//    self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
     
     [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
