@@ -290,6 +290,7 @@
 
 - (void)resetSendForm
 {
+    _image = nil;
     imageView.image = nil;
     imageView.hidden = YES;
     
