@@ -47,6 +47,7 @@
 @property (strong,nonatomic) NSNumber *hasInterest;
 @property (strong,nonatomic) NSDecimalNumber *tpId;
 @property (strong,nonatomic) NSString *tpName;
+@property (nonatomic) NSInteger onlineStatus;
 @property (strong,nonatomic) PostView *post;
 
 

@@ -85,6 +85,25 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    _cellDictionary = nil;
+    _cellIdentifierDictionary = nil;
+    _disableSelectCellIdentifiterArray = nil;
+    _saveButton = nil;
+    _nicknameEditorViewController = nil;
+    _professionEditorViewController = nil;
+    _featureEditorViewController = nil;
+    _newLogo = nil;
+    _datePicker = nil;
+    _locationPicker = nil;
+    _provinceArray = nil;
+    _cityArray = nil;
+    self.logoImageView = nil;
+    self.nicknameLabel = nil;
+    self.birthLabel = nil;
+    self.genderLabel = nil;
+    self.professionLabel = nil;
+    self.featureLabel = nil;
+    self.locationLabel = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

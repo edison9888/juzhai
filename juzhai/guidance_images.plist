@@ -2,8 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<string>ca_ms_hover.png</string>
-	<string>ca_all_hover.png</string>
-	<string>ca_dy_hover.png</string>
+	<string>yd1.jpg</string>
+	<string>yd2.jpg</string>
+	<string>yd3.jpg</string>
+	<string>yd4.jpg</string>
 </array>
 </plist>

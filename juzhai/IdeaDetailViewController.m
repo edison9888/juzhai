@@ -140,9 +140,10 @@
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSURL *imageURL = [NSURL URLWithString:ideaView.bigPic];
         [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+            NSInteger width = image.size.width;
             NSInteger height = image.size.height;
-            [imageView setFrame:CGRectMake(imageView.frame.origin.x, [self getViewOriginY:imageView byUpperView:contentLabel heightGap:IDEA_DEFAULT_HEIGHT_GAP], imageView.frame.size.width, height/2)];
             imageView.image = [image createRoundedRectImage:8.0];
+            [imageView setFrame:CGRectMake(imageView.frame.origin.x, [self getViewOriginY:imageView byUpperView:contentLabel heightGap:IDEA_DEFAULT_HEIGHT_GAP], width/2, height/2)];
             //重新定位以下元素
             [self resetViewFrame];
             

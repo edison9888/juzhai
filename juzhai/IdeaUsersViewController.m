@@ -63,6 +63,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _data = nil;
+    _listHttpRequestDelegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -51,7 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [textView becomeFirstResponder];
     // Do any additional setup after loading the view.
     if (IOS_VERSION >= 5.0){
         [navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
@@ -89,8 +89,6 @@
     Category *category = [[BaseData getCategories] objectAtIndex:0];
     categoryLabel.text = category.name;
     categoryLabel.tag = category.categoryId;
-    
-    [textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
 
 - (void)viewDidUnload

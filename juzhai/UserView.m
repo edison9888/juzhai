@@ -42,6 +42,7 @@
 @synthesize hasInterest;
 @synthesize tpId;
 @synthesize tpName;
+@synthesize onlineStatus;
 
 + (id) convertFromDictionary:(NSDictionary *)info{
     UserView *user = [UserView alloc];
@@ -84,6 +85,7 @@
     self.hasInterest = [info valueForKey:@"hasInterest"];
     self.tpId = [info valueForKey:@"tpId"];
     self.tpName = [info valueForKey:@"tpName"];
+    self.onlineStatus = [[info valueForKey:@"onlineStatus"] intValue];
 }
 
 - (NSString *)basicInfo
@@ -121,8 +123,10 @@
         copy.logo = self.logo;
         copy.smallLogo = self.smallLogo;
         copy.bigLogo = self.bigLogo;
+        copy.originalLogo = self.originalLogo;
         copy.rawLogo = self.rawLogo;
         copy.logoVerifyState = self.logoVerifyState;
+        copy.hasLogo = self.hasLogo;
         copy.birthYear = self.birthYear;
         copy.birthMonth = self.birthMonth;
         copy.birthDay = self.birthDay;
@@ -141,6 +145,9 @@
         copy.postCount = self.postCount;
         copy.hasGuided = self.hasGuided;
         copy.hasInterest = self.hasInterest;
+        copy.tpName = self.tpName;
+        copy.tpId = self.tpId;
+        copy.onlineStatus = self.onlineStatus;
         copy.post = self.post;
     }
     return copy;

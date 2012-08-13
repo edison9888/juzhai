@@ -15,6 +15,7 @@
 #import "GuidanceViewController.h"
 #import "BaseData.h"
 #import "MobClick.h"
+#import "Constant.h"
 
 @implementation AppDelegate
 
@@ -31,6 +32,7 @@
     // Override point for customization after application launch.
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
+    [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     //加载初始化数据
     [BaseData getCategories];
     [BaseData getProvinces];
@@ -43,12 +45,16 @@
         viewController = [[LoginService getInstance] loginTurnToViewController];
     }
     
-    GuidanceViewController *guidanceViewController = [[GuidanceViewController alloc] initWithNibName:@"GuidanceViewController" bundle:nil];
-    self.window.rootViewController = guidanceViewController;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL guidanceUsed = [userDefaults boolForKey:GUIDANCE_USED([Constant appVersion])];
+    if (YES) {
+        GuidanceViewController *guidanceViewController = [[GuidanceViewController alloc] initWithNibName:@"GuidanceViewController" bundle:nil];
+        viewController = guidanceViewController;
+    } else {
+        [application setStatusBarHidden:NO];
+    }
     
-    
-//    [application setStatusBarHidden:NO];
-//    self.window.rootViewController = viewController;
+    self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
     
     [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];

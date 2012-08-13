@@ -64,6 +64,8 @@
 {
     [super viewDidUnload];
     _data = nil;
+    _editButton = nil;
+    _listHttpRequestDelegate = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

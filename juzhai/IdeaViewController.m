@@ -46,6 +46,8 @@
 
 - (void)viewDidLoad
 {
+    _imageDictory = [[NSMutableDictionary alloc] init];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -113,8 +115,16 @@
 }
 
 - (void)viewDidUnload {
-    _refreshHeaderView = nil;
     _data = nil;
+    _categoryPopver = nil;
+    _segmentedControl = nil;
+    _categoryButton = nil;
+    _categoryDownLinkImg = nil;
+    _categoryDownHoverImg = nil;
+    _categoryUpLinkImg = nil;
+    _categoryUpHoverImg = nil;
+    _listHttpRequestDelegate = nil;
+    _imageDictory = nil;
 }
 
 - (void) loadListDataWithPage:(NSInteger)page{

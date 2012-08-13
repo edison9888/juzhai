@@ -71,6 +71,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.navTitle = nil;
+    self.ideaView = nil;
+    self.navigationBar = nil;
+    self.textView = nil;
+    _saveButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

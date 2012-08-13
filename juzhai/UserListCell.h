@@ -31,9 +31,13 @@
     UserView *_userView;
 }
 
-//- (void) redrawn:(UserView *)userView;
-//- (void) setBackground;
-//+ (CGFloat) heightForCell:(UserView *)userView;
+@property (strong, nonatomic) IBOutlet UIImageView *logoView;
+@property (strong, nonatomic) IBOutlet UILabel *nicknameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *contentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *onlineLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIButton *respButton;
 
 -(IBAction)respPost:(id)sender;
 

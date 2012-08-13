@@ -12,6 +12,19 @@
 		CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */; };
 		CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E515D4F948003497E9 /* InviteInputViewController.m */; };
 		CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */; };
+		CB09C4E815D8D0CA00BA8D84 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = CB09C4E715D8D0CA00BA8D84 /* Constant.m */; };
+		CB09C4EB15D8D4EA00BA8D84 /* yd4_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4EA15D8D4EA00BA8D84 /* yd4_btn@2x.png */; };
+		CB09C4ED15D8D4FC00BA8D84 /* yd4_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4EC15D8D4FC00BA8D84 /* yd4_btn.png */; };
+		CB09C4F315D8D6B500BA8D84 /* yd4_btn_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4EE15D8D6B500BA8D84 /* yd4_btn_hover@2x.png */; };
+		CB09C4F415D8D6B500BA8D84 /* yd2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4EF15D8D6B500BA8D84 /* yd2@2x.jpg */; };
+		CB09C4F515D8D6B500BA8D84 /* yd4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4F015D8D6B500BA8D84 /* yd4@2x.jpg */; };
+		CB09C4F615D8D6B500BA8D84 /* yd3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4F115D8D6B500BA8D84 /* yd3@2x.jpg */; };
+		CB09C4F715D8D6B500BA8D84 /* yd1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4F215D8D6B500BA8D84 /* yd1@2x.jpg */; };
+		CB09C4FD15D8D6C100BA8D84 /* yd4_btn_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4F815D8D6C100BA8D84 /* yd4_btn_hover.png */; };
+		CB09C4FE15D8D6C100BA8D84 /* yd4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4F915D8D6C100BA8D84 /* yd4.jpg */; };
+		CB09C4FF15D8D6C100BA8D84 /* yd3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4FA15D8D6C100BA8D84 /* yd3.jpg */; };
+		CB09C50015D8D6C100BA8D84 /* yd2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4FB15D8D6C100BA8D84 /* yd2.jpg */; };
+		CB09C50115D8D6C100BA8D84 /* yd1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB09C4FC15D8D6C100BA8D84 /* yd1.jpg */; };
 		CB0B12AF15D69B85002C361A /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0B12AD15D69B85002C361A /* GuidanceViewController.m */; };
 		CB0B12B015D69B85002C361A /* GuidanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */; };
 		CB0B12B715D6B119002C361A /* guidance_images.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB0B12B615D6B119002C361A /* guidance_images.plist */; };
@@ -475,6 +488,19 @@
 		CB07D5E415D4F947003497E9 /* InviteInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteInputViewController.h; sourceTree = "<group>"; };
 		CB07D5E515D4F948003497E9 /* InviteInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteInputViewController.m; sourceTree = "<group>"; };
 		CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteInputViewController.xib; sourceTree = "<group>"; };
+		CB09C4E715D8D0CA00BA8D84 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		CB09C4EA15D8D4EA00BA8D84 /* yd4_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd4_btn@2x.png"; sourceTree = "<group>"; };
+		CB09C4EC15D8D4FC00BA8D84 /* yd4_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yd4_btn.png; sourceTree = "<group>"; };
+		CB09C4EE15D8D6B500BA8D84 /* yd4_btn_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yd4_btn_hover@2x.png"; sourceTree = "<group>"; };
+		CB09C4EF15D8D6B500BA8D84 /* yd2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yd2@2x.jpg"; sourceTree = "<group>"; };
+		CB09C4F015D8D6B500BA8D84 /* yd4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yd4@2x.jpg"; sourceTree = "<group>"; };
+		CB09C4F115D8D6B500BA8D84 /* yd3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yd3@2x.jpg"; sourceTree = "<group>"; };
+		CB09C4F215D8D6B500BA8D84 /* yd1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yd1@2x.jpg"; sourceTree = "<group>"; };
+		CB09C4F815D8D6C100BA8D84 /* yd4_btn_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yd4_btn_hover.png; sourceTree = "<group>"; };
+		CB09C4F915D8D6C100BA8D84 /* yd4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yd4.jpg; sourceTree = "<group>"; };
+		CB09C4FA15D8D6C100BA8D84 /* yd3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yd3.jpg; sourceTree = "<group>"; };
+		CB09C4FB15D8D6C100BA8D84 /* yd2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yd2.jpg; sourceTree = "<group>"; };
+		CB09C4FC15D8D6C100BA8D84 /* yd1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yd1.jpg; sourceTree = "<group>"; };
 		CB0B12AC15D69B85002C361A /* GuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidanceViewController.h; sourceTree = "<group>"; };
 		CB0B12AD15D69B85002C361A /* GuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidanceViewController.m; sourceTree = "<group>"; };
 		CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuidanceViewController.xib; sourceTree = "<group>"; };
@@ -1158,9 +1184,6 @@
 				CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */,
 				CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */,
 				CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */,
-				CB07D5E415D4F947003497E9 /* InviteInputViewController.h */,
-				CB07D5E515D4F948003497E9 /* InviteInputViewController.m */,
-				CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */,
 			);
 			name = Idea;
 			sourceTree = "<group>";
@@ -1184,6 +1207,9 @@
 				CB669D9C15A48226000545D0 /* SendPostViewController.h */,
 				CB669D9D15A48227000545D0 /* SendPostViewController.m */,
 				CB669D9E15A48227000545D0 /* SendPostViewController.xib */,
+				CB07D5E415D4F947003497E9 /* InviteInputViewController.h */,
+				CB07D5E515D4F948003497E9 /* InviteInputViewController.m */,
+				CB07D5E615D4F948003497E9 /* InviteInputViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1463,6 +1489,7 @@
 			isa = PBXGroup;
 			children = (
 				CB0E472A15AEBC93002FDBB0 /* Constant.h */,
+				CB09C4E715D8D0CA00BA8D84 /* Constant.m */,
 				CB6B15BD157A510300AC821F /* BaseData.h */,
 				CB6B15BE157A510300AC821F /* BaseData.m */,
 				CB6B15C0157A70C800AC821F /* Category.h */,
@@ -1682,6 +1709,12 @@
 		CBD964B2157FC57D006E0196 /* big */ = {
 			isa = PBXGroup;
 			children = (
+				CB09C4EE15D8D6B500BA8D84 /* yd4_btn_hover@2x.png */,
+				CB09C4EF15D8D6B500BA8D84 /* yd2@2x.jpg */,
+				CB09C4F015D8D6B500BA8D84 /* yd4@2x.jpg */,
+				CB09C4F115D8D6B500BA8D84 /* yd3@2x.jpg */,
+				CB09C4F215D8D6B500BA8D84 /* yd1@2x.jpg */,
+				CB09C4EA15D8D4EA00BA8D84 /* yd4_btn@2x.png */,
 				CBD2FDFC15D106ED00C23119 /* btn_unable@2x.png */,
 				CBB46DB915CFB1C9003F2ADC /* ca_ms_hover@2x.png */,
 				CBB46DBA15CFB1C9003F2ADC /* ca_ms_link@2x.png */,
@@ -1845,6 +1878,12 @@
 		CBD964E9157FC57D006E0196 /* small */ = {
 			isa = PBXGroup;
 			children = (
+				CB09C4F815D8D6C100BA8D84 /* yd4_btn_hover.png */,
+				CB09C4F915D8D6C100BA8D84 /* yd4.jpg */,
+				CB09C4FA15D8D6C100BA8D84 /* yd3.jpg */,
+				CB09C4FB15D8D6C100BA8D84 /* yd2.jpg */,
+				CB09C4FC15D8D6C100BA8D84 /* yd1.jpg */,
+				CB09C4EC15D8D4FC00BA8D84 /* yd4_btn.png */,
 				CBB46DBE15CFB1DA003F2ADC /* ca_ms_hover.png */,
 				CBB46DBF15CFB1DA003F2ADC /* ca_ms_link.png */,
 				CB3918EB15CF994900767E5F /* ca_all_hover.png */,
@@ -2544,6 +2583,18 @@
 				CB07D5E815D4F948003497E9 /* InviteInputViewController.xib in Resources */,
 				CB0B12B015D69B85002C361A /* GuidanceViewController.xib in Resources */,
 				CB0B12B715D6B119002C361A /* guidance_images.plist in Resources */,
+				CB09C4EB15D8D4EA00BA8D84 /* yd4_btn@2x.png in Resources */,
+				CB09C4ED15D8D4FC00BA8D84 /* yd4_btn.png in Resources */,
+				CB09C4F315D8D6B500BA8D84 /* yd4_btn_hover@2x.png in Resources */,
+				CB09C4F415D8D6B500BA8D84 /* yd2@2x.jpg in Resources */,
+				CB09C4F515D8D6B500BA8D84 /* yd4@2x.jpg in Resources */,
+				CB09C4F615D8D6B500BA8D84 /* yd3@2x.jpg in Resources */,
+				CB09C4F715D8D6B500BA8D84 /* yd1@2x.jpg in Resources */,
+				CB09C4FD15D8D6C100BA8D84 /* yd4_btn_hover.png in Resources */,
+				CB09C4FE15D8D6C100BA8D84 /* yd4.jpg in Resources */,
+				CB09C4FF15D8D6C100BA8D84 /* yd3.jpg in Resources */,
+				CB09C50015D8D6C100BA8D84 /* yd2.jpg in Resources */,
+				CB09C50115D8D6C100BA8D84 /* yd1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2693,6 +2744,7 @@
 				CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */,
 				CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */,
 				CB0B12AF15D69B85002C361A /* GuidanceViewController.m in Sources */,
+				CB09C4E815D8D0CA00BA8D84 /* Constant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,3 +22,10 @@
 #define FEMALE_NICKNAME_COLOR [UIColor colorWithRed:1.00f green:0.40f blue:0.60f alpha:1.00f]
 
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+
+
+@interface Constant : NSObject
+
++ (NSString *)appVersion;
+
+@end

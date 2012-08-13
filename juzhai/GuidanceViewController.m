@@ -8,6 +8,7 @@
 
 #import "GuidanceViewController.h"
 #import "LoginService.h"
+#import "Constant.h"
 
 @interface GuidanceViewController ()
 - (void)loadPage:(NSInteger)page;
@@ -43,13 +44,15 @@
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.scrollsToTop = NO;
     scrollView.delegate = self;
+//    scrollView.backgroundColor = [UIColor colorWithRed:0.90f green:0.90f blue:0.90f alpha:1.00f];
+    scrollView.backgroundColor = [UIColor blackColor];
     
-    CGRect frame = scrollView.frame;
-    frame.origin.x = frame.size.width * [_imageArray count];
-    frame.origin.y = 0;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [UIImage imageNamed:@"ca_hd_hover.png"];
-    [scrollView addSubview:imageView];
+//    CGRect frame = scrollView.frame;
+//    frame.origin.x = frame.size.width * [_imageArray count];
+//    frame.origin.y = 0;
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+//    imageView.image = [UIImage imageNamed:@"ca_hd_hover.png"];
+//    [scrollView addSubview:imageView];
     
     pageControl.numberOfPages = [_imageArray count];
     pageControl.currentPage = 0;
@@ -88,12 +91,11 @@
         [_imageViewArray replaceObjectAtIndex:page withObject:imageView];
         
         if (page == [_imageArray count] - 1) {
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button setBackgroundImage:[UIImage imageNamed:@"yd4_btn"] forState:UIControlStateNormal];
+            [button setBackgroundImage:[UIImage imageNamed:@"yd4_btn_hover"] forState:UIControlStateHighlighted];
             [button addTarget:self action:@selector(finish) forControlEvents:UIControlEventTouchUpInside];
-            CGRect frame = button.frame;
-            frame.origin.x = scrollView.frame.size.width * page + 160;
-            frame.origin.y = 300;
-            button.frame = frame;
+            button.frame = CGRectMake(scrollView.frame.size.width * page + 85, 350, 150, 40);
             [scrollView addSubview:button];
         }
     }
@@ -121,6 +123,10 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sender
 {
     _pageControlUsed = NO;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)sender willDecelerate:(BOOL)decelerate
+{
     if (scrollView.contentOffset.x >= scrollView.frame.size.width * ([_imageArray count] - 1 + 0.25)) {
         [self finish];
     }
@@ -143,10 +149,21 @@
 
 - (void)finish
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     UIViewController *viewController = [[LoginService getInstance] loginTurnToViewController];
-    self.view.window.rootViewController = viewController;
-    [self.view.window makeKeyAndVisible];
+    [UIView animateWithDuration:0.35 animations:^{
+        self.scrollView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        self.view.window.rootViewController = viewController;
+        viewController.view.alpha = 0.3;
+        [self.view.window makeKeyAndVisible];
+        [UIView animateWithDuration:0.35 animations:^{
+            viewController.view.alpha = 1.0;
+        } completion:^(BOOL finished) {
+        }];
+    }];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:YES forKey:GUIDANCE_USED([Constant appVersion])];
 }
 
 @end

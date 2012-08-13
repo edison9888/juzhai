@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define GUIDANCE_USED(appVersion) [NSString stringWithFormat:@"%@_guidance_used", appVersion]
+
 @interface GuidanceViewController : UIViewController <UIScrollViewDelegate>
 {
     NSArray *_imageArray;

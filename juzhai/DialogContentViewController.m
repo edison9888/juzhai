@@ -44,10 +44,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-        _singlePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-        _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     }
     return self;
 }
@@ -145,6 +141,11 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    _singlePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -186,6 +187,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [_timer invalidate];
     _timer = nil;
 }
@@ -201,6 +203,21 @@
     // e.g. self.myOutlet = nil;
     [_timer invalidate];
     _timer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    _singlePan = nil;
+    _singleTap = nil;
+    _data = nil;
+    _dialogService = nil;
+    _timer = nil;
+    _listHttpRequestDelegate = nil;
+    _image = nil;
+    self.inputAreaView = nil;
+    self.inputAreaBgImageView = nil;
+    self.dialogContentTableView = nil;
+    self.textView = nil;
+    self.imageView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

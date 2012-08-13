@@ -24,7 +24,7 @@
 
 @implementation UserListCell
 
-//@synthesize userView;
+@synthesize logoView, nicknameLabel, infoLabel, onlineLabel, contentLabel, imageView, respButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -76,51 +76,49 @@
 
 - (void) redrawn:(UserView *)userView{
     _userView = userView;
-    UIImageView *imageView = (UIImageView *)[self viewWithTag:USER_LOGO_TAG];
-    imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+    
+    self.logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
     [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-        imageView.image = [resultImage createRoundedRectImage:8.0];
+        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoView.frame.size.width*2, self.logoView.frame.size.height*2)];
+        self.logoView.image = [resultImage createRoundedRectImage:8.0];
     } failure:nil];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
-    [imageView addGestureRecognizer:singleTap];
+    [self.logoView addGestureRecognizer:singleTap];
     
-    UILabel *nicknameLabel = (UILabel *)[self viewWithTag:USER_NICKNAME_TAG];
-    nicknameLabel.font = DEFAULT_FONT(12);
+    [self onlineText:userView.onlineStatus];
+    [self onlineColor:userView.onlineStatus];
+    
+    self.nicknameLabel.font = DEFAULT_FONT(12);
     if(userView.gender.intValue == 0){
-        nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
+        self.nicknameLabel.textColor = FEMALE_NICKNAME_COLOR;
     }else {
-        nicknameLabel.textColor = MALE_NICKNAME_COLOR;
+        self.nicknameLabel.textColor = MALE_NICKNAME_COLOR;
     }
-    CGSize nicknameSize = [userView.nickname sizeWithFont:nicknameLabel.font constrainedToSize:CGSizeMake(120.0f, nicknameLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
-    [nicknameLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x, nicknameLabel.frame.origin.y, nicknameSize.width, nicknameSize.height)];
-    nicknameLabel.text = userView.nickname;
+    CGSize nicknameSize = [userView.nickname sizeWithFont:self.nicknameLabel.font constrainedToSize:CGSizeMake(120.0f, self.nicknameLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
+    [self.nicknameLabel setFrame:CGRectMake(self.nicknameLabel.frame.origin.x, self.nicknameLabel.frame.origin.y, nicknameSize.width, nicknameSize.height)];
+    self.nicknameLabel.text = userView.nickname;
     
-    UILabel *infoLabel = (UILabel *)[self viewWithTag:USER_INFO_TAG];
-    infoLabel.font = DEFAULT_FONT(12);
-    infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];;
-    infoLabel.text = [userView basicInfo];
-    CGSize infoSize = [infoLabel.text sizeWithFont:infoLabel.font constrainedToSize:CGSizeMake(180 - nicknameSize.width, infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
-    [infoLabel setFrame:CGRectMake(nicknameLabel.frame.origin.x + nicknameLabel.frame.size.width + 10.0, infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
+    self.infoLabel.font = DEFAULT_FONT(12);
+    self.infoLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];;
+    self.infoLabel.text = [userView basicInfo];
+    CGSize infoSize = [self.infoLabel.text sizeWithFont:self.infoLabel.font constrainedToSize:CGSizeMake(180 - nicknameSize.width, self.infoLabel.frame.size.height) lineBreakMode:UILineBreakModeTailTruncation];
+    [infoLabel setFrame:CGRectMake(self.nicknameLabel.frame.origin.x + self.nicknameLabel.frame.size.width + 10.0, self.infoLabel.frame.origin.y, infoSize.width, infoSize.height)];
 
-    
-    UILabel *contentLabel = (UILabel *)[self viewWithTag:POST_CONTENT_TAG];
     contentLabel.font = DEFAULT_FONT(14);
     contentLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];;
     contentLabel.text = [NSString stringWithFormat:@"%@：%@", userView.post.purpose, userView.post.content];
     CGSize contentSize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(225, 1000.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, contentSize.width, contentSize.height)];
     
-    UIImageView *postImageView = (UIImageView *)[self viewWithTag:POST_IMAGE_TAG];
     if(![userView.post.bigPic isEqual:[NSNull null]]){
-        postImageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
+        imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
         NSURL *postImageURL = [NSURL URLWithString:userView.post.bigPic];
-        [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, contentLabel.frame.origin.y + contentSize.height + 10.0, postImageView.frame.size.width, postImageView.frame.size.height)];
+        [imageView setFrame:CGRectMake(imageView.frame.origin.x, contentLabel.frame.origin.y + contentSize.height + 10.0, imageView.frame.size.width, imageView.frame.size.height)];
         [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(postImageView.frame.size.width*2, postImageView.frame.size.height*2)];
-            postImageView.image = [resultImage createRoundedRectImage:8.0];
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+            imageView.image = [resultImage createRoundedRectImage:8.0];
 //            CGFloat imageHeight = image.size.height*(postImageView.frame.size.width/image.size.width);
 //            if (imageHeight > postImageView.frame.size.height) {
 //                UIGraphicsBeginImageContext(CGSizeMake(postImageView.frame.size.width, postImageView.frame.size.height));
@@ -132,12 +130,11 @@
 //                postImageView.image = image;
 //            }
         } failure:nil];
-        [postImageView setHidden:NO];
+        [imageView setHidden:NO];
     }else {
-        [postImageView setHidden:YES];
+        [imageView setHidden:YES];
     }
     
-    UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];
     NSString *buttonTitle = [NSString stringWithFormat:@"有兴趣 %d", userView.post.respCnt.intValue];
     CGSize respButtonTitleSize = [buttonTitle sizeWithFont:DEFAULT_FONT(11) constrainedToSize:CGSizeMake(100.0f, 25.0f)lineBreakMode:UILineBreakModeHeadTruncation];
     [respButton setTitle:buttonTitle forState:UIControlStateNormal];
@@ -157,10 +154,10 @@
     
     float respButtonX = 320.0 - 20.0 - (normalImg.size.width + respButtonTitleSize.width);
     float respButtonY = 0.0;
-    if(postImageView.hidden){
+    if(imageView.hidden){
         respButtonY = contentLabel.frame.origin.y + contentSize.height + 10;
     }else {
-        respButtonY = postImageView.frame.origin.y + postImageView.frame.size.height + 10;
+        respButtonY = imageView.frame.origin.y + imageView.frame.size.height + 10;
     }
     respButton.frame = CGRectMake(respButtonX, respButtonY, normalImg.size.width + respButtonTitleSize.width, respButton.frame.size.height);
     [respButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 20.0, 0.0, 0.0)];
@@ -192,7 +189,6 @@
                     [MobClick event:RESPONSE_POST];
                     _userView.post.hasResp = [NSNumber numberWithInt:1];
                     _userView.post.respCnt = [NSNumber numberWithInt:(_userView.post.respCnt.intValue + 1)];
-                    UIButton *respButton = (UIButton *)[self viewWithTag:RESPONSE_BUTTON_TAG];
                     respButton.enabled = NO;
                     [respButton setTitle:[NSString stringWithFormat:@"有兴趣 %d", _userView.post.respCnt.intValue] forState:UIControlStateNormal];
                     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
@@ -218,6 +214,16 @@
             [MBProgressHUD hideHUDForView:coverView animated:YES];
         }
 //    });
+}
+
+- (void)onlineText:(NSInteger)onlineStatus
+{
+    onlineLabel.text = @"当前在线";
+}
+
+- (void)onlineColor:(NSInteger)onlineStatus
+{
+    onlineLabel.textColor = [UIColor colorWithRed:0.18f green:0.70f blue:0.25f alpha:1.00f];
 }
 
 @end

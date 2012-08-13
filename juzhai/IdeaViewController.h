@@ -43,6 +43,7 @@ enum {
     UIImage *_categoryUpLinkImg;
     UIImage *_categoryUpHoverImg;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    NSMutableDictionary *_imageDictory;
 }
 
 //- (void)reloadTableViewDataSource;
