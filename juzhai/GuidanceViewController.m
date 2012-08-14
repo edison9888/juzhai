@@ -39,7 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     scrollView.pagingEnabled = YES;
-    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * ([_imageArray count] + 0.5), scrollView.frame.size.height);
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * ([_imageArray count] + 1), scrollView.frame.size.height);
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.scrollsToTop = NO;
@@ -56,6 +56,10 @@
     
     pageControl.numberOfPages = [_imageArray count];
     pageControl.currentPage = 0;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yd5.jpg"]];
+    imageView.frame = CGRectMake(scrollView.frame.size.width * [_imageArray count], 0, scrollView.frame.size.width, scrollView.frame.size.height);
+    [scrollView addSubview:imageView];
     
     [self loadPage:pageControl.currentPage];
     [self loadPage:pageControl.currentPage + 1];
@@ -127,7 +131,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)sender willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.x >= scrollView.frame.size.width * ([_imageArray count] - 1 + 0.25)) {
+    if (scrollView.contentOffset.x >= scrollView.frame.size.width * ([_imageArray count] - 1 + 0.5)) {
         [self finish];
     }
 }
