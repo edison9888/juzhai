@@ -47,7 +47,6 @@
         }
         [request setCompletionBlock:^{
             NSString *responseString = [request responseString];
-            NSLog(@"%@", responseString);
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
                 [MobClick event:SEND_SMS];
