@@ -62,6 +62,8 @@
 
 - (void)viewDidLoad
 {
+    _postImageDictionary = [[NSMutableDictionary alloc] init];
+    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.postTableView.frame];
     imageView.image = [UIImage imageNamed:APP_BG_IMG];
     [self.view insertSubview:imageView atIndex:0];
@@ -156,6 +158,15 @@
     self.postCountLabel = nil;
     self.interestButton = nil;
     self.cancelInterestButton = nil;
+    _data = nil;
+    _listHttpRequestDelegate = nil;
+    _wholeImageViewController = nil;
+    _postImageDictionary = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [_postImageDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -311,6 +322,7 @@
     PostListCell *cell = [tableView dequeueReusableCellWithIdentifier:postListCellIdentifier];
     if(cell == nil){
         cell = [PostListCell cellFromNib];
+        cell.postImageDictionary = _postImageDictionary;
     }
     if (indexPath.row < [_data count]) {
         PostView *postView = (PostView *)[_data objectAtIndex:indexPath.row];

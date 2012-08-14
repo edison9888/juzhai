@@ -44,6 +44,9 @@
 
 - (void)viewDidLoad
 {
+    _logoDictionary = [[NSMutableDictionary alloc] init];
+    _postImageDictionary = [[NSMutableDictionary alloc] init];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -107,6 +110,15 @@
     _listHttpRequestDelegate = nil;
     _genderButton = nil;
     _segmentedControl = nil;
+    _logoDictionary = nil;
+    _postImageDictionary = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    [_logoDictionary removeAllObjects];
+    [_postImageDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -220,6 +232,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     UserListCell * cell = (UserListCell *)[tableView dequeueReusableCellWithIdentifier:UserListCellIdentifier];
     if(cell == nil){
         cell = [UserListCell cellFromNib];
+        cell.postImageDictionary = _postImageDictionary;
+        cell.logoDictionary = _logoDictionary;
     }
     if (indexPath.row < [_data count]) {
         UserView *userView = (UserView *)[_data objectAtIndex:indexPath.row];

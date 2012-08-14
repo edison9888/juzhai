@@ -34,6 +34,8 @@
 
 - (void)viewDidLoad
 {
+    _logoDictionary = [[NSMutableDictionary alloc] init];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -65,11 +67,17 @@
     [super viewDidUnload];
     _data = nil;
     _listHttpRequestDelegate = nil;
+    _logoDictionary = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [_logoDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -107,6 +115,7 @@
     IdeaUserListCell *cell = (IdeaUserListCell *)[tableView dequeueReusableCellWithIdentifier:IdeaUserListCellIdentifier];
     if(cell == nil){
         cell = [IdeaUserListCell cellFromNib];
+        cell.logoDictionary = _logoDictionary;
     }
     if (indexPath.row < [_data count]) {
         IdeaUserView *ideaUserView = (IdeaUserView *)[_data objectAtIndex:indexPath.row];

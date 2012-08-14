@@ -272,7 +272,7 @@
 //    view.hasImg = (_image != nil);
     
     [textView resignFirstResponder];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
     hud.labelText = @"发送中...";
     [_dialogService sendSms:textView.text toUser:self.targetUser.uid.intValue withImg:_image onSuccess:^(NSDictionary *info) {
         DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:info];
@@ -285,7 +285,7 @@
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"发送成功";
         [hud hide:YES afterDelay:1];
-    } inView:self.view];
+    } inView:self.tabBarController.view];
 }
 
 - (IBAction)imageButtonClick:(id)sender

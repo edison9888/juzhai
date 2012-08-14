@@ -27,6 +27,8 @@
     CustomSegmentedControl *_segmentedControl;
     UIButton *_genderButton;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    NSMutableDictionary *_logoDictionary;
+    NSMutableDictionary *_postImageDictionary;
 }
 
 @end

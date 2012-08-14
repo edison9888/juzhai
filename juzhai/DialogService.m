@@ -24,6 +24,9 @@
                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSInteger textLength = [content chineseLength];
     if (textLength < DIALOG_CONTENT_LENGTH_MIN || textLength > DIALOG_CONTENT_LENGTH_MAX) {
+        if (view) {
+            [MBProgressHUD hideHUDForView:view animated:YES];
+        }
         [MessageShow error:DIALOG_ERROR_TEXT onView:nil];
         return;
     }

@@ -24,7 +24,7 @@
 
 @implementation UserListCell
 
-@synthesize logoView, nicknameLabel, infoLabel, onlineLabel, contentLabel, imageView, respButton;
+@synthesize logoView, nicknameLabel, infoLabel, onlineLabel, contentLabel, imageView, respButton, logoDictionary, postImageDictionary;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -77,13 +77,19 @@
 - (void) redrawn:(UserView *)userView{
     _userView = userView;
     
-    self.logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
-    [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoView.frame.size.width*2, self.logoView.frame.size.height*2)];
-        self.logoView.image = [resultImage createRoundedRectImage:8.0];
-    } failure:nil];
+    UIImage *logoImage = [logoDictionary objectForKey:userView.uid];
+    if (logoImage != nil) {
+        self.logoView.image = logoImage;
+    } else {
+        self.logoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
+        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(self.logoView.frame.size.width*2, self.logoView.frame.size.height*2)];
+            self.logoView.image = [resultImage createRoundedRectImage:8.0];
+            [logoDictionary setObject:self.logoView.image forKey:userView.uid];
+        } failure:nil];
+    }
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [self.logoView addGestureRecognizer:singleTap];
     
@@ -113,23 +119,20 @@
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, contentSize.width, contentSize.height)];
     
     if(![userView.post.bigPic isEqual:[NSNull null]]){
-        imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-        NSURL *postImageURL = [NSURL URLWithString:userView.post.bigPic];
         [imageView setFrame:CGRectMake(imageView.frame.origin.x, contentLabel.frame.origin.y + contentSize.height + 10.0, imageView.frame.size.width, imageView.frame.size.height)];
-        [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-            imageView.image = [resultImage createRoundedRectImage:8.0];
-//            CGFloat imageHeight = image.size.height*(postImageView.frame.size.width/image.size.width);
-//            if (imageHeight > postImageView.frame.size.height) {
-//                UIGraphicsBeginImageContext(CGSizeMake(postImageView.frame.size.width, postImageView.frame.size.height));
-//                [image drawInRect:CGRectMake(0, 0, postImageView.frame.size.width, imageHeight)];
-//                UIImage* resultImage = UIGraphicsGetImageFromCurrentImageContext();
-//                UIGraphicsEndImageContext();
-//                postImageView.image = resultImage;
-//            } else {
-//                postImageView.image = image;
-//            }
-        } failure:nil];
+        UIImage *postImage = [self.postImageDictionary objectForKey:userView.post.postId];
+        if (postImage != nil) {
+            imageView.image = postImage;
+        }else {
+            imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSURL *postImageURL = [NSURL URLWithString:userView.post.bigPic];
+            [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
+                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                imageView.image = [resultImage createRoundedRectImage:8.0];
+                [self.postImageDictionary setObject:imageView.image forKey:userView.post.postId];
+            } failure:nil];
+        }
         [imageView setHidden:NO];
     }else {
         [imageView setHidden:YES];
@@ -218,12 +221,28 @@
 
 - (void)onlineText:(NSInteger)onlineStatus
 {
-    onlineLabel.text = @"当前在线";
+    if (onlineStatus == 0) {
+        onlineLabel.text = @"当前在线";
+    } else if (onlineStatus == 1) {
+        onlineLabel.text = @"今日来访";
+    } else if (onlineStatus == 2) {
+        onlineLabel.text = @"近期来访";
+    } else {
+        onlineLabel.text = @"";
+    }
 }
 
 - (void)onlineColor:(NSInteger)onlineStatus
 {
-    onlineLabel.textColor = [UIColor colorWithRed:0.18f green:0.70f blue:0.25f alpha:1.00f];
+    if (onlineStatus == 0) {
+        onlineLabel.textColor = [UIColor colorWithRed:0.18f green:0.70f blue:0.25f alpha:1.00f];
+    } else if (onlineStatus == 1) {
+        onlineLabel.textColor = [UIColor colorWithRed:1.00f green:0.60f blue:0.00f alpha:1.00f];
+    } else if (onlineStatus == 2) {
+        onlineLabel.textColor = [UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f];
+    } else {
+        onlineLabel.textColor = [UIColor whiteColor];
+    }
 }
 
 @end

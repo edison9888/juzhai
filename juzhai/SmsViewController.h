@@ -18,6 +18,7 @@
     JZData *_data;
     UIButton *_editButton;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    NSMutableDictionary *_logoDictionary;
 }
 
 @end

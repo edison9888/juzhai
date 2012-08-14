@@ -20,6 +20,7 @@
 {
     JZData *_data;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    NSMutableDictionary *_logoDictionary;
 }
 
 @property (nonatomic) BOOL isInterest;

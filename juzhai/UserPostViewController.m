@@ -39,6 +39,8 @@
 
 - (void)viewDidLoad
 {
+    _postImageDictionary = [[NSMutableDictionary alloc] init];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -68,6 +70,14 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    _data = nil;
+    _listHttpRequestDelegate = nil;
+    _postImageDictionary = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [_postImageDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -109,6 +119,7 @@
     PostListCell *cell = [tableView dequeueReusableCellWithIdentifier:postListCellIdentifier];
     if(cell == nil){
         cell = [PostListCell cellFromNib];
+        cell.postImageDictionary = _postImageDictionary;
     }
     if (indexPath.row < [_data count]) {
         PostView *postView = (PostView *)[_data objectAtIndex:indexPath.row];

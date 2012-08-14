@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad
 {
+    _logoDictionary = [[NSMutableDictionary alloc] init];
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -65,6 +66,14 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _data = nil;
+    _listHttpRequestDelegate = nil;
+    _logoDictionary = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [_logoDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -134,14 +143,21 @@
     }
     if (indexPath.row < [_data count]) {
         UserView *userView = [_data objectAtIndex:indexPath.row];
+        
         UIImageView *logo = (UIImageView *)[cell viewWithTag:INTEREST_USER_LOGO_TAG];
-        logo.image = [UIImage imageNamed:FACE_LOADING_IMG];
-        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
-        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(logo.frame.size.width*2, logo.frame.size.height*2)];
-            logo.image = [resultImage createRoundedRectImage:8.0];
-        } failure:nil];
+        UIImage *logoImage = [_logoDictionary objectForKey:userView.uid];
+        if (logoImage != nil) {
+            logo.image = logoImage;
+        } else {
+            logo.image = [UIImage imageNamed:FACE_LOADING_IMG];
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSURL *imageURL = [NSURL URLWithString:userView.bigLogo];
+            [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(logo.frame.size.width*2, logo.frame.size.height*2)];
+                logo.image = [resultImage createRoundedRectImage:8.0];
+                [_logoDictionary setObject:logo.image forKey:userView.uid];
+            } failure:nil];
+        }
         
         UILabel *nicknameLabel = (UILabel *)[cell viewWithTag:INTEREST_USER_NICKNAME_TAG];
         nicknameLabel.font = DEFAULT_FONT(14);

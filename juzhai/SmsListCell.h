@@ -23,4 +23,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *latestContentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (strong, nonatomic) NSMutableDictionary *logoDictionary;
+
 @end

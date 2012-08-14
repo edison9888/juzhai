@@ -23,6 +23,7 @@
 @implementation IdeaListCell
 
 @synthesize imageView;
+@synthesize imageCachesDictory;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -58,16 +59,21 @@
 
 - (void) redrawn:(IdeaView *)ideaView{
     _ideaView = ideaView;
-//    imageView.layer.masksToBounds = YES;
-//    imageView.layer.cornerRadius = 5.0;
-    imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    if(![ideaView.bigPic isEqual:[NSNull null]]){
-        NSURL *imageURL = [NSURL URLWithString:ideaView.bigPic];
-        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-            imageView.image = [resultImage createRoundedRectImage:8.0];
-        } failure:nil];
+
+    UIImage *cacheImage = [self.imageCachesDictory objectForKey:[NSNumber numberWithInt:ideaView.ideaId]];
+    if (cacheImage != nil) {
+        imageView.image = cacheImage;
+    } else {
+        imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        if(![ideaView.bigPic isEqual:[NSNull null]]){
+            NSURL *imageURL = [NSURL URLWithString:ideaView.bigPic];
+            [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                imageView.image = [resultImage createRoundedRectImage:8.0];
+                [self.imageCachesDictory setObject:imageView.image forKey:[NSNumber numberWithInt:ideaView.ideaId]];
+            } failure:nil];
+        }
     }
     
     UILabel *contentLabel = (UILabel *)[self viewWithTag:IDEA_CONTENT_TAG];

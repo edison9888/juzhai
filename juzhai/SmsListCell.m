@@ -24,6 +24,7 @@
 @synthesize targetImageView;
 @synthesize latestContentLabel;
 @synthesize timeLabel;
+@synthesize logoDictionary;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -74,13 +75,19 @@
     _dialogView = dialogView;
     
     //头像
-    userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:_dialogView.targetUser.bigLogo];
-    [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
-        userLogoView.image = [resultImage createRoundedRectImage:8.0];
-    } failure:nil];
+    UIImage *logoImage = [logoDictionary objectForKey:dialogView.targetUser.uid];
+    if (logoImage != nil) {
+        userLogoView.image = logoImage;
+    } else {
+        userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSURL *imageURL = [NSURL URLWithString:_dialogView.targetUser.bigLogo];
+        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+            userLogoView.image = [resultImage createRoundedRectImage:8.0];
+            [logoDictionary setObject:userLogoView.image forKey:dialogView.targetUser.uid];
+        } failure:nil];
+    }
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoClick:)];
     [userLogoView addGestureRecognizer:singleTap];
     

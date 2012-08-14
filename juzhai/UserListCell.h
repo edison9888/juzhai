@@ -39,6 +39,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIButton *respButton;
 
+@property (strong, nonatomic) NSMutableDictionary *logoDictionary;
+@property (strong, nonatomic) NSMutableDictionary *postImageDictionary;
+
 -(IBAction)respPost:(id)sender;
 
 @end

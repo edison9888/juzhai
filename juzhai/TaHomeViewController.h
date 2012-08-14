@@ -28,6 +28,7 @@
     BOOL _isMe;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
     WholeImageViewController *_wholeImageViewController;
+    NSMutableDictionary *_postImageDictionary;
 }
 
 @property (strong, nonatomic) UserView *userView;

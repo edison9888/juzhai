@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad
 {    
+    _logoDictionary = [[NSMutableDictionary alloc] init];
+    
     _data = [[JZData alloc] init];
     _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
     _listHttpRequestDelegate.jzData = _data;
@@ -66,6 +68,7 @@
     _data = nil;
     _editButton = nil;
     _listHttpRequestDelegate = nil;
+    _logoDictionary = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,6 +79,11 @@
     } else {
         [_tableView reloadData];
     }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [_logoDictionary removeAllObjects];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -126,6 +134,7 @@
     SmsListCell *cell = (SmsListCell *)[tableView dequeueReusableCellWithIdentifier:SmsListCellIdentifier];
     if(cell == nil){
         cell = [SmsListCell cellFromNib];
+        cell.logoDictionary = _logoDictionary;
     }
     if (indexPath.row < [_data count]) {
         DialogView *dialogView = (DialogView *)[_data objectAtIndex:indexPath.row];

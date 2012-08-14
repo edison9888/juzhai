@@ -15,5 +15,6 @@
 {
     JZData *_data;
     ListHttpRequestDelegate *_listHttpRequestDelegate;
+    NSMutableDictionary *_postImageDictionary;
 }
 @end

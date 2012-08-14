@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UIButton *sendDateButton;
 
+@property (strong, nonatomic) NSMutableDictionary *logoDictionary;
+
 - (IBAction)dateHim:(id)sender;
 
 @end

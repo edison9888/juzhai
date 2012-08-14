@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *contentLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+@property (strong, nonatomic) NSMutableDictionary *postImageDictionary;
+
 //- (void) redrawn:(PostView *)postView;
 //- (void) setBackground;
 //+ (CGFloat) heightForCell:(PostView *)postView;

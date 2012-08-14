@@ -17,6 +17,7 @@
 
 @synthesize contentLabel;
 @synthesize imageView;
+@synthesize postImageDictionary;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -64,15 +65,21 @@
     CGSize labelsize = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(contentLabel.frame.size.width, 300.0) lineBreakMode:UILineBreakModeCharacterWrap];
     [contentLabel setFrame:CGRectMake(contentLabel.frame.origin.x, contentLabel.frame.origin.y, labelsize.width, labelsize.height)];
     
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
     if(![postView.bigPic isEqual:[NSNull null]]){
-        imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
-        NSURL *postImageURL = [NSURL URLWithString:postView.bigPic];
         [imageView setFrame:CGRectMake(imageView.frame.origin.x, contentLabel.frame.origin.y + labelsize.height + 10.0, imageView.frame.size.width, imageView.frame.size.height)];
-        [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
-            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-            imageView.image = [resultImage createRoundedRectImage:8.0];
-        } failure:nil];
+        UIImage *postImage = [postImageDictionary objectForKey:postView.postId];
+        if (postImage != nil) {
+            imageView.image = postImage;
+        } else {
+            imageView.image = [UIImage imageNamed:SMALL_PIC_LOADING_IMG];
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            NSURL *postImageURL = [NSURL URLWithString:postView.bigPic];
+            [manager downloadWithURL:postImageURL delegate:self options:0 success:^(UIImage *image) {
+                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                imageView.image = [resultImage createRoundedRectImage:8.0];
+                [postImageDictionary setObject:imageView.image forKey:postView.postId];
+            } failure:nil];
+        }
         [imageView setHidden:NO];
     }else {
         [imageView setHidden:YES];

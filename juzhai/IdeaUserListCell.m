@@ -26,6 +26,7 @@
 @synthesize nicknameLabel;
 @synthesize infoLabel;
 @synthesize sendDateButton;
+@synthesize logoDictionary;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -59,13 +60,20 @@
 - (void) redrawn:(IdeaUserView *)ideaUserView
 {
     _ideaUserView = ideaUserView;
-    userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    NSURL *imageURL = [NSURL URLWithString:ideaUserView.userView.bigLogo];
-    [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-        UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
-        userLogoView.image = [resultImage createRoundedRectImage:8.0];
-    } failure:nil];
+    
+    UIImage *logoImage = [self.logoDictionary objectForKey:ideaUserView.userView.uid];
+    if (logoImage != nil) {
+        userLogoView.image = logoImage;
+    } else {
+        userLogoView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSURL *imageURL = [NSURL URLWithString:ideaUserView.userView.bigLogo];
+        [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+            UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(userLogoView.frame.size.width*2, userLogoView.frame.size.height*2)];
+            userLogoView.image = [resultImage createRoundedRectImage:8.0];
+            [logoDictionary setObject:userLogoView.image forKey:ideaUserView.userView.uid];
+        } failure:nil];
+    }
     
     nicknameLabel.font = DEFAULT_FONT(12);
     if(ideaUserView.userView.gender.intValue == 0){

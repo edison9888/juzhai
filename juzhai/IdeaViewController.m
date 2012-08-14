@@ -112,6 +112,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    [_imageDictory removeAllObjects];
 }
 
 - (void)viewDidUnload {
@@ -251,6 +252,7 @@
     IdeaListCell * cell = (IdeaListCell *)[tableView dequeueReusableCellWithIdentifier:IdeaListCellIdentifier];
     if(cell == nil){
         cell = [IdeaListCell cellFromNib];
+        cell.imageCachesDictory = _imageDictory;
     }
     if (indexPath.row < [_data count]) {
         IdeaView *ideaView = (IdeaView *)[_data objectAtIndex:indexPath.row];
