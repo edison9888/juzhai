@@ -190,6 +190,7 @@
 		CB55010115BE732B00DD21EE /* send_jz_select_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB55010015BE732300DD21EE /* send_jz_select_line@2x.png */; };
 		CB57A60915D9FB5100D13CAB /* yd5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB57A60815D9FB5100D13CAB /* yd5@2x.jpg */; };
 		CB57A60B15D9FB6A00D13CAB /* yd5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB57A60A15D9FB6A00D13CAB /* yd5.jpg */; };
+		CB57A60D15DA1C9600D13CAB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB57A60C15DA1C9600D13CAB /* CoreLocation.framework */; };
 		CB5E87E7156CD25C0010EE1C /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E87E5156CD25C0010EE1C /* UserViewController.m */; };
 		CB669D9515A42186000545D0 /* PagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB669D9415A42186000545D0 /* PagerCell.m */; };
 		CB669D9F15A48227000545D0 /* SendPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB669D9D15A48227000545D0 /* SendPostViewController.m */; };
@@ -698,6 +699,7 @@
 		CB55010015BE732300DD21EE /* send_jz_select_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_jz_select_line@2x.png"; sourceTree = "<group>"; };
 		CB57A60815D9FB5100D13CAB /* yd5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "yd5@2x.jpg"; sourceTree = "<group>"; };
 		CB57A60A15D9FB6A00D13CAB /* yd5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yd5.jpg; sourceTree = "<group>"; };
+		CB57A60C15DA1C9600D13CAB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CB5AEA1B15D37A820048CB94 /* StatEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatEvents.h; sourceTree = "<group>"; };
 		CB5E87E4156CD25C0010EE1C /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		CB5E87E5156CD25C0010EE1C /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
@@ -1102,6 +1104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB57A60D15DA1C9600D13CAB /* CoreLocation.framework in Frameworks */,
 				CB07D5DA15D4B14A003497E9 /* MessageUI.framework in Frameworks */,
 				CB540E5515ABEFDE00265412 /* CoreText.framework in Frameworks */,
 				CBFF441B1577BB930089401C /* CoreGraphics.framework in Frameworks */,
@@ -1584,6 +1587,7 @@
 		CB87D3D915518C9C00A25129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB57A60C15DA1C9600D13CAB /* CoreLocation.framework */,
 				CB07D5D915D4B149003497E9 /* MessageUI.framework */,
 				CB540E5415ABEFDE00265412 /* CoreText.framework */,
 				CBFCBE5B156CC39A006A97A8 /* MapKit.framework */,

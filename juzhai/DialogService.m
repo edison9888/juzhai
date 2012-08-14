@@ -47,6 +47,7 @@
         }
         [request setCompletionBlock:^{
             NSString *responseString = [request responseString];
+            NSLog(@"%@", responseString);
             NSMutableDictionary *jsonResult = [responseString JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
                 [MobClick event:SEND_SMS];
@@ -56,11 +57,13 @@
                 return;
             }
             NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
-            NSLog(@"%@", errorInfo);
             if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
                 errorInfo = SERVER_ERROR_INFO;
             }
-            [MessageShow error:errorInfo onView:nil];
+            if (view) {
+                [MBProgressHUD hideHUDForView:view animated:YES];
+            }
+            [MessageShow error:errorInfo onView:view];
         }];
         [request setFailedBlock:^{
             if (view) {

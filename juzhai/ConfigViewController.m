@@ -24,7 +24,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    self.itemList = [[NSMutableArray alloc] initWithObjects:@"退出账号", nil];
+    self.itemList = [[NSMutableArray alloc] initWithObjects:@"退出账号", @"意见反馈", nil];
     self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
 }
@@ -50,7 +50,8 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = [itemList objectAtIndex:indexPath.row];
     return cell;
@@ -59,16 +60,20 @@
 #pragma mark - Table View Delegate Methods
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (indexPath.row) {
-        case 0:{
+    if (indexPath.row == 0) {
+        switch (indexPath.row) {
+            case 0:{
+            }
+            case 1:{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                [alertView show];
+                break;
+            }
+            default:
+                break;
         }
-        case 1:{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-            [alertView show];
-            break;
-        }
-        default:
-            break;
+    } else {
+        
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
