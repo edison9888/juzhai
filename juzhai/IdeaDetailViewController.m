@@ -322,7 +322,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
     picker.messageComposeDelegate = self;
     
-    picker.body = [NSString stringWithFormat:[self.ideaView shareSmsText]];
+    picker.body = [self.ideaView shareSmsText];
     [self presentModalViewController:picker animated:YES];
 }
 

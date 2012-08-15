@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "juzhai/IdeaDetailViewController.m"
+         timestampString = "366727953.929653"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "346"
+         endingLineNumber = "346"
+         landmarkName = "-messageComposeViewController:didFinishWithResult:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "juzhai/IdeaDetailViewController.m"
+         timestampString = "366728040.043683"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "292"
+         endingLineNumber = "292"
+         landmarkName = "-actionSheet:didDismissWithButtonIndex:"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>

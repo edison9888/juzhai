@@ -8,7 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
+@class ProfileSettingViewController;
+
+#define KeyCellTitle(key) [NSString stringWithFormat:@"config.%@", key]
+#define KeySectionTitle(key) [NSString stringWithFormat:@"config.section.%d", key]
+
+#define ACCOUNT_SECTION 0
+#define ABOUT_SECTION 1
+#define CACHE_SECTION 2
+#define LOGOUT_SECTION 3
+
+#define PROFILE_ROW 0
+#define UPGRADE_ROW 2
+
+#define LOGOUT_ALERT_TAG 1
+#define CLEAR_CACHE_ALERT_TAG 2
+
 @interface ConfigViewController : UITableViewController<UIAlertViewDelegate>
-@property (strong,nonatomic) NSArray *itemList;
+{
+    ProfileSettingViewController *_profileSettingViewController;
+}
+
+@property (strong,nonatomic) NSDictionary *sections;
 
 @end

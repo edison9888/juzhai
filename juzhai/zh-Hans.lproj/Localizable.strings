@@ -13,3 +13,20 @@
 "AM" = "上午";
 "PM" = "下午";
 "MM/dd/yyyy hh:mm:a" = "yyyy-dd-MM HH:mm";
+
+"config.profile" = "个人资料设置";
+"config.modifyPwd"= "修改密码";
+"config.getbackPwd"= "取回密码";
+
+"config.protocal" = "使用协议";
+"config.feedback" = "意见反馈";
+"config.upgrade" = "版本更新";
+
+"config.clearCache" = "清除缓存";
+
+"config.logout" = "退出账号";
+
+"config.section.0" = "账号设置";
+"config.section.1" = "关于拒宅";
+"config.section.2" = "";
+"config.section.3" = "";

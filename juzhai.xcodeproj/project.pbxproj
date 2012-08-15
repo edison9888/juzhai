@@ -495,6 +495,7 @@
 		CBFCBE5A156CC38B006A97A8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFCBE59156CC38B006A97A8 /* ImageIO.framework */; };
 		CBFCBE5C156CC39A006A97A8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFCBE5B156CC39A006A97A8 /* MapKit.framework */; };
 		CBFF441B1577BB930089401C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB87D3DE15518C9C00A25129 /* CoreGraphics.framework */; };
+		CEE477CC15DBE4B30092163B /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE477CB15DBE4B30092163B /* config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1125,6 +1126,7 @@
 		CBFB167D159EF7BF006B3EE7 /* InterestUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestUserViewController.m; sourceTree = "<group>"; };
 		CBFCBE59156CC38B006A97A8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CBFCBE5B156CC39A006A97A8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CEE477CB15DBE4B30092163B /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1272,9 +1274,8 @@
 		CB1C27A915B6A00700FAD38A /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				CED5921D15DC031000E0B961 /* Config */,
 				CB1C27AA15B6A04100FAD38A /* Profile */,
-				CB0C448D155D05B800B238D4 /* ConfigViewController.h */,
-				CB0C448E155D05B800B238D4 /* ConfigViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1666,6 +1667,7 @@
 				CB50E4A815918D16001D5673 /* Profile-Setting-Cell-Identifie.plist */,
 				CBB7517F15CA7C8900B94D99 /* Localizable.strings */,
 				CB0B12B615D6B119002C361A /* guidance_images.plist */,
+				CEE477CB15DBE4B30092163B /* config.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2260,6 +2262,15 @@
 			name = String;
 			sourceTree = "<group>";
 		};
+		CED5921D15DC031000E0B961 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CB0C448D155D05B800B238D4 /* ConfigViewController.h */,
+				CB0C448E155D05B800B238D4 /* ConfigViewController.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2663,6 +2674,7 @@
 				CB57A64F15DA3E7700D13CAB /* send_jz_icon_time_hover.png in Resources */,
 				CB57A65015DA3E7700D13CAB /* send_jz_icon_time_link.png in Resources */,
 				CB57A65115DA3E7700D13CAB /* send_jz_show_infor.png in Resources */,
+				CEE477CC15DBE4B30092163B /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
