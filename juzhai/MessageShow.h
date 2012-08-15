@@ -12,6 +12,7 @@
 
 #define SERVER_ERROR_INFO @"服务器忙...请稍候再试"
 
-+ (void) error:(NSString *)msg onView:(UIView *)view;
++ (void)error:(NSString *)msg onView:(UIView *)view;
++ (void)error:(NSString *)msg withDelegate:(id <UIAlertViewDelegate>)deletage onView:(UIView *)view;
 
 @end

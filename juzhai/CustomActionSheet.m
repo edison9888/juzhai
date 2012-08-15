@@ -13,7 +13,7 @@
 @synthesize view;
 @synthesize toolBar;
 
--(id)initWithHeight:(float)height withSheetTitle:(NSString*)title delegate:(id<CustomActionSheetDelegate>)deletage
+-(id)initWithHeight:(float)height withSheetTitle:(NSString*)title withCancelTitle:(NSString *)cancelTitle withDoneTitle:(NSString *)doneTitle delegate:(id<CustomActionSheetDelegate>)deletage
 {
     self = [super init];
     if (self) 
@@ -30,9 +30,17 @@
         toolBar.barStyle = UIBarStyleBlackTranslucent;
         UIBarButtonItem *titleButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
         
-        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(done)];
+        NSString *rightTitle = @"完成";
+        if (doneTitle != nil && ![doneTitle isEqualToString:@""]) {
+            rightTitle = doneTitle;
+        }
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStyleDone target:self action:@selector(done)];
         
-        UIBarButtonItem *leftButton  = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(docancel)];
+        NSString *leftTitle = @"取消";
+        if (cancelTitle != nil && ![cancelTitle isEqualToString:@""]) {
+            leftTitle = cancelTitle;
+        }
+        UIBarButtonItem *leftButton  = [[UIBarButtonItem alloc] initWithTitle:leftTitle style:UIBarButtonItemStyleBordered target:self action:@selector(docancel)];
         
         UIBarButtonItem *fixedButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
@@ -44,6 +52,11 @@
         [self addSubview:view];
     }
     return self;
+}
+
+-(id)initWithHeight:(float)height withSheetTitle:(NSString*)title delegate:(id<CustomActionSheetDelegate>)deletage
+{
+    return [self initWithHeight:height withSheetTitle:title withCancelTitle:nil withDoneTitle:nil delegate:deletage];
 }
 -(void)done
 {

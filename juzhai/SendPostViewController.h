@@ -20,15 +20,24 @@
 #define CATEGORY_ACTION_SHEET_TAG 0
 #define DATE_ACTION_SHEET_TAG 1
 
+#define TEXT_MAX_LENGTH 160
+#define TEXT_MIN_LENGTH 4
+
+#define PLACE_ALERT_VIEW_TAG 1
+
 @interface SendPostViewController : UIViewController <CustomActionSheetDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIAlertViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     UIDatePicker *_datePicker;
-    UIImage *_image;
     UITextField *_placeField;
     NSString *_lastPlaceErrorInput;
     UIButton *_saveButton;
     PostService *_postService;
     UIPickerView *_categoryPicker;
+    
+    NSString *_place;
+    NSString *_time;
+    UIImage *_image;
+    NSInteger _categoryId;
 }
 
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
@@ -38,20 +47,14 @@
 @property (strong, nonatomic) IBOutlet UIButton *placeButton;
 @property (strong, nonatomic) IBOutlet UIButton *imageButton;
 @property (strong, nonatomic) IBOutlet UIButton *categoryButton;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *placeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (strong, nonatomic) IBOutlet UIButton *timeDelButton;
-@property (strong, nonatomic) IBOutlet UIButton *placeDelButton;
-@property (strong, nonatomic) IBOutlet UIButton *imageDelButton;
 @property (strong, nonatomic) IBOutlet UIView *infoView;
+@property (strong, nonatomic) IBOutlet UILabel *remainLengthLabel;
 
 - (IBAction)timeButtonClick:(id)sender;
 - (IBAction)placeButtonClick:(id)sender;
 - (IBAction)imageButtonClick:(id)sender;
 - (IBAction)categoryButtonClick:(id)sender;
-- (IBAction)timeDel:(id)sender;
-- (IBAction)placeDel:(id)sender;
-- (IBAction)imageDel:(id)sender;
+
+- (IBAction)emptyText:(id)sender;
 
 @end

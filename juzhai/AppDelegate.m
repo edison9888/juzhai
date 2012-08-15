@@ -47,7 +47,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL guidanceUsed = [userDefaults boolForKey:GUIDANCE_USED([Constant appVersion])];
-    if (YES) {
+    if (!NO) {
         GuidanceViewController *guidanceViewController = [[GuidanceViewController alloc] initWithNibName:@"GuidanceViewController" bundle:nil];
         viewController = guidanceViewController;
     } else {

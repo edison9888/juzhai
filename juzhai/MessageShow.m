@@ -24,4 +24,11 @@
     [alert show];
 }
 
++ (void)error:(NSString *)msg withDelegate:(id <UIAlertViewDelegate>)deletage onView:(UIView *)view
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:msg message:
+                          nil delegate:deletage cancelButtonTitle:@"关闭" otherButtonTitles:nil]; 
+    [alert show];
+}
+
 @end

@@ -17,6 +17,8 @@
 #import "Constant.h"
 #import "BaseData.h"
 #import "Category.h"
+#import "UIImage+UIImageExt.h"
+#import "NSString+Chinese.h"
 
 @interface SendPostViewController ()
 
@@ -31,13 +33,8 @@
 @synthesize placeButton;
 @synthesize imageButton;
 @synthesize categoryButton;
-@synthesize timeLabel;
-@synthesize placeLabel;
-@synthesize categoryLabel;
-@synthesize timeDelButton;
-@synthesize placeDelButton;
-@synthesize imageDelButton;
 @synthesize infoView;
+@synthesize remainLengthLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,21 +76,18 @@
     textView.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
     textView.delegate = self;
     
-    timeLabel.font = DEFAULT_FONT(12);
-    placeLabel.font = DEFAULT_FONT(12);
-    categoryLabel.font = DEFAULT_FONT(12);
-    timeLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    placeLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
-    categoryLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
+    imageView.layer.cornerRadius = 3.0;
+    imageView.layer.masksToBounds = YES;
     
-    Category *category = [[BaseData getCategories] objectAtIndex:0];
-    categoryLabel.text = category.name;
-    categoryLabel.tag = category.categoryId;
+    _categoryId = [[[BaseData getCategories] objectAtIndex:0] categoryId];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     self.navigationBar = nil;
     self.textView = nil;
     self.imageView = nil;
@@ -101,11 +95,6 @@
     self.placeButton = nil;
     self.imageButton = nil;
     self.categoryButton = nil;
-    self.timeLabel = nil;
-    self.placeLabel = nil;
-    self.categoryLabel = nil;
-    self.timeDelButton = nil;
-    self.placeDelButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -118,15 +107,45 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)keyboardWillShow:(NSNotification *)note
+{
+    CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+	// get a rect for the textView frame
+	CGRect infoViewFrame = infoView.frame;
+    infoViewFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + infoViewFrame.size.height);
+    
+    CGRect textViewFrame = textView.frame;
+    textViewFrame.size.height = infoViewFrame.origin.y - 10 - textView.frame.origin.y;
+    
+	// animations settings
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+	
+	// set views with new info
+	infoView.frame = infoViewFrame;
+    textView.frame = textViewFrame;
+	
+	// commit animations
+	[UIView commitAnimations];
+}
+
 - (IBAction)timeButtonClick:(id)sender
 {
-    [textView resignFirstResponder];
     if (nil == _datePicker) {
         _datePicker = [[UIDatePicker alloc] init];
         _datePicker.datePickerMode = UIDatePickerModeDate;
     }
     
-    CustomActionSheet *actionSheet = [[CustomActionSheet alloc] initWithHeight:_datePicker.frame.size.height withSheetTitle:@"拒宅时间" delegate:self];
+    CustomActionSheet *actionSheet = [[CustomActionSheet alloc] initWithHeight:_datePicker.frame.size.height withSheetTitle:@"拒宅时间" withCancelTitle:@"清空" withDoneTitle:nil delegate:self];
     actionSheet.tag = DATE_ACTION_SHEET_TAG;
     [actionSheet.view addSubview: _datePicker];
     [actionSheet showInView:self.view];
@@ -134,8 +153,8 @@
 
 - (IBAction)placeButtonClick:(id)sender
 {
-    [textView resignFirstResponder];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"输入地点" message:@"\n\n" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = PLACE_ALERT_VIEW_TAG;
     
     if (_placeField == nil) {
         _placeField = [[UITextField alloc] initWithFrame:CGRectMake(15.0f, 51.0f, 254.0f, 30.0f)];
@@ -147,7 +166,7 @@
     if (_lastPlaceErrorInput != nil && ![_lastPlaceErrorInput isEqualToString:@""]) {
         _placeField.text = _lastPlaceErrorInput;
     }else {
-        _placeField.text = placeLabel.text;
+        
     }
     [alertView addSubview:_placeField];
     [alertView show];
@@ -155,19 +174,27 @@
 
 - (IBAction)imageButtonClick:(id)sender
 {
-    [textView resignFirstResponder];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] 
-                                  initWithTitle:@"上传图片" 
-                                  delegate:self 
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"用户相册", @"拍照", nil];
+    UIActionSheet *actionSheet = nil;
+    if (_image != nil) {
+        actionSheet = [[UIActionSheet alloc] 
+                       initWithTitle:@"上传图片" 
+                       delegate:self 
+                       cancelButtonTitle:@"取消"
+                       destructiveButtonTitle:nil
+                       otherButtonTitles:@"用户相册", @"拍照", @"清除照片", nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] 
+                       initWithTitle:@"上传图片" 
+                       delegate:self 
+                       cancelButtonTitle:@"取消"
+                       destructiveButtonTitle:nil
+                       otherButtonTitles:@"用户相册", @"拍照", nil];
+    }
     [actionSheet showInView:self.view];
 }
 
 - (IBAction)categoryButtonClick:(id)sender
 {
-    [textView resignFirstResponder];
     if (nil == _categoryPicker) {
         _categoryPicker = [[UIPickerView alloc] init];
         _categoryPicker.dataSource = self;
@@ -182,35 +209,24 @@
 
 - (IBAction)sendPost:(id)sender
 {
-    [textView resignFirstResponder];
+    if ([textView.text chineseLength] > TEXT_MAX_LENGTH || [textView.text chineseLength] < TEXT_MIN_LENGTH) {
+        [MessageShow error:@"发布内容请控制在2~80字以内" onView:self.view];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"afc" message:
+//                              @"abc" delegate:nil cancelButtonTitle:@"关闭" otherButtonTitles:nil]; 
+//        [alert performSelector:@selector(show) withObject:nil afterDelay:0.1];
+        return;
+    }
     if (!_postService) {
         _postService = [[PostService alloc] init];
     }
-    [_postService sendPost:textView.text withDate:timeLabel.text withPlace:placeLabel.text withImage:_image withCategory:categoryLabel.tag onView:self.view withSuccessCallback:^{
+    [_postService sendPost:textView.text withDate:_time withPlace:_place withImage:_image withCategory:_categoryId onView:self.view withSuccessCallback:^{
         [self performSelector:@selector(back:) withObject:nil afterDelay:1];
     }];
 }
 
-- (IBAction)timeDel:(id)sender
+- (IBAction)emptyText:(id)sender
 {
-    timeLabel.text = @"";
-    timeDelButton.hidden = YES;
-    timeDelButton.enabled = NO;
-}
-
-- (IBAction)placeDel:(id)sender
-{
-    placeLabel.text = @"";
-    placeDelButton.hidden = YES;
-    placeDelButton.enabled = NO;
-}
-
-- (IBAction)imageDel:(id)sender
-{
-    _image = nil;
-    imageView.image = nil;
-    imageDelButton.hidden = YES;
-    imageDelButton.enabled = NO;
+    textView.text = @"";
 }
 
 #pragma mark - 
@@ -220,21 +236,24 @@
     if (actionSheet.tag == DATE_ACTION_SHEET_TAG) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        timeLabel.text = [dateFormatter stringFromDate:[_datePicker date]];
-        timeDelButton.hidden = NO;
-        timeDelButton.enabled = YES;
+        _time = [dateFormatter stringFromDate:_datePicker.date];
+        [timeButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_time_done"] forState:UIControlStateNormal];
     } else if (actionSheet.tag == CATEGORY_ACTION_SHEET_TAG) {
         NSInteger row = [_categoryPicker selectedRowInComponent:0];
         Category *category = [[BaseData getCategories] objectAtIndex:row];
-        categoryLabel.text = category.name;
-        categoryLabel.tag = category.categoryId;
+        _categoryId = category.categoryId;
+        [categoryButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_fenlei_done"] forState:UIControlStateNormal];
     }
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 - (void)docancel:(CustomActionSheet *)actionSheet
 {
-    [textView becomeFirstResponder];
+    if (actionSheet.tag == DATE_ACTION_SHEET_TAG) {
+        [timeButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_time_link"] forState:UIControlStateNormal];
+        _time = nil;
+    }
+//    [textView becomeFirstResponder];
 }
 
 #pragma mark - 
@@ -242,11 +261,18 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex == 2) {
+        _image = nil;
+        imageView.image = nil;
+        imageView.hidden = YES;
+        [imageButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_photo_link"] forState:UIControlStateNormal];
+        return;
+    }
     if(buttonIndex != [actionSheet cancelButtonIndex]){
         UIImagePickerControllerSourceType sourceType;
         if(buttonIndex == 0){
             sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }else {
+        }else if (buttonIndex == 1) {
             if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
                 sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             }else {
@@ -259,7 +285,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         picker.sourceType = sourceType;
         [self presentModalViewController:picker animated:YES];
     } else {
-        [textView becomeFirstResponder];
+//        [textView becomeFirstResponder];
     }
 }
 
@@ -268,50 +294,54 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     _image = [info objectForKey:UIImagePickerControllerEditedImage];
     self.imageView.image = _image;
-    imageDelButton.hidden = NO;
-    imageDelButton.enabled = YES;
+    self.imageView.hidden = NO;
+    [imageButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_photo_done"] forState:UIControlStateNormal];
     [self imagePickerControllerDidCancel:picker];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissModalViewControllerAnimated:YES];
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 #pragma mark -
 #pragma mark Alert View Delegate
 
 - (void)didPresentAlertView:(UIAlertView *)alertView {
-    [_placeField becomeFirstResponder];
+    if (alertView.tag == PLACE_ALERT_VIEW_TAG) {
+        [_placeField becomeFirstResponder];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if (buttonIndex != [alertView cancelButtonIndex]) {
-		//验证字数
-        NSString *value = [_placeField.text stringByTrimmingCharactersInSet: 
-                           [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSInteger textLength = [value chineseLength];
-        if (textLength > PLACE_MAX_LENGTH) {
-            _lastPlaceErrorInput = value;
-            [MessageShow error:PLACE_MAX_ERROR_TEXT onView:alertView];
-            return;
-        }else {
-            _lastPlaceErrorInput = nil;
-            placeLabel.text = value;
-            if ([value isEqualToString:@""]) {
-                placeDelButton.hidden = YES;
-                placeDelButton.enabled = NO;
-            } else {
-                CGSize placeLabelSize = [placeLabel.text sizeWithFont:placeLabel.font constrainedToSize:CGSizeMake(177, 16)lineBreakMode:UILineBreakModeTailTruncation];
-                placeLabel.frame = CGRectMake(placeLabel.frame.origin.x, placeLabel.frame.origin.y, placeLabelSize.width, placeLabelSize.height);
-                placeDelButton.hidden = NO;
-                placeDelButton.enabled = YES;
-                placeDelButton.frame = CGRectMake(placeLabel.frame.origin.x + placeLabel.frame.size.width + 5, placeDelButton.frame.origin.y, placeDelButton.frame.size.width, placeDelButton.frame.size.height);
+    if (alertView.tag == PLACE_ALERT_VIEW_TAG) {
+        if (buttonIndex != [alertView cancelButtonIndex]) {
+            //验证字数
+            _place = @"";
+            NSString *value = [_placeField.text stringByTrimmingCharactersInSet: 
+                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSInteger textLength = [value chineseLength];
+            if (textLength > PLACE_MAX_LENGTH) {
+                _lastPlaceErrorInput = value;
+                [MessageShow error:PLACE_MAX_ERROR_TEXT onView:alertView];
+                return;
+            }else {
+                _lastPlaceErrorInput = nil;
+                _place = value;
+                if ([value isEqualToString:@""]) {
+                    [placeButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_didian_link"] forState:UIControlStateNormal];
+                } else {
+                    [placeButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_didian_done"] forState:UIControlStateNormal];
+                }
             }
         }
-	}
-    [textView becomeFirstResponder];
+    }
+//    [textView becomeFirstResponder];
 }
+
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    [textView becomeFirstResponder];
+//}
 
 #pragma mark -
 #pragma mark Text View Delegate
@@ -321,6 +351,13 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     NSString *value = [self.textView.text stringByTrimmingCharactersInSet: 
                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     _saveButton.enabled = ![value isEqualToString:@""];
+    NSInteger remainLength = TEXT_MAX_LENGTH - [value chineseLength];
+    remainLengthLabel.text = [NSString stringWithFormat:@"%d", remainLength/2];
+    if (remainLength < 0) {
+        remainLengthLabel.textColor = [UIColor redColor];
+    } else {
+        remainLengthLabel.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
+    }
 }
 
 

@@ -154,14 +154,14 @@
 - (void)finish
 {
     UIViewController *viewController = [[LoginService getInstance] loginTurnToViewController];
-    [UIView animateWithDuration:0.2 animations:^{
-        self.scrollView.alpha = 0.5;
+    [UIView animateWithDuration:0.32 animations:^{
+        self.scrollView.alpha = 0.2;
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
         self.view.window.rootViewController = viewController;
         viewController.view.alpha = 0.5;
         [self.view.window makeKeyAndVisible];
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.32 animations:^{
             viewController.view.alpha = 1.0;
         } completion:^(BOOL finished) {
         }];
