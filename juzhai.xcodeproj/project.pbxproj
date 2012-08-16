@@ -496,6 +496,12 @@
 		CBFCBE5C156CC39A006A97A8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFCBE5B156CC39A006A97A8 /* MapKit.framework */; };
 		CBFF441B1577BB930089401C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB87D3DE15518C9C00A25129 /* CoreGraphics.framework */; };
 		CEE477CC15DBE4B30092163B /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE477CB15DBE4B30092163B /* config.plist */; };
+		CEF7149415DCA5C900E28C8D /* ProtocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF7149215DCA5C900E28C8D /* ProtocalViewController.m */; };
+		CEF7149515DCA5C900E28C8D /* ProtocalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149315DCA5C900E28C8D /* ProtocalViewController.xib */; };
+		CEF7149815DCA92C00E28C8D /* protocal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149715DCA92C00E28C8D /* protocal.jpg */; };
+		CEF7149A15DCA93B00E28C8D /* protocal@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149915DCA93B00E28C8D /* protocal@2x.jpg */; };
+		CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */; };
+		CEF7149F15DCACE200E28C8D /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1127,6 +1133,14 @@
 		CBFCBE59156CC38B006A97A8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CBFCBE5B156CC39A006A97A8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEE477CB15DBE4B30092163B /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		CEF7149115DCA5C900E28C8D /* ProtocalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocalViewController.h; sourceTree = "<group>"; };
+		CEF7149215DCA5C900E28C8D /* ProtocalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocalViewController.m; sourceTree = "<group>"; };
+		CEF7149315DCA5C900E28C8D /* ProtocalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProtocalViewController.xib; sourceTree = "<group>"; };
+		CEF7149715DCA92C00E28C8D /* protocal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = protocal.jpg; sourceTree = "<group>"; };
+		CEF7149915DCA93B00E28C8D /* protocal@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "protocal@2x.jpg"; sourceTree = "<group>"; };
+		CEF7149B15DCACE100E28C8D /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1747,6 +1761,7 @@
 		CBD964B2157FC57D006E0196 /* big */ = {
 			isa = PBXGroup;
 			children = (
+				CEF7149915DCA93B00E28C8D /* protocal@2x.jpg */,
 				CB57A60E15DA3E5F00D13CAB /* send_jz_show_infor@2x.png */,
 				CB57A60F15DA3E5F00D13CAB /* send_jz_icon_didian_done@2x.png */,
 				CB57A61015DA3E6000D13CAB /* send_jz_icon_fenlei_done@2x.png */,
@@ -1924,6 +1939,7 @@
 		CBD964E9157FC57D006E0196 /* small */ = {
 			isa = PBXGroup;
 			children = (
+				CEF7149715DCA92C00E28C8D /* protocal.jpg */,
 				CB57A63015DA3E7700D13CAB /* send_jz_icon_bg.png */,
 				CB57A63115DA3E7700D13CAB /* send_jz_icon_clear_hover.png */,
 				CB57A63215DA3E7700D13CAB /* send_jz_icon_clear_link.png */,
@@ -2267,6 +2283,12 @@
 			children = (
 				CB0C448D155D05B800B238D4 /* ConfigViewController.h */,
 				CB0C448E155D05B800B238D4 /* ConfigViewController.m */,
+				CEF7149115DCA5C900E28C8D /* ProtocalViewController.h */,
+				CEF7149215DCA5C900E28C8D /* ProtocalViewController.m */,
+				CEF7149315DCA5C900E28C8D /* ProtocalViewController.xib */,
+				CEF7149B15DCACE100E28C8D /* FeedbackViewController.h */,
+				CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */,
+				CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -2675,6 +2697,10 @@
 				CB57A65015DA3E7700D13CAB /* send_jz_icon_time_link.png in Resources */,
 				CB57A65115DA3E7700D13CAB /* send_jz_show_infor.png in Resources */,
 				CEE477CC15DBE4B30092163B /* config.plist in Resources */,
+				CEF7149515DCA5C900E28C8D /* ProtocalViewController.xib in Resources */,
+				CEF7149815DCA92C00E28C8D /* protocal.jpg in Resources */,
+				CEF7149A15DCA93B00E28C8D /* protocal@2x.jpg in Resources */,
+				CEF7149F15DCACE200E28C8D /* FeedbackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2825,6 +2851,8 @@
 				CB07D5E715D4F948003497E9 /* InviteInputViewController.m in Sources */,
 				CB0B12AF15D69B85002C361A /* GuidanceViewController.m in Sources */,
 				CB09C4E815D8D0CA00BA8D84 /* Constant.m in Sources */,
+				CEF7149415DCA5C900E28C8D /* ProtocalViewController.m in Sources */,
+				CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
