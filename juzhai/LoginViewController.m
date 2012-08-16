@@ -15,6 +15,8 @@
 #import "RectButton.h"
 #import "MessageShow.h"
 #import "LoginResult.h"
+#import "Constant.h"
+#import "GetbackPwdViewController.h"
 
 @implementation LoginViewController
 
@@ -83,6 +85,14 @@
     [self.pwdField resignFirstResponder];
 }
 
+- (IBAction)getbackPwd:(id)sender
+{
+    if (_getbackPwdViewController == nil) {
+        _getbackPwdViewController = [[GetbackPwdViewController alloc] initWithNibName:@"GetbackPwdViewController" bundle:nil];
+    }
+    [self.navigationController pushViewController:_getbackPwdViewController animated:YES];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -132,7 +142,8 @@
     
     loginFormTableView.separatorColor = [UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f];
     tpLoginTableView.separatorColor = [UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f];
-    self.view.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.93f alpha:1.00f];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
 }
 
 - (void)viewDidUnload

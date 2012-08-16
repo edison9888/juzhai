@@ -502,6 +502,8 @@
 		CEF7149A15DCA93B00E28C8D /* protocal@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149915DCA93B00E28C8D /* protocal@2x.jpg */; };
 		CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */; };
 		CEF7149F15DCACE200E28C8D /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */; };
+		CEF714A315DCE5CB00E28C8D /* GetbackPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF714A115DCE5CB00E28C8D /* GetbackPwdViewController.m */; };
+		CEF714A415DCE5CB00E28C8D /* GetbackPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF714A215DCE5CB00E28C8D /* GetbackPwdViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1141,6 +1143,9 @@
 		CEF7149B15DCACE100E28C8D /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
+		CEF714A015DCE5CB00E28C8D /* GetbackPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetbackPwdViewController.h; sourceTree = "<group>"; };
+		CEF714A115DCE5CB00E28C8D /* GetbackPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetbackPwdViewController.m; sourceTree = "<group>"; };
+		CEF714A215DCE5CB00E28C8D /* GetbackPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetbackPwdViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2148,7 +2153,6 @@
 		CBE90A871558D556002780E8 /* Passport */ = {
 			isa = PBXGroup;
 			children = (
-				CBF56117155E2D7D006A03E6 /* XIB */,
 				CBE90A891558D56A002780E8 /* ViewController */,
 				CBE90A8A1558D5A8002780E8 /* Data */,
 				CB3E04451552635D0069DE30 /* Service */,
@@ -2161,12 +2165,19 @@
 			children = (
 				CB7F16D8155196F50009E060 /* LoginViewController.h */,
 				CB7F16D9155196F50009E060 /* LoginViewController.m */,
+				CBB76611158CF69E00F0DCA8 /* LoginForm.xib */,
+				CB7F16DA155196F50009E060 /* LoginViewController.xib */,
 				CB7F16DD155197100009E060 /* RegisterViewController.h */,
 				CB7F16DE155197100009E060 /* RegisterViewController.m */,
+				CB7F16DF155197100009E060 /* RegisterViewController.xib */,
 				CBA483D8158F1B1200322D84 /* TpLoginDelegate.h */,
 				CBA483D9158F1B1200322D84 /* TpLoginDelegate.m */,
 				CB8B257615A356B800F363B1 /* TpLoginViewController.h */,
 				CB8B257715A356B800F363B1 /* TpLoginViewController.m */,
+				CB8B257815A356B900F363B1 /* TpLoginViewController.xib */,
+				CEF714A015DCE5CB00E28C8D /* GetbackPwdViewController.h */,
+				CEF714A115DCE5CB00E28C8D /* GetbackPwdViewController.m */,
+				CEF714A215DCE5CB00E28C8D /* GetbackPwdViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -2198,17 +2209,6 @@
 				CBF4973F15B8F246009DB8C3 /* EGORefreshHeaderViewController.m */,
 			);
 			name = EGORefresh;
-			sourceTree = "<group>";
-		};
-		CBF56117155E2D7D006A03E6 /* XIB */ = {
-			isa = PBXGroup;
-			children = (
-				CB7F16DA155196F50009E060 /* LoginViewController.xib */,
-				CB7F16DF155197100009E060 /* RegisterViewController.xib */,
-				CBB76611158CF69E00F0DCA8 /* LoginForm.xib */,
-				CB8B257815A356B900F363B1 /* TpLoginViewController.xib */,
-			);
-			name = XIB;
 			sourceTree = "<group>";
 		};
 		CBF56119155E2DB9006A03E6 /* ViewBean */ = {
@@ -2701,6 +2701,7 @@
 				CEF7149815DCA92C00E28C8D /* protocal.jpg in Resources */,
 				CEF7149A15DCA93B00E28C8D /* protocal@2x.jpg in Resources */,
 				CEF7149F15DCACE200E28C8D /* FeedbackViewController.xib in Resources */,
+				CEF714A415DCE5CB00E28C8D /* GetbackPwdViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2853,6 +2854,7 @@
 				CB09C4E815D8D0CA00BA8D84 /* Constant.m in Sources */,
 				CEF7149415DCA5C900E28C8D /* ProtocalViewController.m in Sources */,
 				CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */,
+				CEF714A315DCE5CB00E28C8D /* GetbackPwdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
