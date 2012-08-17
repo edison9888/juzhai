@@ -100,6 +100,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:Value1CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    if (indexPath.section == LOGOUT_SECTION) {
+        cell.backgroundColor = [UIColor redColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     NSArray *items = [self.sections objectForKey:[NSString stringWithFormat:@"%d", indexPath.section]];
     cell.textLabel.text = NSLocalizedString(KeyCellTitle([items objectAtIndex:indexPath.row]), @"cell title");
     if (indexPath.section == ABOUT_SECTION && indexPath.row == UPGRADE_ROW) {

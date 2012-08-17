@@ -33,10 +33,11 @@
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
+    
     //加载初始化数据
-    [BaseData getCategories];
-    [BaseData getProvinces];
-    [BaseData getProvinces];
+//    [BaseData getCategories];
+//    [BaseData getProvinces];
+//    [BaseData getProfessions];
     
     UIViewController *viewController;
     if(![[LoginService getInstance] checkLogin]){
@@ -47,7 +48,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL guidanceUsed = [userDefaults boolForKey:GUIDANCE_USED([Constant appVersion])];
-    if (!guidanceUsed) {
+    if (!NO) {
         GuidanceViewController *guidanceViewController = [[GuidanceViewController alloc] initWithNibName:@"GuidanceViewController" bundle:nil];
         viewController = guidanceViewController;
     } else {
