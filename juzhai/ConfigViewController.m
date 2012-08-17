@@ -39,6 +39,7 @@
 
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
     _profileSettingViewController = nil;
     _protocalViewController = nil;
     _upgradeUrl = nil;

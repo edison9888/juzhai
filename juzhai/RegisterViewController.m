@@ -163,8 +163,19 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    _registerFormCells = nil;
+    _tpLoginDelegate = nil;
+    self.registerFormTableView = nil;
+    self.tpLoginTableView = nil;
+    
+    self.accountField = nil;
+    self.nicknameField = nil;
+    self.passwordField = nil;
+    self.confirmPwdField = nil;
+    self.accountCell = nil;
+    self.nicknameCell = nil;
+    self.passwordCell = nil;
+    self.confirmPwdCell = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -112,10 +112,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -149,8 +145,13 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    _loginFormCells = nil;
+    _tpLoginDelegate = nil;
+    _getbackPwdViewController = nil;
+    self.nameField = nil;
+    self.pwdField = nil;
+    self.loginFormTableView = nil;
+    self.tpLoginTableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

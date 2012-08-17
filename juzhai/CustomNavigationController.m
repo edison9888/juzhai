@@ -70,7 +70,7 @@
         backButton.frame = CGRectMake(0, 0, backImage.size.width, backImage.size.height);
         [backButton setBackgroundImage:backImage forState:UIControlStateNormal];
         [backButton setBackgroundImage:activeBackImage forState:UIControlStateHighlighted];
-        [backButton addTarget:self action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(popViewController) forControlEvents:UIControlEventTouchUpInside];
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     }
     return _backItem;

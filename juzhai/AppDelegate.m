@@ -35,9 +35,9 @@
     [ASIHTTPRequest setDefaultTimeOutSeconds:20.0];
     
     //加载初始化数据
-//    [BaseData getCategories];
-//    [BaseData getProvinces];
-//    [BaseData getProfessions];
+    [BaseData getCategories];
+    [BaseData getProvinces];
+    [BaseData getProfessions];
     
     UIViewController *viewController;
     if(![[LoginService getInstance] checkLogin]){
