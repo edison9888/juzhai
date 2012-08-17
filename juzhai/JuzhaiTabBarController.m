@@ -53,7 +53,9 @@
 {
     [super viewDidUnload];
     [_noticeTimer invalidate];
+    [_locationManager stopUpdatingLocation];
     _noticeTimer = nil;
+    _locationManager = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -66,6 +68,7 @@
     UITabBarItem *messageTabBar = [[self.tabBar items] objectAtIndex:3];
     __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/notice/nums"] withParams:nil];
     if (request != nil) {
+        [request setTimeOutSeconds:4];
         [request setCompletionBlock:^{
             NSString *responseString = [request responseString];
             NSMutableDictionary *jsonResult = [responseString JSONValue];
