@@ -10,7 +10,7 @@
 
 @class TpLoginDelegate;
 
-@interface RegisterViewController : UIViewController <UITableViewDataSource>
+@interface RegisterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *_registerFormCells;
     TpLoginDelegate *_tpLoginDelegate;

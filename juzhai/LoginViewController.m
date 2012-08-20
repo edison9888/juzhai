@@ -161,7 +161,7 @@
 }
 
 #pragma mark -
-#pragma mark Table View Data Source
+#pragma mark Table View Data Source & Delegate
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -176,9 +176,10 @@
     return nil;
 }
 
-#pragma mark -
-#pragma mark Table View Delegate
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45;
+}
 
 
 //#pragma mark -

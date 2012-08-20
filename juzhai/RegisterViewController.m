@@ -185,7 +185,7 @@
 }
 
 #pragma mark -
-#pragma mark Table View Data Source
+#pragma mark Table View Data Source & Delegate
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;
@@ -193,6 +193,11 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [_registerFormCells objectAtIndex:indexPath.row];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45;
 }
 
 @end

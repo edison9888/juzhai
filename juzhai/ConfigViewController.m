@@ -102,9 +102,11 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     if (indexPath.section == LOGOUT_SECTION) {
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor = [UIColor colorWithRed:0.85f green:0.35f blue:0.35f alpha:1.00f];
+        cell.textLabel.textColor = [UIColor whiteColor];
     } else {
         cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
     }
     NSArray *items = [self.sections objectForKey:[NSString stringWithFormat:@"%d", indexPath.section]];
     cell.textLabel.text = NSLocalizedString(KeyCellTitle([items objectAtIndex:indexPath.row]), @"cell title");

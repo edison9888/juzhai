@@ -33,13 +33,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TpLoginCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 9, 25, 25)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 25, 25)];
         imageView.tag = LOGO_VIEW_TAG;
         [cell addSubview:imageView];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 200, 13)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 12, 200, 13)];
         titleLabel.tag = TITLE_VIEW_TAG;
-        titleLabel.font = DEFAULT_FONT(13);
+        titleLabel.font = DEFAULT_BOLD_FONT(14);
         titleLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
         titleLabel.backgroundColor = [UIColor clearColor];
         [cell addSubview:titleLabel];
@@ -61,6 +61,11 @@
     UIViewController *viewController = (UIViewController *)tableView.nextResponder.nextResponder;
     [viewController presentModalViewController:tpLoginViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 35;
 }
 
 @end
