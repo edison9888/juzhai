@@ -17,6 +17,7 @@
 #import "LoginResult.h"
 #import "Constant.h"
 #import "GetbackPwdViewController.h"
+#import "BigButton.h"
 
 @implementation LoginViewController
 
@@ -122,6 +123,12 @@
     RectButton *finishButton = [[RectButton alloc] initWithWidth:45.0 buttonText:@"完成" CapLocation:CapLeftAndRight];
     [finishButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:finishButton];
+    
+    BigButton *bigButton = [[BigButton alloc] initWithWidth:300 buttonText:@"登  录" CapLocation:CapLeftAndRight];
+    bigButton.titleLabel.font = DEFAULT_BOLD_FONT(19);
+    bigButton.frame = CGRectMake(10, 122, 300, 40);
+    [bigButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bigButton];
     
     [loginFormTableView setDelegate:self];
     [loginFormTableView setDataSource:self];

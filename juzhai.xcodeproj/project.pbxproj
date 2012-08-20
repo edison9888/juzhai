@@ -102,6 +102,10 @@
 		CB32D09915BF9F94005B5B7F /* CustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32D09815BF9F94005B5B7F /* CustomTextView.m */; };
 		CB32D0A115BFC173005B5B7F /* GrowingTextViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32D0A015BFC173005B5B7F /* GrowingTextViewDelegate.m */; };
 		CB32D0A415BFC417005B5B7F /* GrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32D0A315BFC417005B5B7F /* GrowingTextView.m */; };
+		CB35810115E1F1250036017A /* big_btn_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3580FF15E1F1250036017A /* big_btn_hover@2x.png */; };
+		CB35810215E1F1250036017A /* big_btn_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB35810015E1F1250036017A /* big_btn_link@2x.png */; };
+		CB35810615E1F13A0036017A /* big_btn_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB35810415E1F13A0036017A /* big_btn_hover.png */; };
+		CB35810715E1F13A0036017A /* big_btn_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CB35810515E1F13A0036017A /* big_btn_link.png */; };
 		CB3918FB15CF994900767E5F /* ca_all_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3918EB15CF994900767E5F /* ca_all_hover.png */; };
 		CB3918FC15CF994900767E5F /* ca_all_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3918EC15CF994900767E5F /* ca_all_link.png */; };
 		CB3918FD15CF994900767E5F /* ca_dy_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3918ED15CF994900767E5F /* ca_dy_hover.png */; };
@@ -206,10 +210,7 @@
 		CB57A65015DA3E7700D13CAB /* send_jz_icon_time_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CB57A63F15DA3E7700D13CAB /* send_jz_icon_time_link.png */; };
 		CB57A65115DA3E7700D13CAB /* send_jz_show_infor.png in Resources */ = {isa = PBXBuildFile; fileRef = CB57A64015DA3E7700D13CAB /* send_jz_show_infor.png */; };
 		CB5E87E7156CD25C0010EE1C /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E87E5156CD25C0010EE1C /* UserViewController.m */; };
-		CB606BAB15E1DB7400FB610C /* login_btn_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB606BA915E1DB7400FB610C /* login_btn_hover@2x.png */; };
-		CB606BAC15E1DB7400FB610C /* login_btn_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB606BAA15E1DB7400FB610C /* login_btn_link@2x.png */; };
-		CB606BAF15E1DB9800FB610C /* login_btn_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = CB606BAD15E1DB8300FB610C /* login_btn_hover.png */; };
-		CB606BB015E1DB9800FB610C /* login_btn_link.png in Resources */ = {isa = PBXBuildFile; fileRef = CB606BAE15E1DB8B00FB610C /* login_btn_link.png */; };
+		CB606BB315E1EF6D00FB610C /* BigButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB606BB215E1EF6C00FB610C /* BigButton.m */; };
 		CB669D9515A42186000545D0 /* PagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB669D9415A42186000545D0 /* PagerCell.m */; };
 		CB669D9F15A48227000545D0 /* SendPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB669D9D15A48227000545D0 /* SendPostViewController.m */; };
 		CB669DA015A48227000545D0 /* SendPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB669D9E15A48227000545D0 /* SendPostViewController.xib */; };
@@ -624,6 +625,10 @@
 		CB32D0A015BFC173005B5B7F /* GrowingTextViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowingTextViewDelegate.m; sourceTree = "<group>"; };
 		CB32D0A215BFC417005B5B7F /* GrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowingTextView.h; sourceTree = "<group>"; };
 		CB32D0A315BFC417005B5B7F /* GrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowingTextView.m; sourceTree = "<group>"; };
+		CB3580FF15E1F1250036017A /* big_btn_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "big_btn_hover@2x.png"; sourceTree = "<group>"; };
+		CB35810015E1F1250036017A /* big_btn_link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "big_btn_link@2x.png"; sourceTree = "<group>"; };
+		CB35810415E1F13A0036017A /* big_btn_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big_btn_hover.png; sourceTree = "<group>"; };
+		CB35810515E1F13A0036017A /* big_btn_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big_btn_link.png; sourceTree = "<group>"; };
 		CB3918EB15CF994900767E5F /* ca_all_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ca_all_hover.png; sourceTree = "<group>"; };
 		CB3918EC15CF994900767E5F /* ca_all_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ca_all_link.png; sourceTree = "<group>"; };
 		CB3918ED15CF994900767E5F /* ca_dy_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ca_dy_hover.png; sourceTree = "<group>"; };
@@ -742,10 +747,8 @@
 		CB5AEA1B15D37A820048CB94 /* StatEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatEvents.h; sourceTree = "<group>"; };
 		CB5E87E4156CD25C0010EE1C /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		CB5E87E5156CD25C0010EE1C /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
-		CB606BA915E1DB7400FB610C /* login_btn_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_hover@2x.png"; sourceTree = "<group>"; };
-		CB606BAA15E1DB7400FB610C /* login_btn_link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_link@2x.png"; sourceTree = "<group>"; };
-		CB606BAD15E1DB8300FB610C /* login_btn_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_btn_hover.png; sourceTree = "<group>"; };
-		CB606BAE15E1DB8B00FB610C /* login_btn_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_btn_link.png; sourceTree = "<group>"; };
+		CB606BB115E1EF6C00FB610C /* BigButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigButton.h; sourceTree = "<group>"; };
+		CB606BB215E1EF6C00FB610C /* BigButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigButton.m; sourceTree = "<group>"; };
 		CB669D9315A42186000545D0 /* PagerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagerCell.h; sourceTree = "<group>"; };
 		CB669D9415A42186000545D0 /* PagerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagerCell.m; sourceTree = "<group>"; };
 		CB669D9C15A48226000545D0 /* SendPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendPostViewController.h; sourceTree = "<group>"; };
@@ -1476,6 +1479,8 @@
 				CBF4975115B9441C009DB8C3 /* RectButton.m */,
 				CB8623A815B7E49800BD46F8 /* RefreshButton.h */,
 				CB8623A915B7E49800BD46F8 /* RefreshButton.m */,
+				CB606BB115E1EF6C00FB610C /* BigButton.h */,
+				CB606BB215E1EF6C00FB610C /* BigButton.m */,
 			);
 			name = Button;
 			sourceTree = "<group>";
@@ -1770,8 +1775,8 @@
 		CBD964B2157FC57D006E0196 /* big */ = {
 			isa = PBXGroup;
 			children = (
-				CB606BA915E1DB7400FB610C /* login_btn_hover@2x.png */,
-				CB606BAA15E1DB7400FB610C /* login_btn_link@2x.png */,
+				CB3580FF15E1F1250036017A /* big_btn_hover@2x.png */,
+				CB35810015E1F1250036017A /* big_btn_link@2x.png */,
 				CEF7149915DCA93B00E28C8D /* protocal@2x.jpg */,
 				CB57A60E15DA3E5F00D13CAB /* send_jz_show_infor@2x.png */,
 				CB57A60F15DA3E5F00D13CAB /* send_jz_icon_didian_done@2x.png */,
@@ -1949,8 +1954,8 @@
 		CBD964E9157FC57D006E0196 /* small */ = {
 			isa = PBXGroup;
 			children = (
-				CB606BAD15E1DB8300FB610C /* login_btn_hover.png */,
-				CB606BAE15E1DB8B00FB610C /* login_btn_link.png */,
+				CB35810415E1F13A0036017A /* big_btn_hover.png */,
+				CB35810515E1F13A0036017A /* big_btn_link.png */,
 				CEF7149715DCA92C00E28C8D /* protocal.jpg */,
 				CB57A63015DA3E7700D13CAB /* send_jz_icon_bg.png */,
 				CB57A63115DA3E7700D13CAB /* send_jz_icon_clear_hover.png */,
@@ -2706,10 +2711,10 @@
 				CEF7149A15DCA93B00E28C8D /* protocal@2x.jpg in Resources */,
 				CEF7149F15DCACE200E28C8D /* FeedbackViewController.xib in Resources */,
 				CEF714A415DCE5CB00E28C8D /* GetbackPwdViewController.xib in Resources */,
-				CB606BAB15E1DB7400FB610C /* login_btn_hover@2x.png in Resources */,
-				CB606BAC15E1DB7400FB610C /* login_btn_link@2x.png in Resources */,
-				CB606BAF15E1DB9800FB610C /* login_btn_hover.png in Resources */,
-				CB606BB015E1DB9800FB610C /* login_btn_link.png in Resources */,
+				CB35810115E1F1250036017A /* big_btn_hover@2x.png in Resources */,
+				CB35810215E1F1250036017A /* big_btn_link@2x.png in Resources */,
+				CB35810615E1F13A0036017A /* big_btn_hover.png in Resources */,
+				CB35810715E1F13A0036017A /* big_btn_link.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2863,6 +2868,7 @@
 				CEF7149415DCA5C900E28C8D /* ProtocalViewController.m in Sources */,
 				CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */,
 				CEF714A315DCE5CB00E28C8D /* GetbackPwdViewController.m in Sources */,
+				CB606BB315E1EF6D00FB610C /* BigButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

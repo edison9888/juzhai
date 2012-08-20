@@ -13,6 +13,7 @@
 #import "UrlUtils.h"
 #import "SBJson.h"
 #import "MessageShow.h"
+#import "BigButton.h"
 
 @interface GetbackPwdViewController ()
 
@@ -36,7 +37,21 @@
     [super viewDidLoad];
     self.title = @"找回密码";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+    
+    textField.background = [[UIImage imageNamed:@"send_input_bgxy"] stretchableImageWithLeftCapWidth:7 topCapHeight:7];
+    UILabel *paddingView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, textField.frame.size.height)];
+    paddingView.backgroundColor = [UIColor clearColor];
+    textField.leftView = paddingView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.textColor = [UIColor colorWithRed:0.60f green:0.60f blue:0.60f alpha:1.00f];
+    textField.font = DEFAULT_FONT(15);
     [self.textField becomeFirstResponder];
+    
+    BigButton *bigButton = [[BigButton alloc] initWithWidth:280 buttonText:@"确  定" CapLocation:CapLeftAndRight];
+    bigButton.titleLabel.font = DEFAULT_BOLD_FONT(19);
+    bigButton.frame = CGRectMake(20, 90, 280, 40);
+    [bigButton addTarget:self action:@selector(getback:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bigButton];
 }
 
 - (void)viewDidUnload
