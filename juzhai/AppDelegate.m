@@ -28,6 +28,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
+    //    [MobClick checkUpdate];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO]; 
     
@@ -59,9 +62,6 @@
     
     self.window.rootViewController = viewController;
 	[self.window makeKeyAndVisible];
-    
-    [MobClick startWithAppkey:@"501f7cc852701524f500000e" reportPolicy:REALTIME channelId:@"local"];
-//    [MobClick checkUpdate];
     
     return YES;
 }
