@@ -62,6 +62,9 @@
 
 - (void)upgrade
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.dimBackground = YES;
+    hud.labelText = @"检查新版本...";
     [MobClick checkUpdateWithDelegate:self selector:@selector(appUpdate:)];
 //    [MobClick checkUpdate];
 }
@@ -73,6 +76,7 @@
 
 - (void)upgradeAlert:(NSDictionary *)appInfo
 {
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     UIAlertView *alertView = nil;
     if ([[appInfo objectForKey:@"update"] boolValue]) {
         _upgradeUrl = [appInfo objectForKey:@"path"];
@@ -142,7 +146,7 @@
             }
             [self.navigationController pushViewController:_protocalViewController animated:YES];
         } else if (indexPath.row == FEEDBACK_ROW) {
-            if (nil == _protocalViewController) {
+            if (nil == _feedbackViewController) {
                 _feedbackViewController = [[FeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil];
                 _feedbackViewController.hidesBottomBarWhenPushed = YES;
             }

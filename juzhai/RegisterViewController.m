@@ -151,6 +151,7 @@
     
     //    [tpLoginTableView setDelegate:self];
     [tpLoginTableView setDataSource:_tpLoginDelegate];
+    [tpLoginTableView setDelegate:_tpLoginDelegate];
     tpLoginTableView.backgroundView = nil;
     tpLoginTableView.backgroundColor = [UIColor clearColor];
     tpLoginTableView.opaque = NO;

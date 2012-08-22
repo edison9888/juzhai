@@ -137,7 +137,7 @@
     if(_segmentedControl.tag == OrderTypeTime){
         orderType = @"time";
     }else {
-        orderType = @"pop";
+        orderType = @"recommend";
     }
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:categoryId], @"categoryId",orderType, @"orderType", [NSNumber numberWithInt:page], @"page", nil];
     ASIHTTPRequest *request = [HttpRequestSender getRequestWithUrl:[UrlUtils urlStringWithUri:@"idea/list"] withParams:params];
@@ -166,8 +166,8 @@
         case OrderTypeTime:
             buttonText = @"最新";
             break;
-        case OrderTypeHot:
-            buttonText = @"最热";
+        case OrderTypeRecommend:
+            buttonText = @"推荐";
             break;
     }
     UIButton* button = [[MenuButton alloc] initWithWidth:60 buttonText:buttonText CapLocation:location];

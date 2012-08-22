@@ -19,7 +19,7 @@
 
 enum {
     OrderTypeTime = 0,
-    OrderTypeHot = 1
+    OrderTypeRecommend = 1
 };
 
 #define ALL_CATEGORY_ID 0
