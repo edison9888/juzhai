@@ -11,6 +11,7 @@
 #import "UrlUtils.h"
 #import "SBJson.h"
 #import "CheckNetwork.h"
+#import "AppDelegate.h"
 
 @interface JuzhaiTabBarController ()
 
@@ -30,7 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _noticeTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
+    
+    [self startNotice];
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -39,28 +41,25 @@
     [_locationManager startUpdatingLocation];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    [super viewDidDisappear:animated];
-//}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [_noticeTimer invalidate];
     [_locationManager stopUpdatingLocation];
-    _noticeTimer = nil;
     _locationManager = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)startNotice
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    if (nil == delegate.noticeTimer || ![delegate.noticeTimer isValid]) {
+        delegate.noticeTimer = [NSTimer timerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(notice) userInfo:nil repeats:YES];
+    }
+    [[NSRunLoop currentRunLoop] addTimer:delegate.noticeTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)notice
@@ -80,10 +79,6 @@
                     messageTabBar.badgeValue = nil;
                 }
             }
-        }];
-        [request setFailedBlock:^{
-//            [_noticeTimer invalidate];
-//            _noticeTimer = nil;
         }];
         [request startAsynchronous];;
     }

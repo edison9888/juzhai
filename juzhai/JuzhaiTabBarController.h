@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-#define TIMER_INTERVAL 20
+#define TIMER_INTERVAL 5
+
 @interface JuzhaiTabBarController : UITabBarController <CLLocationManagerDelegate>
 {
-    NSTimer *_noticeTimer;
     CLLocationManager *_locationManager;
 }
 @end

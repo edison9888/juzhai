@@ -18,6 +18,9 @@
 
 @interface BaseData (Private)
 
++ (NSArray *)loadArrayData:(NSString *)fileName withUrl:(NSString *)url;
++ (NSDictionary *)loadDictionaryData:(NSString *)fileName withUrl:(NSString *)url;
++ (NSString *)dataFilePath:(NSString *)fileName;
 + (BaseData *)sharedData;
 
 @end
@@ -40,27 +43,61 @@ static BaseData *baseData;
     }
 }
 
++ (NSArray *)loadArrayData:(NSString *)fileName withUrl:(NSString *)url
+{
+    NSString *path = [self dataFilePath:fileName];
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    if (array == nil || array.count <= 0) {
+        //http load
+        ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:url] withParams:nil];
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([[jsonResult valueForKey:@"success"] boolValue]){
+                array = [jsonResult objectForKey:@"result"];
+                //save to plist
+                [array writeToFile:path atomically:YES];
+            }
+        }
+    }
+    return array;
+}
+
++ (NSDictionary *)loadDictionaryData:(NSString *)fileName withUrl:(NSString *)url
+{
+    NSString *path = [self dataFilePath:fileName];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    if (dic == nil || dic.count <= 0) {
+        //http load
+        ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:url] withParams:nil];
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([[jsonResult valueForKey:@"success"] boolValue]){
+                dic = [jsonResult objectForKey:@"result"];
+                //save to plist
+                [dic writeToFile:path atomically:YES];
+            }
+        }
+    }
+    return dic;
+}
+
 + (NSArray *)getCategories{
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.categoryArray){
-        //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/categoryList"] withParams:nil];
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                NSArray *array = [jsonResult objectForKey:@"result"];
-                baseData.categoryArray = [[NSMutableArray alloc] initWithCapacity:array.count];
-                for(NSDictionary *dic in array){
-                    NSInteger categoryId = [[dic objectForKey:@"categoryId"] intValue];
-                    NSString *name = [dic objectForKey:@"name"];
-                    NSString *icon = [dic objectForKey:@"icon"];
-                    [baseData.categoryArray addObject:[[Category alloc] initWithCategoryId:categoryId withName:name withIcon:icon]];
-                }
-            }
-        }];
-        [request startSynchronous];
+        NSArray *array = [BaseData loadArrayData:CATEGORY_FILE_NAME withUrl:@"base/categoryList"];
+        baseData.categoryArray = [[NSMutableArray alloc] initWithCapacity:array.count];
+        for(NSDictionary *dic in array){
+            NSInteger categoryId = [[dic objectForKey:@"categoryId"] intValue];
+            NSString *name = [dic objectForKey:@"name"];
+            NSString *icon = [dic objectForKey:@"icon"];
+            [baseData.categoryArray addObject:[[Category alloc] initWithCategoryId:categoryId withName:name withIcon:icon]];
+        }
     }
     return baseData.categoryArray;
 }
@@ -68,25 +105,15 @@ static BaseData *baseData;
 + (NSArray *)getProfessions{
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.professionArray){
-        //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/professionList"] withParams:nil];
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                NSArray *array = [jsonResult objectForKey:@"result"];
-                baseData.professionArray = [[NSMutableArray alloc] initWithCapacity:array.count];
-                for(NSDictionary *dic in array){
-                    NSDecimalNumber *pId = nil;
-                    for(NSDecimalNumber *key in [dic allKeys]){
-                        pId = key;
-                    }
-                    [baseData.professionArray addObject:[[Profession alloc] initWithProfessionId:pId withName:[dic objectForKey:pId]]];
-                }
+        NSArray *array = [BaseData loadArrayData:PROFESSION_FILE_NAME withUrl:@"base/professionList"];
+        baseData.professionArray = [[NSMutableArray alloc] initWithCapacity:array.count];
+        for(NSDictionary *dic in array){
+            NSDecimalNumber *pId = nil;
+            for(NSDecimalNumber *key in [dic allKeys]){
+                pId = key;
             }
-        }];
-        [request startSynchronous];
+            [baseData.professionArray addObject:[[Profession alloc] initWithProfessionId:pId withName:[dic objectForKey:pId]]];
+        }
     }
     return baseData.professionArray;
 }
@@ -94,40 +121,30 @@ static BaseData *baseData;
 + (NSArray *)getProvinces{
     BaseData *baseData = [BaseData sharedData];
     if(!baseData.provinceArray){
-        //http load
-        __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"base/provinceCityList"] withParams:nil];
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                NSDictionary *result = [jsonResult objectForKey:@"result"];
-                NSArray *provinceDicArray = [result objectForKey:@"provinceList"];
-                NSArray *cityDicArray = [result objectForKey:@"cityList"];
-                
-                baseData.provinceArray = [[NSMutableArray alloc] initWithCapacity:provinceDicArray.count];
-                baseData.citiesDictionary = [[NSMutableDictionary alloc] initWithCapacity:provinceDicArray.count];
-                
-                for (NSDictionary *provinceDic in provinceDicArray) {
-                    NSInteger provinceId = [[provinceDic objectForKey:@"provinceId"] intValue];
-                    NSString *provinceName = [provinceDic objectForKey:@"provinceName"];
-                    [baseData.provinceArray addObject:[[Province alloc] initWithProvinceId:provinceId withName:provinceName]];
-                }
-                for (NSDictionary *cityDic in cityDicArray) {
-                    NSInteger cityId = [[cityDic objectForKey:@"cityId"] intValue];
-                    NSString *cityName = [cityDic objectForKey:@"cityName"];
-                    NSInteger provinceId = [[cityDic objectForKey:@"provinceId"] intValue];
-                    
-                    NSMutableArray *cities = [baseData.citiesDictionary objectForKey:[NSNumber numberWithInt:provinceId]];
-                    if (!cities) {
-                        cities = [[NSMutableArray alloc] init];
-                        [baseData.citiesDictionary setObject:cities forKey:[NSNumber numberWithInt:provinceId]];
-                    }
-                    [cities addObject:[[City alloc] initWithCityId:cityId withName:cityName withProvinceId:provinceId]];
-                }
+        NSDictionary *dic = [BaseData loadDictionaryData:PROVINCE_FILE_NAME withUrl:@"base/provinceCityList"];
+        
+        NSArray *provinceDicArray = [dic objectForKey:@"provinceList"];
+        NSArray *cityDicArray = [dic objectForKey:@"cityList"];
+        baseData.provinceArray = [[NSMutableArray alloc] initWithCapacity:provinceDicArray.count];
+        baseData.citiesDictionary = [[NSMutableDictionary alloc] initWithCapacity:provinceDicArray.count];
+        
+        for (NSDictionary *provinceDic in provinceDicArray) {
+            NSInteger provinceId = [[provinceDic objectForKey:@"provinceId"] intValue];
+            NSString *provinceName = [provinceDic objectForKey:@"provinceName"];
+            [baseData.provinceArray addObject:[[Province alloc] initWithProvinceId:provinceId withName:provinceName]];
+        }
+        for (NSDictionary *cityDic in cityDicArray) {
+            NSInteger cityId = [[cityDic objectForKey:@"cityId"] intValue];
+            NSString *cityName = [cityDic objectForKey:@"cityName"];
+            NSInteger provinceId = [[cityDic objectForKey:@"provinceId"] intValue];
+            
+            NSMutableArray *cities = [baseData.citiesDictionary objectForKey:[NSNumber numberWithInt:provinceId]];
+            if (!cities) {
+                cities = [[NSMutableArray alloc] init];
+                [baseData.citiesDictionary setObject:cities forKey:[NSNumber numberWithInt:provinceId]];
             }
-        }];
-        [request startSynchronous];
+            [cities addObject:[[City alloc] initWithCityId:cityId withName:cityName withProvinceId:provinceId]];
+        }
     }
     return baseData.provinceArray;
 }
@@ -160,6 +177,13 @@ static BaseData *baseData;
         i++;
     }
     return -1;
+}
+
++ (NSString *)dataFilePath:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:fileName];
 }
 
 @end

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define CATEGORY_FILE_NAME @"category.plist"
+#define PROFESSION_FILE_NAME @"profession.plist"
+#define PROVINCE_FILE_NAME @"province.plist"
+
 @interface BaseData : NSObject
 
 @property (strong,nonatomic) NSMutableArray *categoryArray;

@@ -293,7 +293,6 @@
 		CB87D3E715518C9C00A25129 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB87D3E515518C9C00A25129 /* InfoPlist.strings */; };
 		CB87D3E915518C9C00A25129 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB87D3E815518C9C00A25129 /* main.m */; };
 		CB87D3ED15518C9C00A25129 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB87D3EC15518C9C00A25129 /* AppDelegate.m */; };
-		CB87D3F015518C9C00A25129 /* juzhai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB87D3EE15518C9C00A25129 /* juzhai.xcdatamodeld */; };
 		CB8B257915A356BA00F363B1 /* TpLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8B257715A356B800F363B1 /* TpLoginViewController.m */; };
 		CB8B257A15A356BA00F363B1 /* TpLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8B257815A356B900F363B1 /* TpLoginViewController.xib */; };
 		CB8F09C21572217F0003018D /* IdeaListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F09C11572217F0003018D /* IdeaListCell.m */; };
@@ -854,7 +853,6 @@
 		CB87D3EA15518C9C00A25129 /* juzhai-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "juzhai-Prefix.pch"; sourceTree = "<group>"; };
 		CB87D3EB15518C9C00A25129 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CB87D3EC15518C9C00A25129 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CB87D3EF15518C9C00A25129 /* juzhai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = juzhai.xcdatamodel; sourceTree = "<group>"; };
 		CB8B257615A356B800F363B1 /* TpLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TpLoginViewController.h; sourceTree = "<group>"; };
 		CB8B257715A356B800F363B1 /* TpLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TpLoginViewController.m; sourceTree = "<group>"; };
 		CB8B257815A356B900F363B1 /* TpLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TpLoginViewController.xib; sourceTree = "<group>"; };
@@ -1434,7 +1432,6 @@
 				CBB46DC315CFB7D0003F2ADC /* MobClick.h */,
 				CB87D3EB15518C9C00A25129 /* AppDelegate.h */,
 				CB87D3EC15518C9C00A25129 /* AppDelegate.m */,
-				CB87D3EE15518C9C00A25129 /* juzhai.xcdatamodeld */,
 				CB0B12AC15D69B85002C361A /* GuidanceViewController.h */,
 				CB0B12AD15D69B85002C361A /* GuidanceViewController.m */,
 				CB0B12AE15D69B85002C361A /* GuidanceViewController.xib */,
@@ -1574,6 +1571,13 @@
 			name = Beans;
 			sourceTree = "<group>";
 		};
+		CB75304B15E4808A00536394 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
 		CB774A27159AF3BC00E67B2D /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1604,6 +1608,7 @@
 		CB8367F7155EADE7004CFD54 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CB75304B15E4808A00536394 /* Table */,
 				CB5AEA1A15D37A620048CB94 /* Stat */,
 				CB7C8F3515B3E496007E3F9B /* Date */,
 				CB40316C15903CB000D758AF /* Message */,
@@ -2743,7 +2748,6 @@
 			files = (
 				CB87D3E915518C9C00A25129 /* main.m in Sources */,
 				CB87D3ED15518C9C00A25129 /* AppDelegate.m in Sources */,
-				CB87D3F015518C9C00A25129 /* juzhai.xcdatamodeld in Sources */,
 				CB7F16DB155196F50009E060 /* LoginViewController.m in Sources */,
 				CB7F16E0155197110009E060 /* RegisterViewController.m in Sources */,
 				CB3E04481552638C0069DE30 /* LoginService.m in Sources */,
@@ -3009,16 +3013,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CB87D3EE15518C9C00A25129 /* juzhai.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CB87D3EF15518C9C00A25129 /* juzhai.xcdatamodel */,
-			);
-			currentVersion = CB87D3EF15518C9C00A25129 /* juzhai.xcdatamodel */;
-			path = juzhai.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		CBE91CD315829B1C008BDDE9 /* juzhai.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
