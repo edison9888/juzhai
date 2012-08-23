@@ -20,6 +20,8 @@
 #import "UserContext.h"
 #import "ProtocalViewController.h"
 #import "FeedbackViewController.h"
+#import "UserView.h"
+#import "AuthorizeViewController.h"
 
 @implementation ConfigViewController
 
@@ -43,6 +45,12 @@
     _profileSettingViewController = nil;
     _protocalViewController = nil;
     _upgradeUrl = nil;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)doLogout
@@ -103,8 +111,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Value1CellIdentifier];
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:Value1CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == LOGOUT_SECTION) {
         cell.backgroundColor = [UIColor colorWithRed:0.85f green:0.35f blue:0.35f alpha:1.00f];
         cell.textLabel.textColor = [UIColor whiteColor];
@@ -116,6 +124,19 @@
     cell.textLabel.text = NSLocalizedString(KeyCellTitle([items objectAtIndex:indexPath.row]), @"cell title");
     if (indexPath.section == ABOUT_SECTION && indexPath.row == UPGRADE_ROW) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"当前版本：v%@", [Constant appVersion]];
+    } else if (indexPath.section == PROFILE_ROW && indexPath.row == AUTHORIZE_ROW) {
+        UserView *userView = [UserContext getUserView];
+        if (userView.tpId.intValue > 0) {
+            if (userView.tokenExpired) {
+                cell.detailTextLabel.text = @"授权已过期";
+            } else {
+                cell.detailTextLabel.text = @"已绑定";
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        } else {
+            cell.detailTextLabel.text = @"未绑定";
+        }
+        
     }
     return cell;
 }
@@ -160,6 +181,16 @@
             }
             [_profileSettingViewController initUserView:[UserContext getUserView]];
             [self.navigationController pushViewController:_profileSettingViewController animated:YES];
+        } else if (indexPath.row == AUTHORIZE_ROW) {
+            UserView *userView = [UserContext getUserView];
+            if (userView.tpId.intValue > 0 && userView.tokenExpired) {
+                if (nil == _authorizeViewController) {
+                    _authorizeViewController = [[AuthorizeViewController alloc] initWithNibName:@"AuthorizeViewController" bundle:nil];
+                    _authorizeViewController.hidesBottomBarWhenPushed = YES;
+                }
+                _authorizeViewController.tpId = userView.tpId.intValue;
+                [self.navigationController pushViewController:_authorizeViewController animated:YES];
+            }
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

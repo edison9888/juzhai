@@ -12,6 +12,9 @@
 #import "SBJson.h"
 #import "CheckNetwork.h"
 #import "AppDelegate.h"
+#import "UserContext.h"
+#import "UserView.h"
+#import "AuthorizeViewController.h"
 
 @interface JuzhaiTabBarController ()
 
@@ -39,6 +42,17 @@
     _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     _locationManager.distanceFilter = 50.0;
     [_locationManager startUpdatingLocation];
+    
+    UINavigationController *viewController = [self.viewControllers objectAtIndex:0];
+    UserView *userView = [UserContext getUserView];
+    if (userView.tpId.intValue > 0 && userView.tokenExpired) {
+        if (nil == _authorizeViewController) {
+            _authorizeViewController = [[AuthorizeViewController alloc] initWithNibName:@"AuthorizeViewController" bundle:nil];
+            _authorizeViewController.hidesBottomBarWhenPushed = YES;
+        }
+        _authorizeViewController.tpId = userView.tpId.intValue;
+        [viewController pushViewController:_authorizeViewController animated:YES];
+    }
 }
 
 - (void)viewDidUnload

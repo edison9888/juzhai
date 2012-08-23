@@ -24,8 +24,8 @@
 @synthesize webView;
 @synthesize tpId;
 @synthesize navigationBar;
-@synthesize webTitle;
 @synthesize loadingView;
+@synthesize authorizeType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,7 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    navigationBar.topItem.title = webTitle;
+    NSString *titleKey = [NSString stringWithFormat:@"tpLogin.%d.title", self.tpId];
+    navigationBar.topItem.title = NSLocalizedString(titleKey, @"tpLoginTitle");
     
     if (IOS_VERSION >= 5.0){
         [navigationBar setBackgroundImage:TOP_BG_IMG forBarMetrics:UIBarMetricsDefault];
@@ -51,13 +52,25 @@
     backButton.frame = CGRectMake(0, 0, backImage.size.width, backImage.size.height);
     [backButton setBackgroundImage:backImage forState:UIControlStateNormal];
     [backButton setBackgroundImage:activeBackImage forState:UIControlStateHighlighted];
-    [backButton addTarget:self action:@selector(backToLogin:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     navigationBar.topItem.leftBarButtonItem = backItem;
     
     loadingView.hidesWhenStopped = YES;
     
-    NSURL *requestUrl = [NSURL URLWithString:[UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/tpLogin/%d", tpId]]];
+    NSString *uri;
+    switch (authorizeType) {
+        case AuthorizeLogin:
+            uri = [NSString stringWithFormat:@"passport/tpLogin/%d", self.tpId];
+            break;
+        case AuthorizeExpired:
+            uri = [NSString stringWithFormat:@"passport/authorize/token/%d", self.tpId];
+            break;
+        case AuthorizeBind:
+            break;
+    }
+    
+    NSURL *requestUrl = [NSURL URLWithString:[UrlUtils urlStringWithUri:uri]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:requestUrl];
 	[webView loadRequest:request];
 }
@@ -68,7 +81,6 @@
     self.webView = nil;
     self.navigationBar = nil;
     self.loadingView = nil;
-    self.webTitle = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -76,10 +88,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)backToLogin:(id)sender{
+- (IBAction)back:(id)sender{
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
+#pragma mark -
+#pragma mark AuthorizeLogin
 -(void) doLogin:(NSString *)query{
     LoginResult *loginResult = [[LoginService getInstance] loginWithTpId:tpId withQuery:query];
     if(loginResult.success){
@@ -105,15 +120,41 @@
 	[hud showWhileExecuting:@selector(doLogin:) onTarget:self withObject:query animated:YES];
 }
 
+#pragma mark AuthorizeExpired
+
+- (void)authorize:(NSString *)query{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = YES;
+	[hud showWhileExecuting:@selector(doAuthorize:) onTarget:self withObject:query animated:YES];
+}
+
+-(void) doAuthorize:(NSString *)query{
+    LoginResult *loginResult = [[LoginService getInstance] authorize:self.tpId withQuery:query];
+    if(loginResult.success){
+        [self dismissModalViewControllerAnimated:YES];
+    }else{
+        [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
+    }
+}
+
 #pragma mark - Web View Delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
     NSURL *requestUrl = [request URL];
-    if ([[requestUrl path] rangeOfString:@"/web/access"].length > 0) {
-        [loadingView stopAnimating]; 
-        [self login:requestUrl.query];
-        return NO;
+    
+    if (self.authorizeType == AuthorizeLogin) {
+        if ([[requestUrl path] rangeOfString:@"/web/access"].length > 0) {
+            [loadingView stopAnimating]; 
+            [self login:requestUrl.query];
+            return NO;
+        }
+    } else if (self.authorizeType == AuthorizeExpired) {
+        if ([[requestUrl path] rangeOfString:@"/authorize/access"].length > 0) {
+            [loadingView stopAnimating]; 
+            [self authorize:requestUrl.query];
+            return NO;
+        }
     }
 	return YES;
 }

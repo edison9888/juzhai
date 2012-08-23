@@ -42,6 +42,7 @@
 @synthesize hasInterest;
 @synthesize tpId;
 @synthesize tpName;
+@synthesize tokenExpired;
 @synthesize onlineStatus;
 
 + (id) convertFromDictionary:(NSDictionary *)info{
@@ -85,6 +86,7 @@
     self.hasInterest = [info valueForKey:@"hasInterest"];
     self.tpId = [info valueForKey:@"tpId"];
     self.tpName = [info valueForKey:@"tpName"];
+    self.tokenExpired = [[info valueForKey:@"tokenExpired"] boolValue];
     self.onlineStatus = [[info valueForKey:@"onlineStatus"] intValue];
 }
 
@@ -147,6 +149,7 @@
         copy.hasInterest = self.hasInterest;
         copy.tpName = self.tpName;
         copy.tpId = self.tpId;
+        copy.tokenExpired = self.tokenExpired;
         copy.onlineStatus = self.onlineStatus;
         copy.post = self.post;
     }

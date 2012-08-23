@@ -87,14 +87,35 @@ static LoginService *loginService;
         if (!error && [request responseStatusCode] == 200){
             NSString *response = [request responseString];
             NSMutableDictionary *jsonResult = [response JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+            if([[jsonResult valueForKey:@"success"] boolValue]){
                 //登录成功
                 [self loginSuccess:nil withJson:jsonResult withCookies:request.responseCookies];
                 return [LoginResult successLoginResult];
             }else{
                 return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
             }
-        }else{
+        }
+    }
+    return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];
+}
+
+- (LoginResult *)authorize:(NSInteger)tpId withQuery:(NSString *)query
+{
+    NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/authorize/access/%d?%@", tpId, query]];
+    ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:url withParams:nil];
+    if (request != nil) {
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error && [request responseStatusCode] == 200){
+            NSString *response = [request responseString];
+            NSMutableDictionary *jsonResult = [response JSONValue];
+            if([[jsonResult valueForKey:@"success"] boolValue]){
+                //登录成功
+                [UserContext setUserView:[UserView convertFromDictionary:[jsonResult valueForKey:@"result"]]];
+                return [LoginResult successLoginResult];
+            }else{
+                return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
+            }
         }
     }
     return [LoginResult loginResultWithSuccess:NO errorCode:0 errorInfo:SERVER_ERROR_INFO];

@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class AuthorizeViewController;
+
 #define TIMER_INTERVAL 5
 
 @interface JuzhaiTabBarController : UITabBarController <CLLocationManagerDelegate>
 {
     CLLocationManager *_locationManager;
+    AuthorizeViewController *_authorizeViewController;
 }
 @end

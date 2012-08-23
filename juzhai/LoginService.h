@@ -16,12 +16,28 @@
 
 + (id)getInstance;
 
+//利用帐号密码登录
 - (LoginResult *)useLoginName:(NSString *)account byPassword:(NSString *)password byToken:(NSString *)token;
+
+//第三方登录
 - (LoginResult *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query;
+
+//第三方重新绑定
+- (LoginResult *)authorize:(NSInteger)tpId withQuery:(NSString *)query;
+
+//检查是否登录
 - (BOOL)checkLogin;
+
+//登录成功
 - (void)loginSuccess:(LoginUser *)loginUser withJson:(NSDictionary *)jsonResult withCookies:(NSArray *)cookies;
+
+//登出
 - (void)logout;
+
+//本地登出
 - (void)localLogout;
+
+//登录之后转向的UIViewController
 - (UIViewController *)loginTurnToViewController;
 
 @end

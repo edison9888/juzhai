@@ -15,6 +15,7 @@
 "MM/dd/yyyy hh:mm:a" = "yyyy-dd-MM HH:mm";
 
 "config.profile" = "个人资料设置";
+"config.authorize" = "授权设置";
 "config.modifyPwd"= "修改密码";
 "config.getbackPwd"= "取回密码";
 
@@ -30,3 +31,17 @@
 "config.section.1" = "";
 "config.section.2" = "";
 "config.section.3" = "";
+
+"authorize.6.title1" = "新浪微博授权已经过期";
+"authorize.6.title2" = "请重新授权激活微博同步功能";
+
+"authorize.7.title1" = "豆瓣帐号授权已经过期";
+"authorize.7.title2" = "请重新授权激活豆瓣说同步功能";
+
+"authorize.8.title1" = "qq帐号授权已经过期";
+"authorize.8.title2" = "请重新授权激活qq同步功能";
+
+"tpLogin.6.title" = "用新浪微博帐号登录";
+"tpLogin.7.title" = "用豆瓣帐号登录";
+"tpLogin.8.title" = "用QQ帐号登录";
+

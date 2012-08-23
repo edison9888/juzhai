@@ -5,6 +5,7 @@
 	<key>0</key>
 	<array>
 		<string>profile</string>
+		<string>authorize</string>
 	</array>
 	<key>1</key>
 	<array>

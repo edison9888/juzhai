@@ -11,6 +11,7 @@
 @class ProfileSettingViewController;
 @class ProtocalViewController;
 @class FeedbackViewController;
+@class AuthorizeViewController;
 @class UserView;
 
 #define KeyCellTitle(key) [NSString stringWithFormat:@"config.%@", key]
@@ -22,6 +23,7 @@
 #define LOGOUT_SECTION 3
 
 #define PROFILE_ROW 0
+#define AUTHORIZE_ROW 1
 #define PROTOCAL_ROW 0
 #define FEEDBACK_ROW 1
 #define UPGRADE_ROW 2
@@ -35,6 +37,7 @@
     ProfileSettingViewController *_profileSettingViewController;
     ProtocalViewController *_protocalViewController;
     FeedbackViewController *_feedbackViewController;
+    AuthorizeViewController *_authorizeViewController;
     NSString *_upgradeUrl;
 }
 

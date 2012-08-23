@@ -13,7 +13,6 @@
 
 @interface TpLoginDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *_titleArray;
     NSArray *_logoImageArray;
     NSArray *_tpIdArray;
 }
