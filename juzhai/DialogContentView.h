@@ -18,5 +18,6 @@
 @property (nonatomic) NSTimeInterval createTime;
 @property (strong, nonatomic) NSString *imgUrl;
 @property (nonatomic) BOOL hasImg;
+@property (strong, nonatomic) UIImage *image;
 
 @end

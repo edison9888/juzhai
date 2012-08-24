@@ -26,6 +26,7 @@
 #import "CustomNavigationController.h"
 #import "CheckNetwork.h"
 #import "UIImage+UIImageExt.h"
+#import "MessageShow.h"
 
 @interface DialogContentViewController ()
 
@@ -46,6 +47,107 @@
     if (self) {
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    _singlePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    
+    _data = [[JZData alloc] init];
+    _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
+    _listHttpRequestDelegate.jzData = _data;
+    _listHttpRequestDelegate.viewClassName = @"DialogContentView";
+    _listHttpRequestDelegate.listViewController = self;
+    _listHttpRequestDelegate.addToHead = YES;
+    
+    self.title = [NSString stringWithFormat:@"与 %@ 对话", self.targetUser.nickname];
+    
+    self.inputAreaBgImageView.image = [[UIImage imageNamed:@"send_area_bg.png"] stretchableImageWithLeftCapWidth:25 topCapHeight:0];
+    //隐藏下方线条
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [self.dialogContentTableView setTableFooterView:view];
+    
+    textView.backgroundImage = [[UIImage imageNamed:@"send_input_bgxy"] stretchableImageWithLeftCapWidth:7 topCapHeight:7];
+    textView.font = [UIFont systemFontOfSize:15];
+    [textView setCustomDelegate:self];
+    [textView setMinNumberOfLines:1];
+    [textView setMaxNumberOfLines:3];
+    
+    _textViewOriginalX = textView.frame.origin.x;
+    _textVieworiginalWidth = textView.frame.size.width;
+    
+    [textView sizeToFit];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
+    [inputAreaView sizeToFit];
+    
+    //load
+    [self loadListDataWithPage:1];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    [_timer invalidate];
+    _timer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    _singlePan = nil;
+    _singleTap = nil;
+    _data = nil;
+    _dialogService = nil;
+    _timer = nil;
+    _listHttpRequestDelegate = nil;
+    _image = nil;
+    self.inputAreaView = nil;
+    self.inputAreaBgImageView = nil;
+    self.dialogContentTableView = nil;
+    self.textView = nil;
+    self.imageView = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)refresh
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.targetUser.uid, @"uid", nil];
+    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/refreshDialogContent"] withParams:params];
+    if (request != nil) {
+        [request setCompletionBlock:^{
+            NSString *responseString = [request responseString];
+            NSMutableDictionary *jsonResult = [responseString JSONValue];
+            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+                NSMutableArray *dialogContentViewList = [[jsonResult valueForKey:@"result"] valueForKey:@"list"];
+                for (int i = 0; i < dialogContentViewList.count; i++) {
+                    DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:[dialogContentViewList objectAtIndex:i]];
+                    [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
+                }
+                [self doneLoadingTableViewData];
+            }
+        }];
+        [request setFailedBlock:^{
+        }];
+        [request startAsynchronous];
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)note
@@ -137,117 +239,9 @@
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    _singlePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    
-    _data = [[JZData alloc] init];
-    _listHttpRequestDelegate = [[ListHttpRequestDelegate alloc] init];
-    _listHttpRequestDelegate.jzData = _data;
-    _listHttpRequestDelegate.viewClassName = @"DialogContentView";
-    _listHttpRequestDelegate.listViewController = self;
-    _listHttpRequestDelegate.addToHead = YES;
-    
-    self.title = [NSString stringWithFormat:@"与 %@ 对话", self.targetUser.nickname];
-    
-    self.inputAreaBgImageView.image = [[UIImage imageNamed:@"send_area_bg.png"] stretchableImageWithLeftCapWidth:25 topCapHeight:0];
-    //隐藏下方线条
-    UIView *view = [UIView new];
-    view.backgroundColor = [UIColor clearColor];
-    [self.dialogContentTableView setTableFooterView:view];
-    
-    textView.backgroundImage = [[UIImage imageNamed:@"send_input_bgxy"] stretchableImageWithLeftCapWidth:7 topCapHeight:7];
-    textView.font = [UIFont systemFontOfSize:15];
-//    textView.contentInset = UIEdgeInsetsMake(0,0,0,0);
-    [textView setCustomDelegate:self];
-    [textView setMinNumberOfLines:1];
-    [textView setMaxNumberOfLines:3];
-    
-    _textViewOriginalX = textView.frame.origin.x;
-    _textVieworiginalWidth = textView.frame.size.width;
-    
-    [textView sizeToFit];
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_BG_IMG]];
-    [inputAreaView sizeToFit];
-    
-//    imageView.layer.masksToBounds = YES;
-//    imageView.layer.cornerRadius = 5.0;
-    
-    //load
-    [self loadListDataWithPage:1];
-    
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [_timer invalidate];
-    _timer = nil;
-}
 
 - (void)hideKeyboard{  
     [self.textView resignFirstResponder];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    [_timer invalidate];
-    _timer = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    
-    _singlePan = nil;
-    _singleTap = nil;
-    _data = nil;
-    _dialogService = nil;
-    _timer = nil;
-    _listHttpRequestDelegate = nil;
-    _image = nil;
-    self.inputAreaView = nil;
-    self.inputAreaBgImageView = nil;
-    self.dialogContentTableView = nil;
-    self.textView = nil;
-    self.imageView = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)refresh
-{
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.targetUser.uid, @"uid", nil];
-    __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/refreshDialogContent"] withParams:params];
-    if (request != nil) {
-        [request setCompletionBlock:^{
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
-                NSMutableArray *dialogContentViewList = [[jsonResult valueForKey:@"result"] valueForKey:@"list"];
-                for (int i = 0; i < dialogContentViewList.count; i++) {
-                    DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:[dialogContentViewList objectAtIndex:i]];
-                    [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
-                }
-                [self doneLoadingTableViewData];
-            }
-        }];
-        [request setFailedBlock:^{
-//            [_timer invalidate];
-//            _timer = nil;
-        }];
-        [request startAsynchronous];
-    }
 }
 
 - (void)doneLoadingTableViewData
@@ -261,31 +255,45 @@
 
 - (IBAction)sendSms:(id)sender
 {
+    //初始化要插入的对象
+    DialogContentView *view = [[DialogContentView alloc] init];
+    view.content = textView.text;
+    view.senderUid = [UserContext getUid];
+    view.receiverUid = self.targetUser.uid.intValue;
+    view.createTime = [[NSDate date] timeIntervalSince1970];
+    view.image = _image;
+    view.hasImg = (_image != nil);
+    
     if (_dialogService == nil) {
         _dialogService = [[DialogService alloc] init];
     }
-//    DialogContentView *view = [[DialogContentView alloc] init];
-//    view.content = nil;
-//    view.senderUid = [UserContext getUid];
-//    view.receiverUid = self.targetUser.uid.intValue;
-//    view.createTime = [[NSDate date] timeIntervalSince1970];
-//    view.hasImg = (_image != nil);
-    
     [textView resignFirstResponder];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
-    hud.labelText = @"发送中...";
-    [_dialogService sendSms:textView.text toUser:self.targetUser.uid.intValue withImg:_image onSuccess:^(NSDictionary *info) {
+    BOOL success = [_dialogService sendSms:view onSuccess:^(NSDictionary *info) {
         DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:info];
-        [_data addObject:dialogContentView withIdentity:[NSNumber numberWithInt:dialogContentView.dialogContentId]];
+        view.imgUrl = dialogContentView.imgUrl;
+        view.dialogContentId = dialogContentView.dialogContentId;
+        view.createTime = dialogContentView.createTime;
+        [_data addIdentity:[NSNumber numberWithInt:view.dialogContentId]];
+        //隐藏警告icon
+        [self.dialogContentTableView reloadData];
+    } onFailure:^(NSString *error, BOOL hasSent) {
+        if (nil != error && ![error isEqualToString:@""]) {
+            //显示错误
+            [MessageShow error:DIALOG_ERROR_TEXT onView:nil];
+        }
+        if (hasSent) {
+            //显示警告标志
+            [self.dialogContentTableView reloadData];
+        }
+    }];
+    
+    if (success) {
+        //默认显示队列中icon
+        [_data addObject:view];
+        [self doneLoadingTableViewData];
         textView.text = @"";
         [self resetSendForm];
-        [self doneLoadingTableViewData];
-        
-        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-        hud.mode = MBProgressHUDModeCustomView;
-        hud.labelText = @"发送成功";
-        [hud hide:YES afterDelay:1];
-    } inView:self.tabBarController.view];
+    }
 }
 
 - (IBAction)imageButtonClick:(id)sender

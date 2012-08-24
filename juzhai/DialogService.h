@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class DialogContentView;
+
 #define DIALOG_CONTENT_LENGTH_MAX 400
 #define DIALOG_CONTENT_LENGTH_MIN 2
 #define DIALOG_ERROR_TEXT @"私聊内容字数控制在1-200个汉字内"
 
 @interface DialogService : NSObject
 
-- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view;
+//- (BOOL)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view;
+
+- (BOOL)sendSms:(DialogContentView *)dialogContentView onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock;
 
 @end

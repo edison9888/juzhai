@@ -1519,6 +1519,7 @@
 		CB4D4E63155BB7A20061AAD4 /* Logon */ = {
 			isa = PBXGroup;
 			children = (
+				CB75304B15E4808A00536394 /* DB */,
 				CBF56119155E2DB9006A03E6 /* ViewBean */,
 				CB4D4E65155BB7AC0061AAD4 /* ViewController */,
 				CBD6FA9F15A6096A0029877D /* Service */,
@@ -1580,11 +1581,11 @@
 			name = Beans;
 			sourceTree = "<group>";
 		};
-		CB75304B15E4808A00536394 /* Table */ = {
+		CB75304B15E4808A00536394 /* DB */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Table;
+			name = DB;
 			sourceTree = "<group>";
 		};
 		CB774A27159AF3BC00E67B2D /* ActionSheet */ = {
@@ -1617,7 +1618,6 @@
 		CB8367F7155EADE7004CFD54 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CB75304B15E4808A00536394 /* Table */,
 				CB5AEA1A15D37A620048CB94 /* Stat */,
 				CB7C8F3515B3E496007E3F9B /* Date */,
 				CB40316C15903CB000D758AF /* Message */,

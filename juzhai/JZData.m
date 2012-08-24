@@ -68,18 +68,33 @@
 
 - (void) addObject:(id)object withIdentity:(id)identity
 {
-    if(![_identitySet containsObject:identity]){
+    if(identity == nil || ![_identitySet containsObject:identity]){
         [_data addObject:object];
         [_identitySet addObject:identity];
     }
 }
 
-- (void)insertObjectAtHead:(id)object withIdentity:(id)identity;
+- (void)insertObjectAtHead:(id)object withIdentity:(id)identity
 {
-    if(![_identitySet containsObject:identity]){
+    if(identity == nil || ![_identitySet containsObject:identity]){
         [_data insertObject:object atIndex:0];
         [_identitySet addObject:identity];
     }
+}
+
+- (void)addIdentity:(id)identity;
+{
+    [_identitySet addObject:identity];
+}
+
+- (void) addObject:(id)object
+{
+    [_data addObject:object];
+}
+
+- (void)insertObjectAtHead:(id)object
+{
+    [_data insertObject:object atIndex:0];
 }
 
 - (id)objectAtIndex:(NSUInteger)index

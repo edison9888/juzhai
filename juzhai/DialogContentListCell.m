@@ -142,17 +142,25 @@
         imageView.hidden = NO;
         imageView.frame = CGRectMake(startX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height);
         //load图片
-        imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
-        if (_dialogContentView.imgUrl != nil && ![_dialogContentView.imgUrl isEqual:[NSNull null]] && ![_dialogContentView.imgUrl isEqualToString:@""]) {
-            SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
-            [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-                UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-                imageView.image = [resultImage createRoundedRectImage:8.0];
-                
-                UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-                [imageView addGestureRecognizer:singleTap];
-            } failure:nil];
+        if (_dialogContentView.image != nil) {
+            UIImage *resultImage = [_dialogContentView.image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+            imageView.image = [resultImage createRoundedRectImage:8.0];
+            
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+            [imageView addGestureRecognizer:singleTap];
+        } else {
+            imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
+            if (_dialogContentView.imgUrl != nil && ![_dialogContentView.imgUrl isEqual:[NSNull null]] && ![_dialogContentView.imgUrl isEqualToString:@""]) {
+                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
+                [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+                    UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+                    imageView.image = [resultImage createRoundedRectImage:8.0];
+                    
+                    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+                    [imageView addGestureRecognizer:singleTap];
+                } failure:nil];
+            }
         }
     } else {
         imageView.hidden = YES;

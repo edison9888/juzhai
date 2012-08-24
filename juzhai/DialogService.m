@@ -14,34 +14,33 @@
 #import "NSString+Chinese.h"
 #import "MobClick.h"
 #import "MBProgressHUD.h"
-
+#import "DialogContentView.h"
 
 @implementation DialogService
 
-- (void)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view
+- (BOOL)sendSms:(DialogContentView *)dialogContentView onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock
 {
-    content = [content stringByTrimmingCharactersInSet: 
+    NSString *content = [dialogContentView.content stringByTrimmingCharactersInSet: 
                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSInteger textLength = [content chineseLength];
     if (textLength < DIALOG_CONTENT_LENGTH_MIN || textLength > DIALOG_CONTENT_LENGTH_MAX) {
-        if (view) {
-            [MBProgressHUD hideHUDForView:view animated:YES];
+        if (aFailureBlock) {
+            aFailureBlock(DIALOG_ERROR_TEXT, NO);
         }
-        [MessageShow error:DIALOG_ERROR_TEXT onView:nil];
-        return;
+        return false;
     }
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:content, @"content", [NSNumber numberWithInt:uid], @"uid", nil];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:content, @"content", [NSNumber numberWithInt:dialogContentView.receiverUid], @"uid", nil];
     __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/sendSms"] withParams:params];
     if (request) {
-        if (image != nil) {
+        if (dialogContentView.image != nil) {
             CGFloat compression = 0.9f;
             CGFloat maxCompression = 0.1f;
             int maxFileSize = 2*1024*1024;
             
-            NSData *imageData = UIImageJPEGRepresentation(image, compression);
+            NSData *imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
             while ([imageData length] > maxFileSize && compression > maxCompression){
                 compression -= 0.1;
-                imageData = UIImageJPEGRepresentation(image, compression);
+                imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
             }
             [request setData:imageData withFileName:@"dialogImg.jpg" andContentType:@"image/jpeg" forKey:@"dialogImg"];
         }
@@ -59,23 +58,24 @@
             if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
                 errorInfo = SERVER_ERROR_INFO;
             }
-            if (view) {
-                [MBProgressHUD hideHUDForView:view animated:YES];
+            if (aFailureBlock) {
+                aFailureBlock(errorInfo, YES);
             }
-            [MessageShow error:errorInfo onView:view];
         }];
         [request setFailedBlock:^{
-            if (view) {
-                [MBProgressHUD hideHUDForView:view animated:YES];
-            }
             [HttpRequestDelegate requestFailedHandle:request];
+            if (aFailureBlock) {
+                aFailureBlock(nil, YES);
+            }
         }];
         [request startAsynchronous];
-    } else {            
-        if (view) {
-            [MBProgressHUD hideHUDForView:view animated:YES];
+    } else {
+        return NO;
+        if (aFailureBlock) {
+            aFailureBlock(nil, NO);
         }
     }
+    return YES;
 }
 
 @end

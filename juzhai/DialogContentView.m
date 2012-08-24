@@ -17,6 +17,7 @@
 @synthesize createTime;
 @synthesize imgUrl;
 @synthesize hasImg;
+@synthesize image;
 
 + (id)convertFromDictionary:(NSDictionary *)info
 {

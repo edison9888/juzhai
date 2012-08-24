@@ -12,6 +12,8 @@
 #import "RectButton.h"
 #import "MBProgressHUD.h"
 #import "DialogService.h"
+#import "DialogContentView.h"
+#import "MessageShow.h"
 
 @interface FeedbackViewController ()
 
@@ -70,13 +72,22 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
     hud.labelText = @"发送中...";
     hud.yOffset = -77;
-    [_dialogService sendSms:value toUser:2 withImg:nil onSuccess:^(NSDictionary *info) {
+    DialogContentView *view = [[DialogContentView alloc] init];
+    view.content = value;
+    view.receiverUid = 2;
+    [_dialogService sendSms:view onSuccess:^(NSDictionary *info) {
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"发送成功";
         [hud hide:YES afterDelay:1];
         [self performSelector:@selector(back:) withObject:nil afterDelay:1];
-    } inView:self.tabBarController.view];
+        customTextView.text = @"";
+    } onFailure:^(NSString *error, BOOL hasSent) {
+        [MBProgressHUD hideHUDForView:self.tabBarController.view animated:YES];
+        if (nil != error && ![error isEqualToString:@""]) {
+            [MessageShow error:error onView:nil];
+        }
+    }];
 }
 
 - (IBAction)back:(id)sender

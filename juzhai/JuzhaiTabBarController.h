@@ -11,7 +11,7 @@
 
 @class AuthorizeViewController;
 
-#define TIMER_INTERVAL 5
+#define TIMER_INTERVAL 20
 
 @interface JuzhaiTabBarController : UITabBarController <CLLocationManagerDelegate>
 {
