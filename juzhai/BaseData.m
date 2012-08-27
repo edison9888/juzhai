@@ -50,15 +50,17 @@ static BaseData *baseData;
     if (array == nil || array.count <= 0) {
         //http load
         ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:url] withParams:nil];
-        [request startSynchronous];
-        NSError *error = [request error];
-        if (!error && [request responseStatusCode] == 200){
-            NSString *responseString = [request responseString];
-            NSMutableDictionary *jsonResult = [responseString JSONValue];
-            if([[jsonResult valueForKey:@"success"] boolValue]){
-                array = [jsonResult objectForKey:@"result"];
-                //save to plist
-                [array writeToFile:path atomically:YES];
+        if (request != nil) {
+            [request startSynchronous];
+            NSError *error = [request error];
+            if (!error && [request responseStatusCode] == 200){
+                NSString *responseString = [request responseString];
+                NSMutableDictionary *jsonResult = [responseString JSONValue];
+                if([[jsonResult valueForKey:@"success"] boolValue]){
+                    array = [jsonResult objectForKey:@"result"];
+                    //save to plist
+                    [array writeToFile:path atomically:YES];
+                }
             }
         }
     }

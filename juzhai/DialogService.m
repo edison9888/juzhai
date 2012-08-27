@@ -35,7 +35,7 @@
         if (dialogContentView.image != nil) {
             CGFloat compression = 0.9f;
             CGFloat maxCompression = 0.1f;
-            int maxFileSize = 2*1024*1024;
+            int maxFileSize = 1*1024*1024;
             
             NSData *imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
             while ([imageData length] > maxFileSize && compression > maxCompression){
