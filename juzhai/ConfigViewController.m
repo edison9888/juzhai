@@ -21,7 +21,7 @@
 #import "ProtocalViewController.h"
 #import "FeedbackViewController.h"
 #import "UserView.h"
-#import "AuthorizeViewController.h"
+#import "AuthorizeExpiredViewController.h"
 
 @implementation ConfigViewController
 
@@ -183,13 +183,17 @@
             [self.navigationController pushViewController:_profileSettingViewController animated:YES];
         } else if (indexPath.row == AUTHORIZE_ROW) {
             UserView *userView = [UserContext getUserView];
+            //授权过期
             if (userView.tpId.intValue > 0 && userView.tokenExpired) {
-                if (nil == _authorizeViewController) {
-                    _authorizeViewController = [[AuthorizeViewController alloc] initWithNibName:@"AuthorizeViewController" bundle:nil];
-                    _authorizeViewController.hidesBottomBarWhenPushed = YES;
+                if (nil == _authorizeExpiredViewController) {
+                    _authorizeExpiredViewController = [[AuthorizeExpiredViewController alloc] initWithNibName:@"AuthorizeExpiredViewController" bundle:nil];
+                    _authorizeExpiredViewController.hidesBottomBarWhenPushed = YES;
                 }
-                _authorizeViewController.tpId = userView.tpId.intValue;
-                [self.navigationController pushViewController:_authorizeViewController animated:YES];
+                _authorizeExpiredViewController.tpId = userView.tpId.intValue;
+                [self.navigationController pushViewController:_authorizeExpiredViewController animated:YES];
+            } else if (userView.tpId.intValue <= 0) {
+                //未绑定第三方
+                
             }
         }
     }

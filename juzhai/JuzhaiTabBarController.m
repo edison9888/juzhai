@@ -14,7 +14,7 @@
 #import "AppDelegate.h"
 #import "UserContext.h"
 #import "UserView.h"
-#import "AuthorizeViewController.h"
+#import "AuthorizeExpiredViewController.h"
 
 @interface JuzhaiTabBarController ()
 
@@ -46,12 +46,12 @@
     UINavigationController *viewController = [self.viewControllers objectAtIndex:0];
     UserView *userView = [UserContext getUserView];
     if (userView.tpId.intValue > 0 && userView.tokenExpired) {
-        if (nil == _authorizeViewController) {
-            _authorizeViewController = [[AuthorizeViewController alloc] initWithNibName:@"AuthorizeViewController" bundle:nil];
-            _authorizeViewController.hidesBottomBarWhenPushed = YES;
+        if (nil == _authorizeExpiredViewController) {
+            _authorizeExpiredViewController = [[AuthorizeExpiredViewController alloc] initWithNibName:@"AuthorizeViewController" bundle:nil];
+            _authorizeExpiredViewController.hidesBottomBarWhenPushed = YES;
         }
-        _authorizeViewController.tpId = userView.tpId.intValue;
-        [viewController pushViewController:_authorizeViewController animated:YES];
+        _authorizeExpiredViewController.tpId = userView.tpId.intValue;
+        [viewController pushViewController:_authorizeExpiredViewController animated:YES];
     }
 }
 

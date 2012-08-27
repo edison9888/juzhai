@@ -6,18 +6,18 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "AuthorizeViewController.h"
+#import "AuthorizeExpiredViewController.h"
 #import "Constant.h"
 #import "BigButton.h"
 #import "TpLoginViewController.h"
 #import "UserContext.h"
 #import "UserView.h"
 
-@interface AuthorizeViewController ()
+@interface AuthorizeExpiredViewController ()
 
 @end
 
-@implementation AuthorizeViewController
+@implementation AuthorizeExpiredViewController
 
 @synthesize tpId;
 @synthesize label1;

@@ -11,7 +11,7 @@
 @class ProfileSettingViewController;
 @class ProtocalViewController;
 @class FeedbackViewController;
-@class AuthorizeViewController;
+@class AuthorizeExpiredViewController;
 @class UserView;
 
 #define KeyCellTitle(key) [NSString stringWithFormat:@"config.%@", key]
@@ -37,7 +37,7 @@
     ProfileSettingViewController *_profileSettingViewController;
     ProtocalViewController *_protocalViewController;
     FeedbackViewController *_feedbackViewController;
-    AuthorizeViewController *_authorizeViewController;
+    AuthorizeExpiredViewController *_authorizeExpiredViewController;
     NSString *_upgradeUrl;
 }
 

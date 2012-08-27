@@ -244,8 +244,8 @@
 		CB6935061586EF8100F73CB0 /* weizhi_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6934F21586EF8100F73CB0 /* weizhi_bg.png */; };
 		CB6B15BF157A510300AC821F /* BaseData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6B15BE157A510300AC821F /* BaseData.m */; };
 		CB6B15C2157A70C800AC821F /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6B15C1157A70C800AC821F /* Category.m */; };
-		CB75304F15E4DD6400536394 /* AuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75304D15E4DD6400536394 /* AuthorizeViewController.m */; };
-		CB75305015E4DD6400536394 /* AuthorizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75304E15E4DD6400536394 /* AuthorizeViewController.xib */; };
+		CB75304F15E4DD6400536394 /* AuthorizeExpiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75304D15E4DD6400536394 /* AuthorizeExpiredViewController.m */; };
+		CB75305015E4DD6400536394 /* AuthorizeExpiredViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75304E15E4DD6400536394 /* AuthorizeExpiredViewController.xib */; };
 		CB75B01715AD51540008AA87 /* date_btn_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB75B00D15AD51540008AA87 /* date_btn_done@2x.png */; };
 		CB75B01815AD51540008AA87 /* date_btn_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB75B00E15AD51540008AA87 /* date_btn_hover@2x.png */; };
 		CB75B01915AD51540008AA87 /* date_btn_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB75B00F15AD51540008AA87 /* date_btn_link@2x.png */; };
@@ -795,9 +795,9 @@
 		CB6B15BE157A510300AC821F /* BaseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseData.m; sourceTree = "<group>"; };
 		CB6B15C0157A70C800AC821F /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		CB6B15C1157A70C800AC821F /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
-		CB75304C15E4DD6400536394 /* AuthorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeViewController.h; sourceTree = "<group>"; };
-		CB75304D15E4DD6400536394 /* AuthorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeViewController.m; sourceTree = "<group>"; };
-		CB75304E15E4DD6400536394 /* AuthorizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeViewController.xib; sourceTree = "<group>"; };
+		CB75304C15E4DD6400536394 /* AuthorizeExpiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AuthorizeExpiredViewController.h; sourceTree = "<group>"; };
+		CB75304D15E4DD6400536394 /* AuthorizeExpiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeExpiredViewController.m; sourceTree = "<group>"; };
+		CB75304E15E4DD6400536394 /* AuthorizeExpiredViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeExpiredViewController.xib; sourceTree = "<group>"; };
 		CB75B00D15AD51540008AA87 /* date_btn_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_btn_done@2x.png"; sourceTree = "<group>"; };
 		CB75B00E15AD51540008AA87 /* date_btn_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_btn_hover@2x.png"; sourceTree = "<group>"; };
 		CB75B00F15AD51540008AA87 /* date_btn_link@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_btn_link@2x.png"; sourceTree = "<group>"; };
@@ -2334,9 +2334,9 @@
 				CEF7149B15DCACE100E28C8D /* FeedbackViewController.h */,
 				CEF7149C15DCACE100E28C8D /* FeedbackViewController.m */,
 				CEF7149D15DCACE200E28C8D /* FeedbackViewController.xib */,
-				CB75304C15E4DD6400536394 /* AuthorizeViewController.h */,
-				CB75304D15E4DD6400536394 /* AuthorizeViewController.m */,
-				CB75304E15E4DD6400536394 /* AuthorizeViewController.xib */,
+				CB75304C15E4DD6400536394 /* AuthorizeExpiredViewController.h */,
+				CB75304D15E4DD6400536394 /* AuthorizeExpiredViewController.m */,
+				CB75304E15E4DD6400536394 /* AuthorizeExpiredViewController.xib */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -2752,7 +2752,7 @@
 				CB35810215E1F1250036017A /* big_btn_link@2x.png in Resources */,
 				CB35810615E1F13A0036017A /* big_btn_hover.png in Resources */,
 				CB35810715E1F13A0036017A /* big_btn_link.png in Resources */,
-				CB75305015E4DD6400536394 /* AuthorizeViewController.xib in Resources */,
+				CB75305015E4DD6400536394 /* AuthorizeExpiredViewController.xib in Resources */,
 				CB2308DD15E5D3770057D845 /* sq_back_btn@2x.png in Resources */,
 				CB2308E015E5D3880057D845 /* sq_back_btn.png in Resources */,
 				CBF7C61F15EB0FDC0010622C /* waiting_icon@2x.png in Resources */,
@@ -2914,7 +2914,7 @@
 				CEF7149E15DCACE200E28C8D /* FeedbackViewController.m in Sources */,
 				CEF714A315DCE5CB00E28C8D /* GetbackPwdViewController.m in Sources */,
 				CB606BB315E1EF6D00FB610C /* BigButton.m in Sources */,
-				CB75304F15E4DD6400536394 /* AuthorizeViewController.m in Sources */,
+				CB75304F15E4DD6400536394 /* AuthorizeExpiredViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

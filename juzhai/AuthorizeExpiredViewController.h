@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AuthorizeViewController : UIViewController
+@interface AuthorizeExpiredViewController : UIViewController
 
 @property (nonatomic) NSInteger tpId;
 
