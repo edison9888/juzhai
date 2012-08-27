@@ -46,5 +46,6 @@
 //@property (strong, nonatomic) IBOutlet DetailTextView *dialogContentTextView;
 @property (strong, nonatomic) IBOutlet UILabel *dialogContentTextView;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *warning;
 
 @end

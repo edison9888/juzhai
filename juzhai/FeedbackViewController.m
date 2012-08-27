@@ -75,7 +75,7 @@
     DialogContentView *view = [[DialogContentView alloc] init];
     view.content = value;
     view.receiverUid = 2;
-    [_dialogService sendSms:view onSuccess:^(NSDictionary *info) {
+    [_dialogService sendSms:view inQueue:nil onSuccess:^(NSDictionary *info) {
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"发送成功";

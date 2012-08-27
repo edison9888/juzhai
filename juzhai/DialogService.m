@@ -18,7 +18,7 @@
 
 @implementation DialogService
 
-- (BOOL)sendSms:(DialogContentView *)dialogContentView onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock
+- (BOOL)sendSms:(DialogContentView *)dialogContentView inQueue:(NSOperationQueue *)smsQueue  onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock
 {
     NSString *content = [dialogContentView.content stringByTrimmingCharactersInSet: 
                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -68,7 +68,12 @@
                 aFailureBlock(nil, YES);
             }
         }];
-        [request startAsynchronous];
+        if (nil != smsQueue && smsQueue) {
+            request.userInfo = [NSDictionary dictionaryWithObject:dialogContentView forKey:REQUEST_USER_INFO_KEY];
+            [smsQueue addOperation:request];
+        } else {
+            [request startAsynchronous];
+        }
     } else {
         return NO;
         if (aFailureBlock) {

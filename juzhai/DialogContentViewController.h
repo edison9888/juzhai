@@ -14,6 +14,7 @@
 @class DialogService;
 @class ListHttpRequestDelegate;
 @class GrowingTextView;
+@class ASINetworkQueue;
 
 #define TIMER_INTERVAL 10
 
@@ -30,6 +31,7 @@
     UIImage *_image;
     CGFloat _textViewOriginalX;
     CGFloat _textVieworiginalWidth;
+    ASINetworkQueue *_smsQueue;
 }
 @property (strong, nonatomic) UserView *targetUser;
 @property (strong, nonatomic) IBOutlet UIView *inputAreaView;

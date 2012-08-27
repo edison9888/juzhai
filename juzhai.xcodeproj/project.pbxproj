@@ -492,6 +492,10 @@
 		CBF5611C155E2DE3006A03E6 /* IdeaView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF5611B155E2DE3006A03E6 /* IdeaView.m */; };
 		CBF56126155E51B0006A03E6 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF56125155E51B0006A03E6 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBF5612E155EA774006A03E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF5612C155EA752006A03E6 /* QuartzCore.framework */; };
+		CBF7C61F15EB0FDC0010622C /* waiting_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF7C61D15EB0FDC0010622C /* waiting_icon@2x.png */; };
+		CBF7C62015EB0FDC0010622C /* failure_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF7C61E15EB0FDC0010622C /* failure_icon@2x.png */; };
+		CBF7C62415EB0FF00010622C /* waiting_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF7C62215EB0FF00010622C /* waiting_icon.png */; };
+		CBF7C62515EB0FF00010622C /* failure_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF7C62315EB0FF00010622C /* failure_icon.png */; };
 		CBF9406B15CE5F3E0080A521 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406815CE5F3E0080A521 /* MJPopupBackgroundView.m */; };
 		CBF9406C15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406A15CE5F3E0080A521 /* UIViewController+MJPopupViewController.m */; };
 		CBF9407015CE60CA0080A521 /* WholeImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF9406F15CE60CA0080A521 /* WholeImageViewController.m */; };
@@ -1134,6 +1138,10 @@
 		CBF56124155E51B0006A03E6 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		CBF56125155E51B0006A03E6 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		CBF5612C155EA752006A03E6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CBF7C61D15EB0FDC0010622C /* waiting_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waiting_icon@2x.png"; sourceTree = "<group>"; };
+		CBF7C61E15EB0FDC0010622C /* failure_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "failure_icon@2x.png"; sourceTree = "<group>"; };
+		CBF7C62215EB0FF00010622C /* waiting_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waiting_icon.png; sourceTree = "<group>"; };
+		CBF7C62315EB0FF00010622C /* failure_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = failure_icon.png; sourceTree = "<group>"; };
 		CBF9406715CE5F3E0080A521 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
 		CBF9406815CE5F3E0080A521 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
 		CBF9406915CE5F3E0080A521 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
@@ -1789,6 +1797,8 @@
 		CBD964B2157FC57D006E0196 /* big */ = {
 			isa = PBXGroup;
 			children = (
+				CBF7C61D15EB0FDC0010622C /* waiting_icon@2x.png */,
+				CBF7C61E15EB0FDC0010622C /* failure_icon@2x.png */,
 				CB2308DC15E5D3770057D845 /* sq_back_btn@2x.png */,
 				CB3580FF15E1F1250036017A /* big_btn_hover@2x.png */,
 				CB35810015E1F1250036017A /* big_btn_link@2x.png */,
@@ -1969,6 +1979,8 @@
 		CBD964E9157FC57D006E0196 /* small */ = {
 			isa = PBXGroup;
 			children = (
+				CBF7C62215EB0FF00010622C /* waiting_icon.png */,
+				CBF7C62315EB0FF00010622C /* failure_icon.png */,
 				CB2308DF15E5D3880057D845 /* sq_back_btn.png */,
 				CB35810415E1F13A0036017A /* big_btn_hover.png */,
 				CB35810515E1F13A0036017A /* big_btn_link.png */,
@@ -2737,6 +2749,10 @@
 				CB75305015E4DD6400536394 /* AuthorizeViewController.xib in Resources */,
 				CB2308DD15E5D3770057D845 /* sq_back_btn@2x.png in Resources */,
 				CB2308E015E5D3880057D845 /* sq_back_btn.png in Resources */,
+				CBF7C61F15EB0FDC0010622C /* waiting_icon@2x.png in Resources */,
+				CBF7C62015EB0FDC0010622C /* failure_icon@2x.png in Resources */,
+				CBF7C62415EB0FF00010622C /* waiting_icon.png in Resources */,
+				CBF7C62515EB0FF00010622C /* failure_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

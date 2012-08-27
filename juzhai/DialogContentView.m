@@ -18,6 +18,7 @@
 @synthesize imgUrl;
 @synthesize hasImg;
 @synthesize image;
+@synthesize sendStatus;
 
 + (id)convertFromDictionary:(NSDictionary *)info
 {

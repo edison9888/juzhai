@@ -27,6 +27,7 @@
 #import "CheckNetwork.h"
 #import "UIImage+UIImageExt.h"
 #import "MessageShow.h"
+#import "ASINetworkQueue.h"
 
 @interface DialogContentViewController ()
 
@@ -91,11 +92,19 @@
     [self loadListDataWithPage:1];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+    
+    _smsQueue = [ASINetworkQueue queue];
+    _smsQueue.maxConcurrentOperationCount = 1;
+    _smsQueue.delegate = self;
+    _smsQueue.requestDidStartSelector = @selector(requestDidStartSelector:);
+    //设置代理
+    [_smsQueue go];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [_timer invalidate];
 }
 
 - (void)viewDidUnload
@@ -104,9 +113,9 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [_timer invalidate];
-    _timer = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [_smsQueue reset];
     
     _singlePan = nil;
     _singleTap = nil;
@@ -115,6 +124,7 @@
     _timer = nil;
     _listHttpRequestDelegate = nil;
     _image = nil;
+    _smsQueue = nil;
     self.inputAreaView = nil;
     self.inputAreaBgImageView = nil;
     self.dialogContentTableView = nil;
@@ -263,26 +273,29 @@
     view.createTime = [[NSDate date] timeIntervalSince1970];
     view.image = _image;
     view.hasImg = (_image != nil);
+    view.sendStatus = SendStatusWaiting;
     
     if (_dialogService == nil) {
         _dialogService = [[DialogService alloc] init];
     }
     [textView resignFirstResponder];
-    BOOL success = [_dialogService sendSms:view onSuccess:^(NSDictionary *info) {
+    BOOL success = [_dialogService sendSms:view inQueue:_smsQueue onSuccess:^(NSDictionary *info) {
         DialogContentView *dialogContentView = [DialogContentView convertFromDictionary:info];
         view.imgUrl = dialogContentView.imgUrl;
         view.dialogContentId = dialogContentView.dialogContentId;
         view.createTime = dialogContentView.createTime;
-        [_data addIdentity:[NSNumber numberWithInt:view.dialogContentId]];
         //隐藏警告icon
+        view.sendStatus = SendStatusFinish;
+        [_data addIdentity:[NSNumber numberWithInt:view.dialogContentId]];
         [self.dialogContentTableView reloadData];
     } onFailure:^(NSString *error, BOOL hasSent) {
-        if (nil != error && ![error isEqualToString:@""]) {
+        if (nil != error && ![error isEqual:[NSNull null]] && ![error isEqualToString:@""]) {
             //显示错误
-            [MessageShow error:DIALOG_ERROR_TEXT onView:nil];
+            [MessageShow error:error onView:nil];
         }
         if (hasSent) {
             //显示警告标志
+            view.sendStatus = SendStatusFailure;
             [self.dialogContentTableView reloadData];
         }
     }];
@@ -431,6 +444,17 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
         [self resetSendForm];
+    }
+}
+
+#pragma mark - 
+#pragma mark ASINetworkQueue
+- (void)requestDidStartSelector:(ASIHTTPRequest *)request
+{
+    DialogContentView *view = [request.userInfo objectForKey:REQUEST_USER_INFO_KEY];
+    if (view) {
+        view.sendStatus = SendStatusSending;
+        [self.dialogContentTableView reloadData];
     }
 }
 

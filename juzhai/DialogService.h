@@ -18,6 +18,6 @@
 
 //- (BOOL)sendSms:(NSString *)content toUser:(NSInteger)uid withImg:(UIImage *)image onSuccess:(void (^)(NSDictionary *))aSuccessBlock inView:(UIView *)view;
 
-- (BOOL)sendSms:(DialogContentView *)dialogContentView onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock;
+- (BOOL)sendSms:(DialogContentView *)dialogContentView inQueue:(NSOperationQueue *)smsQueue onSuccess:(void (^)(NSDictionary *))aSuccessBlock onFailure:(void (^)(NSString *, BOOL hasSent))aFailureBlock;
 
 @end

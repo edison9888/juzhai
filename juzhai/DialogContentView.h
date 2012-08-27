@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "DataView.h"
 
+#define REQUEST_USER_INFO_KEY @"kDialog"
+
+typedef enum {
+    SendStatusWaiting = 1,
+    SendStatusSending = 2,
+    SendStatusFailure = 3,
+    SendStatusFinish = 4,
+} SendStatus;
+
 @interface DialogContentView : NSObject <DataView>
 
 @property (nonatomic) NSInteger dialogContentId;
@@ -19,5 +28,5 @@
 @property (strong, nonatomic) NSString *imgUrl;
 @property (nonatomic) BOOL hasImg;
 @property (strong, nonatomic) UIImage *image;
-
+@property (nonatomic) SendStatus sendStatus;
 @end

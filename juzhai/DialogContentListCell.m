@@ -31,6 +31,7 @@
 @synthesize imageView;
 @synthesize dialogContentTextView;
 @synthesize timeLabel;
+@synthesize warning;
 
 + (id) cellFromNib
 {
@@ -143,22 +144,14 @@
         imageView.frame = CGRectMake(startX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height);
         //load图片
         if (_dialogContentView.image != nil) {
-            UIImage *resultImage = [_dialogContentView.image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-            imageView.image = [resultImage createRoundedRectImage:8.0];
-            
-            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-            [imageView addGestureRecognizer:singleTap];
+            [self dealImage:_dialogContentView.image];
         } else {
             imageView.image = [UIImage imageNamed:FACE_LOADING_IMG];
             if (_dialogContentView.imgUrl != nil && ![_dialogContentView.imgUrl isEqual:[NSNull null]] && ![_dialogContentView.imgUrl isEqualToString:@""]) {
                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
                 NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
                 [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
-                    UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
-                    imageView.image = [resultImage createRoundedRectImage:8.0];
-                    
-                    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-                    [imageView addGestureRecognizer:singleTap];
+                    [self dealImage:image];
                 } failure:nil];
             }
         }
@@ -185,6 +178,20 @@
         contentBgView.image = [[UIImage imageNamed:HIS_BG_IMAGE_NAME] stretchableImageWithLeftCapWidth:HIS_BG_CAP_WIDTH topCapHeight:HIS_BG_CAP_HEIHGT];
     }
     contentBgView.frame = CGRectMake(0, 0, bubbleView.frame.size.width, bubbleView.frame.size.height);
+    
+    warning.frame = CGRectMake(contentViewX - 10 - warning.frame.size.width, warning.frame.origin.y, warning.frame.size.width, warning.frame.size.height);
+    if (_dialogContentView.sendStatus == SendStatusWaiting) {
+        warning.image = [UIImage imageNamed:@"waiting_icon"];
+        warning.hidden = NO;
+    } else if (_dialogContentView.sendStatus == SendStatusFailure) {
+        warning.image = [UIImage imageNamed:@"failure_icon"];
+        warning.hidden = NO;
+    } else if (_dialogContentView.sendStatus == SendStatusSending) {
+        warning.image = [UIImage imageNamed:@"sending_icon"];
+        warning.hidden = NO;
+    } else {
+        warning.hidden = YES;
+    }
 }
 
 - (void)redrawnTime
@@ -193,6 +200,15 @@
     containerFram.origin.y = bubbleView.frame.origin.y + bubbleView.frame.size.height + 10;
     timeLabel.frame = containerFram;
     timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:_dialogContentView.createTime] showBefore];
+}
+
+- (void)dealImage:(UIImage *)image
+{
+    UIImage *resultImage = [image imageByScalingAndCroppingForSize:CGSizeMake(imageView.frame.size.width*2, imageView.frame.size.height*2)];
+    imageView.image = [resultImage createRoundedRectImage:8.0];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+    [imageView addGestureRecognizer:singleTap];
 }
 
 #pragma mark -
