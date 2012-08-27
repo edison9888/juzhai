@@ -16,9 +16,6 @@
 @class InterestUserViewController;
 @class ListHttpRequestDelegate;
 
-#define INTEREST_COUNT_BUTTON_IMAGE @"my_jz_fans_btn.png"
-#define INTEREST_COUNT_BUTTON_HIGHLIGHT_IMAGE @"my_jz_fans_btn_hover.png"
-#define INTEREST_COUNT_BUTTON_CAP_WIDTH 4.0
 #define TABLE_HEAD_BG_IMAGE @"my_jz_title_bg.png"
 #define TABLE_HEAD_TITLE @"    共 %d 条拒宅"
 
