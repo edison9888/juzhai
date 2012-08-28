@@ -15,6 +15,7 @@
 #import "UserContext.h"
 #import "UserView.h"
 #import "AuthorizeExpiredViewController.h"
+#import "AuthorizeBindViewController.h"
 
 @interface JuzhaiTabBarController ()
 
@@ -52,6 +53,12 @@
         }
         _authorizeExpiredViewController.tpId = userView.tpId.intValue;
         [viewController pushViewController:_authorizeExpiredViewController animated:YES];
+    } else if (userView.tpId.intValue <= 0) {
+        if (nil == _authorizeBindViewController) {
+            _authorizeBindViewController = [[AuthorizeBindViewController alloc] initWithNibName:@"AuthorizeBindViewController" bundle:nil];
+            _authorizeBindViewController.hidesBottomBarWhenPushed = YES;
+        }
+        [viewController pushViewController:_authorizeBindViewController animated:YES];
     }
 }
 

@@ -22,8 +22,11 @@
 //第三方登录
 - (LoginResult *)loginWithTpId:(NSInteger)tpId withQuery:(NSString *)query;
 
-//第三方重新绑定
+//第三方重新授权
 - (LoginResult *)authorize:(NSInteger)tpId withQuery:(NSString *)query;
+
+//绑定第三方
+- (LoginResult *)bind:(NSInteger)tpId withQuery:(NSString *)query;
 
 //检查是否登录
 - (BOOL)checkLogin;

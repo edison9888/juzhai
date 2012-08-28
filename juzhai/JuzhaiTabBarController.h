@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @class AuthorizeExpiredViewController;
+@class AuthorizeBindViewController;
 
 #define TIMER_INTERVAL 20
 
@@ -17,5 +18,6 @@
 {
     CLLocationManager *_locationManager;
     AuthorizeExpiredViewController *_authorizeExpiredViewController;
+    AuthorizeBindViewController *_authorizeBindViewController;
 }
 @end

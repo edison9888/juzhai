@@ -22,6 +22,7 @@
 #import "FeedbackViewController.h"
 #import "UserView.h"
 #import "AuthorizeExpiredViewController.h"
+#import "AuthorizeBindViewController.h"
 
 @implementation ConfigViewController
 
@@ -193,7 +194,11 @@
                 [self.navigationController pushViewController:_authorizeExpiredViewController animated:YES];
             } else if (userView.tpId.intValue <= 0) {
                 //未绑定第三方
-                
+                if (nil == _authorizeBindViewController) {
+                    _authorizeBindViewController = [[AuthorizeBindViewController alloc] initWithNibName:@"AuthorizeBindViewController" bundle:nil];
+                    _authorizeBindViewController.hidesBottomBarWhenPushed = YES;
+                }
+                [self.navigationController pushViewController:_authorizeBindViewController animated:YES];
             }
         }
     }

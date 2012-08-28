@@ -16,4 +16,7 @@
     NSArray *_logoImageArray;
     NSArray *_tpIdArray;
 }
+
+@property (nonatomic) BOOL isBind;
+
 @end

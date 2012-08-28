@@ -12,6 +12,8 @@
 
 @implementation TpLoginDelegate
 
+@synthesize isBind;
+
 - (id) init{
     self = [super init];
     if (self) {
@@ -38,7 +40,7 @@
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 12, 200, 13)];
         titleLabel.tag = TITLE_VIEW_TAG;
-        titleLabel.font = DEFAULT_BOLD_FONT(14);
+        titleLabel.font = DEFAULT_FONT(14);
         titleLabel.textColor = [UIColor colorWithRed:0.40f green:0.40f blue:0.40f alpha:1.00f];
         titleLabel.backgroundColor = [UIColor clearColor];
         [cell addSubview:titleLabel];
@@ -57,7 +59,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TpLoginViewController *tpLoginViewController = [[TpLoginViewController alloc] initWithNibName:@"TpLoginViewController" bundle:nil];
     tpLoginViewController.tpId = [[_tpIdArray objectAtIndex:indexPath.row] intValue];
-    tpLoginViewController.authorizeType = AuthorizeLogin;
+    tpLoginViewController.authorizeType = self.isBind ? AuthorizeBind : AuthorizeLogin;
     UIViewController *viewController = (UIViewController *)tableView.nextResponder.nextResponder;
     [viewController presentModalViewController:tpLoginViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

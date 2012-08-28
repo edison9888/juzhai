@@ -149,7 +149,6 @@
     registerFormTableView.backgroundColor = [UIColor clearColor];
     registerFormTableView.opaque = NO;
     
-    //    [tpLoginTableView setDelegate:self];
     [tpLoginTableView setDataSource:_tpLoginDelegate];
     [tpLoginTableView setDelegate:_tpLoginDelegate];
     tpLoginTableView.backgroundView = nil;

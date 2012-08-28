@@ -12,6 +12,7 @@
 @class ProtocalViewController;
 @class FeedbackViewController;
 @class AuthorizeExpiredViewController;
+@class AuthorizeBindViewController;
 @class UserView;
 
 #define KeyCellTitle(key) [NSString stringWithFormat:@"config.%@", key]
@@ -38,6 +39,7 @@
     ProtocalViewController *_protocalViewController;
     FeedbackViewController *_feedbackViewController;
     AuthorizeExpiredViewController *_authorizeExpiredViewController;
+    AuthorizeBindViewController *_authorizeBindViewController;
     NSString *_upgradeUrl;
 }
 

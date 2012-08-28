@@ -101,7 +101,18 @@ static LoginService *loginService;
 
 - (LoginResult *)authorize:(NSInteger)tpId withQuery:(NSString *)query
 {
-    NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/authorize/access/%d?%@", tpId, query]];
+    NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/authorize/expired/access/%d?%@", tpId, query]];
+    return [self doAuthorize:tpId withUrl:url];
+}
+
+- (LoginResult *)bind:(NSInteger)tpId withQuery:(NSString *)query
+{
+    NSString *url = [UrlUtils urlStringWithUri:[NSString stringWithFormat:@"passport/authorize/bind/access/%d?%@", tpId, query]];
+    return [self doAuthorize:tpId withUrl:url];
+}
+
+- (LoginResult *)doAuthorize:(NSInteger)tpId withUrl:(NSString *)url
+{
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:url withParams:nil];
     if (request != nil) {
         [request startSynchronous];

@@ -58,6 +58,8 @@
 		CB1C279F15B653F000FAD38A /* idea_view_pers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C279D15B653F000FAD38A /* idea_view_pers@2x.png */; };
 		CB1C27A215B6541F00FAD38A /* idea_pers_num_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C27A015B6541F00FAD38A /* idea_pers_num_icon.png */; };
 		CB1C27A315B6541F00FAD38A /* idea_view_pers.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C27A115B6541F00FAD38A /* idea_view_pers.png */; };
+		CB1F575615EC605A0077A7A6 /* AuthorizeBindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F575415EC60590077A7A6 /* AuthorizeBindViewController.m */; };
+		CB1F575715EC605A0077A7A6 /* AuthorizeBindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1F575515EC60590077A7A6 /* AuthorizeBindViewController.xib */; };
 		CB20ECD51589B1A4002F9C93 /* JZData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB20ECD41589B1A4002F9C93 /* JZData.m */; };
 		CB20ECDC1589B93C002F9C93 /* idea_wantgo_done_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB20ECD61589B93C002F9C93 /* idea_wantgo_done_btn@2x.png */; };
 		CB20ECDD1589B93C002F9C93 /* jzxq_mailme_btn_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB20ECD71589B93C002F9C93 /* jzxq_mailme_btn_hover@2x.png */; };
@@ -552,6 +554,9 @@
 		CB1C279D15B653F000FAD38A /* idea_view_pers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idea_view_pers@2x.png"; sourceTree = "<group>"; };
 		CB1C27A015B6541F00FAD38A /* idea_pers_num_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idea_pers_num_icon.png; sourceTree = "<group>"; };
 		CB1C27A115B6541F00FAD38A /* idea_view_pers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idea_view_pers.png; sourceTree = "<group>"; };
+		CB1F575315EC60580077A7A6 /* AuthorizeBindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorizeBindViewController.h; sourceTree = "<group>"; };
+		CB1F575415EC60590077A7A6 /* AuthorizeBindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorizeBindViewController.m; sourceTree = "<group>"; };
+		CB1F575515EC60590077A7A6 /* AuthorizeBindViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizeBindViewController.xib; sourceTree = "<group>"; };
 		CB20ECD31589B1A4002F9C93 /* JZData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZData.h; sourceTree = "<group>"; };
 		CB20ECD41589B1A4002F9C93 /* JZData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZData.m; sourceTree = "<group>"; };
 		CB20ECD61589B93C002F9C93 /* idea_wantgo_done_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idea_wantgo_done_btn@2x.png"; sourceTree = "<group>"; };
@@ -2247,6 +2252,9 @@
 				CB75304C15E4DD6400536394 /* AuthorizeExpiredViewController.h */,
 				CB75304D15E4DD6400536394 /* AuthorizeExpiredViewController.m */,
 				CB75304E15E4DD6400536394 /* AuthorizeExpiredViewController.xib */,
+				CB1F575315EC60580077A7A6 /* AuthorizeBindViewController.h */,
+				CB1F575415EC60590077A7A6 /* AuthorizeBindViewController.m */,
+				CB1F575515EC60590077A7A6 /* AuthorizeBindViewController.xib */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -2641,6 +2649,7 @@
 				CBF7C62515EB0FF00010622C /* failure_icon.png in Resources */,
 				CBF7C62715EB1D410010622C /* sending_icon@2x.png in Resources */,
 				CBF7C62915EB1D4E0010622C /* sending_icon.png in Resources */,
+				CB1F575715EC605A0077A7A6 /* AuthorizeBindViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2795,6 +2804,7 @@
 				CEF714A315DCE5CB00E28C8D /* GetbackPwdViewController.m in Sources */,
 				CB606BB315E1EF6D00FB610C /* BigButton.m in Sources */,
 				CB75304F15E4DD6400536394 /* AuthorizeExpiredViewController.m in Sources */,
+				CB1F575615EC605A0077A7A6 /* AuthorizeBindViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

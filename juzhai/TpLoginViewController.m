@@ -64,9 +64,10 @@
             uri = [NSString stringWithFormat:@"passport/tpLogin/%d", self.tpId];
             break;
         case AuthorizeExpired:
-            uri = [NSString stringWithFormat:@"passport/authorize/token/%d", self.tpId];
+            uri = [NSString stringWithFormat:@"passport/authorize/expired/%d", self.tpId];
             break;
         case AuthorizeBind:
+            uri = [NSString stringWithFormat:@"passport/authorize/bind/%d", self.tpId];
             break;
     }
     
@@ -137,6 +138,23 @@
     }
 }
 
+#pragma mark AuthorizeExpired
+
+- (void)bind:(NSString *)query{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = YES;
+	[hud showWhileExecuting:@selector(doBind:) onTarget:self withObject:query animated:YES];
+}
+
+-(void) doBind:(NSString *)query{
+    LoginResult *loginResult = [[LoginService getInstance] bind:self.tpId withQuery:query];
+    if(loginResult.success){
+        [self dismissModalViewControllerAnimated:YES];
+    }else{
+        [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
+    }
+}
+
 #pragma mark - Web View Delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -153,6 +171,12 @@
         if ([[requestUrl path] rangeOfString:@"/authorize/access"].length > 0) {
             [loadingView stopAnimating]; 
             [self authorize:requestUrl.query];
+            return NO;
+        }
+    } else if (self.authorizeType == AuthorizeBind) {
+        if ([[requestUrl path] rangeOfString:@"/authorize/bindAccess"].length > 0) {
+            [loadingView stopAnimating]; 
+            [self bind:requestUrl.query];
             return NO;
         }
     }
