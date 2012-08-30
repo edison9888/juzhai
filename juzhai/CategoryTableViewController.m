@@ -79,7 +79,7 @@
     }
     UIImageView *iconView;
     if(indexPath.row == 0){
-        cell.textLabel.text = @"全部分类";
+        cell.textLabel.text = @"拒宅项目";
         cell.textLabel.tag = 0;
         NSString *iconImageName = (cell.textLabel.tag == selectCategoryId) ? @"ca_all_hover" : @"ca_all_link";
         iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconImageName]];

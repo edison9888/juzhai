@@ -400,7 +400,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     }
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
+//    picker.allowsEditing = YES;
     picker.sourceType = sourceType;
     [self presentModalViewController:picker animated:YES];
 }
@@ -408,7 +408,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    _image = [info objectForKey:UIImagePickerControllerEditedImage];
+    _image = [info objectForKey:UIImagePickerControllerOriginalImage];
     imageView.image = _image;
     imageView.hidden = NO;
     

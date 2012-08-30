@@ -85,7 +85,7 @@
 
 - (void)notice
 {
-    UITabBarItem *messageTabBar = [[self.tabBar items] objectAtIndex:3];
+    UITabBarItem *messageTabBar = [[self.tabBar items] objectAtIndex:2];
     __unsafe_unretained __block ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"dialog/notice/nums"] withParams:nil];
     if (request != nil) {
         [request setTimeOutSeconds:4];

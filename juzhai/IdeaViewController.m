@@ -69,7 +69,7 @@
     [_categoryButton setBackgroundImage:_categoryDownLinkImg forState:UIControlStateNormal];
     [_categoryButton setBackgroundImage:_categoryDownHoverImg forState:UIControlStateHighlighted];
     _categoryButton.titleLabel.font = DEFAULT_FONT(13);
-    [_categoryButton setTitle:@"全部分类" forState:UIControlStateNormal];
+    [_categoryButton setTitle:@"拒宅项目" forState:UIControlStateNormal];
     [_categoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_categoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [_categoryButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -20.0, 0.0, 0.0)];
