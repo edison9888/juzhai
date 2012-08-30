@@ -37,7 +37,7 @@
     _listHttpRequestDelegate.viewClassName = @"DialogView";
     _listHttpRequestDelegate.listViewController = self;
     
-    self.title = @"我的消息";
+    self.title = @"消息";
     
     _editButton = [[RectButton alloc] initWithWidth:45.0 buttonText:@"删除" CapLocation:CapLeftAndRight];
     [_editButton addTarget:self action:@selector(toggleEdit:) forControlEvents:UIControlEventTouchUpInside];
