@@ -35,7 +35,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 @property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (strong, nonatomic) IBOutlet UILabel *personLabel;
-@property (strong, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) IBOutlet UIButton *postIdeaButton;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIButton *showUsersButton;

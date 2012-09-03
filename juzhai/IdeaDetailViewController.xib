@@ -255,42 +255,6 @@
 										<reference key="IBUIFont" ref="1024933091"/>
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
-									<object class="IBUIButton" id="277876538">
-										<reference key="NSNextResponder" ref="623279073"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{232, 51}, {80, 25}}</string>
-										<reference key="NSSuperview" ref="623279073"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="661233994"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<bool key="IBUIOpaque">NO</bool>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<int key="IBUIContentHorizontalAlignment">0</int>
-										<int key="IBUIContentVerticalAlignment">0</int>
-										<reference key="IBUIHighlightedTitleColor" ref="692475668"/>
-										<object class="NSColor" key="IBUINormalTitleColor">
-											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-										</object>
-										<reference key="IBUINormalTitleShadowColor" ref="1001440904"/>
-										<object class="NSCustomResource" key="IBUIHighlightedImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">idea_view_more_btn_hover.png</string>
-										</object>
-										<object class="NSCustomResource" key="IBUINormalImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">idea_view_more_btn_link.png</string>
-										</object>
-										<object class="IBUIFontDescription" key="IBUIFontDescription" id="1033093584">
-											<int key="type">2</int>
-											<double key="pointSize">15</double>
-										</object>
-										<object class="NSFont" key="IBUIFont" id="124014900">
-											<string key="NSName">Helvetica-Bold</string>
-											<double key="NSSize">15</double>
-											<int key="NSfFlags">16</int>
-										</object>
-									</object>
 									<object class="IBUIButton" id="661233994">
 										<reference key="NSNextResponder" ref="623279073"/>
 										<int key="NSvFlags">292</int>
@@ -321,8 +285,15 @@
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">idea_wangto_btn_link.png</string>
 										</object>
-										<reference key="IBUIFontDescription" ref="1033093584"/>
-										<reference key="IBUIFont" ref="124014900"/>
+										<object class="IBUIFontDescription" key="IBUIFontDescription" id="1033093584">
+											<int key="type">2</int>
+											<double key="pointSize">15</double>
+										</object>
+										<object class="NSFont" key="IBUIFont" id="323403916">
+											<string key="NSName">Helvetica-Bold</string>
+											<double key="NSSize">15</double>
+											<int key="NSfFlags">16</int>
+										</object>
 									</object>
 									<object class="IBUIButton" id="919523158">
 										<reference key="NSNextResponder" ref="623279073"/>
@@ -352,7 +323,7 @@
 											<string key="NSResourceName">idea_share_btn_link.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="1033093584"/>
-										<reference key="IBUIFont" ref="124014900"/>
+										<reference key="IBUIFont" ref="323403916"/>
 									</object>
 									<object class="IBUIImageView" id="665576974">
 										<reference key="NSNextResponder" ref="623279073"/>
@@ -375,7 +346,7 @@
 										<string key="NSFrame">{{28, 60}, {127, 16}}</string>
 										<reference key="NSSuperview" ref="623279073"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="277876538"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -512,14 +483,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">moreButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="277876538"/>
-					</object>
-					<int key="connectionID">41</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">postIdeaButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="661233994"/>
@@ -565,15 +528,6 @@
 						<reference key="destination" ref="200366039"/>
 					</object>
 					<int key="connectionID">55</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">moreIdea:</string>
-						<reference key="source" ref="277876538"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">30</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -665,7 +619,6 @@
 							<reference ref="661233994"/>
 							<reference ref="665576974"/>
 							<reference ref="852446646"/>
-							<reference ref="277876538"/>
 						</array>
 						<reference key="parent" ref="710574375"/>
 					</object>
@@ -697,11 +650,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
 						<reference key="object" ref="924352948"/>
-						<reference key="parent" ref="623279073"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">29</int>
-						<reference key="object" ref="277876538"/>
 						<reference key="parent" ref="623279073"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -746,8 +694,6 @@
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="29.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="3" key="42.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
@@ -897,8 +843,6 @@
 			<string key="idea_pers_num_icon.png">{16, 16}</string>
 			<string key="idea_share_btn_hover.png">{145, 35}</string>
 			<string key="idea_share_btn_link.png">{145, 35}</string>
-			<string key="idea_view_more_btn_hover.png">{80, 23}</string>
-			<string key="idea_view_more_btn_link.png">{80, 23}</string>
 			<string key="idea_view_pers.png">{320, 35}</string>
 			<string key="idea_wangto_btn_hover.png">{145, 35}</string>
 			<string key="idea_wangto_btn_link.png">{145, 35}</string>

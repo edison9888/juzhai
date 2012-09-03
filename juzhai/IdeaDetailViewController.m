@@ -44,7 +44,6 @@
 @synthesize addressIconView;
 @synthesize categoryIconView;
 @synthesize personIconView;
-@synthesize moreButton;
 @synthesize postIdeaButton;
 @synthesize shareButton;
 @synthesize showUsersButton;
@@ -124,10 +123,6 @@
         [personLabel setFrame:CGRectMake(personLabel.frame.origin.x, personIconView.frame.origin.y, personLabel.frame.size.width, personLabel.frame.size.height)];
     }
     
-    moreButton.hidden = YES;
-    moreButton.enabled = NO;
-//    [moreButton setFrame:CGRectMake(moreButton.frame.origin.x, [self getViewOriginY:moreButton byUpperView:categoryIconView heightGap:IDEA_DEFAULT_HEIGHT_GAP], moreButton.frame.size.width, moreButton.frame.size.height)];
-    
     [postIdeaButton setFrame:CGRectMake(postIdeaButton.frame.origin.x, [self getViewOriginY:postIdeaButton byUpperView:personIconView heightGap:IDEA_DEFAULT_HEIGHT_GAP], postIdeaButton.frame.size.width, postIdeaButton.frame.size.height)];
     postIdeaButton.enabled = !ideaView.hasUsed;
     
@@ -195,7 +190,6 @@
     self.addressLabel = nil;
     self.categoryLabel = nil;
     self.personLabel = nil;
-    self.moreButton = nil;
     self.postIdeaButton = nil;
     self.shareButton = nil;
     self.showUsersButton = nil;

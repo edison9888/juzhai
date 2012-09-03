@@ -60,7 +60,7 @@ static LoginService *loginService;
         if (!error && [request responseStatusCode] == 200){
             NSString *response = [request responseString];
             NSMutableDictionary *jsonResult = [response JSONValue];
-            if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
+            if([[jsonResult valueForKey:@"success"] boolValue]){
                 //登录成功
                 LoginUser *loginUser = [[LoginUser alloc] initWithAccount:account password:password];
                 [self loginSuccess:loginUser withJson:jsonResult withCookies:request.responseCookies];
@@ -68,7 +68,7 @@ static LoginService *loginService;
             }else{
                 return [LoginResult loginResultWithSuccess:NO errorCode:[[jsonResult valueForKey:@"errorCode"] intValue] errorInfo:[jsonResult valueForKey:@"errorInfo"]];
             }
-        }else{
+        } else {
             NSLog(@"error: %@", [request responseStatusMessage]);
         }
     } else {
