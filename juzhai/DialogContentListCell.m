@@ -66,7 +66,7 @@
     _isMe = dialogContentView.senderUid == [UserContext getUid];
     
     [self redrawnLogo];
-    [self redrawnImg];
+//    [self redrawnImg];
     [self redrawnDialogText];
     [self redrawnTime];
 }
@@ -151,6 +151,7 @@
                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
                 NSURL *imageURL = [NSURL URLWithString:_dialogContentView.imgUrl];
                 [manager downloadWithURL:imageURL delegate:self options:0 success:^(UIImage *image) {
+                    _dialogContentView.image = image;
                     [self dealImage:image];
                 } failure:nil];
             }

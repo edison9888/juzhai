@@ -106,7 +106,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.dimBackground = YES;
     hud.labelText = @"刷新中...";
-    [hud showWhileExecuting:@selector(doRefresh) onTarget:self withObject:hud animated:YES];
+    [hud showWhileExecuting:@selector(doRefresh) onTarget:self withObject:nil animated:YES];
 }
 
 - (void)doRefresh

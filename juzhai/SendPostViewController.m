@@ -95,6 +95,12 @@
     self.placeButton = nil;
     self.imageButton = nil;
     self.categoryButton = nil;
+    _image = nil;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    _image = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -219,7 +225,7 @@
     if (!_postService) {
         _postService = [[PostService alloc] init];
     }
-    [_postService sendPost:textView.text withDate:_time withPlace:_place withImage:_image withCategory:_categoryId onView:self.view withSuccessCallback:^{
+    [_postService sendPost:textView.text withDate:_time withPlace:_place withImage:_image  withCategory:_categoryId onView:self.view withSuccessCallback:^{
         [self performSelector:@selector(back:) withObject:nil afterDelay:1];
     }];
 }
@@ -281,7 +287,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         }
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-//        picker.allowsEditing = YES;
+        picker.allowsEditing = YES;
         picker.sourceType = sourceType;
         [self presentModalViewController:picker animated:YES];
     } else {
@@ -292,7 +298,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    _image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    _image = [info objectForKey:UIImagePickerControllerEditedImage];
     self.imageView.image = _image;
     self.imageView.hidden = NO;
     [imageButton setBackgroundImage:[UIImage imageNamed:@"send_jz_icon_photo_done"] forState:UIControlStateNormal];

@@ -113,7 +113,8 @@
     CLLocationDegrees latitude = newLocation.coordinate.latitude;
     //经度
     CLLocationDegrees longitude = newLocation.coordinate.longitude;
-    
+//    NSLog(@"%g", latitude);
+//    NSLog(@"%g", longitude);
     if (oldLocation != nil) {
         //纬度
         CLLocationDegrees oldLatitude = newLocation.coordinate.latitude;

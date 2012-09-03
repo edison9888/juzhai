@@ -22,18 +22,19 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.labelText = @"发布中...";
     hud.yOffset = -77;
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:content, @"content", place, @"place", date, @"dateString", [NSNumber numberWithInt:catId], @"categoryId", nil];
         __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"post/sendPost"] withParams:params];
         if (request) {
             if (image != nil) {
                 CGFloat compression = 0.9f;
                 CGFloat maxCompression = 0.1f;
-                int maxFileSize = 2*1024*1024;
+                int maxFileSize = 0.1*1024*1024;
                 
                 NSData *imageData = UIImageJPEGRepresentation(image, compression);
                 while ([imageData length] > maxFileSize && compression > maxCompression){
-                    compression -= 0.1;
+                    imageData = nil;
+                    compression -= 0.2;
                     imageData = UIImageJPEGRepresentation(image, compression);
                 }
                 [request setData:imageData withFileName:@"postImg.jpg" andContentType:@"image/jpeg" forKey:@"postImg"];
@@ -69,7 +70,7 @@
         } else {
             [MBProgressHUD hideHUDForView:view animated:YES];
         }
-//    });
+    });
 }
 
 @end

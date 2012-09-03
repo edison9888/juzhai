@@ -293,6 +293,7 @@
 		CB8F09C4157221A30003018D /* IdeaListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8F09C3157221A30003018D /* IdeaListCell.xib */; };
 		CB9946FE159302530057FBB6 /* FeatureEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9946FC159302530057FBB6 /* FeatureEditorViewController.m */; };
 		CB9946FF159302530057FBB6 /* FeatureEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9946FD159302530057FBB6 /* FeatureEditorViewController.xib */; };
+		CBA39AF415F062A90090B3CE /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA39AF315F062A90090B3CE /* UIImage+fixOrientation.m */; };
 		CBA483DA158F1B1200322D84 /* TpLoginDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA483D9158F1B1200322D84 /* TpLoginDelegate.m */; };
 		CBA483E2158F6B5300322D84 /* zcdl_bottom_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CBA483E0158F6B5200322D84 /* zcdl_bottom_bg.png */; };
 		CBA483E3158F6B5300322D84 /* zcdl_or_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CBA483E1158F6B5200322D84 /* zcdl_or_line.png */; };
@@ -840,6 +841,8 @@
 		CB9946FB159302530057FBB6 /* FeatureEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureEditorViewController.h; sourceTree = "<group>"; };
 		CB9946FC159302530057FBB6 /* FeatureEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeatureEditorViewController.m; sourceTree = "<group>"; };
 		CB9946FD159302530057FBB6 /* FeatureEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeatureEditorViewController.xib; sourceTree = "<group>"; };
+		CBA39AF215F062A90090B3CE /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		CBA39AF315F062A90090B3CE /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		CBA483D8158F1B1200322D84 /* TpLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TpLoginDelegate.h; sourceTree = "<group>"; };
 		CBA483D9158F1B1200322D84 /* TpLoginDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TpLoginDelegate.m; sourceTree = "<group>"; };
 		CBA483E0158F6B5200322D84 /* zcdl_bottom_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zcdl_bottom_bg.png; sourceTree = "<group>"; };
@@ -2154,6 +2157,8 @@
 		CBEE333115CBD7B1004CEE34 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CBA39AF215F062A90090B3CE /* UIImage+fixOrientation.h */,
+				CBA39AF315F062A90090B3CE /* UIImage+fixOrientation.m */,
 				CBEE333215CBD7C9004CEE34 /* UIImage+UIImageExt.h */,
 				CBEE333315CBD7C9004CEE34 /* UIImage+UIImageExt.m */,
 			);
@@ -2805,6 +2810,7 @@
 				CB606BB315E1EF6D00FB610C /* BigButton.m in Sources */,
 				CB75304F15E4DD6400536394 /* AuthorizeExpiredViewController.m in Sources */,
 				CB1F575615EC605A0077A7A6 /* AuthorizeBindViewController.m in Sources */,
+				CBA39AF415F062A90090B3CE /* UIImage+fixOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2882,8 +2888,8 @@
 		CB87D3F415518C9C00A25129 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "juzhai/juzhai-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2898,8 +2904,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2907,8 +2911,8 @@
 		CB87D3F515518C9C00A25129 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "juzhai/juzhai-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2923,8 +2927,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

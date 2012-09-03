@@ -16,7 +16,7 @@
 @class GrowingTextView;
 @class ASINetworkQueue;
 
-#define TIMER_INTERVAL 10
+#define TIMER_INTERVAL 20
 
 #define GROWING_TEXT_VIEW_TAG 1000
 

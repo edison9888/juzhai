@@ -28,6 +28,7 @@
 #import "UIImage+UIImageExt.h"
 #import "MessageShow.h"
 #import "ASINetworkQueue.h"
+#import "UIImage+fixOrientation.h"
 
 @interface DialogContentViewController ()
 
@@ -130,6 +131,11 @@
     self.dialogContentTableView = nil;
     self.textView = nil;
     self.imageView = nil;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    _image = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -311,7 +317,7 @@
 
 - (IBAction)imageButtonClick:(id)sender
 {
-    [textView resignFirstResponder];
+//    [textView resignFirstResponder];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] 
                                   initWithTitle:@"上传图片" 
                                   delegate:self 
@@ -400,7 +406,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     }
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-//    picker.allowsEditing = YES;
+    picker.allowsEditing = YES;
     picker.sourceType = sourceType;
     [self presentModalViewController:picker animated:YES];
 }
@@ -408,7 +414,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 #pragma mark -
 #pragma mark Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    _image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    _image = [info objectForKey:UIImagePickerControllerEditedImage];
     imageView.image = _image;
     imageView.hidden = NO;
     
@@ -425,7 +431,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissModalViewControllerAnimated:YES];
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 #pragma mark -
