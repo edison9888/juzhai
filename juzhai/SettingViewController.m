@@ -235,14 +235,17 @@
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                 hud.mode = MBProgressHUDModeCustomView;
                 hud.labelText = @"保存成功";
+                [hud hide:YES afterDelay:1];
                 [self saveSuccess];
                 return;
             }else{
                 errorInfo = [jsonResult valueForKey:@"errorInfo"];
             }
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
             [MessageShow error:errorInfo onView:self.navigationController.view];
         }else{
             NSLog(@"error: %@", [request responseStatusMessage]);
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
             [HttpRequestDelegate requestFailedHandle:request];
         }
     }
@@ -253,7 +256,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hud.dimBackground = YES;
         hud.labelText = @"保存中...";
-        [hud showWhileExecuting:@selector(doSave:) onTarget:self withObject:hud animated:YES];
+        [self performSelector:@selector(doSave:) withObject:hud];
     }
 }
 

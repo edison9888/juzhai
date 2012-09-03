@@ -13,9 +13,9 @@
 @required
 - (CGFloat)buttonCapWidth;
 - (NSString *)buttonNormalBackgroundImageName;
-- (NSString *)buttonHighlightedBackgroundImageName;
 
 @optional
+- (NSString *)buttonHighlightedBackgroundImageName;
 - (NSString *)buttonDisabledBackgroundImageName;
 
 @end

@@ -9,7 +9,7 @@
 #import "CustomButton.h"
 
 #define BIG_BUTTON_IMAGE @"big_btn_link.png"
-#define BIG_BUTTON_HOVER_IMAGE @"big_btn_hover.png"
+//#define BIG_BUTTON_HOVER_IMAGE @"big_btn_hover.png"
 #define BIG_BUTTON_CAP_WIDTH 5
 
 @interface BigButton : CustomButton <CustomButtonDelegate>

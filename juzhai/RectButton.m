@@ -26,10 +26,10 @@
     return BUTTON_IMAGE;
 }
 
-- (NSString *)buttonHighlightedBackgroundImageName
-{
-    return BUTTON_HOVER_IMAGE;
-}
+//- (NSString *)buttonHighlightedBackgroundImageName
+//{
+//    return nil;
+//}
 
 - (NSString *)buttonDisabledBackgroundImageName
 {

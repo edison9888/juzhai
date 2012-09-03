@@ -27,12 +27,13 @@
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [self setTitleColor:[UIColor colorWithRed:0.50f green:0.67f blue:0.83f alpha:1.00f] forState:UIControlStateDisabled];
         [self setBackgroundImage:image forState:UIControlStateNormal];
-        [self setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
-        [self setBackgroundImage:pressedImage forState:UIControlStateSelected];
+        if (pressedImage != nil) {
+            [self setBackgroundImage:pressedImage forState:UIControlStateHighlighted];
+            [self setBackgroundImage:pressedImage forState:UIControlStateSelected];
+        }
         if (disabledImage != nil) {
             [self setBackgroundImage:disabledImage forState:UIControlStateDisabled];
         }
-        self.adjustsImageWhenHighlighted = NO;
     }
     return self;
 }
@@ -45,7 +46,9 @@
     if (location == CapLeftAndRight)
     {
         buttonImage = [[UIImage imageNamed:[self.delegate buttonNormalBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
-        buttonPressedImage = [[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
+        if ([_delegate respondsToSelector:@selector(buttonHighlightedBackgroundImageName)]) {
+            buttonPressedImage = [[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
+        }
         if ([_delegate respondsToSelector:@selector(buttonDisabledBackgroundImageName)]) {
             buttonDisableImage = [[UIImage imageNamed:[self.delegate buttonDisabledBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0];
         }
@@ -53,7 +56,9 @@
     else
     {
         buttonImage = [self image:[[UIImage imageNamed:[self.delegate buttonNormalBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
-        buttonPressedImage = [self image:[[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
+        if ([_delegate respondsToSelector:@selector(buttonHighlightedBackgroundImageName)]) {
+            buttonPressedImage = [self image:[[UIImage imageNamed:[self.delegate buttonHighlightedBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
+        }
         if ([_delegate respondsToSelector:@selector(buttonDisabledBackgroundImageName)]) {
             buttonDisableImage = [self image:[[UIImage imageNamed:[self.delegate buttonDisabledBackgroundImageName]] stretchableImageWithLeftCapWidth:[self.delegate buttonCapWidth] topCapHeight:0.0] withCap:location capWidth:[self.delegate buttonCapWidth] buttonWidth:width];
         }

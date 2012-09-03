@@ -37,7 +37,7 @@
     // Override point for customization after application launch.
     //初始化设置
     [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
-    [ASIHTTPRequest setDefaultTimeOutSeconds:5.0];
+    [ASIHTTPRequest setDefaultTimeOutSeconds:10.0];
     
     //加载初始化数据
     [BaseData getCategories];

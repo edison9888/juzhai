@@ -26,9 +26,9 @@
     return BIG_BUTTON_IMAGE;
 }
 
-- (NSString *)buttonHighlightedBackgroundImageName
-{
-    return BIG_BUTTON_HOVER_IMAGE;
-}
+//- (NSString *)buttonHighlightedBackgroundImageName
+//{
+//    return nil;
+//}
 
 @end
