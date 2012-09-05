@@ -17,8 +17,8 @@
 - (id) init{
     self = [super init];
     if (self) {
-        _logoImageArray = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"sina"], [UIImage imageNamed:@"db"], [UIImage imageNamed:@"qq"], nil];
-        _tpIdArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:6], [NSNumber numberWithInt:7], [NSNumber numberWithInt:8], nil];
+        _logoImageArray = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"sina"], [UIImage imageNamed:@"qq"], [UIImage imageNamed:@"db"], nil];
+        _tpIdArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:6], [NSNumber numberWithInt:8], [NSNumber numberWithInt:7], nil];
     }
     return self;
 }
@@ -50,8 +50,8 @@
     logoView.image = [_logoImageArray objectAtIndex:indexPath.row];
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:TITLE_VIEW_TAG];
-    NSString *titleKey = [NSString stringWithFormat:@"tpLogin.%d.title", [[_tpIdArray objectAtIndex:indexPath.row] intValue]];
-    titleLabel.text = NSLocalizedString(titleKey, @"tpLoginTitle");
+    NSString *titleKey = [NSString stringWithFormat:isBind ? @"tpBind.%d.title" : @"tpLogin.%d.title", [[_tpIdArray objectAtIndex:indexPath.row] intValue]];
+    titleLabel.text = NSLocalizedString(titleKey, @"tpTitle");
     
     return cell;
 }

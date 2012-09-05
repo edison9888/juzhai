@@ -131,7 +131,8 @@
             if (userView.tokenExpired) {
                 cell.detailTextLabel.text = @"授权已过期";
             } else {
-                cell.detailTextLabel.text = @"已绑定";
+                NSString *tpNameKey = [NSString stringWithFormat:@"tp.%d.name", userView.tpId.intValue];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"已绑定：%@", NSLocalizedString(tpNameKey, @"name")];
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
         } else {

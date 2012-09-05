@@ -132,7 +132,7 @@
 -(void) doAuthorize:(NSString *)query{
     LoginResult *loginResult = [[LoginService getInstance] authorize:self.tpId withQuery:query];
     if(loginResult.success){
-        [self dismissModalViewControllerAnimated:YES];
+        [self back:nil];
     }else{
         [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
     }
@@ -149,7 +149,7 @@
 -(void) doBind:(NSString *)query{
     LoginResult *loginResult = [[LoginService getInstance] bind:self.tpId withQuery:query];
     if(loginResult.success){
-        [self dismissModalViewControllerAnimated:YES];
+        [self back:nil];
     }else{
         [MessageShow error:loginResult.errorInfo onView:self.navigationController.view];
     }

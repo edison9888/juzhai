@@ -12,6 +12,7 @@
 #import "TpLoginViewController.h"
 #import "UserContext.h"
 #import "UserView.h"
+#import "MBProgressHUD.h"
 
 @interface AuthorizeExpiredViewController ()
 
@@ -71,7 +72,12 @@
     [super viewWillAppear:animated];
     if(![UserContext getUserView].tokenExpired)
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.labelText = @"授权成功";
+        [hud hide:YES afterDelay:2];
+        [self performSelector:@selector(back:) withObject:nil afterDelay:2];
     }
 }
 

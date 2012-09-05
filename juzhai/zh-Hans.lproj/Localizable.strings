@@ -45,3 +45,11 @@
 "tpLogin.7.title" = "用豆瓣帐号登录";
 "tpLogin.8.title" = "用QQ帐号登录";
 
+"tpBind.6.title" = "绑定新浪微博账号";
+"tpBind.7.title" = "绑定豆瓣账号";
+"tpBind.8.title" = "绑定QQ账号";
+
+"tp.6.name" = "新浪微博";
+"tp.7.name" = "豆瓣账号";
+"tp.8.name" = "qq账号";
+

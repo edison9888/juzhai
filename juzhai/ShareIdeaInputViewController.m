@@ -14,6 +14,7 @@
 #import "IdeaView.h"
 #import "HttpRequestSender.h"
 #import "UrlUtils.h"
+#import "MBProgressHUD.h"
 
 @interface ShareIdeaInputViewController ()
 
@@ -93,7 +94,13 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.textView.text, @"content", [NSNumber numberWithInt:self.ideaView.ideaId], @"ideaId", nil];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"idea/shareIdea"] withParams:params];
     [request startAsynchronous];
-    [self back:nil];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.yOffset = -77;
+    hud.labelText = @"已分享";
+    [hud hide:YES afterDelay:2];
+    [self performSelector:@selector(back:) withObject:nil afterDelay:2];
 }
 
 @end

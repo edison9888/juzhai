@@ -13,6 +13,7 @@
 #import "CustomNavigationController.h"
 #import "HttpRequestSender.h"
 #import "UrlUtils.h"
+#import "MBProgressHUD.h"
 
 @interface InviteInputViewController ()
 
@@ -86,7 +87,13 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.textView.text, @"content", nil];
     ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[UrlUtils urlStringWithUri:@"home/invite"] withParams:params];
     [request startAsynchronous];
-    [self back:nil];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.yOffset = -77;
+    hud.labelText = @"邀请成功";
+    [hud hide:YES afterDelay:2];
+    [self performSelector:@selector(back:) withObject:nil afterDelay:2];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "UserContext.h"
 #import "UserView.h"
 #import "TpLoginDelegate.h"
+#import "MBProgressHUD.h"
 
 @interface AuthorizeBindViewController ()
 
@@ -66,7 +67,12 @@
     [super viewWillAppear:animated];
     if([UserContext getUserView].tpId.intValue > 0)
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.labelText = @"绑定成功";
+        [hud hide:YES afterDelay:2];
+        [self performSelector:@selector(back:) withObject:nil afterDelay:2];
     }
 }
 
