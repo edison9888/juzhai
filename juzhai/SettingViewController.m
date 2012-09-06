@@ -200,7 +200,7 @@
     if (_newLogo != nil) {
         CGFloat compression = 0.9f;
         CGFloat maxCompression = 0.1f;
-        int maxFileSize = 2*1024*1024;
+        int maxFileSize = 0.1*1024*1024;
         
         NSData *imageData = UIImageJPEGRepresentation(_newLogo, compression);
         while ([imageData length] > maxFileSize && compression > maxCompression){
@@ -212,13 +212,10 @@
 }
 
 - (void)doSave:(MBProgressHUD *)hud{
-    ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[self postUrl] withParams: [self getParams]];
+    __unsafe_unretained __block ASIFormDataRequest *request = [HttpRequestSender postRequestWithUrl:[self postUrl] withParams: [self getParams]];
     if (request) {
         [self postNewLogo:request];
-        [request startSynchronous];
-        NSError *error = [request error];
-        NSString *errorInfo = SERVER_ERROR_INFO;
-        if (!error && [request responseStatusCode] == 200){
+        [request setCompletionBlock:^{
             NSString *response = [request responseString];
             NSMutableDictionary *jsonResult = [response JSONValue];
             if([jsonResult valueForKey:@"success"] == [NSNumber numberWithBool:YES]){
@@ -235,19 +232,22 @@
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                 hud.mode = MBProgressHUDModeCustomView;
                 hud.labelText = @"保存成功";
-                [hud hide:YES afterDelay:1];
+                [hud hide:YES afterDelay:2];
                 [self saveSuccess];
                 return;
-            }else{
-                errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            }
+            NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
+            if (errorInfo == nil || [errorInfo isEqual:[NSNull null]] || [errorInfo isEqualToString:@""]) {
+                errorInfo = SERVER_ERROR_INFO;
             }
             [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
             [MessageShow error:errorInfo onView:self.navigationController.view];
-        }else{
-            NSLog(@"error: %@", [request responseStatusMessage]);
+        }];
+        [request setFailedBlock:^{
             [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
             [HttpRequestDelegate requestFailedHandle:request];
-        }
+        }];
+        [request startAsynchronous];
     }
 }
 
@@ -256,7 +256,9 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hud.dimBackground = YES;
         hud.labelText = @"保存中...";
-        [self performSelector:@selector(doSave:) withObject:hud];
+        [NSThread detachNewThreadSelector:@selector(doSave:) toTarget:self withObject:hud];
+//        [self performSelector:@selector(doSave:) withObject:hud afterDelay:1];
+//        NSLog(@"aaa");
     }
 }
 

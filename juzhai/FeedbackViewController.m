@@ -79,7 +79,7 @@
         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"发送成功";
-        [hud hide:YES afterDelay:1];
+        [hud hide:YES afterDelay:2];
         [self performSelector:@selector(back:) withObject:nil afterDelay:1];
         customTextView.text = @"";
     } onFailure:^(NSString *error, BOOL hasSent) {

@@ -221,7 +221,7 @@
                     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                     hud.mode = MBProgressHUDModeCustomView;
                     hud.labelText = @"关注成功";
-                    [hud hide:YES afterDelay:1];
+                    [hud hide:YES afterDelay:2];
                     return;
                 }
                 NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];
@@ -280,7 +280,7 @@
                         hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                         hud.mode = MBProgressHUDModeCustomView;
                         hud.labelText = @"取消成功";
-                        [hud hide:YES afterDelay:1];
+                        [hud hide:YES afterDelay:2];
                         return;
                     }
                     NSString *errorInfo = [jsonResult valueForKey:@"errorInfo"];

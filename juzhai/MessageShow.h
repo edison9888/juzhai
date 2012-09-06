@@ -10,7 +10,7 @@
 
 @interface MessageShow : NSObject
 
-#define SERVER_ERROR_INFO @"服务器忙...请稍候再试"
+#define SERVER_ERROR_INFO @"网络不给力，稍后再试吧"
 
 + (void)error:(NSString *)msg onView:(UIView *)view;
 + (void)error:(NSString *)msg withDelegate:(id <UIAlertViewDelegate>)deletage onView:(UIView *)view;
