@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB03531515F99A61000922AC /* JzQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = CB03531415F99A61000922AC /* JzQueues.m */; };
 		CB07D5DA15D4B14A003497E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB07D5D915D4B149003497E9 /* MessageUI.framework */; };
 		CB07D5E215D4C867003497E9 /* ShareIdeaInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */; };
 		CB07D5E315D4C867003497E9 /* ShareIdeaInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB07D5E115D4C867003497E9 /* ShareIdeaInputViewController.xib */; };
@@ -492,6 +493,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB03531315F99A61000922AC /* JzQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JzQueues.h; sourceTree = "<group>"; };
+		CB03531415F99A61000922AC /* JzQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JzQueues.m; sourceTree = "<group>"; };
 		CB07D5D915D4B149003497E9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		CB07D5DF15D4C867003497E9 /* ShareIdeaInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareIdeaInputViewController.h; sourceTree = "<group>"; };
 		CB07D5E015D4C867003497E9 /* ShareIdeaInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareIdeaInputViewController.m; sourceTree = "<group>"; };
@@ -1148,6 +1151,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB03530E15F9995B000922AC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CBF3229715AA741000D82CBB /* SmsListCell.h */,
+				CBF3229815AA741100D82CBB /* SmsListCell.m */,
+				CBF3229B15AA742D00D82CBB /* SmsListCell.xib */,
+				CBDFEDFF15B196830004DDE0 /* DialogContentListCell.h */,
+				CBDFEE0015B196830004DDE0 /* DialogContentListCell.m */,
+				CBDFEE0315B197130004DDE0 /* DialogContentListCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		CB03531215F99A3A000922AC /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				CB03531315F99A61000922AC /* JzQueues.h */,
+				CB03531415F99A61000922AC /* JzQueues.m */,
+			);
+			name = Queue;
+			sourceTree = "<group>";
+		};
 		CB175ABC156E252200D5F054 /* FPPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -1247,19 +1272,14 @@
 		CB1C27A815B69FBA00FAD38A /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				CB03530E15F9995B000922AC /* Cell */,
 				CBD977B015A9DB2E002FC519 /* MessageNavigationController.h */,
 				CBD977B115A9DB2E002FC519 /* MessageNavigationController.m */,
 				CBD977B415A9DBEE002FC519 /* SmsViewController.h */,
 				CBD977B515A9DBEE002FC519 /* SmsViewController.m */,
-				CBF3229715AA741000D82CBB /* SmsListCell.h */,
-				CBF3229815AA741100D82CBB /* SmsListCell.m */,
-				CBF3229B15AA742D00D82CBB /* SmsListCell.xib */,
 				CB4BAEFB15AF064F00C68760 /* DialogContentViewController.h */,
 				CB4BAEFC15AF064F00C68760 /* DialogContentViewController.m */,
 				CB4BAEFD15AF064F00C68760 /* DialogContentViewController.xib */,
-				CBDFEDFF15B196830004DDE0 /* DialogContentListCell.h */,
-				CBDFEE0015B196830004DDE0 /* DialogContentListCell.m */,
-				CBDFEE0315B197130004DDE0 /* DialogContentListCell.xib */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1578,6 +1598,7 @@
 		CB8367F7155EADE7004CFD54 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CB03531215F99A3A000922AC /* Queue */,
 				CB5AEA1A15D37A620048CB94 /* Stat */,
 				CB7C8F3515B3E496007E3F9B /* Date */,
 				CB40316C15903CB000D758AF /* Message */,
@@ -2811,6 +2832,7 @@
 				CB75304F15E4DD6400536394 /* AuthorizeExpiredViewController.m in Sources */,
 				CB1F575615EC605A0077A7A6 /* AuthorizeBindViewController.m in Sources */,
 				CBA39AF415F062A90090B3CE /* UIImage+fixOrientation.m in Sources */,
+				CB03531515F99A61000922AC /* JzQueues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -80,7 +80,7 @@
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"发送成功";
         [hud hide:YES afterDelay:2];
-        [self performSelector:@selector(back:) withObject:nil afterDelay:1];
+        [self performSelector:@selector(back:) withObject:nil afterDelay:2];
         customTextView.text = @"";
     } onFailure:^(NSString *error, BOOL hasSent) {
         [MBProgressHUD hideHUDForView:self.tabBarController.view animated:YES];

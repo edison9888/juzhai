@@ -56,12 +56,23 @@
                 aFailureBlock(nil, YES);
             }
         }];
+        if (dialogContentView.image != nil) {
+            CGFloat compression = 0.9f;
+            CGFloat maxCompression = 0.1f;
+            int maxFileSize = 0.1*1024*1024;
+            
+            NSData *imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
+            while ([imageData length] > maxFileSize && compression > maxCompression){
+                compression -= 0.1;
+                imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
+            }
+            [request setData:imageData withFileName:@"dialogImg.jpg" andContentType:@"image/jpeg" forKey:@"dialogImg"];
+        }
         if (nil != smsQueue && smsQueue) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                [self doSendSms:request withDialogContentView:dialogContentView inQueue:smsQueue];
-            });
+            request.userInfo = [NSDictionary dictionaryWithObject:dialogContentView forKey:REQUEST_USER_INFO_KEY];
+            [smsQueue addOperation:request];
         } else {
-            [self doSendSms:request withDialogContentView:dialogContentView inQueue:smsQueue];
+            [request startAsynchronous];
         }
     } else {
         return NO;
@@ -70,28 +81,6 @@
         }
     }
     return YES;
-}
-
-- (void)doSendSms:(ASIFormDataRequest *)request withDialogContentView:(DialogContentView *)dialogContentView inQueue:(NSOperationQueue *)smsQueue
-{
-    if (dialogContentView.image != nil) {
-        CGFloat compression = 0.9f;
-        CGFloat maxCompression = 0.1f;
-        int maxFileSize = 0.1*1024*1024;
-        
-        NSData *imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
-        while ([imageData length] > maxFileSize && compression > maxCompression){
-            compression -= 0.2;
-            imageData = UIImageJPEGRepresentation(dialogContentView.image, compression);
-        }
-        [request setData:imageData withFileName:@"dialogImg.jpg" andContentType:@"image/jpeg" forKey:@"dialogImg"];
-    }
-    if (nil != smsQueue && smsQueue) {
-        request.userInfo = [NSDictionary dictionaryWithObject:dialogContentView forKey:REQUEST_USER_INFO_KEY];
-        [smsQueue addOperation:request];
-    } else {
-        [request startAsynchronous];
-    }
 }
 
 @end

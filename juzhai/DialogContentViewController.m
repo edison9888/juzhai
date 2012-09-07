@@ -136,6 +136,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     _image = nil;
+    [_smsQueue reset];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
