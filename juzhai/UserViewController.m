@@ -86,6 +86,11 @@
     
     _tableView.separatorColor = [UIColor clearColor];
     
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    _locationManager.distanceFilter = 50.0;
+    
     [super viewDidLoad];
 }
 
@@ -112,6 +117,8 @@
     _segmentedControl = nil;
     _logoDictionary = nil;
     _postImageDictionary = nil;
+    [_locationManager stopUpdatingLocation];
+    _locationManager = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,6 +168,7 @@
     } else {
         [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
     }
+    [_locationManager startUpdatingLocation];
 }
 
 #pragma mark - 
@@ -263,6 +271,44 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         [self loadListDataWithPage:[_data.pager nextPage]];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    [manager stopUpdatingLocation];
+    //纬度
+    CLLocationDegrees latitude = newLocation.coordinate.latitude;
+    //经度
+    CLLocationDegrees longitude = newLocation.coordinate.longitude;
+    //    NSLog(@"%g", latitude);
+    //    NSLog(@"%g", longitude);
+    if (oldLocation != nil) {
+        //纬度
+        CLLocationDegrees oldLatitude = newLocation.coordinate.latitude;
+        //经度
+        CLLocationDegrees oldLongitude = newLocation.coordinate.longitude;
+        
+        if (oldLatitude == latitude && oldLongitude == longitude) {
+            return;
+        }
+    }
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:longitude], @"longitude", [NSNumber numberWithDouble:latitude], @"latitude", nil];
+    ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"home/updateloc"] withParams:params];
+    if (request != nil) {
+        [request startAsynchronous];;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if (error.code == kCLErrorLocationUnknown) {
+        //无法确定位置
+    } else if (error.code == kCLErrorDenied) {
+        //被拒绝
+    }
+    [manager stopUpdatingLocation];
 }
 
 @end

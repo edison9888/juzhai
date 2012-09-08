@@ -38,12 +38,6 @@
     
     [self startNotice];
     
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-    _locationManager.distanceFilter = 50.0;
-    [_locationManager startUpdatingLocation];
-    
     UINavigationController *viewController = [self.viewControllers objectAtIndex:0];
     UserView *userView = [UserContext getUserView];
     if (userView.tpId.intValue > 0 && userView.tokenExpired) {
@@ -65,8 +59,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [_locationManager stopUpdatingLocation];
-    _locationManager = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -104,42 +96,4 @@
         [request startAsynchronous];;
     }
 }
-
-#pragma mark -
-#pragma mark CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    //纬度
-    CLLocationDegrees latitude = newLocation.coordinate.latitude;
-    //经度
-    CLLocationDegrees longitude = newLocation.coordinate.longitude;
-//    NSLog(@"%g", latitude);
-//    NSLog(@"%g", longitude);
-    if (oldLocation != nil) {
-        //纬度
-        CLLocationDegrees oldLatitude = newLocation.coordinate.latitude;
-        //经度
-        CLLocationDegrees oldLongitude = newLocation.coordinate.longitude;
-        
-        if (oldLatitude == latitude && oldLongitude == longitude) {
-            return;
-        }
-    }
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:longitude], @"longitude", [NSNumber numberWithDouble:latitude], @"latitude", nil];
-    ASIHTTPRequest *request = [HttpRequestSender backgroundGetRequestWithUrl:[UrlUtils urlStringWithUri:@"home/updateloc"] withParams:params];
-    if (request != nil) {
-        [request startAsynchronous];;
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    if (error.code == kCLErrorLocationUnknown) {
-        //无法确定位置
-    } else if (error.code == kCLErrorDenied) {
-        //被拒绝
-        [manager stopUpdatingLocation];
-    }
-}
-
 @end

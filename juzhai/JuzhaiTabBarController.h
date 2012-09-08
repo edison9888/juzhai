@@ -7,16 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 
 @class AuthorizeExpiredViewController;
 @class AuthorizeBindViewController;
 
 #define TIMER_INTERVAL 20
 
-@interface JuzhaiTabBarController : UITabBarController <CLLocationManagerDelegate>
+@interface JuzhaiTabBarController : UITabBarController
 {
-    CLLocationManager *_locationManager;
     AuthorizeExpiredViewController *_authorizeExpiredViewController;
     AuthorizeBindViewController *_authorizeBindViewController;
 }

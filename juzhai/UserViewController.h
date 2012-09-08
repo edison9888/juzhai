@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomSegmentedControl.h"
 #import "EGORefreshHeaderViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @class JZData;
 @class PostDetailViewController;
@@ -21,7 +22,7 @@
 #define QUERY_GENDER_BOY 1
 #define QUERY_GENDER_ALL 2
 
-@interface UserViewController : EGORefreshHeaderViewController <UIActionSheetDelegate,CustomSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface UserViewController : EGORefreshHeaderViewController <UIActionSheetDelegate,CustomSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 {
     JZData *_data;
     CustomSegmentedControl *_segmentedControl;
@@ -29,6 +30,7 @@
     ListHttpRequestDelegate *_listHttpRequestDelegate;
     NSMutableDictionary *_logoDictionary;
     NSMutableDictionary *_postImageDictionary;
+    CLLocationManager *_locationManager;
 }
 
 @end
